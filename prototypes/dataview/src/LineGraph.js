@@ -1,18 +1,20 @@
 import { flatRollup, groups, rollups, sum, extent } from 'd3-array';
 
-import { scaleLinear } from 'd3-scale'
+import { scaleLinear, scaleOrdinal } from 'd3-scale'
 import { line } from 'd3-shape'
 import { format } from 'd3-format'
 import { Delaunay } from 'd3-delaunay'
 import { useRef, useState, useMemo } from 'react';
-
+import {schemeCategory10 } from 'd3-scale-chromatic'
+import exportSVG from './exportSVG';
 const valueFormatter = (value) => format('.2s')(value).replace(/G/, 'B')
 
-const getLineForCountry = (summedByCountryAndYear, xScale, yScale, lineGen, points) => (country, options = {}) => {
+const getLineForCountry = (summedByCountryAndYear, xScale, yScale, lineGen, points, colorScale) => (country, options = {}) => {
   const rows = summedByCountryAndYear.filter(d => d[0] === country)
   const linePath = lineGen(rows)
   let strokeWidth = options.showLabel ? 3 : null
-  const line = <path d={linePath} fill='none' strokeWidth={strokeWidth} stroke='black' opacity={0.85} />
+  let stroke=colorScale(country)
+  const line = <path d={linePath} fill='none' strokeWidth={strokeWidth} stroke={stroke} opacity={0.75} />
   rows.forEach(r => {
     const x = xScale(r[1])
     const y = yScale(r[2])
@@ -38,15 +40,15 @@ export default function LineGraph(props) {
 
   const [hoveredCountry, setHoveredCountry] = useState(null)
 
-  const width = 600
-  const height = 450
+  const width = window.innerWidth * 0.7
+  const height = width * 0.67
   const margins = {
     top: 20, left: 120, bottom: 20, right: 150,
   }
   const svgWidth = width + margins.left + margins.right
   const svgHeight = height + margins.top + margins.bottom
   const minYear = 2010
-  const { byCountryAndYear, summedByCountryAndYear, xExtent, yExtent, xScale, yScale, lineGen, countryGroups, delaunay, points } = useMemo(() => {
+  const { byCountryAndYear, summedByCountryAndYear, xExtent, yExtent, xScale, yScale, lineGen, countryGroups, delaunay, points, colorScale } = useMemo(() => {
     const byCountryAndYear = groups(data, d => d.country, d => d.year)
     const summedByCountryAndYear = flatRollup(data, rows => sum(rows, d => d.amount), d => d.country, d => d.year)
       .filter(d => d[1] >= minYear)
@@ -68,6 +70,9 @@ export default function LineGraph(props) {
       .domain([yExtent[0], yMax === '' ? yExtent[1] : Math.min(yExtent[1], yMax)])
       .range([height, 0])
 
+    const colorScale = scaleOrdinal()
+      .range(schemeCategory10)
+
     const lineGen = line()
       .x(d => xScale(d[1]))
       .y(d => yScale(d[2]))
@@ -75,12 +80,12 @@ export default function LineGraph(props) {
     const points = []
 
     const countryGroups = countries.map(country => {
-      return getLineForCountry(summedByCountryAndYear, xScale, yScale, lineGen, points)(country)
+      return getLineForCountry(summedByCountryAndYear, xScale, yScale, lineGen, points,colorScale)(country)
 
     })
     const delaunay = Delaunay.from(points)
-    return { byCountryAndYear, summedByCountryAndYear, xExtent, yExtent, xScale, yScale, lineGen, countryGroups, delaunay, points }
-  }, [data, yMax])
+    return { byCountryAndYear, summedByCountryAndYear, xExtent, yExtent, xScale, yScale, lineGen, countryGroups, delaunay, points, colorScale }
+  }, [data, yMax, width, height])
   const xTicks = xScale.ticks().map(tick => {
     const x = xScale(tick)
     return (
@@ -116,13 +121,18 @@ export default function LineGraph(props) {
 
   let hoveredLine = null
   if (hoveredCountry) {
-    hoveredLine = getLineForCountry(summedByCountryAndYear, xScale, yScale, lineGen, [])(hoveredCountry, {showLabel: true})
+    hoveredLine = getLineForCountry(summedByCountryAndYear, xScale, yScale, lineGen, [], colorScale)(hoveredCountry, {showLabel: true})
   }
+
+  const rightClick = () => {
+    exportSVG(svgRef.current, 'ocigraph.svg')
+  }
+
   return (
     <div>
-      <svg ref={svgRef} width={svgWidth} height={svgHeight} onMouseMove={hoverSvg} onMouseOut={e => setHoveredCountry(null)}>
-
+      <svg ref={svgRef} width={svgWidth} height={svgHeight} onMouseMove={hoverSvg} onMouseOut={e => setHoveredCountry(null)} onContextMenu={rightClick}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
+          <rect width={width} height={height} fill='transparent' />
           <g>{countryGroups}</g>
           <g>{xTicks}</g>
           <g>{yTicks}</g>
