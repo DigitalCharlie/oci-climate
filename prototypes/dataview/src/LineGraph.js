@@ -23,7 +23,7 @@ const getLineForCountry = (summedByCountryAndYear, xScale, yScale, lineGen, poin
   if (options.showLabel) {
     const lastPoint = points[points.length - 1]
     // console.log(lastPoint)
-    label = <text x={lastPoint[0]} y={lastPoint[1]}>{country}</text>
+    label = <text x={xScale.range()[1]} y={lastPoint[1]}>{country}</text>
   }
   return (
     <g key={country}>
@@ -41,7 +41,7 @@ export default function LineGraph(props) {
   const width = 600
   const height = 450
   const margins = {
-    top: 5, left: 120, bottom: 20, right: 150,
+    top: 20, left: 120, bottom: 20, right: 150,
   }
   const svgWidth = width + margins.left + margins.right
   const svgHeight = height + margins.top + margins.bottom
@@ -65,7 +65,7 @@ export default function LineGraph(props) {
       .range([0, width])
 
     const yScale = scaleLinear()
-      .domain([yExtent[0], yMax === '' ? yExtent[1] : yMax])
+      .domain([yExtent[0], yMax === '' ? yExtent[1] : Math.min(yExtent[1], yMax)])
       .range([height, 0])
 
     const lineGen = line()
@@ -108,7 +108,7 @@ export default function LineGraph(props) {
     const x = event.clientX - svgPosition.left
     const y = event.clientY - svgPosition.top
     const i = delaunay.find(x, y)
-    if (i !== -1) {
+    if (i !== -1 && !isNaN(i)) {
       const country = points[i][2]
       setHoveredCountry(country)
     }
@@ -120,7 +120,7 @@ export default function LineGraph(props) {
   }
   return (
     <div>
-      <svg ref={svgRef} width={svgWidth} height={svgHeight} onMouseMove={hoverSvg}>
+      <svg ref={svgRef} width={svgWidth} height={svgHeight} onMouseMove={hoverSvg} onMouseOut={e => setHoveredCountry(null)}>
 
         <g transform={`translate(${margins.left}, ${margins.top})`}>
           <g>{countryGroups}</g>
