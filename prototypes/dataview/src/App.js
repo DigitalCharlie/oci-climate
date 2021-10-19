@@ -2,7 +2,7 @@ import './App.css';
 import useDataHook from './useDataHook';
 import SummaryGraph from './SummaryGraph';
 import SmallMultiples from './SmallMultiples'
-
+import Maps from './Map'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 function App() {
   const data = useDataHook()
@@ -10,9 +10,9 @@ function App() {
   return (
     <Router>
       <div>
-        <Link to='/summary'>Summary</Link>
-        <Link to='/country'>Country View</Link>
-        <Link to='/maps'>Maps</Link>
+        <Link to='/summary'>Summary</Link>{' '}
+        <Link to='/country'>Country View</Link>{' '}
+        <Link to='/maps'>Maps</Link>{' '}
         <Link to='/multiples'>Small Multiples</Link>
       </div>
 
@@ -22,6 +22,14 @@ function App() {
         </Route>
         <Route path='/multiples'>
           <SmallMultiples data={data} />
+        </Route>
+
+        <Route path='/maps'>
+          <Maps data={data} />
+        </Route>
+
+        <Route path='/country'>
+          <div>coming soon?</div>
         </Route>
       </Switch>
     </Router>
