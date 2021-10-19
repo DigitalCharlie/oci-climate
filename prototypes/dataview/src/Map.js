@@ -1,6 +1,133 @@
 
-export default function Maps(props) {
+import { geoEqualEarth, geoPath } from 'd3-geo'
+import { useMemo, useRef, useState } from 'react'
+import useMapHook from './useMapHook'
+import exportSVG from './exportSVG'
+import { groups, sum, mean, extent } from 'd3-array'
+import { scaleLinear, scaleLog } from 'd3-scale'
+function Map(props) {
+
+  const { collection, data, colorScale, dataKey } = props
+
+  const width = 960
+  const height = 480
+
+  const svgRef = useRef()
+  const rightClick = () => exportSVG(svgRef.current, `map$-${dataKey}.svg`)
+
+  const { projection, path, pathStrings} = useMemo(() => {
+    const projection = geoEqualEarth()
+    const path = geoPath(projection)
+
+    const padding = 20
+    projection.fitExtent([[padding, padding], [width-padding, height- padding]], collection)
+
+    const pathStrings = {}
+    collection.features.forEach(feature => {
+      if (!feature.id) {
+        return null
+      }
+      const pathData = path(feature)
+      pathStrings[feature.id] = pathData
+    })
+    return { projection, path, pathStrings}
+  }, [width, height, collection])
+
+
+  const features = collection.features.map(feature => {
+    if (!feature.id) {
+      return null
+    }
+    const pathData = pathStrings[feature.id]
+    let fill = 'none'
+
+
+    let matching = data.find(d => d.country === feature.properties.name)
+    if (matching && matching[dataKey] && isFinite(matching[dataKey])) {
+      fill = colorScale(matching[dataKey])
+      console.log(matching)
+    }
+    return (
+      <path key={feature.id} d={pathData} fill={fill} />
+    )
+  })
   return (
-    <div> maps</div>
+    <div>
+
+      <div>{dataKey}</div>
+      <svg width={width} height={height} ref={svgRef} onContextMenu={rightClick}>
+        <g>{features}</g>
+      </svg>
+    </div>
+  )
+
+
+}
+
+export default function Maps(props) {
+
+  const map = useMapHook()
+  const { data } = props
+  const [startYear, setStartYear] = useState(2010)
+  const [endYear, setEndYear] = useState(2020)
+  const [metric, setMetric] = useState('sum')
+
+  const optionStartYear = 2010
+  const optionEndYear = 2021
+  const yearOptions = []
+  for (let i = optionStartYear; i <= optionEndYear; i++) {
+    yearOptions.push(<option key={i} value={i}>{i}</option>)
+  }
+
+  const categories = ['Fossil Fuel', 'Clean', 'Other']
+
+  const countryData = groups(data.filter(d => d.year >= startYear && d.year <= endYear), d => d.country).map(v => ({country: v[0], values: v[1]})).map(cData => {
+
+    const rollup = metric === 'sum' ? sum : mean
+    const totalValue = rollup(cData.values, d => d.amount)
+    const categoryValues = {}
+    categories.forEach(category => {
+      categoryValues[category] = rollup(cData.values.filter(d => d.category === category), d => d.amount)
+    })
+    return {
+      ...cData,
+      Total: totalValue,
+      ...categoryValues,
+    }
+  })
+  console.log(countryData)
+  const mapDataKeys = ['Total', ... categories]
+  const dataExtent = extent(countryData, d => d.Total)
+  const dataTotalExtent = dataExtent[1] - dataExtent[0]
+  const colorScale = scaleLog()
+    .domain([
+      dataExtent[1],
+      dataExtent[1] - dataTotalExtent * 0.191,
+      dataExtent[1] - dataTotalExtent * 0.358,
+      dataExtent[1] - dataTotalExtent * 0.493,
+      dataExtent[1] - dataTotalExtent * 0.649,
+      dataExtent[1] - dataTotalExtent * 0.812,
+      dataExtent[0]
+    ])
+    .range(['#963e0f', '#cc6730', '#f4a77e', '#efc1a8', '#edd4c7', '#e8dbd5', '#ffffff' ])
+
+  return (
+    <div>
+      <div>
+        start year: <select value={startYear} onChange={e => setStartYear(e.target.value)}>
+          {yearOptions}
+        </select>
+        end year: <select value={endYear} onChange={e => setEndYear(e.target.value)}>
+          {yearOptions}
+        </select>
+        metric: <select value={metric} onChange={e => setMetric(e.target.value)}>
+          <option value='sum'>sum</option>
+          <option value='average'>average</option>
+        </select>
+
+      </div>
+      {map ? (
+        mapDataKeys.map(dataKey => <Map colorScale={colorScale} key={dataKey} dataKey={dataKey} collection={map} data={countryData} />)) : null}
+    </div>
   )
 }
