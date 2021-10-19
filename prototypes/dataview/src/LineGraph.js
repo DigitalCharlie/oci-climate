@@ -2,13 +2,11 @@ import { flatRollup, groups, rollups, sum, extent } from 'd3-array';
 
 import { scaleLinear, scaleOrdinal } from 'd3-scale'
 import { line } from 'd3-shape'
-import { format } from 'd3-format'
 import { Delaunay } from 'd3-delaunay'
 import { useRef, useState, useMemo } from 'react';
 import {schemeCategory10 } from 'd3-scale-chromatic'
 import exportSVG from './exportSVG';
-const valueFormatter = (value) => format('.2s')(value).replace(/G/, 'B')
-
+import valueFormatter from './valueFormatter';
 const getLineForCountry = (summedByCountryAndYear, xScale, yScale, lineGen, points, colorScale) => (country, options = {}) => {
   const rows = summedByCountryAndYear.filter(d => d[0] === country)
   const linePath = lineGen(rows)
@@ -47,11 +45,13 @@ export default function LineGraph(props) {
   }
   const svgWidth = width + margins.left + margins.right
   const svgHeight = height + margins.top + margins.bottom
-  const minYear = 2010
+  const minYear = 2013
+  const maxYear = 2020
   const { byCountryAndYear, summedByCountryAndYear, xExtent, yExtent, xScale, yScale, lineGen, countryGroups, delaunay, points, colorScale } = useMemo(() => {
     const byCountryAndYear = groups(data, d => d.country, d => d.year)
     const summedByCountryAndYear = flatRollup(data, rows => sum(rows, d => d.amount), d => d.country, d => d.year)
       .filter(d => d[1] >= minYear)
+      .filter(d => d[1] <= maxYear)
     console.log(byCountryAndYear)
     console.log(summedByCountryAndYear)
     const xExtent = extent(summedByCountryAndYear, d => d[1])
@@ -87,6 +87,9 @@ export default function LineGraph(props) {
     return { byCountryAndYear, summedByCountryAndYear, xExtent, yExtent, xScale, yScale, lineGen, countryGroups, delaunay, points, colorScale }
   }, [data, yMax, width, height])
   const xTicks = xScale.ticks().map(tick => {
+    if (tick !== Math.round(tick)) {
+      return null
+    }
     const x = xScale(tick)
     return (
       <g key={tick} transform={`translate(${x}, ${height})`}>
