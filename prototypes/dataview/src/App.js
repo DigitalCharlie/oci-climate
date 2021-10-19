@@ -8,7 +8,7 @@ function App() {
   const data = useDataHook()
 
   return (
-    <Router>
+    <Router basename='oci/prototypes/dataview/'>
       <div>
         <Link to='/summary'>Summary</Link>{' '}
         <Link to='/country'>Country View</Link>{' '}

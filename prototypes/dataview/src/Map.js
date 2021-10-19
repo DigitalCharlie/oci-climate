@@ -1,13 +1,16 @@
 
-import { geoEqualEarth, geoPath } from 'd3-geo'
+import { geoMercator, geoPath } from 'd3-geo'
 import { useMemo, useRef, useState } from 'react'
 import useMapHook from './useMapHook'
 import exportSVG from './exportSVG'
 import { groups, sum, mean, extent } from 'd3-array'
 import { scaleLinear, scaleLog } from 'd3-scale'
+import {colors} from './SmallMultiples'
+import valueFormatter from './valueFormatter'
+
 function Map(props) {
 
-  const { collection, data, colorScale, dataKey } = props
+  const { collection, data, dataKey } = props
 
   const width = 960
   const height = 480
@@ -15,25 +18,35 @@ function Map(props) {
   const svgRef = useRef()
   const rightClick = () => exportSVG(svgRef.current, `map$-${dataKey}.svg`)
 
-  const { projection, path, pathStrings} = useMemo(() => {
-    const projection = geoEqualEarth()
+  const { projection, path, pathStrings, centers} = useMemo(() => {
+    const projection = geoMercator()
     const path = geoPath(projection)
 
-    const padding = 20
+    const padding = 0
     projection.fitExtent([[padding, padding], [width-padding, height- padding]], collection)
 
     const pathStrings = {}
+    const centers = {}
     collection.features.forEach(feature => {
       if (!feature.id) {
         return null
       }
       const pathData = path(feature)
       pathStrings[feature.id] = pathData
+      centers[feature.id] = path.centroid(feature)
     })
-    return { projection, path, pathStrings}
+    return { projection, path, pathStrings, centers}
   }, [width, height, collection])
 
-
+  const sorted = [...data].sort((a, b) => b[dataKey] - a[dataKey])
+  sorted.forEach((d, i) => {
+    d.sortedIndex = i
+  })
+  const colorScale = scaleLinear()
+    .domain(extent(data, d => d[dataKey] ?  d[dataKey] : null))
+    .range(['#ffffff', colors[dataKey]])
+  console.log(extent(data, d => d[dataKey] ?  d[dataKey] : null))
+  const [hoveredFeature, setHoveredFeature] = useState(null)
   const features = collection.features.map(feature => {
     if (!feature.id) {
       return null
@@ -45,10 +58,33 @@ function Map(props) {
     let matching = data.find(d => d.country === feature.properties.name)
     if (matching && matching[dataKey] && isFinite(matching[dataKey])) {
       fill = colorScale(matching[dataKey])
-      console.log(matching)
+      // console.log(matching)
     }
     return (
-      <path key={feature.id} d={pathData} fill={fill} />
+      <path key={feature.id} d={pathData} fill={fill} onMouseOver={() => setHoveredFeature(feature.properties.name)} onMouseOut={() => setHoveredFeature(null)} />
+    )
+  })
+
+  const labels = collection.features.map(feature => {
+    if (!feature.id) {
+      return null
+    }
+    const center = centers[feature.id]
+    let matching = data.find(d => d.country === feature.properties.name)
+    let value = null
+    if (!matching || !matching[dataKey] || !isFinite(matching[dataKey])) {
+      return null
+    }
+    let hidden = matching.sortedIndex > 5 && feature.properties.name !== hoveredFeature
+    if (hidden) {
+      return null
+    }
+
+    value = valueFormatter(matching[dataKey])
+    return (
+      <g transform={`translate(${center.join(',')})`}>
+        <text  textAnchor='middle'>{feature.properties.name} - {value}</text>
+      </g>
     )
   })
   return (
@@ -57,6 +93,7 @@ function Map(props) {
       <div>{dataKey}</div>
       <svg width={width} height={height} ref={svgRef} onContextMenu={rightClick}>
         <g>{features}</g>
+        <g style={{ pointerEvents: 'none'}}>{labels}</g>
       </svg>
     </div>
   )
@@ -97,22 +134,10 @@ export default function Maps(props) {
   })
   console.log(countryData)
   const mapDataKeys = ['Total', ... categories]
-  const dataExtent = extent(countryData, d => d.Total)
-  const dataTotalExtent = dataExtent[1] - dataExtent[0]
-  const colorScale = scaleLog()
-    .domain([
-      dataExtent[1],
-      dataExtent[1] - dataTotalExtent * 0.191,
-      dataExtent[1] - dataTotalExtent * 0.358,
-      dataExtent[1] - dataTotalExtent * 0.493,
-      dataExtent[1] - dataTotalExtent * 0.649,
-      dataExtent[1] - dataTotalExtent * 0.812,
-      dataExtent[0]
-    ])
-    .range(['#963e0f', '#cc6730', '#f4a77e', '#efc1a8', '#edd4c7', '#e8dbd5', '#ffffff' ])
-
   return (
     <div>
+      <p>Showing sum of investments amounts in countries by type, missing countries could be due to names not matching up between datasets</p>
+      <p>can filter years</p>
       <div>
         start year: <select value={startYear} onChange={e => setStartYear(e.target.value)}>
           {yearOptions}
@@ -120,14 +145,14 @@ export default function Maps(props) {
         end year: <select value={endYear} onChange={e => setEndYear(e.target.value)}>
           {yearOptions}
         </select>
-        metric: <select value={metric} onChange={e => setMetric(e.target.value)}>
+        {/* metric: <select value={metric} onChange={e => setMetric(e.target.value)}>
           <option value='sum'>sum</option>
           <option value='average'>average</option>
-        </select>
+        </select> */}
 
       </div>
       {map ? (
-        mapDataKeys.map(dataKey => <Map colorScale={colorScale} key={dataKey} dataKey={dataKey} collection={map} data={countryData} />)) : null}
+        mapDataKeys.map(dataKey => <Map key={dataKey} dataKey={dataKey} collection={map} data={countryData} />)) : null}
     </div>
   )
 }

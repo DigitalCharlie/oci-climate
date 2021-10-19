@@ -6,10 +6,11 @@ import { scaleLinear } from "d3-scale"
 import valueFormatter from './valueFormatter';
 import exportSVG from "./exportSVG";
 import './SmallMultiples.scss'
-const colors = {
-  'Clean': 'green',
-  'Fossil Fuel': 'grey',
-  'Other': 'lightblue',
+export const colors = {
+  'Clean': '#29711e',
+  'Fossil Fuel': '#757575',
+  'Other': '#a9d1e0',
+  'Total': '#473124',
 }
 function Graph(props) {
   const { data, country} = props
@@ -141,6 +142,7 @@ export default function SmallMultiples(props) {
   }, [data])
   return (
     <div>
+      <p>Showing investment amounts in each country by category type</p>
       <div>
         {Object.keys(colors).map(category => {
           const color = colors[category]
