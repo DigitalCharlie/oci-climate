@@ -75,7 +75,7 @@ function Map(props) {
     if (!matching || !matching[dataKey] || !isFinite(matching[dataKey])) {
       return null
     }
-    let hidden = matching.sortedIndex > 5 && feature.properties.name !== hoveredFeature
+    let hidden = matching.sortedIndex > 10 && feature.properties.name !== hoveredFeature
     if (hidden) {
       return null
     }

@@ -2,6 +2,7 @@ import './App.css';
 import useDataHook from './useDataHook';
 import SummaryGraph from './SummaryGraph';
 import SmallMultiples from './SmallMultiples'
+import EmissionCircles from './EmissionCircles'
 import Maps from './Map'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 function App() {
@@ -13,7 +14,8 @@ function App() {
         <Link to='/summary'>Summary</Link>{' '}
         <Link to='/country'>Country View</Link>{' '}
         <Link to='/maps'>Maps</Link>{' '}
-        <Link to='/multiples'>Small Multiples</Link>
+        <Link to='/multiples'>Small Multiples</Link>{' '}
+        <Link to='/emissionCircles'>Emission Circles</Link>
       </div>
 
       <Switch>
@@ -30,6 +32,9 @@ function App() {
 
         <Route path='/country'>
           <div>coming soon?</div>
+        </Route>
+        <Route path='/emissionCircles'>
+          <EmissionCircles data={data} />
         </Route>
       </Switch>
     </Router>
