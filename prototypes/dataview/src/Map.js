@@ -8,6 +8,12 @@ import { scaleLinear, scaleLog } from 'd3-scale'
 import {colors} from './SmallMultiples'
 import valueFormatter from './valueFormatter'
 
+const mapColors = {
+  'Fossil Fuel': ['#fcf9f9', '#a83c01'],
+  'Clean': ['#f7fcfc', '#075a60'],
+  Other: ['#f7fbfd', '#005080'],
+  'Total': ['#f7fafa', '#000000']
+}
 function Map(props) {
 
   const { collection, data, dataKey } = props
@@ -44,7 +50,7 @@ function Map(props) {
   })
   const colorScale = scaleLinear()
     .domain(extent(data, d => d[dataKey] ?  d[dataKey] : null))
-    .range(['#ffffff', colors[dataKey]])
+    .range(mapColors[dataKey])
   console.log(extent(data, d => d[dataKey] ?  d[dataKey] : null))
   const [hoveredFeature, setHoveredFeature] = useState(null)
   const features = collection.features.map(feature => {
@@ -82,7 +88,7 @@ function Map(props) {
 
     value = valueFormatter(matching[dataKey])
     return (
-      <g transform={`translate(${center.join(',')})`}>
+      <g transform={`translate(${center.join(',')})`} key={feature.id}>
         <text  textAnchor='middle'>{feature.properties.name} - {value}</text>
       </g>
     )
