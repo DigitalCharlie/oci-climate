@@ -139,8 +139,10 @@ export default function EmissionCircles(props) {
   const [metric, setMetric] = useState('sum')
   const [countryGrouping, setCountryGrouping] = useState('institutionGroup')
   const [inactiveCategories, setInactiveCategories] = useState([])
-  const byCountryAndYear = flatGroup(data, d=> d[countryGrouping])
-    .sort((a, b) => a[0].localeCompare(b[0]))
+  const byCountryAndYear = flatGroup(
+    data.filter(d => !inactiveCategories.includes(d.category))
+    , d=> d[countryGrouping]
+  ).sort((a, b) => a[0].localeCompare(b[0]))
 
   // console.log(byCountryAndYear)
 
@@ -182,6 +184,28 @@ export default function EmissionCircles(props) {
         <option value='country'>Country</option>
         <option value='institutionGroup'>Institution Group</option>
       </select>
+      <span>{' '}
+        categories:{' '}
+        {categories.map(category => {
+          return <label key={category} style={{ paddingRight: '1em'}}>
+            <input type="checkbox" checked={!inactiveCategories.includes(category)}
+              onChange={e => {
+                setInactiveCategories(cats => {
+                  var index = cats.indexOf(category)
+                  if (index === -1) {
+                    return [...cats, category]
+                  } else {
+                    const newA = [...cats]
+                    newA.splice(index, 1)
+                    return newA
+                  }
+                })
+              }}
+            />
+            {category}
+          </label>
+        })}
+      </span>
       <p>Showing investments by type per country 2013-16 vs 2017-20</p>
       <div style={{ display: 'flex', flexWrap: 'wrap'}}>
         {countryGroups}
