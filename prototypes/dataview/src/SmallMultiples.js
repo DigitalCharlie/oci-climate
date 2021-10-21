@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react"
+import { useMemo, useRef, useState } from "react"
 
 import { flatRollup, extent, sum } from "d3-array"
 import { area, stack, stackOrderNone, stackOffsetNone } from "d3-shape"
@@ -21,7 +21,7 @@ function Graph(props) {
   const margins = {
     top: 10, left: 60, bottom: 20, right: 20
   }
-  console.log(country)
+  // console.log(country)
 
   const categories = useMemo(() =>
     Array.from(new Set(data.map(d => d[2]))).filter(d => d !== '')
@@ -35,7 +35,7 @@ function Graph(props) {
       transposedData.push({ year: row[1], [row[2]]: row[3]})
     }
   })
-  console.log(transposedData)
+  // console.log(transposedData)
   const stackedData = stack()
     .keys(categories)
     .value((d, key) => {
@@ -47,13 +47,13 @@ function Graph(props) {
     .order(stackOrderNone)
     .offset(stackOffsetNone)
     (transposedData)
-  console.log(categories)
-  console.log(data)
-  console.log(stackedData)
+  // console.log(categories)
+  // console.log(data)
+  // console.log(stackedData)
 
   const yDomain = extent(stackedData.flat(2))
   const xDomain = extent(transposedData, d => d.year)
-  console.log(xDomain, yDomain)
+  // console.log(xDomain, yDomain)
 
   const xScale = scaleLinear()
     .domain(xDomain)
@@ -72,7 +72,7 @@ function Graph(props) {
 
   const paths = stackedData.map(stack => {
     const path = areaGen(stack)
-    console.log(stack)
+    // console.log(stack)
     const fill = colors[stack.key]
     return <path d={path} key={stack.key} fill={fill} />
   })
@@ -122,24 +122,25 @@ function Graph(props) {
 
 export default function SmallMultiples(props) {
   const {data } = props
+  const [countryGrouping, setCountryGrouping] = useState('country')
 
   const graphs = useMemo(() => {
-    const summedByCountryAndYear = flatRollup(data, rows => sum(rows, d => d.amount), d => d.country, d => d.year, d=> d.category)
+    const summedByCountryAndYear = flatRollup(data, rows => sum(rows, d => d.amount), d => d[countryGrouping], d => d.year, d=> d.category)
 
-    console.log(summedByCountryAndYear)
+    // console.log(summedByCountryAndYear)
     const xExtent = extent(summedByCountryAndYear, d => d[1])
     const yExtent = extent(summedByCountryAndYear, d => d[2])
-    console.log(xExtent, yExtent)
+    // console.log(xExtent, yExtent)
     summedByCountryAndYear.sort((a, b) => a[1] - b[1])
 
     const countries = Array.from(new Set(summedByCountryAndYear.map(d => d[0]))).sort()
-    console.log(countries)
+    // console.log(countries)
     return countries.map(country => {
         const countryData = summedByCountryAndYear.filter(d => d[0] === country)
         return <Graph key={country} data={countryData} country={country} />
       })
 
-  }, [data])
+  }, [data, countryGrouping])
   return (
     <div>
       <p>Showing investment amounts in each country by category type</p>
@@ -155,6 +156,14 @@ export default function SmallMultiples(props) {
         })}
 
       </div>
+      <div>
+
+      grouping: <select value={countryGrouping} onChange={e => setCountryGrouping(e.target.value)}>
+        <option value='country'>Country</option>
+        <option value='institutionGroup'>Institution Group</option>
+      </select>
+      </div>
+
       <div className='smallMultiples'>
         {graphs}
       </div>

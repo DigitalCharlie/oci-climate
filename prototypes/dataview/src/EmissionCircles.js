@@ -137,8 +137,8 @@ export default function EmissionCircles(props) {
 
   const { data } = props
   const [metric, setMetric] = useState('sum')
-
-  const byCountryAndYear = flatGroup(data, d=> d.country)
+  const [countryGrouping, setCountryGrouping] = useState('country')
+  const byCountryAndYear = flatGroup(data, d=> d[countryGrouping])
     .sort((a, b) => a[0].localeCompare(b[0]))
 
   // console.log(byCountryAndYear)
@@ -176,6 +176,10 @@ export default function EmissionCircles(props) {
       metric: <select value={metric} onChange={e => setMetric(e.target.value)}>
         <option value='sum'>sum</option>
         <option value='average'>average</option>
+      </select>
+      grouping: <select value={countryGrouping} onChange={e => setCountryGrouping(e.target.value)}>
+        <option value='country'>Country</option>
+        <option value='institutionGroup'>Institution Group</option>
       </select>
       <p>Showing investments by type per country 2013-16 vs 2017-20</p>
       <div style={{ display: 'flex', flexWrap: 'wrap'}}>
