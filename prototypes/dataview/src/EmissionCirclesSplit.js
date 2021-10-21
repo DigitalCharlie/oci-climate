@@ -140,10 +140,12 @@ export default function EmissionCircles(props) {
   // console.log(byCountryAndYear)
 
   const countries = Array.from(new Set(byCountryAndYear.map(d => d[0])))
-
+  countries.unshift('Total')
   // console.log(countries)
   const countryGroups = countries.map(country => {
-    const countryRows = byCountryAndYear.filter(d => d[0] === country)[0][1]
+    const countryRows = country === 'Total' ?
+      byCountryAndYear.map(d => d[1]).flat() :
+      byCountryAndYear.filter(d => d[0] === country)[0][1]
     const frames = [
       { startYear: 2013, endYear: 2016 },
       { startYear: 2017, endYear: 2020}
