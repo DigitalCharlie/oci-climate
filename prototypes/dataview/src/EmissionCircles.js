@@ -138,7 +138,7 @@ export default function EmissionCircles(props) {
   const { data } = props
   const [metric, setMetric] = useState('sum')
   const [countryGrouping, setCountryGrouping] = useState('institutionGroup')
-  const [inactiveCategories, setInactiveCategories] = useState([])
+  const [inactiveCategories, setInactiveCategories] = useState(['Other'])
   const byCountryAndYear = flatGroup(
     data.filter(d => !inactiveCategories.includes(d.category))
     , d=> d[countryGrouping]
