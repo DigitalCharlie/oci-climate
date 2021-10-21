@@ -106,7 +106,7 @@ export default function EmissionCircles(props) {
 
   const { data } = props
   const [metric, setMetric] = useState('sum')
-  const [countryGrouping, setCountryGrouping] = useState('country')
+  const [countryGrouping, setCountryGrouping] = useState('institutionGroup')
 
   const byCountryAndYear = flatGroup(data, d=> d[countryGrouping])
     .sort((a, b) => a[0].localeCompare(b[0]))

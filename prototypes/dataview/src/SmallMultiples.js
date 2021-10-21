@@ -122,7 +122,7 @@ function Graph(props) {
 
 export default function SmallMultiples(props) {
   const {data } = props
-  const [countryGrouping, setCountryGrouping] = useState('country')
+  const [countryGrouping, setCountryGrouping] = useState('institutionGroup')
 
   const graphs = useMemo(() => {
     const summedByCountryAndYear = flatRollup(data, rows => sum(rows, d => d.amount), d => d[countryGrouping], d => d.year, d=> d.category)
