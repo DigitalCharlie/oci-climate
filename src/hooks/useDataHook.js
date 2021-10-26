@@ -21,6 +21,9 @@ export default function useDataHook() {
           renames.forEach(rename => {
             row[rename[1]] = row[rename[0]]
           })
+          const group = row.institutionGroup
+          row.isBank = group.includes('Bank')
+          row.isCountry = !row.isBank
 
         })
 
