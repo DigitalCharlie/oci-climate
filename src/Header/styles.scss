@@ -1,0 +1,90 @@
+header.Header {
+  display: flex;
+  margin: 1rem;
+  justify-content: space-between;
+  position: relative;
+  > div {
+    display: flex;
+  }
+  img {
+    width: 12em;
+    align-self: center;
+  }
+  h1 {
+    margin: 0;
+    margin-left: 1em;
+    align-self: center;
+    margin-top: 0.3em;
+  }
+
+  nav {
+    font-family: Diavlo;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    a {
+      white-space: nowrap;
+      color: #222;
+      padding: 1.5em 1em 0.8em;
+      text-decoration: none;
+
+      &.active, &:hover {
+        color: #D71921;
+      }
+    }
+  }
+
+  select.menu {
+    display: none;
+    margin-left: -1rem;
+    appearance: none;
+    width: 100vw;
+    font-size: 1rem;
+    background: #F0F0F0 url('../images/menu.svg') 0 0 no-repeat;
+    border: none;
+    height: 27px;
+    margin-top: 1em;
+    padding-left: 115px;
+    font-family: Diavlo;
+    font-weight: bold;
+    text-transform: uppercase;
+    &:focus:hover {
+      text-transform: none;
+    }
+  }
+
+  .social {
+    white-space: nowrap;
+    a {
+      padding-top: 1.3em;
+      display: inline-block;
+      + a {
+        margin-left: 1em;
+      }
+    }
+    img {
+      width: 1em;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    > div {
+      display: block;
+    }
+    h1 {
+      margin-left: 0;
+    }
+    nav {
+      display: none;
+    }
+
+    select.menu {
+      display: block;
+    }
+    .right {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
