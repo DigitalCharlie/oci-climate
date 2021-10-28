@@ -1,9 +1,12 @@
 import './styles.scss'
 import useWindowSize from '../hooks/useWindowSize'
 import classNames from 'classnames'
-import React from 'react'
+import React, { useEffect } from 'react'
 import TopUsageGraph from './TopUsageGraph'
 import YearlyUsageGraph from './YearlyUsageGraph'
+import infoIcon from '../images/info_icon.svg'
+import ReactTooltip from 'react-tooltip';
+
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
 export default function DataView(props) {
   const { data } = props
@@ -39,6 +42,11 @@ export default function DataView(props) {
   sections.forEach((s, i) => s.index = i)
 
   const {width, height} = useWindowSize()
+
+  useEffect(() => {
+    ReactTooltip.rebuild()
+  })
+
   console.log(width)
   if (!width) {
     return null
@@ -54,7 +62,9 @@ export default function DataView(props) {
       defaultContent
     return (
       <section key={section.title}>
-        <h2>{section.title}</h2>
+        <h2>{section.title}
+          <img src={infoIcon} data-tip='Lorem ipsum dollar...' />
+        </h2>
         <div>{description}</div>
         {content}
       </section>
@@ -77,6 +87,7 @@ export default function DataView(props) {
   return (
     <div className={classNames('DataView', { twoColumnView: !singleColumnView })}>
       {sectionDivs}
+      <ReactTooltip />
     </div>
   )
 }
