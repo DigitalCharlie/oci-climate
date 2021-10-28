@@ -6,6 +6,7 @@ import TopUsageGraph from './TopUsageGraph'
 import YearlyUsageGraph from './YearlyUsageGraph'
 import infoIcon from '../images/info_icon.svg'
 import ReactTooltip from 'react-tooltip';
+import MiniMap from './MiniMap'
 
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
 export default function DataView(props) {
@@ -37,6 +38,9 @@ export default function DataView(props) {
     {
       title: 'Energy investment recipient country',
       column: 'left',
+      content: (
+        data.length ? <MiniMap data={data} /> : null
+      )
     },
   ]
   sections.forEach((s, i) => s.index = i)

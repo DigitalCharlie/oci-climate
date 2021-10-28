@@ -50,7 +50,7 @@ export default function YearlyAverageUsageGraph(props) {
 
   const filteredData = selectedGroup ? data.filter(d => d.institutionGroup === selectedGroup) : data
   const grouped = rollup(filteredData, rows => sum(rows, d => d.amount), d => d.year, d => d.category)
-  console.log(grouped)
+  // console.log(grouped)
   const forceYears = [2013, 2020]
   for (let year = forceYears[0]; year <= forceYears[1]; year++) {
     if (grouped.has(year)) continue
@@ -58,7 +58,7 @@ export default function YearlyAverageUsageGraph(props) {
   }
 
   const sortedByYear = new Map([...grouped.entries()].sort((a, b) => a[0] - b[0]))
-  console.log(sortedByYear)
+  // console.log(sortedByYear)
 
   const stacks = stack()
     .keys(typesSorted)
@@ -66,7 +66,7 @@ export default function YearlyAverageUsageGraph(props) {
       return d[1].has(key) ? d[1].get(key) : 0
     })(sortedByYear)
     // .map(s => s.map(d => Object.assign(d, {year: d.data[0] })));
-  console.log(stacks)
+  // console.log(stacks)
 
   const yDomain = extent(stacks.flat(2))
   const xDomain = extent(sortedByYear.keys())
@@ -92,7 +92,7 @@ export default function YearlyAverageUsageGraph(props) {
   const stackSprings = useSprings(stacks.length, stacks.map(stack => ({
     path: areaGen(stack)
   })))
-  console.log(stackSprings)
+  // console.log(stackSprings)
   const areaGroup = stacks.map((stack, stackIndex) => {
     // const path = areaGen(stack)
     const path = stackSprings[stackIndex].path
