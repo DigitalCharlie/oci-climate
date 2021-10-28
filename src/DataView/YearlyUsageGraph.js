@@ -1,5 +1,5 @@
 
-import './YearlyAverageUsageGraph.scss'
+import './YearlyUsageGraph.scss'
 import { rollup, sum, extent } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
@@ -135,7 +135,7 @@ export default function YearlyAverageUsageGraph(props) {
 
   const svgRef = useRef()
   return (
-    <div className="YearlyAverageUsageGraph">
+    <div className="YearlyUsageGraph">
       <Select placeholder='Select an Instituion Group'  value={selectedGroup} onChange={setSelectedGroup} options={groups} />
       <svg ref={svgRef} width={width} height={svgHeight}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
