@@ -1,0 +1,44 @@
+.YearlyAverageUsageGraph {
+  font-size: 0.75em;
+  position: relative;
+  svg {
+    g.dataRow {
+      opacity: 0.6;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .tooltip {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1em 1em 0.5em 1em;
+    border: 1px solid #D9D9D9;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+    background-color: #fff;
+    .tooltip-header {
+      font-weight: bold;
+      font-size: 1.125em;
+      margin-bottom: 0.5em;
+      max-width: 180px;
+    }
+    .tooltip-row {
+      display: flex;
+      margin-bottom: 0.5em;
+      > div {
+        margin-right: 0.3em;
+      }
+    }
+    .tooltip-row-diamond {
+      width: 1em;
+      height: 1em;
+      transform: rotate(45deg) translateY(20%);
+      margin-right: 0.5em !important;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import useWindowSize from '../hooks/useWindowSize'
 import classNames from 'classnames'
 import React from 'react'
 import TopUsageGraph from './TopUsageGraph'
+import YearlyAverageUsageGraph from './YearlyAverageUsageGraph'
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
 export default function DataView(props) {
   const { data } = props
@@ -11,6 +12,9 @@ export default function DataView(props) {
     {
       title: 'Energy Investment average 2014-2020',
       column: 'left',
+      content: (
+        data.length ? <YearlyAverageUsageGraph data={data} /> : null
+      )
 
     },
     {
