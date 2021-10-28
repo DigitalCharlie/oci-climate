@@ -1,3 +1,9 @@
 .Select {
-
+  appearance: none;
+  border: 1px solid #D9D9D9;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  padding: 0.25em 0.5em;
+  background: url('../images/chevron.svg') center right 7px no-repeat;
+  margin: 0.5em 0;
 }
