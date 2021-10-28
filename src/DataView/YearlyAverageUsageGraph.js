@@ -5,6 +5,7 @@ import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef } from 'react'
 import { stack, area } from 'd3-shape'
+import { animated, useSpring, useSprings } from 'react-spring'
 import Select from 'Select/'
 const colors = {
   'Fossil Fuel': '#EFC1A8',
@@ -17,6 +18,22 @@ const highlightColors = {
   'Other': '#6ABEF0'
 }
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
+
+
+const GraphLabel = (props) => {
+  const { x, y, value, fill } = props
+  const animatedProps = useSpring({
+    transform: `translate(${x}, ${y})`,
+    value,
+  })
+
+  return (
+    <animated.g transform={animatedProps.transform}>
+      <rect width={10} height={10} transform={`rotate(45) translate(-5, -5)`} fill={fill} />
+      <animated.text textAnchor='middle' y={-10}>{animatedProps.value.to(valueFormatter)}</animated.text>
+    </animated.g>
+  )
+}
 export default function YearlyAverageUsageGraph(props) {
   const { width, data, isBank } = props
 
@@ -34,6 +51,12 @@ export default function YearlyAverageUsageGraph(props) {
   const filteredData = selectedGroup ? data.filter(d => d.institutionGroup === selectedGroup) : data
   const grouped = rollup(filteredData, rows => sum(rows, d => d.amount), d => d.year, d => d.category)
   console.log(grouped)
+  const forceYears = [2013, 2020]
+  for (let year = forceYears[0]; year <= forceYears[1]; year++) {
+    if (grouped.has(year)) continue
+    grouped.set(year, new Map())
+  }
+
   const sortedByYear = new Map([...grouped.entries()].sort((a, b) => a[0] - b[0]))
   console.log(sortedByYear)
 
@@ -66,26 +89,31 @@ export default function YearlyAverageUsageGraph(props) {
       return yScale(d[1])
     })
 
-  const areaGroup = stacks.map(stack => {
-    const path = areaGen(stack)
+  const stackSprings = useSprings(stacks.length, stacks.map(stack => ({
+    path: areaGen(stack)
+  })))
+  console.log(stackSprings)
+  const areaGroup = stacks.map((stack, stackIndex) => {
+    // const path = areaGen(stack)
+    const path = stackSprings[stackIndex].path
     return (
-      <path opacity={stack.key === 'Fossil Fuel' ? null : '0.3'} d={path} key={stack.key} fill={colors[stack.key]} />
+      <animated.path opacity={stack.key === 'Fossil Fuel' ? null : '0.3'} d={path} key={stack.key} fill={colors[stack.key]} />
     )
   })
 
   const points = stacks.map(stack => {
-    return stack.map(d => {
-      console.log(stack, d)
+    return stack.map((d, i) => {
+      // console.log(stack, d)
       if (d[1] - d[0] === 0) {
         return null
       }
       const x = xScale(d.data[0])
       const y = yScale(d[1])
       return (
-        <g transform={`translate(${x},${y})`} key={`${stack.key}-${d[1]}`}>
-          <rect width={10} height={10} transform={`rotate(45) translate(-5, -5)`} fill={highlightColors[stack.key]} />
-          <text textAnchor='middle' y={-10}>{valueFormatter(d[1] - d[0])}</text>
-        </g>
+        <GraphLabel x={x} y={y} key={`${stack.key}-${d.data[0]}`}
+          fill={highlightColors[stack.key]}
+          value={d[1] - d[0]}
+        />
       )
     })
   })
