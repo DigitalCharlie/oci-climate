@@ -1,6 +1,6 @@
 
 import './TopUsageGraph.scss'
-import { rollups, sum, extent } from 'd3-array'
+import { rollups, sum, extent, mean } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef } from 'react'
@@ -75,12 +75,12 @@ function AnimatedRow(props) {
 }
 
 export default function TopUsageGraph(props) {
-  const { width, data, isBank, selectedEnergyTypes } = props
+  const { width, data, isBank, selectedEnergyTypes, aggregationType } = props
   const filteredData = data.filter(d => selectedEnergyTypes.includes(d.category))
   const singleEnergyType = selectedEnergyTypes.length === 1
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
 
-  const grouped = rollups(filteredData, rows => sum(rows, d => d.amount), d => d.institutionGroup, categoryAccessor)
+  const grouped = rollups(filteredData, rows => (aggregationType === 'sum' ? sum : mean)(rows, d => d.amount), d => d.institutionGroup, categoryAccessor)
   const [hoveredGroup, setHoveredGroup] = useState(null)
   const categoryList = Array.from(new Set(filteredData.map(categoryAccessor))).sort()
   grouped.forEach(group => {

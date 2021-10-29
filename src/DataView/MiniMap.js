@@ -1,6 +1,6 @@
 
 import './MiniMap.scss'
-import { rollup, sum, extent, groups } from 'd3-array'
+import { rollup, sum, extent, groups, mean } from 'd3-array'
 import { scaleLinear, scaleLog } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef, useMemo } from 'react'
@@ -28,6 +28,8 @@ function StackedBarSelector(props) {
     const summedData = data.reduce(
       (acc, d) => {
         mapDataKeys.forEach(key => {
+          const v = d[key]
+          if (isNaN(v)) return
           acc[key] += d[key]
         })
         return acc
@@ -41,14 +43,14 @@ function StackedBarSelector(props) {
 
   const rowHeight = height / 2
   const xScale = scaleLinear()
-    .domain([0, summedData.Total])
+    .domain([0, summedData['Fossil Fuel'] + summedData.Clean + summedData.Other])
     .range([0, width])
   let runningX = 0
   const dataRects = mapDataKeys.map((key, i) => {
     const isTotal = key === 'Total'
     const y = isTotal ? 0 : rowHeight
     const x = runningX
-    const barWidth = xScale(summedData[key])
+    const barWidth = isTotal ? width : xScale(summedData[key])
     const selected = selectedDataKey === key
     const style = { cursor: 'pointer', opacity: selected ? 1 : 0.5 }
     const textAnchor = isTotal ? 'start' : 'end'
@@ -72,7 +74,7 @@ function StackedBarSelector(props) {
 }
 
 export default function MiniMap(props) {
-  const { width, data, isBank } = props
+  const { width, data, isBank, aggregationType } = props
 
   const collection = useMapHook()
   const height = width * 0.6
@@ -83,11 +85,11 @@ export default function MiniMap(props) {
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
   const countryData = groups(data, countryAccessor).map(v => ({country: v[0], values: v[1]})).map(cData => {
 
-    const totalValue = sum(cData.values, d => d.amount)
+    const totalValue = (aggregationType === 'sum' ? sum : mean)(cData.values, d => d.amount)
     const categoryValues = {}
     // console.log(cData)
     categories.forEach(category => {
-      categoryValues[category] = sum(cData.values.filter(d => d.category === category), d => d.amount)
+      categoryValues[category] = (aggregationType === 'sum' ? sum : mean)(cData.values.filter(d => d.category === category), d => d.amount)
     })
     return {
       ...cData,
@@ -95,6 +97,7 @@ export default function MiniMap(props) {
       ...categoryValues,
     }
   })
+  console.log(countryData)
 
   let tooltip = null
 

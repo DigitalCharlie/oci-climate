@@ -1,6 +1,6 @@
 
 import './YearlyUsageGraph.scss'
-import { rollup, sum, extent } from 'd3-array'
+import { rollup, sum, extent, mean } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef } from 'react'
@@ -38,7 +38,7 @@ const GraphLabel = (props) => {
   )
 }
 export default function YearlyAverageUsageGraph(props) {
-  const { width, data, isBank, selectedEnergyTypes } = props
+  const { width, data, isBank, selectedEnergyTypes, aggregationType } = props
 
 
   const height = width * 0.6
@@ -55,7 +55,7 @@ export default function YearlyAverageUsageGraph(props) {
   filteredData = filteredData.filter(d => selectedEnergyTypes.includes(d.category))
   const singleEnergyType = selectedEnergyTypes.length === 1
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
-  const grouped = rollup(filteredData, rows => sum(rows, d => d.amount), d => d.year, categoryAccessor)
+  const grouped = rollup(filteredData, rows => (aggregationType === 'sum' ? sum : mean)(rows, d => d.amount), d => d.year, categoryAccessor)
   console.log(grouped)
   const forceYears = [2013, 2020]
   for (let year = forceYears[0]; year <= forceYears[1]; year++) {
