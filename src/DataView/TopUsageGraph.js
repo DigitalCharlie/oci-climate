@@ -16,7 +16,8 @@ const colors = {
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 const rowHeight = 30
 function AnimatedRow(props) {
-  const { group, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType } = props
+  const { group, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, splitBarGraph } = props
+
   const name = group[0]
   const values = group[1]
   const y = groupIndex * rowHeight
@@ -75,11 +76,12 @@ function AnimatedRow(props) {
 }
 
 export default function TopUsageGraph(props) {
-  const { width, data, isBank, selectedEnergyTypes, aggregationType } = props
-  const filteredData = data.filter(d => selectedEnergyTypes.includes(d.category))
+  const { width, data, isBank, selectedEnergyTypes, aggregationType, barGraphStyle } = props
+  const splitBarGraph = barGraphStyle === 'split'
+  let filteredData = data.filter(d => selectedEnergyTypes.includes(d.category))
   const singleEnergyType = selectedEnergyTypes.length === 1
-  let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
 
+  let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
   const grouped = rollups(filteredData, rows => (aggregationType === 'sum' ? sum : mean)(rows, d => d.amount), d => d.institutionGroup, categoryAccessor)
   const [hoveredGroup, setHoveredGroup] = useState(null)
   const categoryList = Array.from(new Set(filteredData.map(categoryAccessor))).sort()
@@ -109,6 +111,7 @@ export default function TopUsageGraph(props) {
     return bValue - aValue
   })
 
+  console.log(grouped)
   const valueRange = extent(grouped, d => d.value)
   const numToShow = Math.min(grouped.length, 10)
   const height = rowHeight * numToShow
@@ -146,6 +149,7 @@ export default function TopUsageGraph(props) {
         key={group[0]}
         groupIndex={groupIndex}
         singleEnergyType={singleEnergyType}
+        splitBarGraph={splitBarGraph}
       />
     )
   })

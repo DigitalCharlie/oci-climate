@@ -1,12 +1,14 @@
 
 import './MiniMap.scss'
 import { rollup, sum, extent, groups, mean } from 'd3-array'
-import { scaleLinear, scaleLog } from 'd3-scale'
+import { scaleLinear, scaleLog, scaleSequentialLog } from 'd3-scale'
+import { interpolateRgb } from 'd3-interpolate'
 import valueFormatter from 'valueFormatter'
-import { useState, useRef, useMemo } from 'react'
+import { useState, useRef, useMemo, useEffect } from 'react'
 import { geoMercator, geoPath } from 'd3-geo'
 import useMapHook from '../hooks/useMapHook'
 import Select from 'Select'
+import Legend from 'Legend'
 const categories = ['Fossil Fuel', 'Clean', 'Other']
 const mapDataKeys = ['Total', ... categories]
 
@@ -83,7 +85,8 @@ export default function MiniMap(props) {
   const [dataKey, setSelectedDataKey] = useState(mapDataKeys[0])
 
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
-  const countryData = groups(data, countryAccessor).map(v => ({country: v[0], values: v[1]})).map(cData => {
+  const countryRows = data.filter(d => !d.isBank)
+  const countryData = groups(countryRows, countryAccessor).map(v => ({country: v[0], values: v[1]})).map(cData => {
 
     const totalValue = (aggregationType === 'sum' ? sum : mean)(cData.values, d => d.amount)
     const categoryValues = {}
@@ -127,9 +130,10 @@ export default function MiniMap(props) {
   sorted.forEach((d, i) => {
     d.sortedIndex = i
   })
-  const colorScale = scaleLog()
+  const colorScale = scaleSequentialLog()
     .domain(extent(countryData, d => d[dataKey] ?  d[dataKey] : null))
-    .range(mapColors[dataKey])
+    // .range(mapColors[dataKey])
+    .interpolator(interpolateRgb(mapColors[dataKey][0], mapColors[dataKey][1]))
   const [hoveredFeature, setHoveredFeature] = useState(null)
   const features =  !collection ? null : collection.features.map(feature => {
     if (!feature.id) {
@@ -174,6 +178,15 @@ export default function MiniMap(props) {
   })
   console.log(countryData)
   const svgRef = useRef()
+  const legendRef = useRef()
+  useEffect(() => {
+    const legend = Legend(colorScale, {
+      tickFormat: valueFormatter,
+      ticks: 3,
+    })
+    legendRef.current.append(legend);
+    return () => legend.remove();
+  })
   return (
     <div className="MiniMap">
       Group By: <Select options={countryGroupings} value={countryGrouping} onChange={setCountryGrouping} />
@@ -185,6 +198,8 @@ export default function MiniMap(props) {
         onChange={setSelectedDataKey}
         selectedDataKey={dataKey}
       />
+
+      <div ref={legendRef} />
 
       <svg className='map' ref={svgRef} width={width} height={height}>
         <g>{features}</g>

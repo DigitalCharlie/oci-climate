@@ -11,11 +11,13 @@ const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
 const aggregationTypes = ['sum', 'average']
+const barGraphStyles = ['all', 'split']
 export default function DataView(props) {
   const { data } = props
   console.log(data)
   const [selectedEnergyTypes , setSelectedEnergyTypes] = useState([...energyTypes])
   const [aggregationType, setAggregationType] = useState('sum')
+  const [barGraphStyle, setBarGraphStyle] = useState('all')
   const sections = [
     {
       title: 'Energy Investment 2014-2020',
@@ -72,6 +74,7 @@ export default function DataView(props) {
           height: 200,
           selectedEnergyTypes,
           aggregationType,
+          barGraphStyle,
         }) :
       defaultContent
     return (
@@ -142,6 +145,22 @@ export default function DataView(props) {
                 type="radio"
                 checked={aggregationType === type}
                 onChange={() => setAggregationType(type)}
+              />
+              {type}
+            </label>
+          )
+        })}
+      </div>
+      <div>
+        Bar Graph Style:
+        {barGraphStyles.map(type => {
+          return (
+            <label key={type} style={{ marginRight: '1em'}}>
+              <input
+
+                type="radio"
+                checked={barGraphStyle === type}
+                onChange={() => setBarGraphStyle(type)}
               />
               {type}
             </label>
