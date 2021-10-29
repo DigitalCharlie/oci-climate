@@ -1,0 +1,14 @@
+.ColorLegend {
+  display: flex;;
+
+  .legend-item {
+    display: flex;
+    margin-right: 2em;
+    .legend-item-color {
+      width: 1em;
+      height: 1em;
+      margin-right: 0.3em;
+      transform: translate(0px, 2.5px);
+    }
+  }
+}

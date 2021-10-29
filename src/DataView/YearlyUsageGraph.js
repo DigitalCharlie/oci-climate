@@ -8,9 +8,9 @@ import { stack, area } from 'd3-shape'
 import { animated, useSpring, useSprings } from 'react-spring'
 import Select from 'Select/'
 import subcategoryColorScale from './subcategoryColorScale'
-
+import ColorLegend from './ColorLegend'
 const colors = {
-  'Fossil Fuel': '#EFC1A8',
+  'Fossil Fuel': '#F4A77E',
   'Clean': '#99DEE3',
   'Other': '#6ABEF0',
 }
@@ -21,6 +21,7 @@ const highlightColors = {
 }
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 
+const parisYear = 2016
 
 const GraphLabel = (props) => {
   const { x, y, value, fill } = props
@@ -42,7 +43,7 @@ export default function YearlyAverageUsageGraph(props) {
 
   const height = width * 0.6
   const margins = {
-    top: 30, left: 20, right: 20, bottom: 20
+    top: 30, left: 20, right: 20, bottom: 40
   }
   const [selectedGroup, setSelectedGroup] = useState('')
   const groups = Array.from(new Set(data.map(d => d.institutionGroup)))
@@ -64,7 +65,7 @@ export default function YearlyAverageUsageGraph(props) {
 
   const sortedByYear = new Map([...grouped.entries()].sort((a, b) => a[0] - b[0]))
   // console.log(sortedByYear)
-  const subcategories = Array.from(new Set(data.map(d => d['category detail'])))
+  const subcategories = Array.from(new Set(filteredData.map(d => d['category detail'])))
   const stackKeys = singleEnergyType ? subcategories : typesSorted
   const stacks = stack()
     .keys(stackKeys)
@@ -103,9 +104,10 @@ export default function YearlyAverageUsageGraph(props) {
     // const path = areaGen(stack)
     const path = stackSprings[stackIndex].path
     const fill = singleEnergyType ? subcategoryColorScale(stack.key) : colors[stack.key]
-    let opacity = stack.key === 'Fossil Fuel' ? null : '0.3'
+    // let opacity = stackIndex === 0 ? null : '0.3'
+    let opacity = 0.5
     if (singleEnergyType) {
-      opacity = null
+      // opacity = null
     }
     return (
       <animated.path opacity={opacity} d={path} key={stack.key} fill={fill} />
@@ -138,19 +140,29 @@ export default function YearlyAverageUsageGraph(props) {
 
   const xTicks = xScale.ticks(5).map(tick => {
     const x = xScale(tick)
+    const isParisYear = tick === parisYear
+    const fontWeight = isParisYear ? 'bold' : 'normal'
+    const lineStroke = isParisYear ? 'black' : '#fff'
+    const parisLabel = isParisYear ? (
+      <text y={height + 32} textAnchor='middle'>Year Paris Accord Enacted</text>
+    ) : null
     return (
       <g key={tick} transform={`translate(${x}, 0)`}>
-        <text y={height + 16} textAnchor='middle'>{tick}</text>
-        <line y2={height} strokeWidth={2} stroke='#fff'/>
+        <text y={height + 16} textAnchor='middle' fontWeight={fontWeight}>{tick}</text>
+        {parisLabel}
+        <line y2={height} strokeWidth={2} stroke={lineStroke}/>
       </g>
     )
   })
   let tooltip = null
 
   const svgRef = useRef()
+  const legendColors = (singleEnergyType ? stacks.map(stack => stack.key) : typesSorted)
+    .map(category => ({ category, color: singleEnergyType ? subcategoryColorScale(category) : colors[category] }))
   return (
     <div className="YearlyUsageGraph">
       <Select placeholder='Select an Instituion Group'  value={selectedGroup} onChange={setSelectedGroup} options={groups} />
+      <ColorLegend colors={legendColors} />
       <svg ref={svgRef} width={width} height={svgHeight}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
           {areaGroup}

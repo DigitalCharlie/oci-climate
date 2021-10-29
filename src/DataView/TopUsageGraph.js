@@ -6,6 +6,7 @@ import valueFormatter from 'valueFormatter'
 import { useState, useRef } from 'react'
 import { animated, useSpring, useSprings} from 'react-spring'
 import subcategoryColorScale from './subcategoryColorScale'
+import ColorLegend from './ColorLegend'
 
 const colors = {
   'Fossil Fuel': '#EFC1A8',
@@ -14,7 +15,6 @@ const colors = {
 }
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 const rowHeight = 30
-
 function AnimatedRow(props) {
   const { group, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType } = props
   const name = group[0]
@@ -194,8 +194,13 @@ export default function TopUsageGraph(props) {
   }
 
   const svgRef = useRef()
+  const legend = <ColorLegend colors={(singleEnergyType ? categoryList : typesSorted).map((category) => {
+    const color = singleEnergyType ? subcategoryColorScale(category) : colors[category]
+    return { category, color}
+  })} />
   return (
     <div className="TopUsageGraph">
+      {legend}
       <svg ref={svgRef} width={width} height={svgHeight}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
           <g>{xTicks}</g>
