@@ -1,17 +1,19 @@
 import './styles.scss'
 import useWindowSize from '../hooks/useWindowSize'
 import classNames from 'classnames'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TopUsageGraph from './TopUsageGraph'
 import YearlyUsageGraph from './YearlyUsageGraph'
 import infoIcon from '../images/info_icon.svg'
 import ReactTooltip from 'react-tooltip';
 import MiniMap from './MiniMap'
+const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
 export default function DataView(props) {
   const { data } = props
   console.log(data)
+  const [selectedEnergyTypes , setSelectedEnergyTypes] = useState([...energyTypes])
   const sections = [
     {
       title: 'Energy Investment 2014-2020',
@@ -62,7 +64,7 @@ export default function DataView(props) {
     const description = section.description || loremIpsum
     let defaultContent = <svg width={sectionWidth} height={200 + section.index * 50} />
     let content = section.content ?
-      React.cloneElement(section.content, {width: sectionWidth, height: 200}) :
+      React.cloneElement(section.content, {width: sectionWidth, height: 200, selectedEnergyTypes}) :
       defaultContent
     return (
       <section key={section.title}>
@@ -89,9 +91,44 @@ export default function DataView(props) {
     </React.Fragment>
   }
   return (
-    <div className={classNames('DataView', { twoColumnView: !singleColumnView })}>
-      {sectionDivs}
-      <ReactTooltip />
+    <div>
+      <div>
+        Energy Types:
+
+        {energyTypes.map(type => {
+          return (
+            <label key={type} style={{ marginRight: '1em'}}>
+              <input
+                type="checkbox"
+                checked={selectedEnergyTypes.includes(type)}
+                onChange={() => {
+
+                  const newSelected = selectedEnergyTypes.includes(type) ?
+                    selectedEnergyTypes.filter(t => t !== type) :
+                    [...selectedEnergyTypes, type]
+                  if (newSelected.length === 0) {
+                    return selectedEnergyTypes
+                  }
+                  newSelected.sort((a, b) => {
+                    const aIndex = energyTypes.indexOf(a)
+                    const bIndex = energyTypes.indexOf(b)
+                    return aIndex - bIndex
+                  })
+
+                  setSelectedEnergyTypes(newSelected)
+                }}
+              />
+              {type}
+            </label>
+
+          )
+        })}
+
+      </div>
+      <div className={classNames('DataView', { twoColumnView: !singleColumnView })}>
+        {sectionDivs}
+        <ReactTooltip />
+      </div>
     </div>
   )
 }

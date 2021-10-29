@@ -4,15 +4,78 @@ import { rollups, sum, extent } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef } from 'react'
+import { animated, useSpring, useSprings} from 'react-spring'
 const colors = {
   'Fossil Fuel': '#EFC1A8',
   'Clean': '#99DEE3',
   'Other': '#6ABEF0',
 }
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
+const rowHeight = 30
+
+function AnimatedRow(props) {
+  const { group, groupIndex, xScale, isBank, margins, width, hoverGroup } = props
+  const name = group[0]
+  const values = group[1]
+  const y = groupIndex * rowHeight
+  let barX = 0
+
+  const valueSprings = useSprings(values.length, values.map(([type, amount]) => {
+    const width = xScale(amount)
+    const x = barX
+    barX += width
+    return {x, width}
+  }))
+  const bars = values.map(([type, amount], index) => {
+    // const width = xScale(amount)
+    // const x = barX
+    // barX += width
+    const fill = colors[type]
+    const barHeight = rowHeight * 0.8
+    return (
+      <animated.g key={type} transform={valueSprings[index].x.to(x => `translate(${x}, 0)`)} >
+        <animated.rect width={valueSprings[index].width} height={barHeight} fill={fill} />
+      </animated.g>
+    )
+  })
+  let label = name
+  if (isBank) {
+    label = name.split(' ').map(word => word.charAt(0)).join('')
+  } else {
+    label = name.split(' ').map((word, wordIndex, words) =>
+      <tspan key={wordIndex} x="-15" dy={(wordIndex * 16) - ((words.length - 1) * 4)}>{word}</tspan>
+    )
+  }
+  const ySpring = useSpring({
+    to: {
+      y,
+    },
+    config: {
+      ease: t => t*t * t,
+      duration: 250,
+    }
+  })
+  return (
+    <animated.g
+      onMouseOver={hoverGroup(group[0], values)}
+      onMouseMove={hoverGroup(group[0], values)}
+      onMouseOut={hoverGroup(null)}
+      className='dataRow'
+      key={name}
+      transform={ySpring.y.to(y => `translate(0, ${y})`)}
+    >
+      <rect x={-margins.left} width={width + margins.left + margins.right} height={rowHeight} fill='transparent' />
+      <text x={-5} textAnchor='end' y={rowHeight / 2}>{label}</text>
+
+      {bars}
+    </animated.g>
+  )
+}
+
 export default function TopUsageGraph(props) {
-  const { width, data, isBank } = props
-  const grouped = rollups(data, rows => sum(rows, d => d.amount), d => d.institutionGroup, d => d.category)
+  const { width, data, isBank, selectedEnergyTypes } = props
+  const filteredData = data.filter(d => selectedEnergyTypes.includes(d.category))
+  const grouped = rollups(filteredData, rows => sum(rows, d => d.amount), d => d.institutionGroup, d => d.category)
   const [hoveredGroup, setHoveredGroup] = useState(null)
   grouped.forEach(group => {
     group.value = sum(group[1], d => d[1])
@@ -26,8 +89,8 @@ export default function TopUsageGraph(props) {
   grouped.sort((a, b) => {
     let aValue = 0
     let bValue = 0
-    const aFossil = a[1].find(d => d[0] === 'Fossil Fuel')
-    const bFossil = b[1].find(d => d[0] === 'Fossil Fuel')
+    const aFossil = a[1].find(d => d[0] === selectedEnergyTypes[0])
+    const bFossil = b[1].find(d => d[0] === selectedEnergyTypes[0])
     if (aFossil) {
       aValue = aFossil[1]
     }
@@ -39,7 +102,6 @@ export default function TopUsageGraph(props) {
 
   const valueRange = extent(grouped, d => d.value)
   const numToShow = Math.min(grouped.length, 10)
-  const rowHeight = 30
   const height = rowHeight * numToShow
 
   const margins = {
@@ -64,42 +126,17 @@ export default function TopUsageGraph(props) {
     setHoveredGroup({group, values, x, y, clientX, clientY})
   }
   const rows = grouped.slice(0, numToShow).map((group, groupIndex) => {
-    const name = group[0]
-    const values = group[1]
-    const y = groupIndex * rowHeight
-    let barX = 0
-    const bars = values.map(([type, amount]) => {
-      const width = xScale(amount)
-      const x = barX
-      barX += width
-      const fill = colors[type]
-      const barHeight = rowHeight * 0.8
-      return (
-        <g key={type} transform={`translate(${x}, 0)`} ><rect width={width} height={barHeight} fill={fill} /></g>
-      )
-    })
-    let label = name
-    if (isBank) {
-      label = name.split(' ').map(word => word.charAt(0)).join('')
-    } else {
-      label = name.split(' ').map((word, wordIndex, words) =>
-        <tspan key={wordIndex} x="-15" dy={(wordIndex * 16) - ((words.length - 1) * 4)}>{word}</tspan>
-      )
-    }
     return (
-      <g
-        onMouseOver={hoverGroup(group[0], values)}
-        onMouseMove={hoverGroup(group[0], values)}
-        onMouseOut={hoverGroup(null)}
-        className='dataRow'
-        key={name}
-        transform={`translate(0, ${y})`}
-      >
-        <rect x={-margins.left} width={width + margins.left + margins.right} height={rowHeight} fill='transparent' />
-        <text x={-5} textAnchor='end' y={rowHeight / 2}>{label}</text>
-
-        {bars}
-      </g>
+      <AnimatedRow
+        xScale={xScale}
+        hoverGroup={hoverGroup}
+        width={width}
+        margins={margins}
+        isBank={isBank}
+        group={group}
+        key={group[0]}
+        groupIndex={groupIndex}
+      />
     )
   })
 

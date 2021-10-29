@@ -35,7 +35,7 @@ const GraphLabel = (props) => {
   )
 }
 export default function YearlyAverageUsageGraph(props) {
-  const { width, data, isBank } = props
+  const { width, data, isBank, selectedEnergyTypes } = props
 
 
   const height = width * 0.6
@@ -48,7 +48,8 @@ export default function YearlyAverageUsageGraph(props) {
     .map(group => ({ value: group, label: group }))
 
 
-  const filteredData = selectedGroup ? data.filter(d => d.institutionGroup === selectedGroup) : data
+  let filteredData = selectedGroup ? data.filter(d => d.institutionGroup === selectedGroup) : data
+  filteredData = filteredData.filter(d => selectedEnergyTypes.includes(d.category))
   const grouped = rollup(filteredData, rows => sum(rows, d => d.amount), d => d.year, d => d.category)
   // console.log(grouped)
   const forceYears = [2013, 2020]
