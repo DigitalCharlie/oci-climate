@@ -5,6 +5,8 @@ import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef } from 'react'
 import { animated, useSpring, useSprings} from 'react-spring'
+import subcategoryColorScale from './subcategoryColorScale'
+
 const colors = {
   'Fossil Fuel': '#EFC1A8',
   'Clean': '#99DEE3',
@@ -14,7 +16,7 @@ const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 const rowHeight = 30
 
 function AnimatedRow(props) {
-  const { group, groupIndex, xScale, isBank, margins, width, hoverGroup } = props
+  const { group, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType } = props
   const name = group[0]
   const values = group[1]
   const y = groupIndex * rowHeight
@@ -30,7 +32,7 @@ function AnimatedRow(props) {
     // const width = xScale(amount)
     // const x = barX
     // barX += width
-    const fill = colors[type]
+    const fill = singleEnergyType ? subcategoryColorScale(type) : colors[type]
     const barHeight = rowHeight * 0.8
     return (
       <animated.g key={type} transform={valueSprings[index].x.to(x => `translate(${x}, 0)`)} >
@@ -75,13 +77,17 @@ function AnimatedRow(props) {
 export default function TopUsageGraph(props) {
   const { width, data, isBank, selectedEnergyTypes } = props
   const filteredData = data.filter(d => selectedEnergyTypes.includes(d.category))
-  const grouped = rollups(filteredData, rows => sum(rows, d => d.amount), d => d.institutionGroup, d => d.category)
+  const singleEnergyType = selectedEnergyTypes.length === 1
+  let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
+
+  const grouped = rollups(filteredData, rows => sum(rows, d => d.amount), d => d.institutionGroup, categoryAccessor)
   const [hoveredGroup, setHoveredGroup] = useState(null)
+  const categoryList = Array.from(new Set(filteredData.map(categoryAccessor))).sort()
   grouped.forEach(group => {
     group.value = sum(group[1], d => d[1])
     group[1].sort((a, b) => {
-      const aIndex = typesSorted.indexOf(a[0])
-      const bIndex = typesSorted.indexOf(b[0])
+      const aIndex = (singleEnergyType ? categoryList : typesSorted).indexOf(a[0])
+      const bIndex = (singleEnergyType ? categoryList : typesSorted).indexOf(b[0])
       return aIndex - bIndex
     })
   })
@@ -89,6 +95,9 @@ export default function TopUsageGraph(props) {
   grouped.sort((a, b) => {
     let aValue = 0
     let bValue = 0
+    if (singleEnergyType) {
+      return b.value - a.value
+    }
     const aFossil = a[1].find(d => d[0] === selectedEnergyTypes[0])
     const bFossil = b[1].find(d => d[0] === selectedEnergyTypes[0])
     if (aFossil) {
@@ -136,6 +145,7 @@ export default function TopUsageGraph(props) {
         group={group}
         key={group[0]}
         groupIndex={groupIndex}
+        singleEnergyType={singleEnergyType}
       />
     )
   })
@@ -168,13 +178,16 @@ export default function TopUsageGraph(props) {
           {group}
         </div>
         <div className='tooltip-body'>
-          {values.map(([type, amount]) => (
-            <div key={type} className='tooltip-row'>
-              <div className='tooltip-row-diamond' style={{backgroundColor: colors[type]}} />
-              <div className='tooltip-row-type'>{type}</div>
-              <div className='tooltip-row-amount'>{valueFormatter(amount)}</div>
-            </div>
-          ))}
+          {values.map(([type, amount]) => {
+            const backgroundColor = singleEnergyType ? subcategoryColorScale(type) : colors[type]
+            return (
+              <div key={type} className='tooltip-row'>
+                <div className='tooltip-row-diamond' style={{backgroundColor}} />
+                <div className='tooltip-row-type'>{type}</div>
+                <div className='tooltip-row-amount'>{valueFormatter(amount)}</div>
+              </div>
+            )
+          })}
         </div>
       </div>
     )

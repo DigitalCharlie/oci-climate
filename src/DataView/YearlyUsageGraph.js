@@ -7,6 +7,8 @@ import { useState, useRef } from 'react'
 import { stack, area } from 'd3-shape'
 import { animated, useSpring, useSprings } from 'react-spring'
 import Select from 'Select/'
+import subcategoryColorScale from './subcategoryColorScale'
+
 const colors = {
   'Fossil Fuel': '#EFC1A8',
   'Clean': '#99DEE3',
@@ -50,8 +52,10 @@ export default function YearlyAverageUsageGraph(props) {
 
   let filteredData = selectedGroup ? data.filter(d => d.institutionGroup === selectedGroup) : data
   filteredData = filteredData.filter(d => selectedEnergyTypes.includes(d.category))
-  const grouped = rollup(filteredData, rows => sum(rows, d => d.amount), d => d.year, d => d.category)
-  // console.log(grouped)
+  const singleEnergyType = selectedEnergyTypes.length === 1
+  let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
+  const grouped = rollup(filteredData, rows => sum(rows, d => d.amount), d => d.year, categoryAccessor)
+  console.log(grouped)
   const forceYears = [2013, 2020]
   for (let year = forceYears[0]; year <= forceYears[1]; year++) {
     if (grouped.has(year)) continue
@@ -60,9 +64,10 @@ export default function YearlyAverageUsageGraph(props) {
 
   const sortedByYear = new Map([...grouped.entries()].sort((a, b) => a[0] - b[0]))
   // console.log(sortedByYear)
-
+  const subcategories = Array.from(new Set(data.map(d => d['category detail'])))
+  const stackKeys = singleEnergyType ? subcategories : typesSorted
   const stacks = stack()
-    .keys(typesSorted)
+    .keys(stackKeys)
     .value((d, key) => {
       return d[1].has(key) ? d[1].get(key) : 0
     })(sortedByYear)
@@ -97,12 +102,17 @@ export default function YearlyAverageUsageGraph(props) {
   const areaGroup = stacks.map((stack, stackIndex) => {
     // const path = areaGen(stack)
     const path = stackSprings[stackIndex].path
+    const fill = singleEnergyType ? subcategoryColorScale(stack.key) : colors[stack.key]
+    let opacity = stack.key === 'Fossil Fuel' ? null : '0.3'
+    if (singleEnergyType) {
+      opacity = null
+    }
     return (
-      <animated.path opacity={stack.key === 'Fossil Fuel' ? null : '0.3'} d={path} key={stack.key} fill={colors[stack.key]} />
+      <animated.path opacity={opacity} d={path} key={stack.key} fill={fill} />
     )
   })
 
-  const points = stacks.map(stack => {
+  const points = stacks.map((stack, stackIndex) => {
     return stack.map((d, i) => {
       // console.log(stack, d)
       if (d[1] - d[0] === 0) {
@@ -110,9 +120,12 @@ export default function YearlyAverageUsageGraph(props) {
       }
       const x = xScale(d.data[0])
       const y = yScale(d[1])
+      let fill = singleEnergyType ? subcategoryColorScale(stack.key) : highlightColors[stack.key]
+
+      console.log(fill)
       return (
         <GraphLabel x={x} y={y} key={`${stack.key}-${d.data[0]}`}
-          fill={highlightColors[stack.key]}
+          fill={fill}
           value={d[1] - d[0]}
         />
       )
