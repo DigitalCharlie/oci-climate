@@ -48,7 +48,7 @@ function StackedBarSelector(props) {
     .domain([0, summedData['Fossil Fuel'] + summedData.Clean + summedData.Other])
     .range([0, width])
   let runningX = 0
-  const dataRects = mapDataKeys.map((key, i) => {
+  const dataRects = categories.map((key, i) => {
     const isTotal = key === 'Total'
     const y = isTotal ? 0 : rowHeight
     const x = runningX
@@ -82,7 +82,7 @@ export default function MiniMap(props) {
   const height = width * 0.6
   const [countryGrouping, setCountryGrouping] = useState(countryGroupings[0].value)
   const countryAccessor = d => d[countryGrouping]
-  const [dataKey, setSelectedDataKey] = useState(mapDataKeys[0])
+  const [dataKey, setSelectedDataKey] = useState(mapDataKeys[1])
 
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
   const countryRows = data.filter(d => !d.isBank)
