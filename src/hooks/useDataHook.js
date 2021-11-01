@@ -1,6 +1,10 @@
 import { csvParse } from 'd3-dsv'
 import { useEffect, useState } from 'react'
 
+import ecas from './ecas'
+import dfis from './dfis'
+
+const modifiers = [{ field: 'isECA', values: ecas }, { field: 'isDFI', values: dfis }]
 export default function useDataHook() {
 
   const [data, setData] = useState([])
@@ -27,9 +31,15 @@ export default function useDataHook() {
           row.isBank = group.includes('Bank') && group !== 'North American Development Bank'
           row.isCountry = !row.isBank
 
-        })
 
+          const institution = row.institution
+          modifiers.forEach(({ field, values }) => {
+            row[field] = values.includes(institution)
+          })
+
+        })
         rows = rows.filter(d => d.visible === 'TRUE' && d.year > 2000)
+        // console.log(rows)
         setData(rows)
       })
   }, [])

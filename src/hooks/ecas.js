@@ -1,0 +1,23 @@
+const ecas = ['Export Finance Australia',
+'Brazilian Development Bank',
+'Export Development Canada',
+'Export-Import Bank of China',
+'China Export and Credit Insurance Corporation',
+'BPIFrance Assurance Export',
+'Export Credit Guarantees of the Federal Republic of Germany',
+'Export-Import Bank of India',
+'Indonesia Eximbank',
+'Servizi Assicurativi del Commercio Estero',
+'Japan Bank for International Co-operation',
+'Nippon Export and Investment Insurance',
+'Export-Import Bank of Korea',
+'Korea Trade Insurance Corporation',
+'Banco National de Comercio Exterior',
+'Export Insurance Agency of Russia',
+'Export Credit Insurance Corporation',
+'Turk Eximbank',
+'UK Export Finance',
+'Export-Import Bank of the United States',
+]
+
+export default ecas

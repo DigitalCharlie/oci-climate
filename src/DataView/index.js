@@ -41,6 +41,22 @@ export default function DataView(props) {
         <TopUsageGraph isBank data={data.filter(d => d.isBank)} />
       )
     },
+
+    {
+      title: 'ECAs Comparison',
+      column: 'left',
+      content: (
+        <TopUsageGraph data={data.filter(d => d.isECA)} />
+      )
+    },
+
+    {
+      title: 'DFAs Comparison',
+      column: 'right',
+      content: (
+        <TopUsageGraph data={data.filter(d => d.isDFI)} />
+      )
+    },
     {
       title: 'Energy investment recipient country',
       column: 'left',
