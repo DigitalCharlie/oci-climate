@@ -167,7 +167,7 @@ export default function DataView(props) {
           )
         })}
       </div>
-      <div style={{ display: 'none'}}>
+      <div>
         Bar Graph Style:
         {barGraphStyles.map(type => {
           return (

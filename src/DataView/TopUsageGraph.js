@@ -3,7 +3,7 @@ import './TopUsageGraph.scss'
 import { rollups, sum, extent, mean } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { animated, useSpring, useSprings} from 'react-spring'
 import subcategoryColorScale from './subcategoryColorScale'
 import ColorLegend from './ColorLegend'
@@ -17,27 +17,42 @@ const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 const rowHeight = 30
 function AnimatedRow(props) {
   const { groups, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, splitBarGraph } = props
+  // console.log(groups)
+  const name = groups[0] ? groups[0][0] : groups[1][0]
+  // console.log(groups)
 
-  const name = groups[0][0]
-  const values = groups.map(group => group[1])
+  const values = groups.map(group => group ? group[1] : null)
   const y = groupIndex * rowHeight
-  let barX = 0
+  let barXByValueSet = values.map((_) => 0)
 
-  const flatValues = values.flat()
-  const valueSprings = useSprings(flatValues.length, flatValues.map(([type, amount]) => {
+
+  const flatValues = []
+  values.forEach((valueSet, valueSetIndex) => {
+    if (!valueSet) return
+    valueSet.forEach(value => value.valueSetIndex = valueSetIndex)
+    flatValues.push(...valueSet)
+  })
+  // console.log(flatValues)
+
+
+  const valueSprings = useSprings(flatValues.length, flatValues.map((value) => {
+    const [type, amount] = value
+    // console.log(value)
+    const valueSetIndex = value.valueSetIndex
     const width = xScale(amount)
-    const x = barX
-    barX += width
+    const x = barXByValueSet[valueSetIndex]
+    barXByValueSet[valueSetIndex] += width
     return {x, width}
   }))
-  const bars = flatValues.map(([type, amount], index) => {
-    // const width = xScale(amount)
-    // const x = barX
-    // barX += width
+  const bars = flatValues.map((value, index) => {
+    const [type, amount] = value
+    const valueSetIndex = value.valueSetIndex
+
+    const barHeight = (rowHeight / values.length) * 0.8
+    const y = (valueSetIndex * 1.1) * barHeight
     const fill = singleEnergyType ? subcategoryColorScale(type) : colors[type]
-    const barHeight = rowHeight * 0.8
     return (
-      <animated.g key={type} transform={valueSprings[index].x.to(x => `translate(${x}, 0)`)} >
+      <animated.g key={`${valueSetIndex}-${type}`} transform={valueSprings[index].x.to(x => `translate(${x}, ${y})`)} >
         <animated.rect width={valueSprings[index].width} height={barHeight} fill={fill} />
       </animated.g>
     )
@@ -61,8 +76,8 @@ function AnimatedRow(props) {
   })
   return (
     <animated.g
-      onMouseOver={hoverGroup(name, values)}
-      onMouseMove={hoverGroup(name, values)}
+      onMouseOver={hoverGroup(name, flatValues)}
+      onMouseMove={hoverGroup(name, flatValues)}
       onMouseOut={hoverGroup(null)}
       className='dataRow'
       key={name}
@@ -124,7 +139,7 @@ export default function TopUsageGraph(props) {
     return grouped
   })
 
-  console.log(groupRows)
+  // console.log(groupRows)
   const valueRange = extent(groupRows.flat(), d => d.value)
   const numToShow = Math.min(groupRows[0].length, 15)
 
@@ -151,8 +166,7 @@ export default function TopUsageGraph(props) {
 
     setHoveredGroup({group, values, x, y, clientX, clientY})
   }
-  const countriesToShow = groupRows[0].map(d => d[0])
-
+  const countriesToShow = groupRows[groupRows.length - 1].map(d => d[0])
   const countryRows = countriesToShow.slice(0, numToShow).map((country, countryIndex) => {
     const groupData = groupRows.map(group => group.find(d => d[0] === country))
     const group = []
@@ -194,20 +208,32 @@ export default function TopUsageGraph(props) {
       ${flipY ? 'translateY(-100%)' : ''}`
 
     }
+    let previousYearLabel = null
     tooltip = (
       <div className='tooltip' style={style}>
         <div className='tooltip-header'>
           {group}
         </div>
         <div className='tooltip-body'>
-          {values.map(([type, amount]) => {
+          {values.map((value) => {
+            const [type, amount] = value
+            const valueSetIndex = value.valueSetIndex
+            const yearLabel = yearRows[valueSetIndex].startYear + '-' + yearRows[valueSetIndex].endYear
+            let yearLabelDiv = null
             const backgroundColor = singleEnergyType ? subcategoryColorScale(type) : colors[type]
+            if (previousYearLabel !== yearLabel) {
+              previousYearLabel = yearLabel
+              yearLabelDiv = <div className='tooltip-year-label'>{yearLabel}</div>
+            }
             return (
-              <div key={type} className='tooltip-row'>
-                <div className='tooltip-row-diamond' style={{backgroundColor}} />
-                <div className='tooltip-row-type'>{type}</div>
-                <div className='tooltip-row-amount'>{valueFormatter(amount)}</div>
-              </div>
+              <React.Fragment key={`${valueSetIndex}-${type}`}>
+                {yearLabelDiv}
+                <div key={`${valueSetIndex}-${type}`} className='tooltip-row'>
+                  <div className='tooltip-row-diamond' style={{backgroundColor}} />
+                  <div className='tooltip-row-type'>{type}</div>
+                  <div className='tooltip-row-amount'>{valueFormatter(amount)}</div>
+                </div>
+              </React.Fragment>
             )
           })}
         </div>
@@ -223,6 +249,9 @@ export default function TopUsageGraph(props) {
   return (
     <div className="TopUsageGraph">
       {legend}
+      {yearRows.map(({startYear, endYear}) => (
+        <div style={{ fontWeight: 'bold' }}className='year-label' key={`${startYear}-${endYear}`}>{startYear}-{endYear}</div>
+      ))}
       <svg ref={svgRef} width={width} height={svgHeight}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
           <g>{xTicks}</g>
