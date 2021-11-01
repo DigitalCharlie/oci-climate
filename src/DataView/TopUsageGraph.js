@@ -16,20 +16,21 @@ const colors = {
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 const rowHeight = 30
 function AnimatedRow(props) {
-  const { group, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, splitBarGraph } = props
+  const { groups, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, splitBarGraph } = props
 
-  const name = group[0]
-  const values = group[1]
+  const name = groups[0][0]
+  const values = groups.map(group => group[1])
   const y = groupIndex * rowHeight
   let barX = 0
 
-  const valueSprings = useSprings(values.length, values.map(([type, amount]) => {
+  const flatValues = values.flat()
+  const valueSprings = useSprings(flatValues.length, flatValues.map(([type, amount]) => {
     const width = xScale(amount)
     const x = barX
     barX += width
     return {x, width}
   }))
-  const bars = values.map(([type, amount], index) => {
+  const bars = flatValues.map(([type, amount], index) => {
     // const width = xScale(amount)
     // const x = barX
     // barX += width
@@ -60,8 +61,8 @@ function AnimatedRow(props) {
   })
   return (
     <animated.g
-      onMouseOver={hoverGroup(group[0], values)}
-      onMouseMove={hoverGroup(group[0], values)}
+      onMouseOver={hoverGroup(name, values)}
+      onMouseMove={hoverGroup(name, values)}
       onMouseOut={hoverGroup(null)}
       className='dataRow'
       key={name}
@@ -78,42 +79,55 @@ function AnimatedRow(props) {
 export default function TopUsageGraph(props) {
   const { width, data, isBank, selectedEnergyTypes, aggregationType, barGraphStyle } = props
   const splitBarGraph = barGraphStyle === 'split'
-  let filteredData = data.filter(d => selectedEnergyTypes.includes(d.category))
-  const singleEnergyType = selectedEnergyTypes.length === 1
 
-  let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
-  const grouped = rollups(filteredData, rows => (aggregationType === 'sum' ? sum : mean)(rows, d => d.amount), d => d.institutionGroup, categoryAccessor)
+  const yearRows = splitBarGraph ? [
+    { startYear: 2013, endYear: 2016},
+    { startYear: 2017, endYear: 2020},
+  ] : [{ startYear: 2013, endYear: 2020}]
+
   const [hoveredGroup, setHoveredGroup] = useState(null)
-  const categoryList = Array.from(new Set(filteredData.map(categoryAccessor))).sort()
-  grouped.forEach(group => {
-    group.value = sum(group[1], d => d[1])
-    group[1].sort((a, b) => {
-      const aIndex = (singleEnergyType ? categoryList : typesSorted).indexOf(a[0])
-      const bIndex = (singleEnergyType ? categoryList : typesSorted).indexOf(b[0])
-      return aIndex - bIndex
+  const singleEnergyType = selectedEnergyTypes.length === 1
+  let categoryFilteredData = data.filter(d => selectedEnergyTypes.includes(d.category))
+  let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
+  const categoryList = Array.from(new Set(categoryFilteredData.map(categoryAccessor))).sort()
+
+  const groupRows = yearRows.map(({startYear, endYear}) => {
+
+    let filteredData = categoryFilteredData.filter(d => d.year >= startYear && d.year <= endYear)
+
+    const grouped = rollups(filteredData, rows => (aggregationType === 'sum' ? sum : mean)(rows, d => d.amount), d => d.institutionGroup, categoryAccessor)
+    grouped.forEach(group => {
+      group.value = sum(group[1], d => d[1])
+      group[1].sort((a, b) => {
+        const aIndex = (singleEnergyType ? categoryList : typesSorted).indexOf(a[0])
+        const bIndex = (singleEnergyType ? categoryList : typesSorted).indexOf(b[0])
+        return aIndex - bIndex
+      })
     })
+
+    grouped.sort((a, b) => {
+      let aValue = 0
+      let bValue = 0
+      if (singleEnergyType) {
+        return b.value - a.value
+      }
+      const aFossil = a[1].find(d => d[0] === selectedEnergyTypes[0])
+      const bFossil = b[1].find(d => d[0] === selectedEnergyTypes[0])
+      if (aFossil) {
+        aValue = aFossil[1]
+      }
+      if (bFossil) {
+        bValue = bFossil[1]
+      }
+      return bValue - aValue
+    })
+    return grouped
   })
 
-  grouped.sort((a, b) => {
-    let aValue = 0
-    let bValue = 0
-    if (singleEnergyType) {
-      return b.value - a.value
-    }
-    const aFossil = a[1].find(d => d[0] === selectedEnergyTypes[0])
-    const bFossil = b[1].find(d => d[0] === selectedEnergyTypes[0])
-    if (aFossil) {
-      aValue = aFossil[1]
-    }
-    if (bFossil) {
-      bValue = bFossil[1]
-    }
-    return bValue - aValue
-  })
+  console.log(groupRows)
+  const valueRange = extent(groupRows.flat(), d => d.value)
+  const numToShow = Math.min(groupRows[0].length, 15)
 
-  console.log(grouped)
-  const valueRange = extent(grouped, d => d.value)
-  const numToShow = Math.min(grouped.length, 15)
   const height = rowHeight * numToShow
 
   const margins = {
@@ -137,7 +151,11 @@ export default function TopUsageGraph(props) {
 
     setHoveredGroup({group, values, x, y, clientX, clientY})
   }
-  const rows = grouped.slice(0, numToShow).map((group, groupIndex) => {
+  const countriesToShow = groupRows[0].map(d => d[0])
+
+  const countryRows = countriesToShow.slice(0, numToShow).map((country, countryIndex) => {
+    const groupData = groupRows.map(group => group.find(d => d[0] === country))
+    const group = []
     return (
       <AnimatedRow
         xScale={xScale}
@@ -145,9 +163,9 @@ export default function TopUsageGraph(props) {
         width={width}
         margins={margins}
         isBank={isBank}
-        group={group}
-        key={group[0]}
-        groupIndex={groupIndex}
+        groups={groupData}
+        key={country}
+        groupIndex={countryIndex}
         singleEnergyType={singleEnergyType}
         splitBarGraph={splitBarGraph}
       />
@@ -208,7 +226,7 @@ export default function TopUsageGraph(props) {
       <svg ref={svgRef} width={width} height={svgHeight}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
           <g>{xTicks}</g>
-          <g>{rows}</g>
+          <g>{countryRows}</g>
         </g>
       </svg>
       {tooltip}
