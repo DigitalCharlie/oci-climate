@@ -113,7 +113,7 @@ export default function TopUsageGraph(props) {
 
   console.log(grouped)
   const valueRange = extent(grouped, d => d.value)
-  const numToShow = Math.min(grouped.length, 10)
+  const numToShow = Math.min(grouped.length, 15)
   const height = rowHeight * numToShow
 
   const margins = {

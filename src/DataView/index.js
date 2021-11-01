@@ -28,7 +28,7 @@ export default function DataView(props) {
 
     },
     {
-      title: 'Top 12 G20 Country Comparison 2014-2020',
+      title: 'Top 15 G20 Country Comparison 2014-2020',
       column: 'right',
       content: (
         <TopUsageGraph data={data.filter(d => d.isCountry)} />
