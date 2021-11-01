@@ -18,7 +18,6 @@ header.Header {
   }
 
   nav {
-    font-family: Diavlo;
     font-weight: bold;
     text-transform: uppercase;
     display: flex;
@@ -46,7 +45,6 @@ header.Header {
     height: 27px;
     margin-top: 1em;
     padding-left: 115px;
-    font-family: Diavlo;
     font-weight: bold;
     text-transform: uppercase;
     &:focus:hover {
