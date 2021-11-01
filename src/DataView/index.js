@@ -20,7 +20,7 @@ export default function DataView(props) {
   const [barGraphStyle, setBarGraphStyle] = useState('all')
   const sections = [
     {
-      title: 'Energy Investment 2014-2020',
+      title: 'Energy Investment',
       column: 'left',
       content: (
         data.length ? <YearlyUsageGraph data={data} /> : null
@@ -28,14 +28,14 @@ export default function DataView(props) {
 
     },
     {
-      title: 'Top 15 G20 Country Comparison 2014-2020',
+      title: 'Top 15 G20 Country Comparison',
       column: 'right',
       content: (
         <TopUsageGraph data={data.filter(d => d.isCountry)} />
       )
     },
     {
-      title: 'MDB Comparison 2014-2020',
+      title: 'MDB Comparison',
       column: 'right',
       content: (
         <TopUsageGraph isBank data={data.filter(d => d.isBank)} />

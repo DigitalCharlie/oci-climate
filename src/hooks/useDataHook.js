@@ -22,7 +22,9 @@ export default function useDataHook() {
             row[rename[1]] = row[rename[0]]
           })
           const group = row.institutionGroup
-          row.isBank = group.includes('Bank')
+          // this works for now, but might need something more robust
+          // e.g. a hardcoded list of MDBs
+          row.isBank = group.includes('Bank') && group !== 'North American Development Bank'
           row.isCountry = !row.isBank
 
         })
