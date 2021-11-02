@@ -1,10 +1,6 @@
 import { csvParse } from 'd3-dsv'
 import { useEffect, useState } from 'react'
 
-import ecas from './ecas'
-import dfis from './dfis'
-
-const modifiers = [{ field: 'isECA', values: ecas }, { field: 'isDFI', values: dfis }]
 export default function useDataHook() {
 
   const [data, setData] = useState([])
@@ -25,17 +21,7 @@ export default function useDataHook() {
           renames.forEach(rename => {
             row[rename[1]] = row[rename[0]]
           })
-          const group = row.institutionGroup
-          // this works for now, but might need something more robust
-          // e.g. a hardcoded list of MDBs
-          row.isBank = group.includes('Bank') && group !== 'North American Development Bank'
-          row.isCountry = !row.isBank
 
-
-          const institution = row.institution
-          modifiers.forEach(({ field, values }) => {
-            row[field] = values.includes(institution)
-          })
 
         })
         rows = rows.filter(d => d.visible === 'TRUE' && d.year > 2000)

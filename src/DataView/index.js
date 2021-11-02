@@ -31,14 +31,14 @@ export default function DataView(props) {
       title: 'Top 15 G20 Country Comparison',
       column: 'right',
       content: (
-        <TopUsageGraph data={data.filter(d => d.isCountry)} />
+        <TopUsageGraph data={data.filter(d => d.institutionKind !== 'Multilateral')} />
       )
     },
     {
       title: 'MDB Comparison',
       column: 'right',
       content: (
-        <TopUsageGraph isBank data={data.filter(d => d.isBank)} />
+        <TopUsageGraph isBank data={data.filter(d => d.institutionKind === 'Multilateral')} />
       )
     },
 
@@ -46,15 +46,15 @@ export default function DataView(props) {
       title: 'ECAs Comparison',
       column: 'left',
       content: (
-        <TopUsageGraph data={data.filter(d => d.isECA)} />
+        <TopUsageGraph data={data.filter(d => d.institutionKind === 'Export Credit')} />
       )
     },
 
     {
-      title: 'DFAs Comparison',
+      title: 'DFIs Comparison',
       column: 'right',
       content: (
-        <TopUsageGraph data={data.filter(d => d.isDFI)} />
+        <TopUsageGraph data={data.filter(d => d.institutionKind === 'Bilateral')} />
       )
     },
     {
