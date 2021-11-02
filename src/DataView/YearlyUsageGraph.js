@@ -103,7 +103,7 @@ export default function YearlyAverageUsageGraph(props) {
   const areaGroup = stacks.map((stack, stackIndex) => {
     // const path = areaGen(stack)
     const path = stackSprings[stackIndex].path
-    const fill = singleEnergyType ? subcategoryColorScale(stack.key) : colors[stack.key]
+    const fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : colors[stack.key]
     // let opacity = stackIndex === 0 ? null : '0.3'
     let opacity = 0.5
     if (singleEnergyType) {
@@ -122,7 +122,7 @@ export default function YearlyAverageUsageGraph(props) {
       }
       const x = xScale(d.data[0])
       const y = yScale(d[1])
-      let fill = singleEnergyType ? subcategoryColorScale(stack.key) : highlightColors[stack.key]
+      let fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : highlightColors[stack.key]
 
       console.log(fill)
       return (
@@ -158,7 +158,7 @@ export default function YearlyAverageUsageGraph(props) {
 
   const svgRef = useRef()
   const legendColors = (singleEnergyType ? stacks.map(stack => stack.key) : typesSorted)
-    .map(category => ({ category, color: singleEnergyType ? subcategoryColorScale(category) : colors[category] }))
+    .map(category => ({ category, color: singleEnergyType && (category !== 'Clean' && category !== 'Other') ? subcategoryColorScale(category) : colors[category] }))
   return (
     <div className="YearlyUsageGraph">
       <Select placeholder='Select an Instituion Group'  value={selectedGroup} onChange={setSelectedGroup} options={groups} />

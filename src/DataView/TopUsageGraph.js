@@ -50,7 +50,7 @@ function AnimatedRow(props) {
 
     const barHeight = (rowHeight / values.length) * 0.8
     const y = (valueSetIndex * 1.1) * barHeight
-    const fill = singleEnergyType ? subcategoryColorScale(type) : colors[type]
+    const fill = singleEnergyType && (type !== 'Clean' && type !== 'Other') ? subcategoryColorScale(type) : colors[type]
     return (
       <animated.g key={`${valueSetIndex}-${type}`} transform={valueSprings[index].x.to(x => `translate(${x}, ${y})`)} >
         <animated.rect width={valueSprings[index].width} height={barHeight} fill={fill} />
@@ -220,7 +220,7 @@ export default function TopUsageGraph(props) {
             const valueSetIndex = value.valueSetIndex
             const yearLabel = yearRows[valueSetIndex].startYear + '-' + yearRows[valueSetIndex].endYear
             let yearLabelDiv = null
-            const backgroundColor = singleEnergyType ? subcategoryColorScale(type) : colors[type]
+            const backgroundColor = singleEnergyType && type  && (type !== 'Clean' && type !== 'Other') ? subcategoryColorScale(type) : colors[type]
             if (previousYearLabel !== yearLabel) {
               previousYearLabel = yearLabel
               yearLabelDiv = <div className='tooltip-year-label'>{yearLabel}</div>
@@ -243,7 +243,7 @@ export default function TopUsageGraph(props) {
 
   const svgRef = useRef()
   const legend = <ColorLegend colors={(singleEnergyType ? categoryList : typesSorted).map((category) => {
-    const color = singleEnergyType ? subcategoryColorScale(category) : colors[category]
+    const color = singleEnergyType && (category !== 'Clean' && category !== 'Other') ? subcategoryColorScale(category) : colors[category]
     return { category, color}
   })} />
   return (
