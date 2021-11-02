@@ -34,16 +34,18 @@ function AnimatedRow(props) {
   })
   // console.log(flatValues)
 
-
+  let xs = []
   const valueSprings = useSprings(flatValues.length, flatValues.map((value) => {
     const [type, amount] = value
     // console.log(value)
     const valueSetIndex = value.valueSetIndex
     const width = xScale(amount)
     const x = barXByValueSet[valueSetIndex]
+    xs.push(x)
     barXByValueSet[valueSetIndex] += width
     return {x, width}
   }))
+
   const bars = flatValues.map((value, index) => {
     const [type, amount] = value
     const valueSetIndex = value.valueSetIndex
@@ -52,7 +54,8 @@ function AnimatedRow(props) {
     const y = (valueSetIndex * 1.1) * barHeight
     const fill = singleEnergyType && (type !== 'Clean' && type !== 'Other') ? subcategoryColorScale(type) : colors[type]
     return (
-      <animated.g key={`${valueSetIndex}-${type}`} transform={valueSprings[index].x.to(x => `translate(${x}, ${y})`)} >
+      // <animated.g key={`${valueSetIndex}-${type}`} transform={valueSprings[index].x.to(x => `translate(${x}, ${y})`)} >
+      <animated.g key={`${valueSetIndex}-${type}`} transform={`translate(${xs[index]}, ${y})`} >
         <animated.rect width={valueSprings[index].width} height={barHeight} fill={fill} />
       </animated.g>
     )
