@@ -226,7 +226,7 @@ export default function TopUsageGraph(props) {
       )
     }
     return (
-      <React.Fragment>
+      <React.Fragment key={tick}>
         <g key={tick} transform={`translate(${x}, 0)`}>
           <text y={-4} textAnchor='middle'>{valueFormatter(tick)}</text>
           <line y2={height} stroke='#4D4D4D' strokeWidth='0.5'/>

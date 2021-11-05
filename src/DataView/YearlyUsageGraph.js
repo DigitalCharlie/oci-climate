@@ -1,6 +1,6 @@
 
 import './YearlyUsageGraph.scss'
-import { rollup, sum, extent, mean } from 'd3-array'
+import { rollup, sum, extent, mean, group } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef } from 'react'
@@ -23,6 +23,18 @@ const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 
 const parisYear = 2016
 
+const GraphDot = (props) => {
+  const { x, y, value, fill } = props
+  const animatedProps = useSpring({
+    transform: `translate(${x}, ${y})`,
+  })
+
+  return (
+    <animated.g transform={animatedProps.transform}>
+      <rect width={10} height={10} transform={`rotate(45) translate(-5, -5)`} fill={fill} />
+    </animated.g>
+  )
+}
 const GraphLabel = (props) => {
   const { x, y, value, fill } = props
   const animatedProps = useSpring({
@@ -32,7 +44,6 @@ const GraphLabel = (props) => {
 
   return (
     <animated.g transform={animatedProps.transform}>
-      <rect width={10} height={10} transform={`rotate(45) translate(-5, -5)`} fill={fill} />
       <animated.text y={4} x={12}>{animatedProps.value.to(valueFormatter)}</animated.text>
     </animated.g>
   )
@@ -56,7 +67,7 @@ export default function YearlyAverageUsageGraph(props) {
   const singleEnergyType = selectedEnergyTypes.length === 1
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
   const grouped = rollup(filteredData, rows => (aggregationType === 'sum' ? sum : mean)(rows, d => d.amount), d => d.year, categoryAccessor)
-  console.log(grouped)
+  // console.log(grouped)
   const forceYears = [2013, 2020]
   for (let year = forceYears[0]; year <= forceYears[1]; year++) {
     if (grouped.has(year)) continue
@@ -114,6 +125,7 @@ export default function YearlyAverageUsageGraph(props) {
     )
   })
 
+  const labelData = []
   const points = stacks.map((stack, stackIndex) => {
     return stack.map((d, i) => {
       // console.log(stack, d)
@@ -121,17 +133,40 @@ export default function YearlyAverageUsageGraph(props) {
         return null
       }
       const x = xScale(d.data[0])
-      const y = yScale(d[1])
+      let y = yScale(d[1])
+
       let fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : highlightColors[stack.key]
 
-      console.log(fill)
+      labelData.push({
+        x, y, value: d[1] - d[0]
+      })
       return (
-        <GraphLabel x={x} y={y} key={`${stack.key}-${d.data[0]}`}
+        <GraphDot x={x} y={y} key={`${stack.key}-${d.data[0]}`}
           fill={fill}
           value={d[1] - d[0]}
         />
       )
     })
+  })
+
+  const labelsByX = Array.from(group(labelData, d => d.x))
+
+
+  // console.log(labelData)
+  const labels = labelsByX.map(([xKey, labelsOfX]) => {
+    labelsOfX.sort((a, b) => b.y - a.y)
+    let lastY = Number.MAX_VALUE
+    return labelsOfX.map(({x,y, value}, index) => {
+      const yDelta = lastY - y
+      // console.log(x, y, value, yDelta)
+      let finalY = y
+      if (yDelta < 16) {
+        finalY = lastY - 16
+      }
+      lastY = finalY
+      return <GraphLabel x={x} y={finalY} value={value} key={`label-${index}-${x}`} />
+    })
+
   })
 
 
@@ -170,6 +205,7 @@ export default function YearlyAverageUsageGraph(props) {
           {areaGroup}
           <g>{xTicks}</g>
           {points}
+          {labels}
         </g>
       </svg>
       {tooltip}
