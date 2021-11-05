@@ -33,7 +33,7 @@ const GraphLabel = (props) => {
   return (
     <animated.g transform={animatedProps.transform}>
       <rect width={10} height={10} transform={`rotate(45) translate(-5, -5)`} fill={fill} />
-      <animated.text textAnchor='middle' y={-10}>{animatedProps.value.to(valueFormatter)}</animated.text>
+      <animated.text y={4} x={12}>{animatedProps.value.to(valueFormatter)}</animated.text>
     </animated.g>
   )
 }
@@ -43,7 +43,7 @@ export default function YearlyAverageUsageGraph(props) {
 
   const height = width * 0.6
   const margins = {
-    top: 30, left: 20, right: 20, bottom: 40
+    top: 30, left: 20, right: 40, bottom: 40
   }
   const [selectedGroup, setSelectedGroup] = useState('')
   const groups = Array.from(new Set(data.map(d => d.institutionGroup)))
@@ -146,11 +146,12 @@ export default function YearlyAverageUsageGraph(props) {
     const parisLabel = isParisYear ? (
       <text y={height + 32} textAnchor='middle'>Year Paris Accord Enacted</text>
     ) : null
+    const strokeDasharray = isParisYear ? '5,5' : null
     return (
       <g key={tick} transform={`translate(${x}, 0)`}>
         <text y={height + 16} textAnchor='middle' fontWeight={fontWeight}>{tick}</text>
         {parisLabel}
-        <line y2={height} strokeWidth={2} stroke={lineStroke}/>
+        <line y2={height} strokeWidth={2} stroke={lineStroke} strokeDasharray={strokeDasharray}/>
       </g>
     )
   })
