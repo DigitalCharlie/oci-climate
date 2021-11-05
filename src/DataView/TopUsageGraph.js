@@ -245,10 +245,11 @@ export default function TopUsageGraph(props) {
   }
 
   const svgRef = useRef()
-  const legend = <ColorLegend colors={(singleEnergyType ? categoryList : typesSorted).map((category) => {
+  let legendColors = (singleEnergyType ? categoryList : typesSorted).map((category) => {
     const color = singleEnergyType && (category !== 'Clean' && category !== 'Other') ? subcategoryColorScale(category) : colors[category]
     return { category, color}
-  })} />
+  }).filter(d => singleEnergyType ? true : selectedEnergyTypes.includes(d.category))
+  const legend = <ColorLegend colors={legendColors} />
   return (
     <div className="TopUsageGraph">
       {legend}

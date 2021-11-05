@@ -160,6 +160,7 @@ export default function YearlyAverageUsageGraph(props) {
   const svgRef = useRef()
   const legendColors = (singleEnergyType ? stacks.map(stack => stack.key) : typesSorted)
     .map(category => ({ category, color: singleEnergyType && (category !== 'Clean' && category !== 'Other') ? subcategoryColorScale(category) : colors[category] }))
+    .filter(d => singleEnergyType ? true : selectedEnergyTypes.includes(d.category))
   return (
     <div className="YearlyUsageGraph">
       <Select placeholder='Select an Instituion Group'  value={selectedGroup} onChange={setSelectedGroup} options={groups} />
