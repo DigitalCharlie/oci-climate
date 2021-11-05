@@ -141,16 +141,17 @@ export default function MiniMap(props) {
     }
     const pathData = pathStrings[feature.id]
     let fill = 'none'
-
+    let stroke = null
     let matching = countryData.find(d => d.country === feature.properties.name)
     if (matching && matching[dataKey] && isFinite(matching[dataKey])) {
       fill = colorScale(matching[dataKey])
       // console.log(matching)
     } else {
+      stroke = '#e8e8e8'
       // console.log('no match')
     }
     return (
-      <path key={feature.id} d={pathData} fill={fill} onMouseOver={() => setHoveredFeature(feature.properties.name)} onMouseOut={() => setHoveredFeature(null)} />
+      <path key={feature.id} stroke={stroke} d={pathData} fill={fill} onMouseOver={() => setHoveredFeature(feature.properties.name)} onMouseOut={() => setHoveredFeature(null)} />
     )
   })
 
