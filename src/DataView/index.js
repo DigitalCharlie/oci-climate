@@ -79,7 +79,7 @@ export default function DataView(props) {
   }
   const singleColumnView = width < 768
 
-  const sectionWidth = singleColumnView ? width - 20 - 16 * 4 : (width - 16 * 4 - 20) / 2
+  const sectionWidth = singleColumnView ? width - 20 - 16 * 2 : (width - 16 * 4 - 20) / 2
   const renderSection = (section) => {
     const description = section.description || loremIpsum
     let defaultContent = <svg width={sectionWidth} height={200 + section.index * 50} />
