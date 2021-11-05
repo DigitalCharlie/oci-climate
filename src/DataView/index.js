@@ -98,7 +98,7 @@ export default function DataView(props) {
         <h2>{section.title}
           <img src={infoIcon} data-tip='Lorem ipsum dollar...' />
         </h2>
-        <div>{description}</div>
+        <div className='description'>{description}</div>
         {content}
       </section>
     )

@@ -8,10 +8,14 @@
 
   section {
     margin: 1em;
-
+    .description {
+      margin-bottom: 12px;
+    }
     h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
       img {
-        margin-left: 1em;
+        margin-left: 8px;
         &:hover {
           opacity: 0.5;
         }
