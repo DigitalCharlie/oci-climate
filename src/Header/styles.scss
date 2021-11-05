@@ -24,7 +24,7 @@ header.Header {
     a {
       white-space: nowrap;
       color: #222;
-      padding: 1.5em 1em 0.8em;
+      padding: 1.7em 1em 0;
       text-decoration: none;
 
       &.active, &:hover {
@@ -55,7 +55,7 @@ header.Header {
   .social {
     white-space: nowrap;
     a {
-      padding-top: 1.3em;
+      padding-top: 1.7em;
       display: inline-block;
       + a {
         margin-left: 1em;
