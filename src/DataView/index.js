@@ -11,7 +11,7 @@ const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
 const aggregationTypes = ['sum', 'average']
-const barGraphStyles = ['all', 'split']
+const barGraphStyles = ['all', 'split', 'split2']
 export default function DataView(props) {
   const { data } = props
   console.log(data)
