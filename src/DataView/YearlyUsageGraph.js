@@ -10,7 +10,7 @@ import Select from 'Select/'
 import subcategoryColorScale from './subcategoryColorScale'
 import ColorLegend from './ColorLegend'
 const colors = {
-  'Fossil Fuel': '#F4A77E',
+  'Fossil Fuel': '#EFC1A8',
   'Clean': '#99DEE3',
   'Other': '#6ABEF0',
 }
@@ -105,7 +105,7 @@ export default function YearlyAverageUsageGraph(props) {
     const path = stackSprings[stackIndex].path
     const fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : colors[stack.key]
     // let opacity = stackIndex === 0 ? null : '0.3'
-    let opacity = 0.5
+    let opacity = 0.65
     if (singleEnergyType) {
       // opacity = null
     }
