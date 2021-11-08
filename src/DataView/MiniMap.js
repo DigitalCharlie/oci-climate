@@ -57,6 +57,15 @@ function StackedBarSelector(props) {
     const style = { cursor: 'pointer', opacity: selected ? 1 : 0.5 }
     const textAnchor = isTotal ? 'start' : 'end'
     const textX = isTotal ? 5 : barWidth - 5
+    const splitTextToTwoLines = width < 500
+    const formattedValue = valueFormatter(summedData[key])
+    let text = <text dy={rowHeight / 2 + 4} x={textX} textAnchor={textAnchor} fill='#fff'>{key} {formattedValue}</text>
+    if (splitTextToTwoLines) {
+      text = <g>
+        <text dy={rowHeight / 2 - 2} x={textX} textAnchor={textAnchor} fill='#fff'>{key}</text>
+        <text dy={rowHeight / 2 + 12} x={textX} textAnchor={textAnchor} fill='#fff'>{formattedValue}</text>
+      </g>
+    }
     runningX += barWidth
     if (runningX >= width) {
       runningX = 0
@@ -64,7 +73,7 @@ function StackedBarSelector(props) {
     return (
       <g key={key} style={style} transform={`translate(${x}, ${y})`} onClick={e => onChange(key)}>
         <rect fill={mapColors[key][2]} width={barWidth} height={rowHeight} />
-        <text dy={rowHeight / 2 + 4} x={textX} textAnchor={textAnchor} fill='#fff'>{key} {valueFormatter(summedData[key])}</text>
+        {text}
       </g>
     )
   })
