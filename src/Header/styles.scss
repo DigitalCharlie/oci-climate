@@ -46,10 +46,6 @@ header.Header {
     margin-top: 1em;
     padding-left: 115px;
     font-weight: bold;
-    text-transform: uppercase;
-    &:focus:hover {
-      text-transform: none;
-    }
   }
 
   .social {
