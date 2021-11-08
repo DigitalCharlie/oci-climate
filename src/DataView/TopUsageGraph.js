@@ -241,7 +241,7 @@ export default function TopUsageGraph(props) {
   if (hoveredGroup) {
     const { group, values, x, y, clientX, clientY } = hoveredGroup
     const offset = 5
-    let flipX = clientX > (window.innerWidth - 300)
+    let flipX = clientX > (window.innerWidth - 140)
     let flipY = clientY > window.innerHeight - 300
 
     const style = { transform:
