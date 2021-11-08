@@ -2,7 +2,7 @@
 import './MiniMap.scss'
 import { rollup, sum, extent, groups, mean } from 'd3-array'
 import { scaleLinear, scaleLog, scaleSequentialLog } from 'd3-scale'
-import { interpolateRgb } from 'd3-interpolate'
+import { interpolateRgb, piecewise } from 'd3-interpolate'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef, useMemo, useEffect } from 'react'
 import { geoMercator, geoPath } from 'd3-geo'
@@ -13,10 +13,10 @@ const categories = ['Fossil Fuel', 'Clean', 'Other']
 const mapDataKeys = ['Total', ... categories]
 
 const mapColors = {
-  'Fossil Fuel': ['#fcf9f9', '#a83c01'],
-  'Clean': ['#f7fcfc', '#075a60'],
-  Other: ['#f7fbfd', '#005080'],
-  'Total': ['#f7fafa', '#000000']
+  'Fossil Fuel': ['#fcf9f9', '#efc1a8', '#de622b'],
+  'Clean': ['#f7fcfc', '#99dee3', '#44a39b'],
+  Other: ['#f7fbfd', '#6abef0', '#5d97c7'],
+  // 'Total': ['#f7fafa', '#000000']
 }
 
 const countryGroupings = [
@@ -63,7 +63,7 @@ function StackedBarSelector(props) {
     }
     return (
       <g key={key} style={style} transform={`translate(${x}, ${y})`} onClick={e => onChange(key)}>
-        <rect fill={mapColors[key][1]} width={barWidth} height={rowHeight} />
+        <rect fill={mapColors[key][2]} width={barWidth} height={rowHeight} />
         <text dy={rowHeight / 2 + 4} x={textX} textAnchor={textAnchor} fill='#fff'>{key} {valueFormatter(summedData[key])}</text>
       </g>
     )
@@ -133,7 +133,8 @@ export default function MiniMap(props) {
   const colorScale = scaleSequentialLog()
     .domain(extent(countryData, d => d[dataKey] ?  d[dataKey] : null))
     // .range(mapColors[dataKey])
-    .interpolator(interpolateRgb(mapColors[dataKey][0], mapColors[dataKey][1]))
+    .interpolator(
+      piecewise(interpolateRgb, mapColors[dataKey]))
   const [hoveredFeature, setHoveredFeature] = useState(null)
   const features =  !collection ? null : collection.features.map(feature => {
     if (!feature.id) {
