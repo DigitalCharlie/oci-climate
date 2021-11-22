@@ -1,6 +1,6 @@
 
 import './TopUsageGraph.scss'
-import { rollups, sum, extent, mean } from 'd3-array'
+import { rollups, groups as d3groups, sum, extent, mean } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import React, { useState, useRef } from 'react'
@@ -126,6 +126,7 @@ export default function TopUsageGraph(props) {
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
   const categoryList = Array.from(new Set(categoryFilteredData.map(categoryAccessor))).sort()
 
+  const groupValues = []
   const groupRows = yearRows.map(({startYear, endYear}) => {
 
     let filteredData = categoryFilteredData.filter(d => d.year >= startYear && d.year <= endYear)
@@ -139,6 +140,10 @@ export default function TopUsageGraph(props) {
         return aIndex - bIndex
       })
     })
+
+    groupValues.push(d3groups(filteredData, d => d.institutionGroup).map(([country, values]) =>
+      [country, [... new Set(values.map(d => d.institution))]]
+    ))
 
     grouped.sort((a, b) => {
       let aValue = 0
@@ -159,7 +164,6 @@ export default function TopUsageGraph(props) {
     return grouped
   })
 
-  // console.log(groupRows)
   const valueRange = extent(groupRows.flat(), d => d.value)
   const numToShow = Math.min(groupRows[0].length, 15)
 
@@ -195,6 +199,7 @@ export default function TopUsageGraph(props) {
   const countryRows = countriesToShow.slice(0, numToShow).map((country, countryIndex) => {
     const groupData = groupRows.map(group => group.find(d => d[0] === country))
     const group = []
+    // console.log(groupData)
     return (
       <AnimatedRow
         xScale={xScale}
