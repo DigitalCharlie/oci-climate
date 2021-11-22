@@ -15,7 +15,7 @@ const barGraphStyles = ['all', 'split', 'split2']
 export default function DataView(props) {
   const { data } = props
   console.log(data)
-  const [selectedEnergyTypes , setSelectedEnergyTypes] = useState([...energyTypes])
+  const [selectedEnergyTypes , setSelectedEnergyTypes] = useState(['Fossil Fuel'])
   const [aggregationType, setAggregationType] = useState('sum')
   const [barGraphStyle, setBarGraphStyle] = useState('all')
   const sections = [
