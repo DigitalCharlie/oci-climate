@@ -1,6 +1,7 @@
 import { csvParse } from 'd3-dsv'
 import { useEffect, useState } from 'react'
 
+import incompleteCountries from './incompleteCountries'
 export default function useDataHook() {
 
   const [data, setData] = useState([])
@@ -22,7 +23,9 @@ export default function useDataHook() {
             row[rename[1]] = row[rename[0]]
           })
 
-
+          if (incompleteCountries.includes(row.institutionGroup)) {
+            row.institutionGroup = `${row.institutionGroup}*`
+          }
         })
         rows = rows.filter(d => d.visible === 'TRUE' && d.year > 2000)
         // console.log(rows)
