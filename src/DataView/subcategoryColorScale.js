@@ -6,6 +6,7 @@ const d3colorScale = scaleOrdinal(schemeCategory10);
 const fossilFuels = {
   'Gas': '#f4ebe2',
   'Oil and Gas': '#cbc6aa',
+  'Oil and gas': '#cbc6aa',
   'Oil': '#ffdd52',
   'Coal': '#4d2907',
   'Mixed Fossil': '#d8794f',

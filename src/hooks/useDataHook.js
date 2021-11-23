@@ -2,6 +2,15 @@ import { csvParse } from 'd3-dsv'
 import { useEffect, useState } from 'react'
 
 import incompleteCountries from './incompleteCountries'
+
+const normalizedDetail = {
+  'oil': 'Oil',
+  'clean': 'Clean',
+  'coal': 'Coal',
+  'gas': 'Gas',
+  'other': 'Other',
+  'oil and gas': 'Oil and Gas',
+}
 export default function useDataHook() {
 
   const [data, setData] = useState([])
@@ -26,6 +35,8 @@ export default function useDataHook() {
           if (incompleteCountries.includes(row.institutionGroup)) {
             row.institutionGroup = `${row.institutionGroup}*`
           }
+          const subcategory = row['category detail'].trim().toLowerCase()
+          row['category detail'] = normalizedDetail[subcategory] || subcategory
         })
         rows = rows.filter(d => d.visible === 'TRUE' && d.year > 2000)
         // console.log(rows)
