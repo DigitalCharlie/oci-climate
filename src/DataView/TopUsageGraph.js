@@ -18,7 +18,7 @@ const rowHeight = 30
 let centeredLabelSize = 80
 
 function AnimatedRow(props) {
-  const { groups, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, splitStyle2 } = props
+  const { groups, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, splitStyle2, institutionData } = props
   // console.log(groups)
   const name = groups[0] ? groups[0][0] : groups[1][0]
   // console.log(groups)
@@ -95,8 +95,8 @@ function AnimatedRow(props) {
   })
   return (
     <animated.g
-      onMouseOver={hoverGroup(name, flatValues)}
-      onMouseMove={hoverGroup(name, flatValues)}
+      onMouseOver={hoverGroup(name, flatValues, institutionData)}
+      onMouseMove={hoverGroup(name, flatValues, institutionData)}
       onMouseOut={hoverGroup(null)}
       className='dataRow'
       key={name}
@@ -126,7 +126,7 @@ export default function TopUsageGraph(props) {
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
   const categoryList = Array.from(new Set(categoryFilteredData.map(categoryAccessor))).sort()
 
-  const groupValues = []
+  const institutionValues = []
   const groupRows = yearRows.map(({startYear, endYear}) => {
 
     let filteredData = categoryFilteredData.filter(d => d.year >= startYear && d.year <= endYear)
@@ -141,8 +141,8 @@ export default function TopUsageGraph(props) {
       })
     })
 
-    groupValues.push(d3groups(filteredData, d => d.institutionGroup).map(([country, values]) =>
-      [country, [... new Set(values.map(d => d.institution))]]
+    institutionValues.push(d3groups(filteredData, d => d.institutionGroup).map(([country, values]) =>
+      [country, [... new Set(values.map(d => d.institution))].sort()]
     ))
 
     grouped.sort((a, b) => {
@@ -183,7 +183,7 @@ export default function TopUsageGraph(props) {
 
   const svgHeight = height + margins.top + margins.bottom
 
-  const hoverGroup = (group, values) => (event) => {
+  const hoverGroup = (group, values, institutionData) => (event) => {
     if (!group) {
       setHoveredGroup(null)
       return
@@ -193,11 +193,12 @@ export default function TopUsageGraph(props) {
     const x = clientX - svgPosition.left
     const y = clientY - svgPosition.top
 
-    setHoveredGroup({group, values, x, y, clientX, clientY})
+    setHoveredGroup({group, values, x, y, clientX, clientY, institutionData})
   }
   const countriesToShow = groupRows[groupRows.length - 1].map(d => d[0])
   const countryRows = countriesToShow.slice(0, numToShow).map((country, countryIndex) => {
     const groupData = groupRows.map(group => group.find(d => d[0] === country))
+    const institutionData = institutionValues.map(group => group.find(d => d[0] === country))
     const group = []
     // console.log(groupData)
     return (
@@ -212,6 +213,7 @@ export default function TopUsageGraph(props) {
         groupIndex={countryIndex}
         singleEnergyType={singleEnergyType}
         splitStyle2={splitStyle2}
+        institutionData={institutionData}
       />
     )
   })
@@ -244,11 +246,11 @@ export default function TopUsageGraph(props) {
   })
   let tooltip = null
   if (hoveredGroup) {
-    const { group, values, x, y, clientX, clientY } = hoveredGroup
+    const { group, values, x, y, clientX, clientY, institutionData } = hoveredGroup
     const offset = 5
     let flipX = clientX > (window.innerWidth - 140)
     let flipY = clientY > window.innerHeight - 300
-
+    console.log(institutionData)
     const style = { transform:
       `translate(${x + (flipX ? -offset : offset)}px, ${y + (flipY ? - offset : offset)}px)
       ${flipX ? 'translateX(-100%)' : ''}
@@ -283,7 +285,16 @@ export default function TopUsageGraph(props) {
               </React.Fragment>
             )
           })}
-        </div>
+          {institutionData &&  institutionData[0] ? (
+            <div className='tooltip-institution-data'>
+              <div className='tooltip-institution-data-header'>
+                Institutions
+              </div>
+              {institutionData[0][1].join(', ')}
+            </div>
+          ) : null}
+       </div>
+
       </div>
     )
   }

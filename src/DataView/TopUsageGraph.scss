@@ -41,5 +41,14 @@
       transform: rotate(45deg) translateY(20%);
       margin-right: 0.5em !important;
     }
+
+    .tooltip-institution-data-header {
+      font-weight: bold;
+      border-bottom: 1px solid #000;
+      margin-bottom: 0.5em;
+    }
+    .tooltip-institution-data {
+      max-width: 20em;
+    }
   }
 }
