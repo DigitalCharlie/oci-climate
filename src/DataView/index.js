@@ -7,6 +7,7 @@ import YearlyUsageGraph from './YearlyUsageGraph'
 import infoIcon from '../images/info_icon.svg'
 import ReactTooltip from 'react-tooltip';
 import MiniMap from './MiniMap'
+import Switch from './Switch'
 const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
@@ -120,7 +121,22 @@ export default function DataView(props) {
   return (
     <div>
       <div>
-        Energy Types:
+
+
+        <Switch
+          label='Show $ amounts as'
+          label1='A total sum'
+          label2='Average annual'
+          value={aggregationType === 'sum'}
+          toggle={() => setAggregationType(aggregationType === 'sum' ? 'average' : 'sum')}
+        />
+        <Switch
+          label='Show'
+          label1='all years'
+          label2='before/after Paris Accord Enacted'
+          value={barGraphStyle === 'all'}
+          toggle={() => setBarGraphStyle(barGraphStyle === 'all' ? 'split2' : 'all')}
+        />
 
         {energyTypes.map(type => {
           return (
@@ -148,38 +164,6 @@ export default function DataView(props) {
               {type}
             </label>
 
-          )
-        })}
-
-      </div>
-      <div>
-        Aggregation Type:
-        {aggregationTypes.map(type => {
-          return (
-            <label key={type} style={{ marginRight: '1em'}}>
-              <input
-                type="radio"
-                checked={aggregationType === type}
-                onChange={() => setAggregationType(type)}
-              />
-              {type}
-            </label>
-          )
-        })}
-      </div>
-      <div>
-        Bar Graph Style:
-        {barGraphStyles.map(type => {
-          return (
-            <label key={type} style={{ marginRight: '1em'}}>
-              <input
-
-                type="radio"
-                checked={barGraphStyle === type}
-                onChange={() => setBarGraphStyle(type)}
-              />
-              {type}
-            </label>
           )
         })}
       </div>

@@ -1,0 +1,37 @@
+.switch {
+  background-color: #F0F0F0;
+  font-weight: bold;
+  padding: 0.2em 1em;
+  display: inline-flex;
+  font-size: 0.875em;
+  border-radius: 0.25em;
+  cursor: pointer;
+  + .switch {
+    margin-left: 0.5em;
+  }
+
+  svg {
+
+    transform: rotate(180deg) translateY(-2px);
+    &.enabled {
+      transform: rotate(0deg) translateY(2px);
+    }
+  }
+
+  label {
+    transition: 0.3s ease-in-out opacity;
+    opacity: 0.35;
+    &.enabled {
+      opacity: 1;
+    }
+
+    &:first-of-type {
+      margin-left: 0.5em;
+      margin-right: 0.2em;
+    }
+    &:last-of-type {
+      margin-right: 0.5em;
+      margin-left: 0.2em;
+    }
+  }
+}
