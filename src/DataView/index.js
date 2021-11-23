@@ -8,8 +8,13 @@ import infoIcon from '../images/info_icon.svg'
 import ReactTooltip from 'react-tooltip';
 import MiniMap from './MiniMap'
 import Switch from './Switch'
+import Checkbox from './Checkbox'
 const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
-
+export const colors = {
+  'Fossil Fuel': '#EFC1A8',
+  'Clean': '#99DEE3',
+  'Other': '#6ABEF0',
+}
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
 const aggregationTypes = ['sum', 'average']
 const barGraphStyles = ['all', 'split', 'split2']
@@ -79,6 +84,7 @@ export default function DataView(props) {
     return null
   }
   const singleColumnView = width < 768
+  console.log(singleColumnView)
 
   const sectionWidth = singleColumnView ? width - 20 - 16 * 2 : (width - 16 * 4 - 20) / 2
   const renderSection = (section) => {
@@ -120,7 +126,7 @@ export default function DataView(props) {
   }
   return (
     <div>
-      <div>
+      <div className='controls'>
 
 
         <Switch
@@ -137,14 +143,12 @@ export default function DataView(props) {
           value={barGraphStyle === 'all'}
           toggle={() => setBarGraphStyle(barGraphStyle === 'all' ? 'split2' : 'all')}
         />
-
-        {energyTypes.map(type => {
-          return (
-            <label key={type} style={{ marginRight: '1em'}}>
-              <input
-                type="checkbox"
-                checked={selectedEnergyTypes.includes(type)}
-                onChange={() => {
+        <div>
+          {energyTypes.map(type => {
+            const color = colors[type]
+            const enabled = selectedEnergyTypes.includes(type)
+            return (
+              <label className='energyTypeToggle' key={type} style={{ backgroundColor: color,  opacity: enabled ? null : 0.35 }} onClick={ () => {
 
                   const newSelected = selectedEnergyTypes.includes(type) ?
                     selectedEnergyTypes.filter(t => t !== type) :
@@ -159,13 +163,16 @@ export default function DataView(props) {
                   })
 
                   setSelectedEnergyTypes(newSelected)
-                }}
-              />
-              {type}
-            </label>
+              }}>
+                <Checkbox
+                  checked={enabled}
+                />
+                {type}
+              </label>
 
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
       <div className={classNames('DataView', { twoColumnView: !singleColumnView })}>
         {sectionDivs}

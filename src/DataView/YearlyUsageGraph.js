@@ -9,11 +9,7 @@ import { animated, useSpring, useSprings } from 'react-spring'
 import Select from 'Select/'
 import subcategoryColorScale from './subcategoryColorScale'
 import ColorLegend from './ColorLegend'
-const colors = {
-  'Fossil Fuel': '#EFC1A8',
-  'Clean': '#99DEE3',
-  'Other': '#6ABEF0',
-}
+import { colors } from './'
 const highlightColors = {
   'Fossil Fuel': '#F4A77E',
   'Clean': '#63CAD1',

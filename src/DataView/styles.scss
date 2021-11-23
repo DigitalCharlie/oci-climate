@@ -26,4 +26,41 @@
   svg {
     overflow: visible;
   }
+
+
+}
+
+.energyTypeToggle {
+  margin-left: 1em;
+  padding: 0.2em 0.5em;
+  font-weight: bold;
+
+  font-size: 0.875em;
+  cursor: pointer;
+  border-radius: 0.25em;
+  transition: opacity 0.3s ease-in-out;
+  .Checkbox {
+    margin-right: 0.5em;
+  }
+}
+.controls {
+  display: flex;
+  @media (max-width: 1150px) {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    .energyTypeToggle:first-of-type {
+      margin-left: 1em;
+    }
+
+    .switch {
+      margin-left: 1em;
+      margin-top: 1em;
+      + .switch {
+        margin-left: 1em;
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    font-size: 0.85em;
+  }
 }

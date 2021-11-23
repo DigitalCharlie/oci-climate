@@ -8,11 +8,8 @@ import { animated, useSpring, useSprings} from 'react-spring'
 import subcategoryColorScale from './subcategoryColorScale'
 import ColorLegend from './ColorLegend'
 
-const colors = {
-  'Fossil Fuel': '#EFC1A8',
-  'Clean': '#99DEE3',
-  'Other': '#6ABEF0',
-}
+import { colors } from './'
+
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 const rowHeight = 30
 let centeredLabelSize = 80
