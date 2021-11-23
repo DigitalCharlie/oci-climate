@@ -9,6 +9,7 @@ import ReactTooltip from 'react-tooltip';
 import MiniMap from './MiniMap'
 import Switch from './Switch'
 import Checkbox from './Checkbox'
+import InfoIcon from './InfoIcon'
 const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 export const colors = {
   'Fossil Fuel': '#EFC1A8',
@@ -79,6 +80,10 @@ export default function DataView(props) {
     ReactTooltip.rebuild()
   })
 
+  useEffect(() => {
+    ReactTooltip.rebuild()
+  })
+
   console.log(width)
   if (!width) {
     return null
@@ -124,6 +129,8 @@ export default function DataView(props) {
       </div>
     </React.Fragment>
   }
+
+
   return (
     <div>
       <div className='controls'>
@@ -147,8 +154,10 @@ export default function DataView(props) {
           {energyTypes.map(type => {
             const color = colors[type]
             const enabled = selectedEnergyTypes.includes(type)
+            const isOther = type === 'Other'
+            const dataTip = isOther ? `<div><div style="font-weight: bold">Other energy type:</div>${loremIpsum}</div>` : null
             return (
-              <label className='energyTypeToggle' key={type} style={{ backgroundColor: color,  opacity: enabled ? null : 0.35 }} onClick={ () => {
+              <label className='energyTypeToggle' data-html={true} data-tip={dataTip} key={type} style={{ backgroundColor: color,  opacity: enabled ? null : 0.35 }} onClick={ () => {
 
                   const newSelected = selectedEnergyTypes.includes(type) ?
                     selectedEnergyTypes.filter(t => t !== type) :
@@ -168,6 +177,9 @@ export default function DataView(props) {
                   checked={enabled}
                 />
                 {type}
+                {isOther ?
+                  <InfoIcon style={{ marginLeft: '1em', transform: 'translateY(1px)'}} /> : null
+                }
               </label>
 
             )
@@ -176,7 +188,7 @@ export default function DataView(props) {
       </div>
       <div className={classNames('DataView', { twoColumnView: !singleColumnView })}>
         {sectionDivs}
-        <ReactTooltip />
+        <ReactTooltip arrowColor='transparent' effect='solid' place='bottom' className='helperTooltip' />
       </div>
     </div>
   )
