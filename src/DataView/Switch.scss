@@ -17,6 +17,9 @@
       transform: rotate(0deg) translateY(2px);
     }
   }
+  span {
+    margin-left: 0.5em;
+  }
 
   label {
     transition: 0.3s ease-in-out opacity;
@@ -26,7 +29,7 @@
     }
 
     &:first-of-type {
-      margin-left: 0.5em;
+      // margin-left: 0.5em;
       margin-right: 0.2em;
     }
     &:last-of-type {

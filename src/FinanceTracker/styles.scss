@@ -1,0 +1,42 @@
+.FinanceTracker {
+  padding: 1em;
+
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
+    thead {
+      font-size: 0.7em;
+      font-weight: bold;
+
+    }
+
+    td:first-child {
+      padding-left: 0.5em;
+    }
+
+    tbody {
+      tr td {
+        border: 1px solid black;
+        margin-bottom: 0.5em;
+        border-left: none;
+        border-right: none;
+        padding: 0.2em 0;
+
+        &:first-child {
+          border-left: 1px solid black;
+        }
+        &:last-child {
+          border-right: 1px solid black;
+        }
+      }
+    }
+  }
+  .dot {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    opacity: 0.5;
+    margin: 0 auto;
+  }
+}

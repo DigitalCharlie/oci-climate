@@ -2,11 +2,11 @@ import classNames from "classnames";
 import './Switch.scss'
 
 export default function Switch(props) {
-  const {value, toggle, label1, label2, label} = props;
+  const {value, toggle, label1, label2, label, style} = props;
 
   return (
-    <div className="switch" onClick={toggle}>
-      <span>{label}</span>
+    <div className="switch" onClick={toggle} style={style}>
+      {label ? <span>{label}</span> : null }
       <label className={classNames({enabled: value})}>
         {label1}
       </label>

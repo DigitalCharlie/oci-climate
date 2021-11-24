@@ -1,9 +1,10 @@
 import DataView from "DataView"
 import Methodology from 'Methodology'
+import FinanceTracker from "FinanceTracker"
 const routes = [
   { label: 'Home', path: '/' },
   { label: 'Data', path: '/data', Component: DataView },
-  { label: 'Finance Tracker', path: '/finance' },
+  { label: 'Finance Tracker', path: '/finance', Component: FinanceTracker },
   { label: 'Methodology', path: '/methodology', Component: Methodology },
   { label: 'Research', path: '/research' },
 ]
