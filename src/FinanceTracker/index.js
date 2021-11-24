@@ -1,11 +1,12 @@
 
 import './styles.scss'
 import Switch from 'DataView/Switch'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import useFinanceTrackerData, {financeTrackerAmountKey} from 'hooks/useFinanceTrackerData'
 import infoIcon from 'images/info_icon.svg'
 import ReactTooltip from 'react-tooltip'
 import { colors } from '@react-spring/shared'
+import { color as d3Color} from 'd3-color'
 const financeTypes = [
   {
     label: 'Bilateral Institutions',
@@ -32,10 +33,18 @@ const legendDescriptions = {
   'Green': 'Full restrictions/policies',
 }
 const policyTypes = ['Coal Exclusion', 'Oil Exclusion', 'Gas Exclusion', 'Indirect Finance']
-const dot = (row, policyType) => {
+const dot = (row, policyType, hoverDot) => {
   const color = dotColors[row[`${policyType} Colour`]]
+  const explanation = row[`${policyType} Policies`]
+
   return (
-    <div className='dot' style={{ backgroundColor: color }} />
+    <div
+      className='dot'
+      style={{ backgroundColor: color }}
+      onMouseMove={hoverDot(color, explanation, policyType)}
+      onMouseOver={hoverDot(color, explanation, policyType)}
+      onMouseOut={hoverDot(null)}
+    />
   )
 }
 const formatValue = (value) => {
@@ -45,10 +54,23 @@ export default function FinanceTracker(props) {
 
   const [selectedFinanceType, setSelectedFinanceType] = useState(financeTypes[0])
   const data = useFinanceTrackerData(selectedFinanceType.file)
-
+  const [hoveredDot, setHoveredDot] = useState(null)
+  const tableContainer = useRef()
+  const hoverDot = (color, explanation, policyType) => {
+    return (event) => {
+      if (!color) {
+        setHoveredDot(null)
+        return
+      }
+      const tablePosition = tableContainer.current.getBoundingClientRect()
+      const x = event.clientX - tablePosition.left
+      const y = event.clientY - tablePosition.top
+      setHoveredDot({ color, explanation, policyType, x ,y })
+    }
+  }
   const policyTypeColumns = policyTypes.map(policyType => ({
     label: policyType.split(' ')[0],
-    accessor: d => dot(d, policyType),
+    accessor: d => dot(d, policyType, hoverDot),
     theadStyle: { textAlign: 'center' },
     tbodyStyle: { width: (10/policyTypes.length) + 'em' },
   }))
@@ -82,12 +104,36 @@ export default function FinanceTracker(props) {
     ...defaultColumns,
     ...policyTypeColumns,
   ]
-  console.log(columns)
+  // console.log(columns)
 
   let tracker = null
   useEffect(() => {
     ReactTooltip.rebuild()
   })
+
+  let dotTooltip = null
+  if (hoveredDot) {
+    const color = d3Color(hoveredDot.color)
+    const tooltipStyle = {
+      transform: `translate(${hoveredDot.x - 5}px, ${hoveredDot.y - 5}px) translateX(-100%)`,
+
+    }
+    const contentStyle = {
+      backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, 0.1)`
+    }
+    dotTooltip = (
+      <div className='dotTooltip' style={tooltipStyle}>
+        <div className='dotTooltip-content' style={contentStyle}>
+          <div className='dot-tooltip-title'>
+            {hoveredDot.policyType} Policies
+          </div>
+          <div className='dot-tooltip-description'>
+            {hoveredDot.explanation}
+          </div>
+        </div>
+     </div>
+    )
+  }
   if (data) {
     tracker = (<table>
       <thead>
@@ -158,7 +204,10 @@ export default function FinanceTracker(props) {
           {legend}
         </div>
       </div>
-      {tracker}
+      <div ref={tableContainer} className='tableContainer'>
+        {tracker}
+        {dotTooltip}
+      </div>
     </div>
   )
 }
