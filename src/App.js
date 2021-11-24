@@ -4,7 +4,7 @@ import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Header from './Header';
 import useDataHook from './hooks/useDataHook'
 import routes from './routes'
-
+import ReactTooltip from 'react-tooltip';
 function App() {
 
   const data = useDataHook()
@@ -20,6 +20,8 @@ function App() {
           ))}
         </Switch>
       </Router>
+      <ReactTooltip arrowColor='transparent' effect='solid' place='bottom' className='helperTooltip' />
+
     </div>
   );
 }

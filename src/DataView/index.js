@@ -188,7 +188,6 @@ export default function DataView(props) {
       </div>
       <div className={classNames('DataView', { twoColumnView: !singleColumnView })}>
         {sectionDivs}
-        <ReactTooltip arrowColor='transparent' effect='solid' place='bottom' className='helperTooltip' />
       </div>
     </div>
   )

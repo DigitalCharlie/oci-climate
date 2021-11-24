@@ -3,6 +3,7 @@
 
 
   table {
+    width: 100%;
     border-collapse: separate;
     border-spacing: 0 0.5em;
     thead {
@@ -38,5 +39,30 @@
     border-radius: 50%;
     opacity: 0.5;
     margin: 0 auto;
+  }
+  .controls {
+    display: flex;
+    justify-content: space-between;
+  }
+  .legend {
+    background-color: #F0F0F0;
+    padding: 0.5em;
+    .legend-title {
+      font-weight: bold;
+      font-size: 1.125em;
+      margin-bottom: 0.5em;
+    }
+    .legend-items {
+      display: flex;
+      > div {
+        display: flex;
+        .dot {
+          margin-right: 0.5em;
+        }
+        + div {
+          margin-left: 2.5em;
+        }
+      }
+    }
   }
 }
