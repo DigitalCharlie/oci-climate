@@ -4,7 +4,7 @@
 
   table {
     width: 100%;
-    border-collapse: separate;
+    border-collapse: collapse;
     border-spacing: 0 0.5em;
     thead {
       font-size: 0.7em;
@@ -17,20 +17,56 @@
     }
 
     tbody {
-      tr td {
+      tr.table td {
+        cursor: pointer;
         border: 1px solid black;
         margin-bottom: 0.5em;
         border-left: none;
         border-right: none;
+        border-bottom: none;
         padding: 0.2em 0;
 
         &:first-child {
           border-left: 1px solid black;
+          padding-left: 0.5em;
         }
         &:last-child {
           border-right: 1px solid black;
         }
       }
+    }
+
+    .policies td {
+      padding: 0;
+      border: 1px solid black;
+      border-top: none;
+
+      > div {
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+        max-height: 0;
+        transition: 0.3s ease-in-out max-height;
+
+        &.open {
+          max-height: 10em;
+        }
+        > div {
+          padding: 1em;
+          div:first-child {
+            font-weight: bold;
+            margin-bottom: 0.5em;
+          }
+          width: 25%;
+
+          + div {
+            margin-left: 1em;
+          }
+        }
+      }
+    }
+    .spacer td {
+      padding-bottom: 1em;
     }
   }
   .dot {

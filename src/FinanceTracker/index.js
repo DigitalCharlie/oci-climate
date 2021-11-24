@@ -1,12 +1,13 @@
 
 import './styles.scss'
 import Switch from 'DataView/Switch'
-import { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import useFinanceTrackerData, {financeTrackerAmountKey} from 'hooks/useFinanceTrackerData'
 import infoIcon from 'images/info_icon.svg'
 import ReactTooltip from 'react-tooltip'
 import { colors } from '@react-spring/shared'
 import { color as d3Color} from 'd3-color'
+import classNames from 'classnames'
 const financeTypes = [
   {
     label: 'Bilateral Institutions',
@@ -27,10 +28,10 @@ const dotColors = {
   'Green': '#075A60',
 }
 const legendDescriptions = {
-  'Red': 'No restriction/policy',
-  'Orange': 'Partial restrictions/policies',
-  'Yellow': 'Partial restrictions/policies',
-  'Green': 'Full restrictions/policies',
+  'Red': 'No exclusions',
+  'Orange': 'Single exclusion',
+  'Yellow': 'Multi-exclusion',
+  'Green': 'Full exclusions',
 }
 const policyTypes = ['Coal Exclusion', 'Oil Exclusion', 'Gas Exclusion', 'Indirect Finance']
 const dot = (row, policyType, hoverDot) => {
@@ -55,6 +56,7 @@ export default function FinanceTracker(props) {
   const [selectedFinanceType, setSelectedFinanceType] = useState(financeTypes[0])
   const data = useFinanceTrackerData(selectedFinanceType.file)
   const [hoveredDot, setHoveredDot] = useState(null)
+  const [selectedCountry, setSelectedCountry] = useState(null)
   const tableContainer = useRef()
   const hoverDot = (color, explanation, policyType) => {
     return (event) => {
@@ -149,9 +151,31 @@ export default function FinanceTracker(props) {
       </thead>
       <tbody>
         {data.map(row => {
-          return <tr key={columns[0].accessor(row)}>
-            {columns.map(column => <td style={column.tbodyStyle} key={column.label}>{column.accessor(row)}</td>)}
-          </tr>
+          const key = columns[0].accessor(row)
+          return <React.Fragment key={key}>
+            <tr className='table' onClick={() => setSelectedCountry(key)}>
+              {columns.map(column => <td style={column.tbodyStyle} key={column.label}>{column.accessor(row)}</td>)}
+            </tr>
+            <tr className='policies' >
+              <td colSpan={columns.length}>
+                <div className={classNames({ open: key=== selectedCountry })}>
+                  {policyTypes.map(policyType => {
+                    const key = `${policyType} Policies`
+                    const color = d3Color(dotColors[row[`${policyType} Colour`]])
+                    return (
+                      <div key={policyType} style={{ backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, 0.1)` }}>
+                        <div>{key}</div>
+                        <div>
+                          {row[key]}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </td>
+            </tr>
+            <tr className='spacer'><td></td></tr>
+          </React.Fragment>
         })}
       </tbody>
     </table>)
