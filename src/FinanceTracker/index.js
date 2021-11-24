@@ -9,6 +9,7 @@ import { colors } from '@react-spring/shared'
 import { color as d3Color} from 'd3-color'
 import classNames from 'classnames'
 import useWindowSize from 'hooks/useWindowSize'
+import Select from 'Select'
 const financeTypes = [
   {
     label: 'Bilateral Institutions',
@@ -60,8 +61,21 @@ export default function FinanceTracker(props) {
   const [selectedCountry, setSelectedCountry] = useState(null)
   const tableContainer = useRef()
   const {width, height} = useWindowSize()
-
+  const [sortIndex, setSortIndex] = useState(0)
   const singleColumnView = width < 768
+  const sortOptions = [
+    {
+      label: 'A-Z',
+      sort: (a, b) => a[selectedFinanceType.firstColumnLabel].localeCompare(b[selectedFinanceType.firstColumnLabel]),
+      value: 0,
+    },
+    {
+      label: 'Average Amount',
+      sort: (a, b) => b[financeTrackerAmountKey] - a[financeTrackerAmountKey],
+      value: 1,
+    }
+  ]
+
   const hoverDot = (color, explanation, policyType) => {
     return (event) => {
       if (!color) {
@@ -141,6 +155,7 @@ export default function FinanceTracker(props) {
     )
   }
   if (data) {
+    const sortedData = [...data].sort(sortOptions[sortIndex].sort)
     tracker = (<table>
       <thead>
         <tr>
@@ -154,7 +169,7 @@ export default function FinanceTracker(props) {
         </tr>
       </thead>
       <tbody>
-        {data.map(row => {
+        {sortedData.map(row => {
           const key = columns[0].accessor(row)
           return <React.Fragment key={key}>
             <tr className='table' onClick={() => setSelectedCountry(key)}>
@@ -228,6 +243,14 @@ export default function FinanceTracker(props) {
               label2={financeTypes[1].label}
               toggle={() => setSelectedFinanceType(selectedFinanceType === financeTypes[0] ? financeTypes[1] : financeTypes[0])}
             />
+            <div>
+              Sort by:{' '}
+              <Select
+                value={sortIndex}
+                options={sortOptions}
+                onChange={setSortIndex}
+              />
+            </div>
           </div>
           {legend}
         </div>
