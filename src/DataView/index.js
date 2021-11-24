@@ -148,7 +148,7 @@ export default function DataView(props) {
           label1='all years'
           label2='before/after Paris Accord Enacted'
           value={barGraphStyle === 'all'}
-          toggle={() => setBarGraphStyle(barGraphStyle === 'all' ? 'split2' : 'all')}
+          toggle={() => setBarGraphStyle(barGraphStyle === 'all' ? 'split' : 'all')}
         />
         <div>
           {energyTypes.map(type => {
