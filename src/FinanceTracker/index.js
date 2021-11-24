@@ -66,7 +66,12 @@ export default function FinanceTracker(props) {
   const sortOptions = [
     {
       label: 'A-Z',
-      sort: (a, b) => a[selectedFinanceType.firstColumnLabel].localeCompare(b[selectedFinanceType.firstColumnLabel]),
+      sort: (a, b) => {
+        const aLabel = a.Country || a.MDB
+        const bLabel = b.Country || b.MDB
+        return aLabel.localeCompare(bLabel)
+        // a[selectedFinanceType.firstColumnLabel].localeCompare(b[selectedFinanceType.firstColumnLabel]),
+      },
       value: 0,
     },
     {
