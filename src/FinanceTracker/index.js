@@ -8,6 +8,7 @@ import ReactTooltip from 'react-tooltip'
 import { colors } from '@react-spring/shared'
 import { color as d3Color} from 'd3-color'
 import classNames from 'classnames'
+import useWindowSize from 'hooks/useWindowSize'
 const financeTypes = [
   {
     label: 'Bilateral Institutions',
@@ -41,7 +42,7 @@ const dot = (row, policyType, hoverDot) => {
   return (
     <div
       className='dot'
-      style={{ backgroundColor: color }}
+      style={{ backgroundColor: color, }}
       onMouseMove={hoverDot(color, explanation, policyType)}
       onMouseOver={hoverDot(color, explanation, policyType)}
       onMouseOut={hoverDot(null)}
@@ -49,7 +50,7 @@ const dot = (row, policyType, hoverDot) => {
   )
 }
 const formatValue = (value) => {
-  return `$ ${value.toLocaleString()}M`
+  return `$${value.toLocaleString()}M`
 }
 export default function FinanceTracker(props) {
 
@@ -58,6 +59,9 @@ export default function FinanceTracker(props) {
   const [hoveredDot, setHoveredDot] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState(null)
   const tableContainer = useRef()
+  const {width, height} = useWindowSize()
+
+  const singleColumnView = width < 768
   const hoverDot = (color, explanation, policyType) => {
     return (event) => {
       if (!color) {
@@ -73,8 +77,8 @@ export default function FinanceTracker(props) {
   const policyTypeColumns = policyTypes.map(policyType => ({
     label: policyType.split(' ')[0],
     accessor: d => dot(d, policyType, hoverDot),
-    theadStyle: { textAlign: 'center' },
-    tbodyStyle: { width: (10/policyTypes.length) + 'em' },
+    theadStyle: { textAlign: 'center', width: '45px' },
+    tbodyStyle: { width: '45px'}, // (10/policyTypes.length) + 'em' },
   }))
 
   const defaultColumns = [
@@ -95,7 +99,7 @@ export default function FinanceTracker(props) {
 
     },
   ].filter(d => {
-    if (selectedFinanceType === financeTypes[1]) {
+    if (selectedFinanceType === financeTypes[1] || singleColumnView) {
       if (d.label === 'Institution') {
         return false
       }
@@ -197,7 +201,7 @@ export default function FinanceTracker(props) {
     </div>
   )
   return (
-    <div className='FinanceTracker'>
+    <div className={classNames('FinanceTracker', { singleColumnView })}>
       <div>
         <h2>Fossil Free Public Finance Tracker
           <img src={infoIcon} data-tip='Lorem ipsum dollar...' />

@@ -126,4 +126,43 @@
       }
     }
   }
+
+
+  &.singleColumnView {
+    font-size: 0.9em;
+    .legend {
+      .legend-items {
+        flex-direction: column;
+        .dot {
+          margin-left: 0;
+        }
+        > div {
+          + div {
+            margin-left: 0;
+            margin-top: 0.5em;
+          }
+        }
+      }
+    }
+    tr.table {
+      td:first-child {
+        padding-right: 0.5em;
+      }
+    }
+    tr.policies td {
+      > div {
+        flex-direction: column;
+
+        &.open {
+          max-height: 80em;
+        }
+        > div {
+          width: auto;
+          + div {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
 }
