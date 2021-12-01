@@ -247,7 +247,7 @@ export default function TopUsageGraph(props) {
     const offset = 5
     let flipX = clientX > (window.innerWidth - 140)
     let flipY = clientY > window.innerHeight - 300
-    console.log(institutionData)
+    // console.log(institutionData)
     const style = { transform:
       `translate(${x + (flipX ? -offset : offset)}px, ${y + (flipY ? - offset : offset)}px)
       ${flipX ? 'translateX(-100%)' : ''}
@@ -260,7 +260,11 @@ export default function TopUsageGraph(props) {
         <div className='tooltip-header'>
           {group}
         </div>
+
         <div className='tooltip-body'>
+          <div style={{ marginBottom: '0.4em'}}>
+            {aggregationType === 'sum' ? '$ amounts as total sum' : '$ amounts as average annual'}
+          </div>
           {values.map((value) => {
             const [type, amount] = value
             const valueSetIndex = value.valueSetIndex
@@ -273,7 +277,7 @@ export default function TopUsageGraph(props) {
             }
             return (
               <React.Fragment key={`${valueSetIndex}-${type}`}>
-                {yearLabelDiv}
+                {splitBarGraph ? yearLabelDiv : null}
                 <div key={`${valueSetIndex}-${type}`} className='tooltip-row'>
                   <div className='tooltip-row-diamond' style={{backgroundColor}} />
                   <div className='tooltip-row-type'>{type}</div>

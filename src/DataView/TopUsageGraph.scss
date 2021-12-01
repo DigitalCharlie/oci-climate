@@ -25,12 +25,14 @@
     .tooltip-header {
       font-weight: bold;
       font-size: 1.125em;
-      margin-bottom: 0.5em;
+      margin-bottom: 0.25em;
       max-width: 180px;
     }
     .tooltip-row {
       display: flex;
       margin-bottom: 0.5em;
+      margin-left: 0.25em;
+      font-weight: bold;
       > div {
         margin-right: 0.3em;
       }
@@ -46,9 +48,14 @@
       font-weight: bold;
       border-bottom: 1px solid #000;
       margin-bottom: 0.5em;
+      margin-top: 1em;
     }
     .tooltip-institution-data {
       max-width: 20em;
+    }
+    .tooltip-year-label {
+      margin-bottom: 0.2em;
+      font-weight: bold;
     }
   }
 }
