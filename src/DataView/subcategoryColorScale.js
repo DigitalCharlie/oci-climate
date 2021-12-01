@@ -4,7 +4,7 @@ import { schemeCategory10 } from "d3-scale-chromatic";
 const d3colorScale = scaleOrdinal(schemeCategory10);
 
 const fossilFuels = {
-  'Gas': '#f4ebe2',
+  'Gas': '#d8794f',
   'Oil and Gas': '#cbc6aa',
   'Oil and gas': '#cbc6aa',
   'Oil': '#ffdd52',

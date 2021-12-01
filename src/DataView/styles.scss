@@ -36,6 +36,7 @@
 }
 .controls {
   display: flex;
+  margin-left: 1em;
   @media (max-width: 1150px) {
     flex-direction: column-reverse;
     align-items: flex-start;

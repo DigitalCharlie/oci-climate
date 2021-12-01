@@ -137,9 +137,9 @@ export default function DataView(props) {
 
 
         <Switch
-          label='Show $ amounts as'
-          label1='A total sum'
-          label2='Average annual'
+          label=''
+          label1='Total Sum'
+          label2='Average Annual'
           value={aggregationType === 'sum'}
           toggle={() => setAggregationType(aggregationType === 'sum' ? 'average' : 'sum')}
         />
