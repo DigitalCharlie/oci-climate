@@ -127,8 +127,8 @@ export default function TopUsageGraph(props) {
   const groupRows = yearRows.map(({startYear, endYear}) => {
 
     let filteredData = categoryFilteredData.filter(d => d.year >= startYear && d.year <= endYear)
-
-    const grouped = rollups(filteredData, rows => (aggregationType === 'sum' ? sum : mean)(rows, d => d.amount), d => d.institutionGroup, categoryAccessor)
+    const denominator = aggregationType === 'sum' ? 1 : (endYear - startYear + 1)
+    const grouped = rollups(filteredData, rows => sum(rows, d => d.amount) / denominator, d => d.institutionGroup, categoryAccessor)
     grouped.forEach(group => {
       group.value = sum(group[1], d => d[1])
       group[1].sort((a, b) => {

@@ -10,7 +10,7 @@ export default function useMapHook() {
       .then(r => r.json())
       .then(topo => {
         const map = feature(topo, topo.objects.countries)
-        console.log(map)
+        // console.log(map)
         setMap(map)
       })
   }, [])

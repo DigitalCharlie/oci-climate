@@ -38,7 +38,7 @@ function StackedBarSelector(props) {
       },
       mapDataKeys.reduce((acc, key) => {acc[key] = 0; return acc}, {})
     )
-    console.log(summedData)
+    // console.log(summedData)
     return summedData
   }, [data])
 
@@ -95,13 +95,15 @@ export default function MiniMap(props) {
 
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
   const countryRows = data.filter(d => !d.isBank)
+  const forceYears = [2013, 2020]
+  const denominator = aggregationType === 'sum' ? 1 : (forceYears[1] - forceYears[0] + 1)
   const countryData = groups(countryRows, countryAccessor).map(v => ({country: v[0], values: v[1]})).map(cData => {
 
-    const totalValue = (aggregationType === 'sum' ? sum : mean)(cData.values, d => d.amount)
+    const totalValue = sum(cData.values, d => d.amount) / denominator
     const categoryValues = {}
     // console.log(cData)
     categories.forEach(category => {
-      categoryValues[category] = (aggregationType === 'sum' ? sum : mean)(cData.values.filter(d => d.category === category), d => d.amount)
+      categoryValues[category] = sum(cData.values.filter(d => d.category === category), d => d.amount) / denominator
     })
     return {
       ...cData,
@@ -109,7 +111,6 @@ export default function MiniMap(props) {
       ...categoryValues,
     }
   })
-  console.log(countryData)
 
   let tooltip = null
 
@@ -187,7 +188,7 @@ export default function MiniMap(props) {
       </g>
     )
   })
-  console.log(countryData)
+  // console.log(countryData)
   const svgRef = useRef()
   const legendRef = useRef()
   useEffect(() => {
