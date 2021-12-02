@@ -9,7 +9,10 @@
     thead {
       font-size: 0.7em;
       font-weight: bold;
-
+      td {
+        vertical-align: bottom;
+        padding-bottom: 0.2em;
+      }
     }
 
     td:first-child {

@@ -96,7 +96,7 @@ export default function FinanceTracker(props) {
   const policyTypeColumns = policyTypes.map(policyType => ({
     label: policyType === 'Indirect Finance' ? policyType : policyType.split(' ')[0],
     accessor: d => dot(d, policyType, hoverDot),
-    theadStyle: { textAlign: 'center', width: '45px' },
+    theadStyle: { textAlign: 'center', width: '45px', paddingBottom: 0 },
     tbodyStyle: { width: '45px'}, // (10/policyTypes.length) + 'em' },
   }))
 
@@ -213,7 +213,7 @@ export default function FinanceTracker(props) {
       </div>
       <div className='legend-items'>
         {Object.keys(dotColors).map(color => (
-          <div>
+          <div key={color}>
             <div className='dot' style={{ backgroundColor: dotColors[color] }} key={color} />
             {legendDescriptions[color]}
           </div>
