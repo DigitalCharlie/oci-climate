@@ -1,0 +1,64 @@
+.year-picker {
+  margin-left: 1em;
+  font-weight: bold;
+
+  background-color: #F0F0F0;
+  > span {
+
+    padding: 0.2em;
+    display: inline-flex;
+    font-size: 0.875em;
+    border-radius: 0.25em;
+    > span {
+      display: inline-flex;
+      opacity: 0.3;
+      transition: 0.3s ease-in-out opacity;
+      &.checked {
+        opacity: 1;
+      }
+    }
+    + span {
+      margin-left: 0.2em;
+      border-left: 1px solid #fff;
+    }
+  }
+
+  select {
+    margin: 0 0.5em;
+    appearance: none;
+    font-weight: bold;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 4em;
+    background: url('../images/chevron.svg') center right 5px no-repeat;
+    outline: none;
+  }
+
+
+  input[type="radio"] {
+    appearance: none;
+
+    width: 1em;
+    height: 1em;
+    border: 0.1em solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &::before {
+      content: "";
+      width: 0.5em;
+      height: 0.5em;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em black;
+      background-color: CanvasText;
+
+    }
+
+    &:checked::before {
+      transform: scale(1);
+    }
+  }
+}

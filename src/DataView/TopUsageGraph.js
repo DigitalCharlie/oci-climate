@@ -15,7 +15,7 @@ const rowHeight = 30
 let centeredLabelSize = 80
 
 function AnimatedRow(props) {
-  const { groups, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, splitStyle2, institutionData } = props
+  const { groups, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, splitBarGraph, institutionData } = props
   // console.log(groups)
   const name = groups[0] ? groups[0][0] : groups[1][0]
   // console.log(groups)
@@ -54,15 +54,15 @@ function AnimatedRow(props) {
     let barHeight = (rowHeight / values.length) * 0.8
     let y = (valueSetIndex * 1.1) * barHeight
     let x = xs[index]
-    if (splitStyle2) {
-      barHeight = rowHeight * 0.8
-      y = 0
-      if (valueSetIndex === 1) {
-        x += (width - margins.left - margins.right) / 2 + centeredLabelSize / 2
-      } else {
-        x = (width - margins.left - margins.right) / 2 - barWidths[index] - centeredLabelSize / 2 - xs[index]
-      }
-    }
+    // if (splitBarGraph) {
+    //   barHeight = rowHeight * 0.8
+    //   y = 0
+    //   if (valueSetIndex === 1) {
+    //     x += (width - margins.left - margins.right) / 2 + centeredLabelSize / 2
+    //   } else {
+    //     x = (width - margins.left - margins.right) / 2 - barWidths[index] - centeredLabelSize / 2 - xs[index]
+    //   }
+    // }
     const fill = singleEnergyType && (type !== 'Clean' && type !== 'Other') ? subcategoryColorScale(type) : colors[type]
     return (
       // <animated.g key={`${valueSetIndex}-${type}`} transform={valueSprings[index].x.to(x => `translate(${x}, ${y})`)} >
@@ -72,8 +72,8 @@ function AnimatedRow(props) {
     )
   })
   let label = name
-  const labelX = splitStyle2 ? (width - margins.left - margins.right) / 2 : -5
-  const textAnchor = splitStyle2 ? 'middle' : 'end'
+  const labelX =  -5
+  const textAnchor = 'end'
   if (isBank) {
     label = name.split(' ').map(word => word.charAt(0)).join('')
   } else {
@@ -108,14 +108,16 @@ function AnimatedRow(props) {
 }
 
 export default function TopUsageGraph(props) {
-  const { width, data, isBank, selectedEnergyTypes, aggregationType, barGraphStyle } = props
-  const splitBarGraph = barGraphStyle === 'split' || barGraphStyle === 'split2'
-  const splitStyle2 = barGraphStyle === 'split2'
-
-  const yearRows = splitBarGraph ? [
+  const { width, data, isBank, selectedEnergyTypes, aggregationType, yearType, customYears } = props
+  const splitBarGraph = yearType === 'paris' // barGraphStyle === 'split' || barGraphStyle === 'split2'
+  console.log(splitBarGraph, yearType)
+  let yearRows = splitBarGraph ? [
     { startYear: 2013, endYear: 2016},
     { startYear: 2017, endYear: 2020},
   ] : [{ startYear: 2013, endYear: 2020}]
+  if (yearType === 'custom') {
+    yearRows = [{ startYear: customYears[0], endYear: customYears[1] }]
+  }
 
   const [hoveredGroup, setHoveredGroup] = useState(null)
   const singleEnergyType = selectedEnergyTypes.length === 1
@@ -169,11 +171,11 @@ export default function TopUsageGraph(props) {
   const margins = {
     top: 30, left: 80, right: 20, bottom: 5
   }
-  if (splitStyle2) {
-    margins.right = 30
-    margins.left = margins.right
-  }
-  const range = (width - margins.left - margins.right) / (splitStyle2 ? 2 : 1)
+  // if (splitBarGraph) {
+  //   margins.right = 30
+  //   margins.left = margins.right
+  // }
+  const range = (width - margins.left - margins.right) // 1(splitBarGraph ? 2 : 1)
   const xScale = scaleLinear()
     .domain([0, valueRange[1]])
     .range([0, range])
@@ -209,7 +211,7 @@ export default function TopUsageGraph(props) {
         key={country}
         groupIndex={countryIndex}
         singleEnergyType={singleEnergyType}
-        splitStyle2={splitStyle2}
+        splitBarGraph={splitBarGraph}
         institutionData={institutionData}
       />
     )
@@ -218,17 +220,17 @@ export default function TopUsageGraph(props) {
   const xTicks = xScale.ticks(5).map(tick => {
     let x = xScale(tick)
     let secondTick = null
-    if (splitStyle2) {
-      let tickX = x
-      x += (width - margins.left - margins.right) / 2 + centeredLabelSize / 2
-      secondTick = (
-        <g key={`${tick}-2`} transform={`translate(${(width - margins.left - margins.right) / 2 - centeredLabelSize / 2 - tickX}, 0)`}>
-          <text y={-4} textAnchor='middle'>{valueFormatter(tick)}</text>
-          <line y2={height} stroke='#4D4D4D' strokeWidth='0.5'/>
-        </g>
+    // if (splitBarGraph) {
+    //   let tickX = x
+    //   x += (width - margins.left - margins.right) / 2 + centeredLabelSize / 2
+    //   secondTick = (
+    //     <g key={`${tick}-2`} transform={`translate(${(width - margins.left - margins.right) / 2 - centeredLabelSize / 2 - tickX}, 0)`}>
+    //       <text y={-4} textAnchor='middle'>{valueFormatter(tick)}</text>
+    //       <line y2={height} stroke='#4D4D4D' strokeWidth='0.5'/>
+    //     </g>
 
-      )
-    }
+    //   )
+    // }
     return (
       <React.Fragment key={tick}>
         <g key={tick} transform={`translate(${x}, 0)`}>

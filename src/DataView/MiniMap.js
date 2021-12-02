@@ -86,7 +86,7 @@ function StackedBarSelector(props) {
 }
 
 export default function MiniMap(props) {
-  const { width, data, isBank, aggregationType } = props
+  const { width, data, isBank, aggregationType, yearType, customYears } = props
 
   const collection = useMapHook()
   const height = width * 0.6
@@ -95,8 +95,13 @@ export default function MiniMap(props) {
   const [dataKey, setSelectedDataKey] = useState(mapDataKeys[1])
 
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
-  const countryRows = data.filter(d => !d.isBank)
   const forceYears = [2013, 2020]
+  if (yearType === 'custom') {
+    forceYears[0] = customYears[0]
+    forceYears[1] = customYears[1]
+  }
+  const countryRows = data.filter(d => !d.isBank)
+    .filter(d => d.year >= forceYears[0] && d.year <= forceYears[1])
   const denominator = aggregationType === 'sum' ? 1 : (forceYears[1] - forceYears[0] + 1)
   const countryData = groups(countryRows, countryAccessor).map(v => ({country: v[0], values: v[1]})).map(cData => {
 

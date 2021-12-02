@@ -45,7 +45,7 @@ const GraphLabel = (props) => {
   )
 }
 export default function YearlyAverageUsageGraph(props) {
-  const { width, data, isBank, selectedEnergyTypes, aggregationType } = props
+  const { width, data, isBank, selectedEnergyTypes, aggregationType, yearType, customYears } = props
 
 
   const height = width * 0.6
@@ -62,8 +62,13 @@ export default function YearlyAverageUsageGraph(props) {
   filteredData = filteredData.filter(d => selectedEnergyTypes.includes(d.category))
   const singleEnergyType = selectedEnergyTypes.length === 1
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
-  const forceYears = [2013, 2020]
-  const grouped = rollup(filteredData, rows => sum(rows, d => d.amount), d => d.year, categoryAccessor)
+  let originalYears = [2013, 2020]
+  let forceYears = [...originalYears]
+  if (yearType === 'custom') {
+    forceYears = customYears
+  }
+  const filterOutYears = filteredData.filter(d => d.year >= forceYears[0] && d.year <= forceYears[1])
+  const grouped = rollup(filterOutYears, rows => sum(rows, d => d.amount), d => d.year, categoryAccessor)
   // console.log(grouped)
   for (let year = forceYears[0]; year <= forceYears[1]; year++) {
     if (grouped.has(year)) continue
@@ -72,7 +77,7 @@ export default function YearlyAverageUsageGraph(props) {
 
   const sortedByYear = new Map([...grouped.entries()].sort((a, b) => a[0] - b[0]))
   // console.log(sortedByYear)
-  const subcategories = Array.from(new Set(filteredData.map(d => d['category detail'])))
+  const subcategories = Array.from(new Set(filterOutYears.map(d => d['category detail'])))
   const stackKeys = singleEnergyType ? subcategories : typesSorted
   const stacks = stack()
     .keys(stackKeys)
@@ -102,14 +107,14 @@ export default function YearlyAverageUsageGraph(props) {
     }).y1(d => {
       return yScale(d[1])
     })
-
-  const stackSprings = useSprings(stacks.length, stacks.map(stack => ({
-    path: areaGen(stack)
-  })))
+  console.log(stacks)
+  // const stackSprings = useSprings(originalYears[1] - originalYears[0] + 1, stacks.map(stack => ({
+  //   path: areaGen(stack)
+  // })))
   // console.log(stackSprings)
   const areaGroup = stacks.map((stack, stackIndex) => {
-    // const path = areaGen(stack)
-    const path = stackSprings[stackIndex].path
+    const path = areaGen(stack)
+    // const path = stackSprings[stackIndex].path
     const fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : colors[stack.key]
     // let opacity = stackIndex === 0 ? null : '0.3'
     let opacity = 0.65
@@ -196,7 +201,7 @@ export default function YearlyAverageUsageGraph(props) {
     <div className="YearlyUsageGraph">
       <Select placeholder='All Institutions'  value={selectedGroup} onChange={setSelectedGroup} options={groups} />
       <ColorLegend colors={legendColors} />
-      <svg ref={svgRef} width={width} height={svgHeight}>
+      <svg ref={svgRef} width={width} height={svgHeight} key={forceYears[1] - forceYears[0]}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
           {areaGroup}
           <g>{xTicks}</g>

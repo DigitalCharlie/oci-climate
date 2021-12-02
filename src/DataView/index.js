@@ -10,6 +10,7 @@ import MiniMap from './MiniMap'
 import Switch from './Switch'
 import Checkbox from './Checkbox'
 import InfoIcon from './InfoIcon'
+import YearPicker from './YearPicker'
 const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 export const colors = {
   'Fossil Fuel': '#EFC1A8',
@@ -25,6 +26,8 @@ export default function DataView(props) {
   const [selectedEnergyTypes , setSelectedEnergyTypes] = useState(['Fossil Fuel'])
   const [aggregationType, setAggregationType] = useState('sum')
   const [barGraphStyle, setBarGraphStyle] = useState('all')
+  const [yearType, setYearType] = useState('all')
+  const [customYears, setCustomYears] = useState([2013, 2020])
   const sections = [
     {
       title: 'Energy Investment',
@@ -103,6 +106,8 @@ export default function DataView(props) {
           selectedEnergyTypes,
           aggregationType,
           barGraphStyle,
+          yearType,
+          customYears,
         }) :
       defaultContent
     return (
@@ -143,12 +148,18 @@ export default function DataView(props) {
           value={aggregationType === 'sum'}
           toggle={() => setAggregationType(aggregationType === 'sum' ? 'average' : 'sum')}
         />
-        <Switch
+        {/* <Switch
           label='Show'
           label1='all years'
           label2='before/after Paris Accord Enacted'
           value={barGraphStyle === 'all'}
           toggle={() => setBarGraphStyle(barGraphStyle === 'all' ? 'split' : 'all')}
+        /> */}
+        <YearPicker
+          value={yearType}
+          onChange={e => setYearType(e.target.value)}
+          customYears={customYears}
+          setCustomYears={setCustomYears}
         />
         <div>
           {energyTypes.map(type => {
