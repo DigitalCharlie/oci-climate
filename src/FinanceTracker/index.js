@@ -110,11 +110,12 @@ export default function FinanceTracker(props) {
       label: financeTrackerAmountKey,
       accessor: d => formatValue(d[financeTrackerAmountKey]),
       theadStyle: { width: '13em'},
-      tbodyStyle: { fontWeight: 'bold' },
+      tbodyStyle: { fontWeight: 'bold', fontSize: '0.875em' },
     },
     {
       label: 'Institution',
       accessor: d => d.Institutions,
+      tbodyStyle: { fontSize: '0.8em'}
 
     },
   ].filter(d => {
