@@ -94,7 +94,7 @@ export default function FinanceTracker(props) {
     }
   }
   const policyTypeColumns = policyTypes.map(policyType => ({
-    label: policyType.split(' ')[0],
+    label: policyType === 'Indirect Finance' ? policyType : policyType.split(' ')[0],
     accessor: d => dot(d, policyType, hoverDot),
     theadStyle: { textAlign: 'center', width: '45px' },
     tbodyStyle: { width: '45px'}, // (10/policyTypes.length) + 'em' },
