@@ -70,8 +70,9 @@ function StackedBarSelector(props) {
     if (runningX >= width) {
       runningX = 0
     }
+    const dataTip = selected ? null : `Click and change the map to ${key}`
     return (
-      <g key={key} style={style} transform={`translate(${x}, ${y})`} onClick={e => onChange(key)}>
+      <g key={key} style={style} transform={`translate(${x}, ${y})`} onClick={e => onChange(key)} data-tip={dataTip}>
         <rect fill={mapColors[key][2]} width={barWidth} height={rowHeight} />
         {text}
       </g>
