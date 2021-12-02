@@ -155,9 +155,9 @@ export default function DataView(props) {
             const color = colors[type]
             const enabled = selectedEnergyTypes.includes(type)
             const isOther = type === 'Other'
-            const dataTip = isOther ? `<div><div style="font-weight: bold">Other energy type:</div>${loremIpsum}</div>` : null
+            const dataTip = isOther ? `<div><div style="font-weight: bold">Other energy type:</div>This includes large hydropower, nuclear, and biomass projects as well as energy spending that cannot be specifically linked to a source of energy (most frequently this is for electricity transmission and distribution projects).</div>` : null
             return (
-              <label className='energyTypeToggle' data-html={true} data-tip={dataTip} key={type} style={{ backgroundColor: color,  opacity: enabled ? null : 0.35 }} onClick={ () => {
+              <label className='energyTypeToggle' key={type} style={{ backgroundColor: color,  opacity: enabled ? null : 0.35 }} onClick={ () => {
 
                   const newSelected = selectedEnergyTypes.includes(type) ?
                     selectedEnergyTypes.filter(t => t !== type) :
@@ -178,7 +178,7 @@ export default function DataView(props) {
                 />
                 {type}
                 {isOther ?
-                  <InfoIcon style={{ marginLeft: '1em', transform: 'translateY(1px)'}} /> : null
+                  <InfoIcon dataHtml={true} dataTip={dataTip} style={{ marginLeft: '1em', transform: 'translateY(1px)'}} /> : null
                 }
               </label>
 
