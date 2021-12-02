@@ -71,10 +71,16 @@ function StackedBarSelector(props) {
       runningX = 0
     }
     const dataTip = selected ? null : `Click and change the map to ${key}`
+
     return (
       <g key={key} style={style} transform={`translate(${x}, ${y})`} onClick={e => onChange(key)} data-tip={dataTip}>
         <rect fill={mapColors[key][2]} width={barWidth} height={rowHeight} />
         {text}
+        {selected ? <polygon
+          fill={mapColors[key][2]}
+          transform={`translate(${barWidth - 40}, ${rowHeight - 1})`}
+          points={`0,0 15,15 30,0`} />
+         : null}
       </g>
     )
   })
@@ -146,8 +152,12 @@ export default function MiniMap(props) {
   sorted.forEach((d, i) => {
     d.sortedIndex = i
   })
+  const dataExtent = extent(countryData, d => d[dataKey] ?  d[dataKey] : null)
+  const fontSizeScale = scaleLinear()
+    .domain(dataExtent)
+    .range([1, 2])
   const colorScale = scaleSequentialLog()
-    .domain(extent(countryData, d => d[dataKey] ?  d[dataKey] : null))
+    .domain(dataExtent)
     // .range(mapColors[dataKey])
     .interpolator(
       piecewise(interpolateRgb, mapColors[dataKey]))
@@ -187,10 +197,13 @@ export default function MiniMap(props) {
       return null
     }
 
+    const fontSize = fontSizeScale(matching[dataKey])
+
     value = valueFormatter(matching[dataKey])
     return (
-      <g transform={`translate(${center.join(',')})`} key={feature.id}>
-        <text style={{  }}  textAnchor='middle'>{feature.properties.name} - {value}</text>
+      <g style={{ fontSize: `${fontSize}em`}} transform={`translate(${center.join(',')})`} key={feature.id}>
+        <text style={{  }}  textAnchor='left'>{feature.properties.name}</text>
+        <text style={{ fontSize: '2em' }} dy='1em'  textAnchor='left'>{value}</text>
       </g>
     )
   })
