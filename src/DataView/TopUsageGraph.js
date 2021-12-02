@@ -299,19 +299,51 @@ export default function TopUsageGraph(props) {
       </div>
     )
   }
-
   const svgRef = useRef()
   let legendColors = (singleEnergyType ? categoryList : typesSorted).map((category) => {
     const color = singleEnergyType && (category !== 'Clean' && category !== 'Other') ? subcategoryColorScale(category) : colors[category]
     return { category, color}
   }).filter(d => singleEnergyType ? true : selectedEnergyTypes.includes(d.category))
+
+
+  let yearRowsLegend = null
+  if (yearRows.length > 1) {
+    let textLabel = isBank ? 'Name of MDB' : 'Country'
+    yearRowsLegend = (
+      <svg width={width} height={30}>
+        <g transform={`translate(${margins.left}, 4)`}>
+          {yearRows.map((yearRow, index) => {
+            return (
+              <g key={index} transform={`translate(${0}, ${index * 14})`}>
+                {legendColors.map((color, colorIndex) => {
+                  return (
+                    <rect
+                      fill={color.color}
+                      width={(width - margins.left) / (legendColors.length * 2)}
+                      height={12}
+                      key={color.category}
+                      x={colorIndex * (width - margins.left) / (legendColors.length * 2)}
+                    />
+                  )
+                })}
+                <text x={legendColors.length * (width - margins.left) / (legendColors.length * 2) + 5} y={10} fontSize={'1.2em'}>
+                  {yearRow.startYear} - {yearRow.endYear}
+                </text>
+              </g>
+            )
+          })}
+          <line y1={-2} y2={28} stroke='#4D4D4D' strokeWidth='0.5'/>
+          <text textAnchor='end' y={16} x={-5}>{textLabel}</text>
+        </g>
+      </svg>
+    )
+  }
+
   const legend = <ColorLegend colors={legendColors} />
   return (
     <div className="TopUsageGraph">
       {legend}
-      {yearRows.map(({startYear, endYear}) => (
-        <div style={{ fontWeight: 'bold' }}className='year-label' key={`${startYear}-${endYear}`}>{startYear}-{endYear}</div>
-      ))}
+      {yearRowsLegend}
       <svg ref={svgRef} width={width} height={svgHeight}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
           <g>{xTicks}</g>
