@@ -1,0 +1,16 @@
+.IntroMap {
+  font-size: 0.75em;
+  position: relative;
+  svg.map {
+    text {
+      pointer-events: none;
+      text-shadow: 0 1px 1px white, 0 -1px 1px white, 1px 0 1px white, -1px 0 1px white;
+    }
+
+    path {
+      transition: fill 0.3s ease-in-out;
+    }
+  }
+
+
+}

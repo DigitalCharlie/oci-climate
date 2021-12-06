@@ -1,0 +1,69 @@
+
+.intro {
+  position: relative;
+  text-align: center;
+  flex-grow: 1;
+  .introMap {
+    width: 100vw;
+
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    &.visible {
+      opacity: 1;
+    }
+  }
+  .introText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 36em;
+    > * {
+      padding: 1em;
+
+      background-color: rgba(255,255, 255, 0.6);
+      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+      margin: 0;
+      &.visible {
+        opacity: 1;
+      }
+    }
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.1em;
+  }
+  .highlight {
+
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+
+  .buttons {
+    position: absolute;
+    bottom: 2em;
+    left: 50%;
+    transform: translate(-50%, 0);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    &.visible {
+      opacity: 1;
+    }
+    > * {
+      appearance: none;
+      border: none;
+      background-color: #F0F0F0;
+      font-weight: bold;
+      padding: 0.5em 1em;
+      color: #000;
+      text-decoration: none;
+      font-size: 1em;
+      cursor: pointer;
+      + * {
+        margin-left: 1em;
+      }
+    }
+  }
+}
