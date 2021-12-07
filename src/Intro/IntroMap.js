@@ -3,7 +3,7 @@ import './IntroMap.scss'
 import { sum, groups } from 'd3-array'
 import { scaleOrdinal } from 'd3-scale'
 
-import { useState, useRef, useMemo, useEffect } from 'react'
+import {  useRef, useMemo } from 'react'
 import { geoMercator, geoPath } from 'd3-geo'
 
 import { animated, useSpring } from '@react-spring/web'
@@ -34,13 +34,8 @@ function Bars(props) {
   )
 }
 export default function IntroMap(props) {
-  const { width, height, data, collection, showBars } = props
-  const [filled, setFilled] = useState(false)
-  useEffect(() => {
-    setTimeout(() => {
-      setFilled(true)
-    }, 1000)
-  }, [])
+  const { width, height, data, collection, showBars, filled, opacity } = props
+
   const countryGrouping = 'institutionGroup'
   const countryAccessor = d => d[countryGrouping]
   const dataKey = 'Total'
@@ -143,7 +138,7 @@ export default function IntroMap(props) {
   })
   const svgRef = useRef()
   return (
-    <div className="IntroMap">
+    <div className="IntroMap" style={{ opacity }}>
 
       <svg className='map' ref={svgRef} width={width} height={height}>
         <g>{features}</g>

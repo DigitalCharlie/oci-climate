@@ -70,8 +70,12 @@ header.Header {
     > div {
       display: block;
     }
+    img {
+      width: 8em;
+    }
     h1 {
       margin-left: 0;
+      font-size: 1.25em;
     }
     nav {
       display: none;

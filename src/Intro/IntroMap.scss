@@ -1,6 +1,7 @@
 .IntroMap {
   font-size: 0.75em;
   position: relative;
+  transition: 1s ease-in-out opacity;
   svg.map {
     text {
       pointer-events: none;
@@ -8,7 +9,7 @@
     }
 
     path {
-      transition: fill 0.3s ease-in-out;
+      transition: fill 1s ease-in-out;
     }
   }
 

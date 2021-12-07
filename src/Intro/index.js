@@ -22,6 +22,8 @@ export default function Intro(props) {
   const [p2Visible, setP2Visible] = useState(false);
   const [buttonsVisible, setButtonsVisible] = useState(false);
   const [showMapBars, setShowMapBars] = useState(false);
+  const [mapFilled, setMapFilled] = useState(false);
+  const [mapVisible, setMapVisible] = useState(false);
   const data = useDataHook()
 
   const introContainer = useRef()
@@ -34,11 +36,19 @@ export default function Intro(props) {
         setH1Visible(true);
       }, 100)
       setTimeout(() => {
+        setMapVisible(true)
+      }, 1300)
+
+      setTimeout(() => {
         setP1Visible(true);
-        setShowMapBars(true);
-      }, 2000)
+      }, 2300)
+      setTimeout(() => {
+        setMapFilled(true);
+
+      }, 2600)
       setTimeout(() => {
         setP2Visible(true);
+        setShowMapBars(true);
       }, 4000)
       setTimeout(() => {
         setButtonsVisible(true);
@@ -86,9 +96,16 @@ export default function Intro(props) {
   // console.log(fossilFuelBoxEntry)
   let fossilFuelBoxHeight = 0
   let cleanBoxHeight = 0
+  const width = introMapSize ? introMapSize[0] : 0
+  const mobileLayout = width && width < 600
+
+  let expandedHeight =  mobileLayout ? contentHeight * 0.2 : contentHeight * 0.8
+  let showingBars = false
   if (fossilFuelBoxInView || (fossilFuelBoxEntry && fossilFuelBoxEntry.boundingClientRect.top < 0)) {
-    fossilFuelBoxHeight = contentHeight * 0.8
+    showingBars = true
+    fossilFuelBoxHeight = expandedHeight
   }
+  console.log(fossilFuelBoxInView, fossilFuelBoxEntry)
   if (cleanBoxInView || (cleanBoxEntry && cleanBoxEntry.boundingClientRect.top < 0)) {
     cleanBoxHeight = fossilFuelBoxHeight / 2.5
   }
@@ -105,8 +122,11 @@ export default function Intro(props) {
   const cleanOpacity = cleanBoxHeight ? 1 : 0
 
   const boxHeights = useSpring({ fossilFuelBoxHeight, cleanBoxHeight, config: { duration: 1000, ease: easeCubic }})
-  const barWidth = introMapSize ?  introMapSize[0] * 0.1 : 0
-  const width = introMapSize ? introMapSize[0] : 0
+  const barWidth = introMapSize ?  (mobileLayout ? introMapSize[0] * 0.3 : introMapSize[0] * 0.1) : 0
+
+  let mobileSVGOffset = mobileLayout ? 80 : 0
+  let barPadding = mobileLayout ? 6 : 0
+  const labelHeight = 30
   return (
     <div className="intro" ref={introContainer} style={{ top: headerHeight}}>
       {width ? <IntroMap
@@ -114,14 +134,17 @@ export default function Intro(props) {
         collection={collection}
         data={data}
         width={width}
-        height={contentHeight} />
+        height={contentHeight}
+        filled={mapFilled}
+        opacity={mapVisible ? 1 : 0}
+      />
        : null}
       <div className="introText" style={{ top: contentHeight / 2}}>
-        <h1 className={classNames({visible: h1Visible})}>A public database of international public finance for energy</h1>
+        <h1 className={classNames({visible: h1Visible})}>A Public Database of International Public Finance for Energy</h1>
         <p  className={classNames({visible: p1Visible})}>G20 countries have provided at least $188 billion in influential, government-backed public finance for oil, gas, and coal since 2018.</p>
         <p  className={classNames({visible: p2Visible})}>We are tracking this money from G20 export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they <span className='highlight'>#StopFundingFossils</span> and shift it to support just climate solutions instead. </p>
       </div>
-      <div className={classNames('buttons', {visible: buttonsVisible, introDismissed})}>
+      <div className={classNames('buttons', {visible: buttonsVisible, introDismissed, mobileLayout})}>
         {introDismissed ? null : <button onClick={() => setIntroDismissed(true)}>Read More</button>}
         <Link to='/data'>Explore the data</Link>
         <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
@@ -141,8 +164,10 @@ export default function Intro(props) {
           <p ref={finalBoxRef}>We’re tracking G20 countries’ and MDBs’ implementation of these promises into policy here. Visit our research and action page here to learn more and help make sure governments <strong className='large'>#StopFundingFossils</strong>.  </p>
         </section>
       </div>
-      <svg style={{ top: headerHeight }} className='fuelTypes' width={width} height={contentHeight}>
-      <animated.g style={{ opacity: fossilFuelOpacity}} transform={boxHeights.fossilFuelBoxHeight.interpolate(y => `translate(${width * 0.1 + barWidth / 2}, ${contentHeight - y})`)}>
+      <svg style={{ top: headerHeight }} className={classNames('fuelTypes', { mobileLayout})} width={width} height={contentHeight}>
+
+        {mobileLayout && showingBars ? <rect fill='#fff' opacity='0.9' width={width} height={expandedHeight + labelHeight + barPadding} y={contentHeight - expandedHeight - mobileSVGOffset - labelHeight - barPadding } /> : null}
+        <animated.g style={{ opacity: fossilFuelOpacity}} transform={boxHeights.fossilFuelBoxHeight.interpolate(y => `translate(${width * 0.1}, ${contentHeight - y - mobileSVGOffset - barPadding})`)}>
           <animated.rect
             height={boxHeights.fossilFuelBoxHeight}
             width={barWidth}
@@ -150,7 +175,7 @@ export default function Intro(props) {
           />
           <text dy='-1em' fill={colors['Fossil Fuel']}>Fossil Fuel</text>
         </animated.g>
-        <animated.g style={{ opacity: cleanOpacity }} transform={boxHeights.cleanBoxHeight.interpolate(y => `translate(${width * 0.9 - barWidth / 2}, ${contentHeight - y})`)}>
+        <animated.g style={{ opacity: cleanOpacity }} transform={boxHeights.cleanBoxHeight.interpolate(y => `translate(${width * 0.8 - barWidth}, ${contentHeight - y - mobileSVGOffset - barPadding})`)}>
           <animated.rect
             height={boxHeights.cleanBoxHeight}
             width={barWidth}
@@ -158,6 +183,7 @@ export default function Intro(props) {
           />
           <text dy={'-1em'} fill={colors.Clean}>Renewable Energy</text>
         </animated.g>
+
 
       </svg>
     </div>
