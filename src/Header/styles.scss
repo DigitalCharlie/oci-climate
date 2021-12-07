@@ -1,8 +1,12 @@
 header.Header {
   display: flex;
-  margin: 1rem;
+  padding: 1rem;
   justify-content: space-between;
-  position: relative;
+  position: fixed;
+  background-color: #fff;
+  z-index: 10;
+  top: 0;
+  width: 100%;
   > div {
     display: flex;
   }

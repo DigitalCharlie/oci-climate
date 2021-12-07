@@ -6,7 +6,9 @@ import { NavLink } from 'react-router-dom'
 import facebook from 'images/facebook.svg'
 import twitter from 'images/twitter.svg'
 import { useHistory, useLocation } from 'react-router'
-export default function Header(props) {
+import { forwardRef } from 'react'
+export default forwardRef(Header)
+function Header(props, ref) {
   const history = useHistory()
   const location = useLocation()
   console.log(location)
@@ -16,7 +18,7 @@ export default function Header(props) {
     e.target.blur()
   }
   return (
-    <header className="Header">
+    <header className="Header" ref={ref}>
       <div>
         <img src={logo} alt='Oil Change International' />
         <h1>Energy Finance Database</h1>

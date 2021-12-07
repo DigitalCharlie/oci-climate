@@ -3,6 +3,7 @@
   position: relative;
   text-align: center;
   flex-grow: 1;
+
   .introMap {
     width: 100vw;
 
@@ -14,7 +15,6 @@
   }
   .introText {
     position: absolute;
-    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 36em;
@@ -42,12 +42,21 @@
   }
 
   .buttons {
-    position: absolute;
-    bottom: 2em;
+    position: fixed;
+    bottom: 0em;
     left: 50%;
     transform: translate(-50%, 0);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    z-index: 100;
+    padding: 2em 1em 2em;
+    width: 100%;
+
+    &.introDismissed {
+      background:rgba(255,255, 255, 0.6);
+      background-image: -webkit-gradient(linear, left center, left top, from(rgba(255, 255, 255, 1)), to(rgba(0, 0, 0, 0)));
+
+    }
     &.visible {
       opacity: 1;
     }
@@ -64,6 +73,58 @@
       + * {
         margin-left: 1em;
       }
+    }
+  }
+
+  .restOfIntro {
+    max-width: 36em;
+    margin: 0 auto;
+    margin-top: 3em;
+    section {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      justify-content: space-around;
+    }
+    h2 {
+      font-size: 1.1em;
+      padding: 1em 0 5em;
+      position: sticky;
+      top: 100px;
+      background-image: -webkit-gradient(linear, left center, left bottom, from(rgba(255, 255, 255, 1)), to(rgba(0, 0, 0, 0)));
+
+    }
+    p {
+      padding: 3em 0;
+    }
+  }
+
+
+  .fossilFuel {
+    background-color: #F4A77E;
+    fill: #F4A77E;
+    font-weight: bold;
+  }
+
+  .clean {
+    background-color: #63CAD1;
+    fill: #63CAD1;
+    font-weight: bold;
+  }
+
+
+  svg.fuelTypes {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    pointer-events: none;
+
+    text {
+      font-weight: bold;
+    }
+
+    g {
+      transition: 0.3s ease-in-out opacity;
     }
   }
 }
