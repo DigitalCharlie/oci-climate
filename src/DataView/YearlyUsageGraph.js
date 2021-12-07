@@ -1,11 +1,11 @@
 
 import './YearlyUsageGraph.scss'
-import { rollup, sum, extent, mean, group } from 'd3-array'
+import { rollup, sum, extent, group } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef } from 'react'
 import { stack, area } from 'd3-shape'
-import { animated, useSpring, useSprings } from 'react-spring'
+import { animated, useSpring } from 'react-spring'
 import Select from 'Select/'
 import subcategoryColorScale from './subcategoryColorScale'
 import ColorLegend from './ColorLegend'
@@ -20,7 +20,7 @@ const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 const parisYear = 2016
 
 const GraphDot = (props) => {
-  const { x, y, value, fill } = props
+  const { x, y, fill } = props
   const animatedProps = useSpring({
     transform: `translate(${x}, ${y})`,
   })
@@ -32,7 +32,7 @@ const GraphDot = (props) => {
   )
 }
 const GraphLabel = (props) => {
-  const { x, y, value, fill } = props
+  const { x, y, value } = props
   const animatedProps = useSpring({
     transform: `translate(${x}, ${y})`,
     value,
@@ -45,7 +45,7 @@ const GraphLabel = (props) => {
   )
 }
 export default function YearlyAverageUsageGraph(props) {
-  const { width, data, isBank, selectedEnergyTypes, aggregationType, yearType, customYears } = props
+  const { width, data,  selectedEnergyTypes, yearType, customYears } = props
 
 
   const height = width * 0.6

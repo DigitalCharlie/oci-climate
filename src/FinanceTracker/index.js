@@ -5,7 +5,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import useFinanceTrackerData, {financeTrackerAmountKey} from 'hooks/useFinanceTrackerData'
 import infoIcon from 'images/info_icon.svg'
 import ReactTooltip from 'react-tooltip'
-import { colors } from '@react-spring/shared'
 import { color as d3Color} from 'd3-color'
 import classNames from 'classnames'
 import useWindowSize from 'hooks/useWindowSize'
@@ -60,7 +59,7 @@ export default function FinanceTracker(props) {
   const [hoveredDot, setHoveredDot] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState(null)
   const tableContainer = useRef()
-  const {width, height} = useWindowSize()
+  const {width} = useWindowSize()
   const [sortIndex, setSortIndex] = useState(0)
   const singleColumnView = width < 768
   const sortOptions = [
@@ -225,7 +224,7 @@ export default function FinanceTracker(props) {
     <div className={classNames('FinanceTracker', { singleColumnView })}>
       <div>
         <h2>Fossil Free Public Finance Tracker
-          <img src={infoIcon} data-tip='Lorem ipsum dollar...' />
+          <img alt='lorem ipsum dollar...' src={infoIcon} data-tip='Lorem ipsum dollar...' />
         </h2>
 
         <div className='description'>

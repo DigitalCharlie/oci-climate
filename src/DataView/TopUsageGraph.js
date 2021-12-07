@@ -1,6 +1,6 @@
 
 import './TopUsageGraph.scss'
-import { rollups, groups as d3groups, sum, extent, mean } from 'd3-array'
+import { rollups, groups as d3groups, sum, extent } from 'd3-array'
 import { scaleLinear } from 'd3-scale'
 import valueFormatter from 'valueFormatter'
 import React, { useState, useRef } from 'react'
@@ -12,10 +12,10 @@ import { colors } from './'
 
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 const rowHeight = 30
-let centeredLabelSize = 80
+// let centeredLabelSize = 80
 
 function AnimatedRow(props) {
-  const { groups, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, splitBarGraph, institutionData } = props
+  const { groups, groupIndex, xScale, isBank, margins, width, hoverGroup, singleEnergyType, institutionData } = props
   // console.log(groups)
   const name = groups[0] ? groups[0][0] : groups[1][0]
   // console.log(groups)
@@ -36,7 +36,7 @@ function AnimatedRow(props) {
   let xs = []
   let barWidths = []
   const valueSprings = useSprings(flatValues.length, flatValues.map((value) => {
-    const [type, amount] = value
+    const [, amount] = value
     // console.log(value)
     const valueSetIndex = value.valueSetIndex
     const width = xScale(amount)
@@ -48,7 +48,7 @@ function AnimatedRow(props) {
   }))
 
   const bars = flatValues.map((value, index) => {
-    const [type, amount] = value
+    const [type] = value
     const valueSetIndex = value.valueSetIndex
 
     let barHeight = (rowHeight / values.length) * 0.8
@@ -109,7 +109,7 @@ function AnimatedRow(props) {
 
 export default function TopUsageGraph(props) {
   const { width, data, isBank, selectedEnergyTypes, aggregationType, yearType, customYears } = props
-  const splitBarGraph = yearType === 'paris' // barGraphStyle === 'split' || barGraphStyle === 'split2'
+  const splitBarGraph = yearType === 'paris'
   console.log(splitBarGraph, yearType)
   let yearRows = splitBarGraph ? [
     { startYear: 2013, endYear: 2016},
@@ -141,7 +141,7 @@ export default function TopUsageGraph(props) {
     })
 
     institutionValues.push(d3groups(filteredData, d => d.institutionGroup).map(([country, values]) =>
-      [country, [... new Set(values.map(d => d.institution))].sort()]
+      [country, [...new Set(values.map(d => d.institution))].sort()]
     ))
 
     grouped.sort((a, b) => {
@@ -198,7 +198,6 @@ export default function TopUsageGraph(props) {
   const countryRows = countriesToShow.slice(0, numToShow).map((country, countryIndex) => {
     const groupData = groupRows.map(group => group.find(d => d[0] === country))
     const institutionData = institutionValues.map(group => group.find(d => d[0] === country))
-    const group = []
     // console.log(groupData)
     return (
       <AnimatedRow

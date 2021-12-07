@@ -1,5 +1,5 @@
 import './App.scss';
-import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Header from './Header';
 import useDataHook from './hooks/useDataHook'

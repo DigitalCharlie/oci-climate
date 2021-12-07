@@ -1,7 +1,7 @@
 
 import './MiniMap.scss'
-import { rollup, sum, extent, groups, mean } from 'd3-array'
-import { scaleLinear, scaleLog, scaleSequentialLog } from 'd3-scale'
+import {  sum, extent, groups } from 'd3-array'
+import { scaleLinear,  scaleSequentialLog } from 'd3-scale'
 import { interpolateRgb, piecewise } from 'd3-interpolate'
 import valueFormatter from 'valueFormatter'
 import { useState, useRef, useMemo, useEffect } from 'react'
@@ -10,7 +10,7 @@ import useMapHook from '../hooks/useMapHook'
 import Select from 'Select'
 import Legend from 'Legend'
 const categories = ['Fossil Fuel', 'Clean', 'Other']
-const mapDataKeys = ['Total', ... categories]
+const mapDataKeys = ['Total', ...categories]
 
 const mapColors = {
   'Fossil Fuel': ['#fcf9f9', '#efc1a8', '#de622b'],
@@ -92,7 +92,7 @@ function StackedBarSelector(props) {
 }
 
 export default function MiniMap(props) {
-  const { width, data, isBank, aggregationType, yearType, customYears } = props
+  const { width, data, aggregationType, yearType, customYears } = props
 
   const collection = useMapHook()
   const height = width * 0.6
@@ -126,7 +126,7 @@ export default function MiniMap(props) {
 
   let tooltip = null
 
-  const { projection, path, pathStrings, centers} = useMemo(() => {
+  const { path, pathStrings, centers} = useMemo(() => {
     const projection = geoMercator()
     const path = geoPath(projection)
 

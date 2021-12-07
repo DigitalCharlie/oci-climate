@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import './styles.scss'
-import ociMap from '../images/oci_map.png'
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import IntroMap from './IntroMap'
@@ -19,8 +18,6 @@ export default function Intro(props) {
   const [p1Visible, setP1Visible] = useState(false);
   const [p2Visible, setP2Visible] = useState(false);
   const [buttonsVisible, setButtonsVisible] = useState(false);
-  const [imageVisible, setImageVisible] = useState(true);
-  const [introHidden, setIntroHidden] = useState(false);
   const [showMapBars, setShowMapBars] = useState(false);
   const data = useDataHook()
 
@@ -53,7 +50,7 @@ export default function Intro(props) {
     } else {
       window.document.body.style.overflowY = 'hidden';
     }
-  }, [introDismissed])
+  }, [introDismissed, contentHeight])
   useEffect(() => {
     const resize = () => {
       if (introContainer.current) {
@@ -96,7 +93,7 @@ export default function Intro(props) {
   const barWidth = introMapSize ?  introMapSize[0] * 0.1 : 0
   const width = introMapSize ? introMapSize[0] : 0
   return (
-    <div className="intro" ref={introContainer} style={{ display: introHidden ? 'none' : 'block', top: headerHeight}}>
+    <div className="intro" ref={introContainer} style={{ top: headerHeight}}>
       {width ? <IntroMap
         showBars={showMapBars}
         collection={collection}

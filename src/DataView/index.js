@@ -18,14 +18,11 @@ export const colors = {
   'Other': '#6ABEF0',
 }
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
-const aggregationTypes = ['sum', 'average']
-const barGraphStyles = ['all', 'split', 'split2']
 export default function DataView(props) {
   const { data } = props
   console.log(data)
   const [selectedEnergyTypes , setSelectedEnergyTypes] = useState(['Fossil Fuel'])
   const [aggregationType, setAggregationType] = useState('sum')
-  const [barGraphStyle, setBarGraphStyle] = useState('all')
   const [yearType, setYearType] = useState('all')
   const [customYears, setCustomYears] = useState([2013, 2020])
   const sections = [
@@ -77,7 +74,7 @@ export default function DataView(props) {
   ]
   sections.forEach((s, i) => s.index = i)
 
-  const {width, height} = useWindowSize()
+  const {width} = useWindowSize()
 
   useEffect(() => {
     ReactTooltip.rebuild()
@@ -105,7 +102,6 @@ export default function DataView(props) {
           height: 200,
           selectedEnergyTypes,
           aggregationType,
-          barGraphStyle,
           yearType,
           customYears,
         }) :
@@ -113,7 +109,7 @@ export default function DataView(props) {
     return (
       <section key={section.title}>
         <h2>{section.title}
-          <img src={infoIcon} data-tip='Lorem ipsum dollar...' />
+          <img alt='lorem ipsum dollar...' src={infoIcon} data-tip='Lorem ipsum dollar...' />
         </h2>
         <div className='description'>{description}</div>
         {content}
@@ -148,13 +144,6 @@ export default function DataView(props) {
           value={aggregationType === 'sum'}
           toggle={() => setAggregationType(aggregationType === 'sum' ? 'average' : 'sum')}
         />
-        {/* <Switch
-          label='Show'
-          label1='all years'
-          label2='before/after Paris Accord Enacted'
-          value={barGraphStyle === 'all'}
-          toggle={() => setBarGraphStyle(barGraphStyle === 'all' ? 'split' : 'all')}
-        /> */}
         <YearPicker
           value={yearType}
           onChange={e => setYearType(e.target.value)}

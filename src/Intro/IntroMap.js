@@ -1,13 +1,11 @@
 
 import './IntroMap.scss'
-import { rollup, sum, extent, groups, mean } from 'd3-array'
-import { scaleLinear, scaleLog, scaleSequentialLog, scaleOrdinal } from 'd3-scale'
-import { interpolateRgb, piecewise } from 'd3-interpolate'
-import valueFormatter from 'valueFormatter'
+import { sum, groups } from 'd3-array'
+import { scaleOrdinal } from 'd3-scale'
+
 import { useState, useRef, useMemo, useEffect } from 'react'
 import { geoMercator, geoPath } from 'd3-geo'
-import Select from 'Select'
-import Legend from 'Legend'
+
 import { animated, useSpring } from '@react-spring/web'
 
 const colors = {
@@ -15,13 +13,7 @@ const colors = {
   'Clean':'#63CAD1'
 }
 const categories = ['Fossil Fuel', 'Clean', 'Other']
-const mapDataKeys = ['Total', ... categories]
 
-
-const countryGroupings = [
-  { value: 'institutionGroup', label: 'Institution Group' },
-  { value: 'country', label: 'Recipient Country' },
-]
 function Bars(props) {
   const { maxBarHeight, showBars, barWidth, delay } = props
   const bar1Height = showBars ? maxBarHeight : 0
@@ -38,7 +30,7 @@ function Bars(props) {
   )
 }
 export default function IntroMap(props) {
-  const { width, height, data, isBank, aggregationType, yearType, customYears, collection, showBars } = props
+  const { width, height, data, collection, showBars } = props
   const [filled, setFilled] = useState(false)
   useEffect(() => {
     setTimeout(() => {
@@ -70,9 +62,7 @@ export default function IntroMap(props) {
   })
   console.log(countryRows)
 
-  let tooltip = null
-
-  const { projection, path, pathStrings, centers} = useMemo(() => {
+  const { path, pathStrings, centers} = useMemo(() => {
     const projection = geoMercator()
     const path = geoPath(projection)
 
@@ -100,21 +90,11 @@ export default function IntroMap(props) {
   sorted.forEach((d, i) => {
     d.sortedIndex = i
   })
-  const dataExtent = extent(countryData, d => d[dataKey] ?  d[dataKey] : null)
-  const fontSizeScale = scaleLinear()
-    .domain(dataExtent)
-    .range([1, 2])
-  // const colorScale = scaleLog()
-  //   .domain(dataExtent)
-  //   .range(['#aaa', '#888'])
+
   const colorScale = scaleOrdinal()
     .range(['#888', '#777', '#999', '#aaa', '#bbb', '#ccc'])
   const delayScale = scaleOrdinal()
     .range([100,  300,  500, 700])
-    // .range(mapColors[dataKey])
-    // .interpolator(
-    //   piecewise(interpolateRgb, mapColors[dataKey]))
-  const [hoveredFeature, setHoveredFeature] = useState(null)
   const features =  !collection ? null : collection.features.map(feature => {
     if (!feature.id) {
       return null
@@ -132,7 +112,7 @@ export default function IntroMap(props) {
       // console.log('no match')
     }
     return (
-      <path key={feature.id} style={{ stroke, fill }} d={pathData} onMouseOver={() => setHoveredFeature(feature.properties.name)} onMouseOut={() => setHoveredFeature(null)} />
+      <path key={feature.id} style={{ stroke, fill }} d={pathData} />
     )
   })
   const bars = !collection ? null : collection.features.map(feature => {
@@ -141,7 +121,6 @@ export default function IntroMap(props) {
     }
     const center = centers[feature.id]
     let matching = countryData.find(d => d.country === feature.properties.name)
-    let value = null
     if (!matching || !matching[dataKey] || !isFinite(matching[dataKey])) {
       return null
     }
