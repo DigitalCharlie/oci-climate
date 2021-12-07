@@ -7,7 +7,7 @@ import { useState, useRef, useMemo, useEffect } from 'react'
 import { geoMercator, geoPath } from 'd3-geo'
 
 import { animated, useSpring } from '@react-spring/web'
-
+import { easeCubic } from 'd3-ease'
 const colors = {
   'Fossil Fuel': '#F4A77E',
   'Clean':'#63CAD1'
@@ -15,12 +15,16 @@ const colors = {
 const categories = ['Fossil Fuel', 'Clean', 'Other']
 
 function Bars(props) {
-  const { maxBarHeight, showBars, barWidth, delay } = props
+  const { maxBarHeight, showBars, barWidth, delay, duration } = props
   const bar1Height = showBars ? maxBarHeight : 0
   const bar2Height = showBars ? maxBarHeight * 0.333 : 0
   const barHeights = useSpring({
     bar1Height, bar2Height,
     delay,
+    config: {
+      easing: easeCubic,
+      duration,
+    }
   })
   return (
     <g>
@@ -60,7 +64,7 @@ export default function IntroMap(props) {
       ...categoryValues,
     }
   })
-  console.log(countryRows)
+  // console.log(countryRows)
 
   const { path, pathStrings, centers} = useMemo(() => {
     const projection = geoMercator()
@@ -94,7 +98,9 @@ export default function IntroMap(props) {
   const colorScale = scaleOrdinal()
     .range(['#888', '#777', '#999', '#aaa', '#bbb', '#ccc'])
   const delayScale = scaleOrdinal()
-    .range([100,  300,  500, 700])
+    .range([300,  600,  1000, 1400])
+  const durationScale = scaleOrdinal()
+    .range([2000, 3000, 4000, 5000])
   const features =  !collection ? null : collection.features.map(feature => {
     if (!feature.id) {
       return null
@@ -131,7 +137,7 @@ export default function IntroMap(props) {
 
     return (
       <g transform={`translate(${center.join(',')})`} key={feature.id}>
-        <Bars delay={delayScale(feature.id)} barWidth={height * 0.1 * 0.2} maxBarHeight={height * 0.1} showBars={showBars} />
+        <Bars delay={delayScale(feature.id)} duration={durationScale(feature.id)} barWidth={height * 0.1 * 0.2} maxBarHeight={height * 0.1} showBars={showBars} />
       </g>
     )
   })

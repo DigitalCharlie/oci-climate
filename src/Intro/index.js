@@ -7,6 +7,9 @@ import useDataHook from '../hooks/useDataHook'
 import useMapHook from '../hooks/useMapHook'
 import { useInView } from 'react-intersection-observer';
 import { useSpring, animated } from 'react-spring';
+import { easeCubic } from 'd3-ease'
+import { transition } from 'd3-transition';
+import { interpolateNumber } from 'd3-interpolate';
 const colors = {
   'Fossil Fuel': '#F4A77E',
   'Clean':'#63CAD1'
@@ -33,20 +36,31 @@ export default function Intro(props) {
       setTimeout(() => {
         setP1Visible(true);
         setShowMapBars(true);
-      }, 1000)
-      setTimeout(() => {
-        setP2Visible(true);
       }, 2000)
       setTimeout(() => {
+        setP2Visible(true);
+      }, 4000)
+      setTimeout(() => {
         setButtonsVisible(true);
-      }, 3000)
+      }, 6000)
     }
   }, [data, introMapSize, collection])
 
   useEffect(() => {
     if (introDismissed) {
       window.document.body.style.overflowY = 'auto';
-      window.document.body.scrollTo({ top: contentHeight, behavior: 'smooth'})
+      // window.document.body.scrollTo({ top: contentHeight, behavior: 'smooth'})
+      transition()
+        .duration(1000)
+        .ease(easeCubic)
+        .tween('scroll',
+          () => {
+            var i = interpolateNumber(window.scrollY, contentHeight);
+            return t => {
+              window.document.body.scrollTo(0, i(t));
+            }
+          }
+        )
     } else {
       window.document.body.style.overflowY = 'hidden';
     }
@@ -68,7 +82,8 @@ export default function Intro(props) {
   const [cleanBoxRef, cleanBoxInView, cleanBoxEntry] = useInView({ threshold: 1 })
   const [cleanBoxRef2, cleanBoxInView2, cleanBoxEntry2] = useInView({ threshold: 1 })
   const [cleanBoxRef3, cleanBoxInView3, cleanBoxEntry3] = useInView({ threshold: 1 })
-  console.log(fossilFuelBoxEntry)
+  const [finalBoxRef, finalBoxInView] = useInView({ threshold: 1 })
+  // console.log(fossilFuelBoxEntry)
   let fossilFuelBoxHeight = 0
   let cleanBoxHeight = 0
   if (fossilFuelBoxInView || (fossilFuelBoxEntry && fossilFuelBoxEntry.boundingClientRect.top < 0)) {
@@ -89,7 +104,7 @@ export default function Intro(props) {
   const fossilFuelOpacity = fossilFuelBoxHeight ? 1 : 0
   const cleanOpacity = cleanBoxHeight ? 1 : 0
 
-  const boxHeights = useSpring({ fossilFuelBoxHeight, cleanBoxHeight })
+  const boxHeights = useSpring({ fossilFuelBoxHeight, cleanBoxHeight, config: { duration: 1000, ease: easeCubic }})
   const barWidth = introMapSize ?  introMapSize[0] * 0.1 : 0
   const width = introMapSize ? introMapSize[0] : 0
   return (
@@ -109,8 +124,9 @@ export default function Intro(props) {
       <div className={classNames('buttons', {visible: buttonsVisible, introDismissed})}>
         {introDismissed ? null : <button onClick={() => setIntroDismissed(true)}>Read More</button>}
         <Link to='/data'>Explore the data</Link>
+        <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
       </div>
-      <div className='restOfIntro'>
+      <div className='restOfIntro' style={{ paddingBottom: contentHeight / 4}}>
         <section style={{ minHeight: contentHeight * 2}}>
           <h2 style={{ top: headerHeight}}>Why does international public finance for energy matter？</h2>
           <p >The International Energy Agency is clear we need to end all finance for new fossil fuel supply and rapidly transition to renewable energy and to stay within 1.5°C of warming and avoid the worst climate impacts.</p>
@@ -122,7 +138,7 @@ export default function Intro(props) {
           <h2 style={{ top: headerHeight}}>How do we get public finance out for fossils?</h2>
           <p ref={cleanBoxRef2}>Momentum is building to finally make <strong className='large'>public finance fossil free</strong>. </p>
           <p ref={cleanBoxRef3}>As of 2021, almost all G20 countries have policies to end their coal finance. And six G20 countries, along with 33 other countries and institutions, signed a joint commitment at COP26 to end their international support for oil and gas by 2022 as well.</p>
-          <p>We’re tracking G20 countries’ and MDBs’ implementation of these promises into policy here. Visit our research and action page here to learn more and help make sure governments <strong className='large'>#StopFundingFossils</strong>.  </p>
+          <p ref={finalBoxRef}>We’re tracking G20 countries’ and MDBs’ implementation of these promises into policy here. Visit our research and action page here to learn more and help make sure governments <strong className='large'>#StopFundingFossils</strong>.  </p>
         </section>
       </div>
       <svg style={{ top: headerHeight }} className='fuelTypes' width={width} height={contentHeight}>

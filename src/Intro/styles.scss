@@ -8,7 +8,7 @@
     width: 100vw;
 
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 1s ease-in-out;
     &.visible {
       opacity: 1;
     }
@@ -22,7 +22,7 @@
       padding: 1em;
 
       background-color: rgba(255,255, 255, 0.6);
-      transition: opacity 0.3s ease-in-out;
+      transition: opacity 1s ease-in-out;
       opacity: 0;
       margin: 0;
       &.visible {
@@ -47,7 +47,7 @@
     left: 50%;
     transform: translate(-50%, 0);
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 1s ease-in-out;
     z-index: 100;
     padding: 2em 1em 2em;
     width: 100%;
@@ -60,7 +60,7 @@
     &.visible {
       opacity: 1;
     }
-    > * {
+    > button, > a {
       appearance: none;
       border: none;
       background-color: #F0F0F0;
@@ -70,9 +70,25 @@
       text-decoration: none;
       font-size: 1em;
       cursor: pointer;
-      + * {
+      + button, + a {
         margin-left: 1em;
       }
+    }
+
+    .scrollToContinue {
+      font-size: 0.7em;
+      color: #222222;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: bold;
+      opacity: 0;
+      transition: 0.3s ease-in-out opacity;
+      &.visible {
+        opacity: 1;
+      }
+
     }
   }
 
@@ -124,7 +140,7 @@
     }
 
     g {
-      transition: 0.3s ease-in-out opacity;
+      transition: 1s ease-in-out opacity;
     }
   }
 }
