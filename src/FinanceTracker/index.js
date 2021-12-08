@@ -221,7 +221,7 @@ export default function FinanceTracker(props) {
     </div>
   )
   return (
-    <div className={classNames('FinanceTracker', { singleColumnView })}>
+    <div style={{ marginTop: props.headerHeight }} className={classNames('FinanceTracker', { singleColumnView })}>
       <div>
         <h2>Fossil Free Public Finance Tracker
           <img alt='lorem ipsum dollar...' src={infoIcon} data-tip='Lorem ipsum dollar...' />

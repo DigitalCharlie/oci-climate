@@ -19,7 +19,7 @@ export const colors = {
 }
 const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
 export default function DataView(props) {
-  const { data } = props
+  const { data, headerHeight } = props
   console.log(data)
   const [selectedEnergyTypes , setSelectedEnergyTypes] = useState(['Fossil Fuel'])
   const [aggregationType, setAggregationType] = useState('sum')
@@ -133,7 +133,7 @@ export default function DataView(props) {
 
 
   return (
-    <div>
+    <div style={{ marginTop: headerHeight }}>
       <div className='controls'>
 
 
