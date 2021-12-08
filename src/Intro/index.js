@@ -78,6 +78,9 @@ export default function Intro(props) {
     } else {
       window.document.body.style.overflowY = 'hidden';
     }
+    return () => {
+      window.document.body.style.overflowY = 'auto';
+    }
   }, [introDismissed, contentHeight])
   useEffect(() => {
     const resize = () => {

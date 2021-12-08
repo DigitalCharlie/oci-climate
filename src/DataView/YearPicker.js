@@ -2,8 +2,8 @@
 import classNames from 'classnames'
 import './YearPicker.scss'
 const yearPickerTypes = [
-  {value: 'all', label: 'all years'},
-  {value: 'paris', label: 'before/after Paris Accord Enacted'},
+  {value: 'all', label: 'All Years'},
+  {value: 'paris', label: 'Before/After Paris Accord Enacted'},
   {value: 'custom', label: 'From'}
 ]
 

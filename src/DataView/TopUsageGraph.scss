@@ -1,7 +1,10 @@
 .TopUsageGraph {
   font-size: 0.75em;
   position: relative;
-  svg {
+  .graphContainer {
+    position: relative;
+  }
+  svg:hover {
     g.dataRow {
       opacity: 0.6;
       transition: 0.3s ease-in-out;

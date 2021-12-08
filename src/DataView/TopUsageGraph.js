@@ -345,13 +345,15 @@ export default function TopUsageGraph(props) {
     <div className="TopUsageGraph">
       {legend}
       {yearRowsLegend}
-      <svg ref={svgRef} width={width} height={svgHeight}>
-        <g transform={`translate(${margins.left}, ${margins.top})`}>
-          <g>{xTicks}</g>
-          <g>{countryRows}</g>
-        </g>
-      </svg>
-      {tooltip}
+      <div className='graphContainer'>
+        <svg ref={svgRef} width={width} height={svgHeight}>
+          <g transform={`translate(${margins.left}, ${margins.top})`}>
+            <g>{xTicks}</g>
+            <g>{countryRows}</g>
+          </g>
+        </svg>
+        {tooltip}
+      </div>
     </div>
   )
 }
