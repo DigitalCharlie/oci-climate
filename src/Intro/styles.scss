@@ -102,22 +102,21 @@
     margin: 0 auto;
     padding: 0 1em;
     margin-top: 3em;
+    transition: 1s ease-in-out opacity;
     section {
       display: flex;
       flex-direction: column;
       position: relative;
-      justify-content: space-around;
+      justify-content: space-between;
     }
     h2 {
       font-size: 1.1em;
-      padding: 1em 0 5em;
-      position: sticky;
-      top: 100px;
+      padding: 1em 0 0em;
       background-image: -webkit-gradient(linear, left center, left bottom, from(rgba(255, 255, 255, 1)), to(rgba(255, 255, 255, 0)));
 
     }
     p {
-      padding: 3em 0;
+      padding: 1em 0;
     }
   }
 
