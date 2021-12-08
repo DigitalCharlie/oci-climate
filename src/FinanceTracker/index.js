@@ -177,7 +177,7 @@ export default function FinanceTracker(props) {
         {sortedData.map(row => {
           const key = columns[0].accessor(row)
           return <React.Fragment key={key}>
-            <tr className='table' onClick={() => setSelectedCountry(key)}>
+            <tr className='table' onClick={() => setSelectedCountry(country => country === key ? null : key)}>
               {columns.map(column => <td style={column.tbodyStyle} key={column.label}>{column.accessor(row)}</td>)}
             </tr>
             <tr className='policies' >
