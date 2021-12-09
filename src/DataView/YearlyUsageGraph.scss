@@ -1,4 +1,9 @@
 .YearlyUsageGraph {
   font-size: 0.75em;
   position: relative;
+
+  .graphLabel {
+    text-shadow: 1px 0px 5px  #ffffff, -1px 0px 5px  #ffffff, 0px 1px 5px  #ffffff, 0px -1px 5px  #ffffff;
+
+  }
 }

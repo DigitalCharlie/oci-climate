@@ -10,11 +10,6 @@ import Select from 'Select/'
 import subcategoryColorScale from './subcategoryColorScale'
 import ColorLegend from './ColorLegend'
 import { colors } from './'
-const highlightColors = {
-  'Fossil Fuel': '#F4A77E',
-  'Clean': '#63CAD1',
-  'Other': '#6ABEF0'
-}
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 
 const parisYear = 2016
@@ -39,8 +34,8 @@ const GraphLabel = (props) => {
   })
 
   return (
-    <animated.g transform={animatedProps.transform}>
-      <animated.text y={4} x={12}>{animatedProps.value.to(valueFormatter)}</animated.text>
+    <animated.g transform={animatedProps.transform} >
+      <animated.text y={4} x={12} className='graphLabel'>{animatedProps.value.to(valueFormatter)}</animated.text>
     </animated.g>
   )
 }
@@ -117,7 +112,7 @@ export default function YearlyAverageUsageGraph(props) {
     // const path = stackSprings[stackIndex].path
     const fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : colors[stack.key]
     // let opacity = stackIndex === 0 ? null : '0.3'
-    let opacity = 0.65
+    let opacity = 0.8
     if (singleEnergyType) {
       // opacity = null
     }
@@ -136,7 +131,7 @@ export default function YearlyAverageUsageGraph(props) {
       const x = xScale(d.data[0])
       let y = yScale(d[1])
 
-      let fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : highlightColors[stack.key]
+      let fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : colors[stack.key]
 
       labelData.push({
         x, y, value: d[1] - d[0]
