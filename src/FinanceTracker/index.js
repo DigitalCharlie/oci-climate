@@ -82,6 +82,10 @@ export default function FinanceTracker(props) {
 
   const hoverDot = (color, explanation, policyType) => {
     return (event) => {
+      // if (event)
+      if (window.innerWidth < 768 && 'ontouchstart' in window) {
+        return
+      }
       if (!color) {
         setHoveredDot(null)
         return
@@ -224,7 +228,7 @@ export default function FinanceTracker(props) {
     <div style={{ marginTop: props.headerHeight }} className={classNames('FinanceTracker', { singleColumnView })}>
       <div>
         <h2>Fossil Free Public Finance Tracker
-          <img alt='lorem ipsum dollar...' src={infoIcon} data-tip='Lorem ipsum dollar...' />
+          {/* <img alt='lorem ipsum dollar...' src={infoIcon} data-tip='Lorem ipsum dollar...' /> */}
         </h2>
 
         <div className='description'>

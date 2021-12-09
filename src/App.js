@@ -25,6 +25,7 @@ function App() {
       window.removeEventListener('resize', resize)
     }
   })
+  const disableTooltips = window.innerWidth < 768 && 'ontouchstart' in window
   return (
     <div className="App">
       <Router>
@@ -37,7 +38,7 @@ function App() {
           ))}
         </Switch>
       </Router>
-      <ReactTooltip arrowColor='transparent' effect='solid' place='bottom' className='helperTooltip' />
+      <ReactTooltip disable={disableTooltips} arrowColor='transparent' effect='solid' place='bottom' className='helperTooltip' />
 
     </div>
   );

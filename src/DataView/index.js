@@ -68,7 +68,7 @@ export default function DataView(props) {
       )
     },
     {
-      title: 'Public Finance by Recipient Country',
+      title: 'Public Finance by Recipient Countries',
       column: 'left',
       description: 'Where G20 and MDB public finance for energy is flowing, by country.',
       content: (
