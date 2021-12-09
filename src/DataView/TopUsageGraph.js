@@ -99,7 +99,7 @@ function AnimatedRow(props) {
       key={name}
       transform={ySpring.y.to(y => `translate(0, ${y})`)}
     >
-      <rect x={-margins.left} width={width + margins.left + margins.right} height={rowHeight} fill='transparent' />
+      <rect x={-margins.left} width={width - margins.right} height={rowHeight} fill='transparent' />
       <text x={labelX} textAnchor={textAnchor} y={rowHeight / 2}>{label}</text>
 
       {bars}
@@ -169,7 +169,7 @@ export default function TopUsageGraph(props) {
   const height = rowHeight * numToShow
 
   const margins = {
-    top: 30, left: 80, right: 20, bottom: 5
+    top: 30, left: 80, right: 0, bottom: 5
   }
   // if (splitBarGraph) {
   //   margins.right = 30
