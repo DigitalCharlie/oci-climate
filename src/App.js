@@ -26,6 +26,7 @@ function App() {
     }
   })
   const disableTooltips = window.innerWidth < 768 && 'ontouchstart' in window
+
   return (
     <div className="App">
       <Router>
