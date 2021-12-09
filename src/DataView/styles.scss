@@ -54,5 +54,15 @@
   }
   @media (max-width: 600px) {
     font-size: 0.85em;
+
+    .year-picker  {
+      margin-top: 0.5em;
+      display: flex;
+      flex-direction: column;
+      > span {
+        margin-left: 0;
+        border-left: 0;
+      }
+    }
   }
 }
