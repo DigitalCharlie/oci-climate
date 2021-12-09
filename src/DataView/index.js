@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import TopUsageGraph from './TopUsageGraph'
 import YearlyUsageGraph from './YearlyUsageGraph'
-import infoIcon from '../images/info_icon.svg'
 import ReactTooltip from 'react-tooltip';
 import MiniMap from './MiniMap'
 import Switch from './Switch'
@@ -17,7 +16,6 @@ export const colors = {
   'Clean': '#99DEE3',
   'Other': '#6ABEF0',
 }
-const loremIpsum = `Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot.`
 export default function DataView(props) {
   const { data, headerHeight } = props
   console.log(data)
@@ -27,8 +25,9 @@ export default function DataView(props) {
   const [customYears, setCustomYears] = useState([2013, 2020])
   const sections = [
     {
-      title: 'Energy Investment',
+      title: 'Public Finance by Year',
       column: 'left',
+      description: "International public finance by year and energy type, from G20 trade and development finance institutions. Filter to select a specific country or multilateral development bank, and to change what energy types are shown. Annual financing totals and data availability are often variable at individual institutions, so please use filtered results with caution — and read our About page for more information on the data.",
       content: (
         data.length ? <YearlyUsageGraph data={data} /> : null
       )
@@ -37,6 +36,7 @@ export default function DataView(props) {
     {
       title: 'Top 15 G20 Country Comparison',
       column: 'right',
+      description: 'The top 15 G20 countries for international public finance for energy based on dashboard selections. This includes each country’s bilateral export credit agencies and development finance institutions, but not G20 country contributions to multilateral development banks which are not possible to disaggregate. Hover over each country label to see the institutions included.',
       content: (
         <TopUsageGraph data={data.filter(d => d.institutionKind !== 'Multilateral')} />
       )
@@ -44,6 +44,7 @@ export default function DataView(props) {
     {
       title: 'MDB Comparison',
       column: 'right',
+      description: 'Public energy finance from the major multilateral development banks. G20 countries have the majority voting power at each of these institutions, but other countries have voting power and shares as well. Hover over each bank label to see the institutions included.',
       content: (
         <TopUsageGraph isBank data={data.filter(d => d.institutionKind === 'Multilateral')} />
       )
@@ -52,6 +53,7 @@ export default function DataView(props) {
     {
       title: 'ECAs Comparison',
       column: 'left',
+      description: 'Public energy finance from G20 export credit agencies, by country. Export credit agencies are focused on trade finance and typically have a mandate to promote the export of goods and services from their country. Hover over each country label to see the institutions included.',
       content: (
         <TopUsageGraph data={data.filter(d => d.institutionKind === 'Export Credit')} />
       )
@@ -59,14 +61,16 @@ export default function DataView(props) {
 
     {
       title: 'DFIs Comparison',
+      description: 'Public energy finance from G20 development finance institutions, by country. Hover over each country label to see the institutions included.',
       column: 'right',
       content: (
         <TopUsageGraph data={data.filter(d => d.institutionKind === 'Bilateral')} />
       )
     },
     {
-      title: 'Energy investment recipient country',
+      title: 'Public Finance by Recipient Country',
       column: 'left',
+      description: 'Where G20 and MDB public finance for energy is flowing, by country.',
       content: (
         data.length ? <MiniMap data={data} /> : null
       )
@@ -93,7 +97,7 @@ export default function DataView(props) {
 
   const sectionWidth = singleColumnView ? width - 20 - 16 * 2 : (width - 16 * 4 - 20) / 2
   const renderSection = (section) => {
-    const description = section.description || loremIpsum
+    const description = section.description
     let defaultContent = <svg width={sectionWidth} height={200 + section.index * 50} />
     let content = section.content ?
       React.cloneElement(section.content,
@@ -109,7 +113,6 @@ export default function DataView(props) {
     return (
       <section key={section.title}>
         <h2>{section.title}
-          <img alt='lorem ipsum dollar...' src={infoIcon} data-tip='Lorem ipsum dollar...' />
         </h2>
         <div className='description'>{description}</div>
         {content}
