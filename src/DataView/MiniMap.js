@@ -99,14 +99,17 @@ export default function MiniMap(props) {
   const [countryGrouping, setCountryGrouping] = useState(countryGroupings[0].value)
   const countryAccessor = d => d[countryGrouping]
   const [dataKey, setSelectedDataKey] = useState(mapDataKeys[1])
-
+  const countriesToHighlight = {
+    'institutionGroup': ['China', 'Canada', 'Germany', 'Brazil'],
+    'country': ['Brazil', 'Russian Federation', 'India', 'United States']
+  }
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
   const forceYears = [2013, 2020]
   if (yearType === 'custom') {
     forceYears[0] = customYears[0]
     forceYears[1] = customYears[1]
   }
-  const countryRows = data.filter(d => !d.isBank)
+  const countryRows = data.filter(d => d.institutionKind !== 'Multilateral')
     .filter(d => d.year >= forceYears[0] && d.year <= forceYears[1])
   const denominator = aggregationType === 'sum' ? 1 : (forceYears[1] - forceYears[0] + 1)
   const countryData = groups(countryRows, countryAccessor).map(v => ({country: v[0], values: v[1]})).map(cData => {
@@ -148,10 +151,7 @@ export default function MiniMap(props) {
     return { projection, path, pathStrings, centers}
   }, [width, height, collection])
 
-  const sorted = [...countryData].sort((a, b) => b[dataKey] - a[dataKey])
-  sorted.forEach((d, i) => {
-    d.sortedIndex = i
-  })
+  // console.log(sorted)
   const dataExtent = extent(countryData, d => d[dataKey] ?  d[dataKey] : null)
   const fontSizeScale = scaleLinear()
     .domain(dataExtent)
@@ -169,7 +169,7 @@ export default function MiniMap(props) {
     const pathData = pathStrings[feature.id]
     let fill = 'none'
     let stroke = null
-    let matching = countryData.find(d => d.country === feature.properties.name)
+    let matching = countryData.find(d => d.country.replace('*', '') === feature.properties.name)
     if (matching && matching[dataKey] && isFinite(matching[dataKey])) {
       fill = colorScale(matching[dataKey])
       // console.log(matching)
@@ -181,19 +181,20 @@ export default function MiniMap(props) {
       <path key={feature.id} stroke={stroke} d={pathData} fill={fill} onMouseOver={() => setHoveredFeature(feature.properties.name)} onMouseOut={() => setHoveredFeature(null)} />
     )
   })
+  // console.log(hoveredFeature)
 
   const labels = !collection ? null : collection.features.map(feature => {
     if (!feature.id) {
       return null
     }
     const center = centers[feature.id]
-    let matching = countryData.find(d => d.country === feature.properties.name)
+    let matching = countryData.find(d => d.country.replace('*', '') === feature.properties.name)
     let value = null
     if (!matching || !matching[dataKey] || !isFinite(matching[dataKey])) {
       return null
     }
-    let hidden = matching.sortedIndex > 10 && feature.properties.name !== hoveredFeature
-    if (hidden) {
+    let visible = hoveredFeature ? feature.properties.name === hoveredFeature : countriesToHighlight[countryGrouping].includes(feature.properties.name)
+    if (!visible) {
       return null
     }
 
