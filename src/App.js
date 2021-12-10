@@ -11,6 +11,10 @@ function Footer() {
   const location = useLocation()
   console.log(location)
   const opacity = location.pathname === '/' ? 0 : 1
+  useEffect(() => {
+    window.document.body.scrollTo(0, 0)
+
+  }, [location.pathname])
   return (
     <div className="Footer" style={{ opacity }}>
       © 2021 · Oil Change International · All Rights Reserved
