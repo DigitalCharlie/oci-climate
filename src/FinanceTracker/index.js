@@ -29,10 +29,10 @@ const dotColors = {
   'Green': '#075A60',
 }
 const legendDescriptions = {
-  'Red': 'No exclusions',
-  'Orange': 'Single exclusion',
-  'Yellow': 'Multi-exclusion',
-  'Green': 'Full exclusions',
+  'Red': 'No Exclusions',
+  'Orange': 'Single Partial Exclusion',
+  'Yellow': 'Multiple Partial Exclusions',
+  'Green': 'Full Exclusion',
 }
 const policyTypes = ['Coal Exclusion', 'Oil Exclusion', 'Gas Exclusion', 'Indirect Finance']
 const dot = (row, policyType, hoverDot) => {
@@ -50,6 +50,9 @@ const dot = (row, policyType, hoverDot) => {
   )
 }
 const formatValue = (value) => {
+  if (value > 1000) {
+    return `$${(value / 1000).toFixed(1)}B`
+  }
   return `$${value.toLocaleString()}M`
 }
 export default function FinanceTracker(props) {
@@ -116,7 +119,7 @@ export default function FinanceTracker(props) {
       tbodyStyle: { fontWeight: 'bold', fontSize: '0.875em' },
     },
     {
-      label: 'Institution',
+      label: 'Institution(s)',
       accessor: d => d.Institutions,
       tbodyStyle: { fontSize: '0.8em'}
 
@@ -174,7 +177,7 @@ export default function FinanceTracker(props) {
           {policyTypeColumns.map(policyType => <td key={policyType.label} style={policyType.theadStyle}>{policyType.label}</td>)}
         </tr>
         <tr>
-          <td colSpan={policyTypeColumns.length} style={{ width: '15em', textAlign: 'center'}}>(hover a dot to see details)</td>
+          <td colSpan={policyTypeColumns.length} style={{ width: '15em', textAlign: 'center'}}>(hover  over dot to see details)</td>
         </tr>
       </thead>
       <tbody>
@@ -227,7 +230,7 @@ export default function FinanceTracker(props) {
   return (
     <div style={{ marginTop: props.headerHeight }} className={classNames('FinanceTracker', { singleColumnView })}>
       <div>
-        <h2>Fossil Free Public Finance Tracker
+        <h2>Fossil Free Policy Tracker
           {/* <img alt='lorem ipsum dollar...' src={infoIcon} data-tip='Lorem ipsum dollar...' /> */}
         </h2>
 
@@ -236,7 +239,10 @@ export default function FinanceTracker(props) {
             Last update: DD/MM/YYYY, from Still Digging (2020) by Friends of the Earth US and OCI
           </p>
           <p>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque eopsloi laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunot explicabo. Nemo ernim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sedopk quia consequuntur magni dolores eos qui rationesopl voluptatem sequi nesciunt. Neque porro quisquameo est, qui dolorem ipsum quia dolor sit amet, eopsmiep consectetur, adipisci velit, seisud quia non numquam eius modi tempora incidunt ut labore et dolore wopeir magnam aliquam quaerat voluptatem eoplmuriquisqu
+            We need fossil free public finance to limit warming to 1.5°C, so this Policy Report Card tracks current G20 and MDB policies towards this goal. Like the rest of [site name], this focuses on international public finance from export credit agencies, bilateral development finance institutions, and multilateral development banks. We include policies dealing with coal, oil, and gas across the supply chain as well as “indirect” public finance for fossil fuels through related infrastructure, advisory services, technical assistance, policy support, and financial intermediaries.
+          </p>
+          <p>
+            Fossil free public finance isn’t enough -- to support a globally just energy transition in line with 1.5°C, we also need public finance institutions to shift their fossil fuel support to renewable energy and provide their fair share of debt cancellation and climate finance. Read our full recommendations for international public finance <span style={{ textDecoration: 'underline'}}>here</span>.
           </p>
         </div>
         <div className='controls'>
