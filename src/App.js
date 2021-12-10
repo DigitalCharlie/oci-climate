@@ -1,11 +1,22 @@
 import './App.scss';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 
 import Header from './Header';
 import useDataHook from './hooks/useDataHook'
 import routes from './routes'
 import ReactTooltip from 'react-tooltip';
 import { useRef, useState, useEffect } from 'react';
+
+function Footer() {
+  const location = useLocation()
+  console.log(location)
+  const opacity = location.pathname === '/' ? 0 : 1
+  return (
+    <div className="Footer" style={{ opacity }}>
+      © 2021 · Oil Change International · All Rights Reserved
+    </div>
+  )
+}
 function App() {
 
   const data = useDataHook()
@@ -38,6 +49,7 @@ function App() {
             </Route>
           ))}
         </Switch>
+        <Footer />
       </Router>
       <ReactTooltip disable={disableTooltips} arrowColor='transparent' effect='solid' place='bottom' className='helperTooltip' />
 

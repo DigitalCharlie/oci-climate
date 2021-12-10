@@ -113,7 +113,7 @@ export default function FinanceTracker(props) {
       tbodyStyle: { fontWeight: 'bold' },
     },
     {
-      label: financeTrackerAmountKey,
+      label: `${financeTrackerAmountKey} / Billions`,
       accessor: d => formatValue(d[financeTrackerAmountKey]),
       theadStyle: { width: '13em'},
       tbodyStyle: { fontWeight: 'bold', fontSize: '0.875em' },
