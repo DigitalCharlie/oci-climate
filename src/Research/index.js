@@ -10,7 +10,7 @@ export default function Research(props) {
       .then(text => setResearchMarkdown(text))
   }, [])
   const imageURI = (src, alt, title) => {
-    return `${process.env.PUBLIC_URL}${src}`
+    return `${process.env.PUBLIC_URL}/${src}`
   }
   return (
     <div className='Research' style={{ marginTop: headerHeight}}>
