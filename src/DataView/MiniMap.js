@@ -96,7 +96,7 @@ export default function MiniMap(props) {
 
   const collection = useMapHook()
   const height = width * 0.6
-  const [countryGrouping, setCountryGrouping] = useState(countryGroupings[0].value)
+  const [countryGrouping, setCountryGrouping] = useState(countryGroupings[1].value)
   const countryAccessor = d => d[countryGrouping]
   const [dataKey, setSelectedDataKey] = useState(mapDataKeys[1])
   const countriesToHighlight = {
