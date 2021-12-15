@@ -17,7 +17,9 @@ function Footer() {
   }, [location.pathname])
   return (
     <div className="Footer" style={{ opacity }}>
-      © 2021 · Oil Change International · All Rights Reserved
+      © 2021 · Oil Change International · All Rights Reserved{' '}
+
+      <a href='javascript:alert("Coming Soon!")'>Download Data</a>
     </div>
   )
 }
