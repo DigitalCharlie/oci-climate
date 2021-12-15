@@ -126,7 +126,7 @@ export default function FinanceTracker(props) {
     },
   ].filter(d => {
     if (selectedFinanceType === financeTypes[1] || singleColumnView) {
-      if (d.label === 'Institution') {
+      if (d.label === 'Institution(s)') {
         return false
       }
     }
