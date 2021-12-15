@@ -45,16 +45,19 @@
       border-top: none;
 
       > div {
-        display: flex;
-        width: 100%;
+
         overflow: hidden;
         max-height: 0;
         transition: 0.3s ease-in-out max-height;
-
         &.open {
-          max-height: 10em;
+          max-height: 20em;
         }
-        > div {
+      }
+      .policyList {
+        display: flex;
+        width: 100%;
+
+        .policy {
           padding: 1em;
           div:first-child {
             font-weight: bold;
@@ -70,6 +73,17 @@
     }
     .spacer td {
       padding-bottom: 1em;
+    }
+  }
+  .sources {
+    margin-top: 1em;
+    padding: 1em;
+    background-color: #F0F0F0;
+    p {
+      margin-bottom: 0;
+    }
+    a {
+      color: #D71921;
     }
   }
   .dot {

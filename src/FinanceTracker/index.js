@@ -9,6 +9,9 @@ import { color as d3Color} from 'd3-color'
 import classNames from 'classnames'
 import useWindowSize from 'hooks/useWindowSize'
 import Select from 'Select'
+import Sources from './Sources.csv'
+import { csvParse } from 'd3-dsv'
+import Linkify from 'react-linkify'
 const financeTypes = [
   {
     label: 'Bilateral Institutions',
@@ -65,6 +68,14 @@ export default function FinanceTracker(props) {
   const {width} = useWindowSize()
   const [sortIndex, setSortIndex] = useState(0)
   const singleColumnView = width < 768
+  const [sources, setSources] = useState(null)
+  useEffect(() => {
+    window.fetch(Sources)
+      .then(response => response.text())
+      .then(text => {
+        setSources(csvParse(text))
+      })
+  }, [])
   const sortOptions = [
     {
       label: 'A-Z',
@@ -135,6 +146,11 @@ export default function FinanceTracker(props) {
   const columns = [
     ...defaultColumns,
     ...policyTypeColumns,
+    {
+      label: '',
+      accessor: d => columns[0].accessor(d) === selectedCountry ? '–' : '+',
+      tbodyStyle: { fontWeight: 'bold', fontSize: '1.25em', paddingRight: '0.25em', width: '1em' },
+    }
   ]
   // console.log(columns)
 
@@ -183,6 +199,7 @@ export default function FinanceTracker(props) {
       <tbody>
         {sortedData.map(row => {
           const key = columns[0].accessor(row)
+          const hasSource = sources ? sources.find(source => source.Institution === key) : false
           return <React.Fragment key={key}>
             <tr className='table' onClick={() => setSelectedCountry(country => country === key ? null : key)}>
               {columns.map(column => <td style={column.tbodyStyle} key={column.label}>{column.accessor(row)}</td>)}
@@ -190,18 +207,21 @@ export default function FinanceTracker(props) {
             <tr className='policies' >
               <td colSpan={columns.length}>
                 <div className={classNames({ open: key=== selectedCountry })}>
-                  {policyTypes.map(policyType => {
-                    const key = `${policyType} Policies`
-                    const color = d3Color(dotColors[row[`${policyType} Colour`]])
-                    return (
-                      <div key={policyType} style={{ backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, 0.1)` }}>
-                        <div>{key}</div>
-                        <div>
-                          {row[key]}
+                  <div className='policyList'>
+                    {policyTypes.map(policyType => {
+                      const key = `${policyType} Policies`
+                      const color = d3Color(dotColors[row[`${policyType} Colour`]])
+                      return (
+                        <div className='policy' key={policyType} style={{ backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, 0.1)` }}>
+                          <div>{key}</div>
+                          <div>
+                            {row[key]}
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
+                  </div>
+                  {hasSource ? <div className='sources'><strong>Sources</strong><p><Linkify>{hasSource.Source}</Linkify></p></div> : null}
                 </div>
               </td>
             </tr>
