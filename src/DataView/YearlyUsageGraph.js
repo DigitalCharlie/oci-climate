@@ -43,7 +43,7 @@ export default function YearlyAverageUsageGraph(props) {
   const { width, data,  selectedEnergyTypes, yearType, customYears } = props
 
 
-  const height = width * 0.6
+  const height = width * 0.450
   const margins = {
     top: 30, left: 20, right: 40, bottom: 40
   }

@@ -26,7 +26,7 @@ export default function DataView(props) {
   const sections = [
     {
       title: 'Public Finance by Year',
-      column: 'left',
+      orderMultiColumnView: 0,
       description: "International public finance by year and energy type, from G20 trade and development finance institutions. Filter to select a specific country or multilateral development bank, and to change what energy types are shown. Annual financing totals and data availability are often variable at individual institutions, so please use filtered results with caution — and read our About page for more information on the data.",
       content: (
         data.length ? <YearlyUsageGraph data={data} /> : null
@@ -35,7 +35,7 @@ export default function DataView(props) {
     },
     {
       title: 'Top 15 G20 Country Comparison',
-      column: 'right',
+      orderMultiColumnView: 1,
       description: 'The top 15 G20 countries for international public finance for energy based on dashboard selections. This includes each country’s bilateral export credit agencies and development finance institutions, but not G20 country contributions to multilateral development banks which are not possible to disaggregate. Hover over each country label to see the institutions included.',
       content: (
         <TopUsageGraph data={data.filter(d => d.institutionKind !== 'Multilateral')} />
@@ -43,7 +43,8 @@ export default function DataView(props) {
     },
     {
       title: 'MDB Comparison',
-      column: 'right',
+
+      orderMultiColumnView: 3,
       description: 'Public energy finance from the major multilateral development banks. G20 countries have the majority voting power at each of these institutions, but other countries have voting power and shares as well. Hover over each bank label to see the institutions included.',
       content: (
         <TopUsageGraph isBank data={data.filter(d => d.institutionKind === 'Multilateral')} />
@@ -52,7 +53,8 @@ export default function DataView(props) {
 
     {
       title: 'ECAs Comparison',
-      column: 'left',
+
+      orderMultiColumnView: 5,
       description: 'Public energy finance from G20 export credit agencies, by country. Export credit agencies are focused on trade finance and typically have a mandate to promote the export of goods and services from their country. Hover over each country label to see the institutions included.',
       content: (
         <TopUsageGraph data={data.filter(d => d.institutionKind === 'Export Credit')} />
@@ -61,6 +63,7 @@ export default function DataView(props) {
 
     {
       title: 'DFIs Comparison',
+      orderMultiColumnView: 2,
       description: 'Public energy finance from G20 development finance institutions, by country. Hover over each country label to see the institutions included.',
       column: 'right',
       content: (
@@ -70,6 +73,7 @@ export default function DataView(props) {
     {
       title: 'Public Finance by Recipient Countries',
       column: 'left',
+      orderMultiColumnView: 4,
       description: 'Where G20 and MDB public finance for energy is flowing, by country.',
       content: (
         data.length ? <MiniMap data={data} /> : null
@@ -122,16 +126,9 @@ export default function DataView(props) {
   let sectionDivs = sections.map(renderSection)
 
   if (!singleColumnView) {
-    const leftSections = sections.filter(section => section.column === 'left')
-    const rightSections = sections.filter(section => section.column === 'right')
-    sectionDivs = <React.Fragment>
-      <div className="left-sections column">
-        {leftSections.map(renderSection)}
-      </div>
-      <div className="right-sections column">
-        {rightSections.map(renderSection)}
-      </div>
-    </React.Fragment>
+    const sorted = [...sections]
+    sorted.sort((a, b) => a.orderMultiColumnView - b.orderMultiColumnView)
+    sectionDivs = sorted.map(renderSection)
   }
 
 
