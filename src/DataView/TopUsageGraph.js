@@ -118,7 +118,7 @@ export default function TopUsageGraph(props) {
   if (yearType === 'custom') {
     yearRows = [{ startYear: customYears[0], endYear: customYears[1] }]
   }
-
+  const fixedPositionTooltip = width < 500
   const [hoveredGroup, setHoveredGroup] = useState(null)
   const singleEnergyType = selectedEnergyTypes.length === 1
   let categoryFilteredData = data.filter(d => selectedEnergyTypes.includes(d.category))
@@ -187,11 +187,16 @@ export default function TopUsageGraph(props) {
       setHoveredGroup(null)
       return
     }
-    const {clientX, clientY} = event
+    let {clientX, clientY} = event
+    if (fixedPositionTooltip) {
+      const element = event.target.closest('.dataRow')
+      const rect = element.getBoundingClientRect()
+      clientX = rect.left
+      clientY = rect.top + rect.height
+    }
     const svgPosition = svgRef.current.getBoundingClientRect()
-    const x = clientX - svgPosition.left
-    const y = clientY - svgPosition.top
-
+    let x = clientX - svgPosition.left
+    let y = clientY - svgPosition.top
     setHoveredGroup({group, values, x, y, clientX, clientY, institutionData})
   }
   const countriesToShow = groupRows[groupRows.length - 1].map(d => d[0])
@@ -254,6 +259,14 @@ export default function TopUsageGraph(props) {
       ${flipX ? 'translateX(-100%)' : ''}
       ${flipY ? 'translateY(-100%)' : ''}`
 
+    }
+
+    if (fixedPositionTooltip) {
+      if (y < window.innerHeight / 2) {
+        style.transform = `translate(${x}px, ${y}px)`
+      } else {
+        style.transform = `translate(${x}px, ${y - 34}px) translateY(-100%)`
+      }
     }
     let previousYearLabel = null
     tooltip = (
