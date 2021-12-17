@@ -81,6 +81,7 @@
     background-color: #F0F0F0;
     p {
       margin-bottom: 0;
+      word-break: break-all;
     }
     a {
       color: #D71921;
@@ -167,7 +168,7 @@
       }
     }
     tr.policies td {
-      > div {
+      .policyList {
         flex-direction: column;
 
         &.open {

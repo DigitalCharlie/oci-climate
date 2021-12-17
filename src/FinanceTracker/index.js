@@ -37,6 +37,7 @@ const legendDescriptions = {
   'Yellow': 'Multiple Partial Exclusions',
   'Green': 'Full Exclusion',
 }
+
 const policyTypes = ['Coal Exclusion', 'Oil Exclusion', 'Gas Exclusion', 'Indirect Finance']
 const dot = (row, policyType, hoverDot) => {
   const color = dotColors[row[`${policyType} Colour`]]
