@@ -151,11 +151,12 @@ export default function MiniMap(props) {
     return { projection, path, pathStrings, centers}
   }, [width, height, collection])
 
+  const smallWidth = width < 500
   // console.log(sorted)
   const dataExtent = extent(countryData, d => d[dataKey] ?  d[dataKey] : null)
   const fontSizeScale = scaleLinear()
     .domain(dataExtent)
-    .range([1, 2])
+    .range(smallWidth ? [0.75, 1.25] : [1, 2])
   const colorScale = scaleSequentialLog()
     .domain(dataExtent)
     // .range(mapColors[dataKey])
@@ -203,8 +204,8 @@ export default function MiniMap(props) {
     value = valueFormatter(matching[dataKey])
     return (
       <g style={{ fontSize: `${fontSize}em`}} transform={`translate(${center.join(',')})`} key={feature.id}>
-        <text style={{  }}  textAnchor='left'>{feature.properties.name}</text>
-        <text style={{ fontSize: '2em' }} dy='1em'  textAnchor='left'>{value}</text>
+        <text style={{  }}  textAnchor='middle'>{feature.properties.name}</text>
+        <text style={{ fontSize: '2em' }} dy='1em'  textAnchor='middle'>{value}</text>
       </g>
     )
   })
