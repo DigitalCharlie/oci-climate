@@ -147,7 +147,7 @@ export default function Intro(props) {
         opacity={mapVisible ? 1 : 0}
       />
        : null}
-      <div className="introText" style={{ top: contentHeight / 2}}>
+      <div className="introText" style={{ top: mobileLayout ? contentHeight / 3 : contentHeight / 2}}>
         <h1 className={classNames({visible: h1Visible})}>A Public Database of International Public Finance for Energy</h1>
         <p  className={classNames({visible: p1Visible})}>G20 countries have provided at least $188 billion in influential, government-backed public finance for oil, gas, and coal since 2018.</p>
         <p  className={classNames({visible: p2Visible})}>We are tracking this money from G20 export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they <span className='highlight'>#StopFundingFossils</span> and shift it to support just climate solutions instead. </p>
