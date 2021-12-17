@@ -50,7 +50,7 @@
         max-height: 0;
         transition: 0.3s ease-in-out max-height;
         &.open {
-          max-height: 20em;
+          max-height: 100em;
         }
       }
       .policyList {
