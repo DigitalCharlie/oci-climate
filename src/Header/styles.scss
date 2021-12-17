@@ -19,6 +19,7 @@ header.Header {
     margin-left: 1em;
     align-self: center;
     margin-top: 0.3em;
+    font-weight: normal;
   }
 
   nav {
@@ -28,11 +29,13 @@ header.Header {
     a {
       white-space: nowrap;
       color: #222;
-      padding: 1.7em 1em 0;
+      padding: 1.7em 0em 0;
+      margin: 0 1em;
       text-decoration: none;
 
       &.active, &:hover {
-        color: #D71921;
+        color: #000;
+        border-bottom: 2px solid #000;
       }
     }
   }
@@ -54,6 +57,7 @@ header.Header {
 
   .social {
     white-space: nowrap;
+    padding-right: 1em;
     a {
       padding-top: 1.7em;
       display: inline-block;
