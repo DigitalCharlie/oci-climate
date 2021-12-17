@@ -44,15 +44,29 @@ function StackedBarSelector(props) {
 
 
   const rowHeight = height / 2
+  const minSize = 40
   const xScale = scaleLinear()
     .domain([0, summedData['Fossil Fuel'] + summedData.Clean + summedData.Other])
     .range([0, width])
+    .clamp(true)
   let runningX = 0
+  const barWidths = categories.map(key => {
+    const isTotal = key === 'Total'
+    const barWidth = isTotal ? width : xScale(summedData[key])
+    return barWidth
+  })
+  barWidths.forEach((width,i) => {
+    const delta = width - minSize
+    if (delta < 0) {
+      barWidths[0] += delta
+      barWidths[i] -= delta
+    }
+  })
   const dataRects = categories.map((key, i) => {
     const isTotal = key === 'Total'
     const y = isTotal ? 0 : rowHeight
     const x = runningX
-    const barWidth = isTotal ? width : xScale(summedData[key])
+    const barWidth = barWidths[i]
     const selected = selectedDataKey === key
     const style = { cursor: 'pointer', opacity: selected ? 1 : 0.5 }
     const textAnchor = isTotal ? 'start' : 'end'
