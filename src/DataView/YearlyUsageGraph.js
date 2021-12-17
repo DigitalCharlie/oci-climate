@@ -45,7 +45,7 @@ export default function YearlyAverageUsageGraph(props) {
 
   const height = width * 0.450
   const margins = {
-    top: 30, left: 20, right: 40, bottom: 40
+    top: 10, left: 14, right: 30, bottom: 34
   }
   const [selectedGroup, setSelectedGroup] = useState('')
   const groups = Array.from(new Set(data.map(d => d.institutionGroup)))

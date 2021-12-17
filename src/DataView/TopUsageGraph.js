@@ -169,7 +169,7 @@ export default function TopUsageGraph(props) {
   const height = rowHeight * numToShow
 
   const margins = {
-    top: 30, left: 80, right: 0, bottom: 5
+    top: 30, left: isBank ? 45 : 66, right: -10, bottom: 5
   }
   // if (splitBarGraph) {
   //   margins.right = 30
