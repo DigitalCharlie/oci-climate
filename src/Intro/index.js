@@ -178,7 +178,7 @@ export default function Intro(props) {
             </p>
           </div>
           <p ref={cleanBoxRef3}>As of 2021, almost all G20 countries have policies to end their coal finance. And six G20 countries, along with 33 other countries and institutions, signed a joint commitment at COP26 to end their international support for oil and gas by 2022 as well.</p>
-          <p ref={finalBoxRef}>We’re tracking G20 countries’ and MDBs’ implementation of these promises into policy <Link to='/finance'>here</Link>. Or, visit our resources page <Link to='/research'>here</Link> to learn more and help make sure governments <strong className='large'>#StopFundingFossils</strong>.  </p>
+          <p ref={finalBoxRef}>We’re tracking G20 countries’ and MDBs’ implementation of these promises into policy <Link to='/finance'>here</Link>. Or, visit our resources page <Link to='/resources'>here</Link> to learn more and help make sure governments <strong className='large'>#StopFundingFossils</strong>.  </p>
         </section>
       </div>
       <svg style={{ top: headerHeight }} className={classNames('fuelTypes', { mobileLayout})} width={width} height={contentHeight}>

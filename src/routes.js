@@ -8,7 +8,7 @@ const routes = [
   { label: 'Data', path: '/data', Component: DataView },
   { label: 'Finance Tracker', path: '/finance', Component: FinanceTracker },
   { label: 'About', path: '/about', Component: About },
-  { label: 'Research', path: '/research', Component: Research },
+  { label: 'Resources', path: '/resources', Component: Research },
 ]
 
 export default routes
