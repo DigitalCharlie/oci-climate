@@ -20,7 +20,7 @@ const mapColors = {
 }
 
 const countryGroupings = [
-  { value: 'institutionGroup', label: 'Institution Group' },
+  { value: 'institutionGroup', label: 'Financing Country' },
   { value: 'country', label: 'Recipient Country' },
 ]
 
