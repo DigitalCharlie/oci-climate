@@ -163,11 +163,11 @@ export default function Intro(props) {
             <h2 style={{ top: headerHeight}}>Why does international public finance for energy matter？</h2>
 
            <p>
-              The International Energy Agency is clear we need to end all finance for new fossil fuel supply and rapidly transition to renewable energy and to stay within 1.5°C of warming and avoid the worst climate impacts.
+              The International Energy Agency is clear we need to <strong>end all finance for new fossil fuel supply and rapidly transition to renewable energy</strong> and to stay within 1.5°C of warming and avoid the worst climate impacts.
             </p>
           </div>
-          <p ref={fossilFuelBoxRef}>Despite this, G20 countries are still financing at least USD <strong className='large'>$63 billion a year</strong> for <span className='fossilFuel'>fossil fuel</span> <strong>projects</strong> through their export credit agencies, development finance institutions, and multilateral development banks (2018-2020 average). </p>
-          <p ref={cleanBoxRef}>This is <strong className='large'>2.5x their support</strong> for <span className='clean'>renewable energy</span>.</p>
+          <p ref={fossilFuelBoxRef}>Despite this, G20 countries are still financing at least USD <strong className='large'>$63 billion a year</strong> for <span className='fossilFuel'>fossil fuel</span> <strong>projects</strong> through their export credit agencies, development finance institutions, and multilateral development banks. </p>
+          <p ref={cleanBoxRef}>For 2018-2020 this was <strong className='large'>2.5x their support</strong> for <span className='clean'>renewable energy</span>.</p>
           <p>This money – provided as loans, guarantees, equity, and grants — has an outsized impact on energy systems. Public finance often comes with below-market rates, technical capacity, and decreased financial risks that make projects much more likely to go forward — something that is increasingly influential as the fossil fuel industry faces unprecedented global headwinds. We need this $63 billion a year in public finance for fossil fuels  —  and more — to support a just transition to renewable energy instead. </p>
         </section>
         <section  style={{ minHeight: contentHeight * 1.5}}>
@@ -178,7 +178,7 @@ export default function Intro(props) {
             </p>
           </div>
           <p ref={cleanBoxRef3}>As of 2021, almost all G20 countries have policies to end their coal finance. And six G20 countries, along with 33 other countries and institutions, signed a joint commitment at COP26 to end their international support for oil and gas by 2022 as well.</p>
-          <p ref={finalBoxRef}>We’re tracking G20 countries’ and MDBs’ implementation of these promises into policy here. Visit our research and action page here to learn more and help make sure governments <strong className='large'>#StopFundingFossils</strong>.  </p>
+          <p ref={finalBoxRef}>We’re tracking G20 countries’ and MDBs’ implementation of these promises into policy <Link to='/finance'>here</Link>. Or, visit our resources page <Link to='/research'>here</Link> to learn more and help make sure governments <strong className='large'>#StopFundingFossils</strong>.  </p>
         </section>
       </div>
       <svg style={{ top: headerHeight }} className={classNames('fuelTypes', { mobileLayout})} width={width} height={contentHeight}>
