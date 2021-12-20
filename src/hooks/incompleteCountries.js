@@ -3,10 +3,12 @@ const incompleteCountries = [
   'Russia',
   'Saudi Arabia',
   'India',
-  'Brazil',
   'South Africa',
   'Mexico',
   'Islamic Development Bank',
+  'Australia',
+  'Indonesia',
+  'Argentina',
 ]
 
 export default incompleteCountries
