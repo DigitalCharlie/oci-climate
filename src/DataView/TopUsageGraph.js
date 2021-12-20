@@ -75,7 +75,22 @@ function AnimatedRow(props) {
   const labelX =  -5
   const textAnchor = 'end'
   if (isBank) {
-    label = name.split(' ').map(word => word.charAt(0)).join('')
+    const nameOverrides = {
+      'Islamic Development Bank*': 'IsDB',
+      'Inter-American Development Bank': 'IDB',
+    }
+    if (nameOverrides[name]) {
+      label = nameOverrides[name]
+    } else {
+      label = name.split(' ').map(word => word.charAt(0)).join('')
+      const overrides = {
+        EBfRaD: 'EBRD',
+        'ADB': 'AfDB',
+      }
+      if (overrides[label]) {
+        label = overrides[label]
+      }
+    }
   } else {
     label = name.split(' ').map((word, wordIndex, words) =>
       <tspan key={wordIndex} x={labelX} dy={(wordIndex * 16) - ((words.length - 1) * 4)}>{word}</tspan>
