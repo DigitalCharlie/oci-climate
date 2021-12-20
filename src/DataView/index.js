@@ -20,9 +20,9 @@ export default function DataView(props) {
   const { data, headerHeight } = props
   console.log(data)
   const [selectedEnergyTypes , setSelectedEnergyTypes] = useState(['Fossil Fuel'])
-  const [aggregationType, setAggregationType] = useState('sum')
-  const [yearType, setYearType] = useState('all')
-  const [customYears, setCustomYears] = useState([2013, 2020])
+  const [aggregationType, setAggregationType] = useState('average')
+  const [yearType, setYearType] = useState('custom')
+  const [customYears, setCustomYears] = useState([2018, 2020])
   const sections = [
     {
       title: 'Public Finance by Year',

@@ -170,6 +170,9 @@ export default function YearlyAverageUsageGraph(props) {
 
 
   const xTicks = xScale.ticks(5).map(tick => {
+    if (tick !== Math.round(tick)) {
+      return null
+    }
     const x = xScale(tick)
     const isParisYear = tick === parisYear
     const fontWeight = isParisYear ? 'bold' : 'normal'
