@@ -10,6 +10,7 @@ import Switch from './Switch'
 import Checkbox from './Checkbox'
 import InfoIcon from './InfoIcon'
 import YearPicker from './YearPicker'
+import { Link } from 'react-router-dom'
 const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 export const colors = {
   'Fossil Fuel': '#EFC1A8',
@@ -27,7 +28,7 @@ export default function DataView(props) {
     {
       title: 'Public Finance by Year',
       orderMultiColumnView: 0,
-      description: "International public finance by year and energy type, from G20 trade and development finance institutions. Filter to select a specific country or multilateral development bank, and to change what energy types are shown. Annual financing totals and data availability are often variable at individual institutions, so please use filtered results with caution — and read our About page for more information on the data.",
+      description: <React.Fragment>International public finance by year and energy type, from G20 trade and development finance institutions. Filter to select a specific country or multilateral development bank, and to change what energy types are shown. Annual financing totals and data availability are often variable at individual institutions, so please use filtered results with caution — and read our <Link to='/about'>About page</Link> for more information on the data.</React.Fragment>,
       content: (
         data.length ? <YearlyUsageGraph data={data} /> : null
       )
