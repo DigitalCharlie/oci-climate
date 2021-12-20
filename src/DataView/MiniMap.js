@@ -170,7 +170,7 @@ export default function MiniMap(props) {
   const dataExtent = extent(countryData, d => d[dataKey] ?  d[dataKey] : null)
   const fontSizeScale = scaleLinear()
     .domain(dataExtent)
-    .range(smallWidth ? [0.75, 1.25] : [1, 2])
+    .range(smallWidth ? [1, 1] : [1.5, 1.5])
   const colorScale = scaleSequentialLog()
     .domain(dataExtent)
     // .range(mapColors[dataKey])
@@ -229,7 +229,7 @@ export default function MiniMap(props) {
   useEffect(() => {
     const legend = Legend(colorScale, {
       tickFormat: valueFormatter,
-      ticks: 3,
+      ticks: 2,
     })
     legendRef.current.append(legend);
     return () => legend.remove();
