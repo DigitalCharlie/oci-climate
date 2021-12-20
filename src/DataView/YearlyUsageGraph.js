@@ -178,7 +178,7 @@ export default function YearlyAverageUsageGraph(props) {
     const fontWeight = isParisYear ? 'bold' : 'normal'
     const lineStroke = isParisYear ? 'black' : '#fff'
     const parisLabel = isParisYear ? (
-      <text y={height + 32} textAnchor='middle'>Year Paris Accord Enacted</text>
+      <text y={height + 32} textAnchor='middle'>Year Paris Agreement Adopted</text>
     ) : null
     const strokeDasharray = isParisYear ? '5,5' : null
     return (
