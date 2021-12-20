@@ -37,10 +37,10 @@ function Header(props, ref) {
           ))}
         </nav>
         <div className="social">
-          <a href="https://www.facebook.com/OilChangeInternational/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.facebook.com/priceofoil/" target="_blank" rel="noopener noreferrer">
             <img src={facebook} alt="Facebook" />
           </a>
-          <a href="https://twitter.com/OilChangeInt" target="_blank" rel="noopener noreferrer">
+          <a href="https://twitter.com/PriceofOil" target="_blank" rel="noopener noreferrer">
             <img src={twitter} alt="Twitter" />
           </a>
         </div>
