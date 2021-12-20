@@ -29,10 +29,11 @@ export default function YearPicker(props) {
             {type.value === 'custom' ? <span>
               <select value={customYears[0]} onChange={e => setCustomYears(years => {
                 const newYears = [...years]
-                if (e.target.value > newYears[1]) {
+                const value = +e.target.value
+                if (value > newYears[1]) {
                   return newYears
                 }
-                newYears[0] = e.target.value
+                newYears[0] = value
                 return newYears
               })}>
                 {options}
@@ -40,10 +41,11 @@ export default function YearPicker(props) {
               to
               <select value={customYears[1]} onChange={e => setCustomYears(years => {
                 const newYears = [...years]
-                if (e.target.value < newYears[0]) {
+                const value = +e.target.value
+                if (value < newYears[0]) {
                   return newYears
                 }
-                newYears[1] = e.target.value
+                newYears[1] = value
                 return newYears
               })}>
                 {options}
