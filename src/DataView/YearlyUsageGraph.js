@@ -197,7 +197,7 @@ export default function YearlyAverageUsageGraph(props) {
     .filter(d => singleEnergyType ? true : selectedEnergyTypes.includes(d.category))
   return (
     <div className="YearlyUsageGraph">
-      <Select placeholder='All Institutions'  value={selectedGroup} onChange={setSelectedGroup} options={groups} />
+      <Select placeholder='All Countries and Institutions'  value={selectedGroup} onChange={setSelectedGroup} options={groups} />
       <ColorLegend colors={legendColors} />
       <svg ref={svgRef} width={width} height={svgHeight} key={forceYears[1] - forceYears[0]}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
