@@ -102,7 +102,7 @@ export default function YearlyAverageUsageGraph(props) {
     }).y1(d => {
       return yScale(d[1])
     })
-  console.log(stacks)
+  // console.log(stacks)
   // const stackSprings = useSprings(originalYears[1] - originalYears[0] + 1, stacks.map(stack => ({
   //   path: areaGen(stack)
   // })))
@@ -134,7 +134,7 @@ export default function YearlyAverageUsageGraph(props) {
       let fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : colors[stack.key]
 
       labelData.push({
-        x, y, value: d[1] - d[0]
+        x, y, value: d[1] - d[0], fill
       })
       return (
         <GraphDot x={x} y={y} key={`${stack.key}-${d.data[0]}`}
@@ -164,6 +164,17 @@ export default function YearlyAverageUsageGraph(props) {
     })
 
   })
+
+  let singleYearLines = null
+  if (forceYears[0] === forceYears[1]) {
+    // console.log(labelsByX)
+    const points = [...labelsByX[0][1]]
+    points.sort((a, b) => a.y - b.y)
+    singleYearLines = points.map((d, i) => {
+      return <rect width={3} fill={d.fill} x={d.x - 1.5} y={d.y} height={height - d.y} key={`line-${i}`} />
+    })
+  }
+
 
 
   const svgHeight = height + margins.top + margins.bottom
@@ -203,6 +214,7 @@ export default function YearlyAverageUsageGraph(props) {
         <g transform={`translate(${margins.left}, ${margins.top})`}>
           {areaGroup}
           <g>{xTicks}</g>
+          {singleYearLines}
           {points}
           {labels}
         </g>
