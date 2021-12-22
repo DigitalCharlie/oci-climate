@@ -262,7 +262,7 @@ export default function FinanceTracker(props) {
             We need fossil free public finance to limit warming to 1.5°C, so this Policy Report Card tracks current G20 and MDB policies towards this goal. Like the rest of [site name], this focuses on international public finance from export credit agencies, bilateral development finance institutions, and multilateral development banks. We include policies dealing with coal, oil, and gas across the supply chain as well as “indirect” public finance for fossil fuels through related infrastructure, advisory services, technical assistance, policy support, and financial intermediaries.
           </p>
           <p>
-            Fossil free public finance isn’t enough -- to support a globally just energy transition in line with 1.5°C, we also need public finance institutions to shift their fossil fuel support to renewable energy and provide their fair share of debt cancellation and climate finance. Read our full recommendations for international public finance <span style={{ textDecoration: 'underline'}}>here</span>.
+            Fossil free public finance isn’t enough -- to support a globally just energy transition in line with 1.5°C, we also need public finance institutions to shift their fossil fuel support to renewable energy and provide their fair share of debt cancellation and climate finance. Read our full recommendations for international public finance <a href="https://priceofoil.org/2021/10/28/past-last-call-g20-public-finance-institutions-are-still-bankrolling-fossil-fuels/" rel="noopener noreferrer" target="_blank">here</a>.
           </p>
         </div>
         <div className='controls'>
