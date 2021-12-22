@@ -148,6 +148,26 @@
     }
   }
 
+  @media (max-width: 1350px) {
+    .restOfIntro {
+      width: 32em;
+    }
+  }
+  @media (max-width: 1200px) {
+    .restOfIntro {
+      width: 28em;
+    }
+  }
+  @media (max-width: 1050px) {
+    .restOfIntro {
+      width: 24em;
+    }
+  }
+  @media (max-width: 800px) {
+    .restOfIntro {
+      width: 18em;
+    }
+  }
   @media (max-width: 1000px) {
     .introText {
       width: 24em;
