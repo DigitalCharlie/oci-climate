@@ -18,7 +18,7 @@ export default function About(props) {
     'Is international public finance a “subsidy”?',
     'What do public finance institutions need to do to support a just energy transition aligned with 1.5C?',
     'What about domestic support for fossil fuels?',
-    'Aren\’t fossil fuels needed for development?',
+    'Aren’t fossil fuels needed for development?',
 
   ]
   const slugs = questions.map(q => slug(q))

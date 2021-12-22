@@ -6,7 +6,7 @@ import useDataHook from './hooks/useDataHook'
 import routes from './routes'
 import ReactTooltip from 'react-tooltip';
 import { useRef, useState, useEffect } from 'react';
-
+import { HashLink } from 'react-router-hash-link';
 function Footer() {
   const location = useLocation()
   console.log(location)
@@ -19,7 +19,7 @@ function Footer() {
     <div className="Footer" style={{ opacity }}>
       © 2021 · Oil Change International · All Rights Reserved{' '}
 
-      <a href='javascript:alert("Coming Soon!")'>Download Data</a>
+      <HashLink smooth to='/about#downloadData'>Download Data</HashLink>
     </div>
   )
 }
