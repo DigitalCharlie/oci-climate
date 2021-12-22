@@ -190,6 +190,9 @@ export default function DataView(props) {
       <div className={classNames('DataView', { twoColumnView: !singleColumnView })}>
         {sectionDivs}
       </div>
+      <div className='disclaimer'>
+        * Limited or no direct reporting available. To read about how our data is sourced, see the <Link to='/about'>About page</Link>.
+      </div>
     </div>
   )
 }
