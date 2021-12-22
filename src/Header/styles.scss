@@ -20,6 +20,7 @@ header.Header {
     align-self: center;
     margin-top: 0.3em;
     font-weight: normal;
+    white-space: nowrap;
   }
 
   nav {
@@ -32,7 +33,7 @@ header.Header {
       padding: 1.7em 0em 0;
       margin: 0 1em;
       text-decoration: none;
-
+      height: 3.3em;
       &.active, &:hover {
         color: #005080;
         border-bottom: 2px solid #005080;
@@ -67,6 +68,25 @@ header.Header {
     }
     img {
       width: 1em;
+    }
+  }
+  @media (max-width: 1250px) {
+    h1 {
+      font-size: 1.25em;
+    }
+    nav a {
+      padding-top: 1.2em;
+      height: 3em;
+    }
+    .social {
+      a {
+        padding-top: 1.2em;
+      }
+    }
+  }
+  @media (max-width: 1060px) {
+    h1 {
+      font-size: 1em;
     }
   }
 
