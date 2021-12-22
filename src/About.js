@@ -128,7 +128,7 @@ export default function About(props) {
 
       </p>
       <p>
-        You can download the data as a spreadsheet <HashLink smooth to='/about#downloadData'>here</HashLink>. Definitions for each field are provided in the first tab, and a source for each transaction is in the last column. You can also read more background and analysis on public finance <Link to='/resources'>here</Link>.
+        You can download the data as a spreadsheet <HashLink smooth to='/about#downloadData'>here</HashLink>. Definitions for each field are provided in the first tab, and a source for each transaction is in the last column. You can also read more background and analysis on public finance <Link to='/research'>here</Link>.
 
       </p>
       <p id={slugs[5]}><strong>How to cite this website</strong></p>
