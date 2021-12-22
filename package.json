@@ -26,6 +26,7 @@
     "react-scripts": "4.0.3",
     "react-spring": "^9.3.0",
     "react-tooltip": "^4.2.21",
+    "slug": "^5.1.1",
     "topojson": "^3.0.2",
     "web-vitals": "^2.1.2"
   },
