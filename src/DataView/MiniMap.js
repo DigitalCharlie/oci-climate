@@ -115,7 +115,7 @@ export default function MiniMap(props) {
   const [dataKey, setSelectedDataKey] = useState(mapDataKeys[1])
   const countriesToHighlight = {
     'institutionGroup': ['China', 'Canada', 'Germany', 'Brazil'],
-    'country': ['Brazil', 'Russian Federation', 'India', 'United States']
+    'country': ['Brazil', 'Russia', 'India', 'United States']
   }
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
   const forceYears = [2013, 2020]
