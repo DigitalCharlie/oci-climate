@@ -5,10 +5,10 @@ import Intro from 'Intro'
 import Research from 'Research'
 const routes = [
   { label: 'Home', path: '/', Component: Intro },
-  { label: 'Data', path: '/data', Component: DataView },
-  { label: 'Finance Tracker', path: '/finance', Component: FinanceTracker },
   { label: 'About', path: '/about', Component: About },
-  { label: 'Research', path: '/research', Component: Research },
+  { label: 'Data Dashboard', path: '/data', Component: DataView },
+  { label: 'Policy Tracker', path: '/tracker', Component: FinanceTracker },
+  { label: 'Resources', path: '/resources', Component: Research },
 ]
 
 export default routes

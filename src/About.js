@@ -128,7 +128,7 @@ export default function About(props) {
 
       </p>
       <p>
-        You can download the data as a spreadsheet <HashLink smooth to='/about#downloadData'>here</HashLink>. Definitions for each field are provided in the first tab, and a source for each transaction is in the last column. You can also read more background and analysis on public finance <Link to='/research'>here</Link>.
+        You can download the data as a spreadsheet <HashLink smooth to='/about#downloadData'>here</HashLink>. Definitions for each field are provided in the first tab, and a source for each transaction is in the last column. You can also read more background and analysis on public finance <Link to='/resources'>here</Link>.
 
       </p>
       <p id={slugs[5]}><strong>How to cite this website</strong></p>
@@ -158,7 +158,7 @@ export default function About(props) {
       Continued public finance for fossil fuels now nearly always contradicts recommendations for achieving <ExLink href="https://www.seforall.org/data-and-evidence/energizing-finance-series/energizing-finance-2020">energy access</ExLink> and <ExLink href="https://www.iisd.org/">avoiding economic shocks</ExLink> like stranded assets and climate disasters. Furthermore, ending these public finance flows also does not mean halting the use and production of fossil fuels in overnight. Rather, it means saying no to new projects now and starting widespread planning now to ensure there is time and resources for clean-up and for a just transition for the workers and communities that depend upon production. The wealthy countries most responsible for historic and current emissions — including most of the G20 — must move first and fastest to phase out their fossil fuel production and pay their fair share for the global energy transition.
       </p>
       <p>
-      As seen <Link to='/finance'>in all existing policies</Link> from G20 institutions to end public finance for fossil fuels, there should be limited short-term exceptions for emergency settings and energy access in cases where renewable energy is not immediately available -- categories which account for a <ExLink href="http://priceofoil.org/2018/10/10/shortchanging-energy-access-report-mdb-finance/">minute portion</ExLink> of G20 public finance for fossil fuels.
+      As seen <Link to='/tracker'>in all existing policies</Link> from G20 institutions to end public finance for fossil fuels, there should be limited short-term exceptions for emergency settings and energy access in cases where renewable energy is not immediately available -- categories which account for a <ExLink href="http://priceofoil.org/2018/10/10/shortchanging-energy-access-report-mdb-finance/">minute portion</ExLink> of G20 public finance for fossil fuels.
 
       </p>
       <h2 id="downloadData">Download Data</h2>
