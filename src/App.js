@@ -1,28 +1,13 @@
 import './App.scss';
-import { HashRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Header from './Header';
 import useDataHook from './hooks/useDataHook'
 import routes from './routes'
 import ReactTooltip from 'react-tooltip';
 import { useRef, useState, useEffect } from 'react';
-import { HashLink } from 'react-router-hash-link';
-function Footer() {
-  const location = useLocation()
-  console.log(location)
-  const opacity = location.pathname === '/' ? 0 : 1
-  useEffect(() => {
-    window.document.body.scrollTo(0, 0)
+import Footer from './Footer'
 
-  }, [location.pathname])
-  return (
-    <div className="Footer" style={{ opacity }}>
-      © 2021 · Oil Change International · All Rights Reserved{' '}
-
-      <HashLink smooth to='/about#downloadData'>Download Data</HashLink>
-    </div>
-  )
-}
 function App() {
 
   const data = useDataHook()

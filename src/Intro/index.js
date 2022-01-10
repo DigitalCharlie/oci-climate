@@ -10,6 +10,7 @@ import { useSpring, animated } from 'react-spring';
 import { easeCubic } from 'd3-ease'
 import { transition } from 'd3-transition';
 import { interpolateNumber } from 'd3-interpolate';
+import Footer from '../Footer/'
 const colors = {
   'Fossil Fuel': '#F4A77E',
   'Clean':'#63CAD1'
@@ -266,7 +267,9 @@ export default function Intro(props) {
 
 
         </svg>
+        <Footer introFooter opacity={finalBoxInView ? 1 : 0 } />
       </Fragment> : null}
+
     </div>
   )
 }

@@ -1,0 +1,13 @@
+
+.Footer {
+  text-align: center;
+  background-color: #F0F0F0;
+  padding: 0.2em;
+  transition: opacity 0.3s ease-in-out;
+  &.introFooter {
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    width: 100%;
+  }
+}
