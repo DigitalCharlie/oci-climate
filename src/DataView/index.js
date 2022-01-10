@@ -151,7 +151,7 @@ export default function DataView(props) {
           customYears={customYears}
           setCustomYears={setCustomYears}
         />
-        <div>
+        <div className='energyTypes'>
           {energyTypes.map(type => {
             const color = colors[type]
             const enabled = selectedEnergyTypes.includes(type)
