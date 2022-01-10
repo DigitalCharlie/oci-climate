@@ -137,6 +137,7 @@ export default function Intro(props) {
   // console.log(cleanBoxInView3, cleanBoxEntry3 && cleanBoxEntry3.boundingClientRect.top)
 
   let firstShown = false
+  let showBarLabels = true
   if (introDismissed && (fossilFuelBoxInView || (fossilFuelBoxEntry && fossilFuelBoxEntry.boundingClientRect.top < 0))) {
     showingBars = true
     fossilFuelBoxHeight = expandedHeight
@@ -157,14 +158,21 @@ export default function Intro(props) {
     cleanBoxHeight = temp
     // console.log('3')
     thirdShown = true
-
+    showBarLabels = false
   }
 
-  let atBottom = false
+  let fourthShown = false
   if (introDismissed && thirdShown && (cleanBoxInView3 || (cleanBoxEntry3 && cleanBoxEntry3.boundingClientRect.top < 0))) {
     fossilFuelBoxHeight = 0
     // console.log('4')
-    atBottom = true
+    fourthShown = true
+    showBarLabels = false
+  }
+
+  if (introDismissed && thirdShown && finalBoxInView) {
+    fossilFuelBoxHeight = expandedHeight
+    cleanBoxHeight = fossilFuelBoxHeight / 2.5
+    showBarLabels = true
   }
 
 
@@ -203,12 +211,12 @@ export default function Intro(props) {
           </div>}
         </div>
         <div className={classNames('buttons fixed', {visible: buttonsVisible && introDismissed, introDismissed, mobileLayout})}>
-            <Link className={classNames('finalExplore', {visible: atBottom})} to='/data'>Explore the data</Link>
+            <Link className={classNames('finalExplore', {visible: finalBoxInView})} to='/data'>Explore the data</Link>
             <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
           </div>
 
         <div className='restOfIntro' style={{ paddingBottom: contentHeight / 2, opacity: restOfIntroVisible ? 1 : 0}}>
-          <section style={{ minHeight: contentHeight * 3, paddingBottom: contentHeight / 2}}>
+          <section style={{ minHeight: contentHeight * 2.5, paddingBottom: contentHeight / 2}}>
           <div>
               <h2 style={{ top: headerHeight}}>Why does international public finance for energy matter？</h2>
 
@@ -240,7 +248,9 @@ export default function Intro(props) {
               width={barWidth}
               fill={colors['Fossil Fuel']}
             />
-            <text dy='-1em' fill={colors['Fossil Fuel']}>Fossil Fuel</text>
+            <text dy='-1em' fill={colors['Fossil Fuel']}>Fossil Fuel
+              <tspan style={{ opacity: showBarLabels ? 1 : 0}}> $63 billion</tspan>
+            </text>
           </animated.g>
           <animated.g style={{ opacity: cleanOpacity }} transform={boxHeights.cleanBoxHeight.interpolate(y => `translate(${width * 0.8 - barWidth}, ${contentHeight - y - mobileSVGOffset - barPadding})`)}>
             <animated.rect
@@ -248,7 +258,10 @@ export default function Intro(props) {
               width={barWidth}
               fill={colors.Clean}
             />
-            <text dy={'-1em'} fill={colors.Clean}>Renewable Energy</text>
+            <text dy={'-1em'} fill={colors.Clean}>Renewable Energy
+
+              <tspan style={{ opacity: showBarLabels ? 1 : 0}}> $26 billion</tspan>
+            </text>
           </animated.g>
 
 
