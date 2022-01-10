@@ -106,11 +106,14 @@ export default function Intro(props) {
       if (!introDismissed && buttonsVisible) {
         setIntroDismissed(true)
         window.removeEventListener('wheel', scroll)
+        window.removeEventListener('touchmove', scroll)
       }
     }
     window.addEventListener('wheel', scroll)
+    window.addEventListener('touchmove', scroll)
     return () => {
       window.removeEventListener('wheel', scroll)
+      window.removeEventListener('touchmove', scroll)
     }
 
   }, [introDismissed, buttonsVisible])
