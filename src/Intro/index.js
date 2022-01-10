@@ -41,22 +41,22 @@ export default function Intro(props) {
       }, 100)
       setTimeout(() => {
         setMapVisible(true)
-      }, 1300)
+      }, 1300 / 2)
 
       setTimeout(() => {
         setP1Visible(true);
-      }, 2300)
+      }, 2300 / 2)
       setTimeout(() => {
         setMapFilled(true);
 
-      }, 2600)
+      }, 2600 / 2)
       setTimeout(() => {
         setP2Visible(true);
         setShowMapBars(true);
-      }, 6000)
+      }, 6000 / 2)
       setTimeout(() => {
         setButtonsVisible(true);
-      }, 8000)
+      }, 8000 / 2)
     }
   }, [data, introMapSize, collection])
 
@@ -99,6 +99,21 @@ export default function Intro(props) {
       window.removeEventListener('resize', resize)
     }
   },[])
+
+  useEffect(() => {
+    const scroll = () => {
+      // console.log('scroll')
+      if (!introDismissed && buttonsVisible) {
+        setIntroDismissed(true)
+        window.removeEventListener('wheel', scroll)
+      }
+    }
+    window.addEventListener('wheel', scroll)
+    return () => {
+      window.removeEventListener('wheel', scroll)
+    }
+
+  }, [introDismissed, buttonsVisible])
   const rootMargin = `0px 0px -${contentHeight / 6}px 0px`
   const [fossilFuelBoxRef, fossilFuelBoxInView, fossilFuelBoxEntry] = useInView({ threshold: 1, rootMargin })
   const [cleanBoxRef, cleanBoxInView, cleanBoxEntry] = useInView({ threshold: 1 })
@@ -142,9 +157,11 @@ export default function Intro(props) {
 
   }
 
+  let atBottom = false
   if (introDismissed && thirdShown && (cleanBoxInView3 || (cleanBoxEntry3 && cleanBoxEntry3.boundingClientRect.top < 0))) {
     fossilFuelBoxHeight = 0
     // console.log('4')
+    atBottom = true
   }
 
 
@@ -160,6 +177,7 @@ export default function Intro(props) {
 
   return (
     <div className="intro" ref={introContainer} style={{ top: headerHeight}}>
+      {!width || !render ? <div className='loading'>Loading Finance Data...</div> : null}
       {width ? <IntroMap
         showBars={showMapBars}
         collection={collection}
@@ -171,16 +189,21 @@ export default function Intro(props) {
       />
        : null}
        {render ? <Fragment>
-        <div className="introText" style={{ top: mobileLayout ? contentHeight / 3 : contentHeight / 2}}>
+        <div className="introText" style={{ top: mobileLayout ? contentHeight / 2.5 : contentHeight / 2}}>
           <h1 className={classNames({visible: h1Visible})}>A Public Database of International Public Finance for Energy</h1>
           <p  className={classNames({visible: p1Visible})}>G20 countries have provided at least $188 billion in influential, government-backed public finance for oil, gas, and coal since 2018.</p>
           <p  className={classNames({visible: p2Visible})}>We are tracking this money from G20 export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they <span className='highlight'>#StopFundingFossils</span> and shift it to support just climate solutions instead. </p>
+          {introDismissed ? null : <div className={classNames('buttons', {visible: buttonsVisible && !introDismissed, introDismissed, mobileLayout})}>
+            {introDismissed ? null : <button onClick={() => setIntroDismissed(true)}>Read More</button>}
+            <Link to='/data'>Explore the data</Link>
+            <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
+          </div>}
         </div>
-        <div className={classNames('buttons', {visible: buttonsVisible, introDismissed, mobileLayout})}>
-          {introDismissed ? null : <button onClick={() => setIntroDismissed(true)}>Read More</button>}
-          <Link to='/data'>Explore the data</Link>
-          <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
-        </div>
+        <div className={classNames('buttons fixed', {visible: buttonsVisible && introDismissed, introDismissed, mobileLayout})}>
+            <Link className={classNames('finalExplore', {visible: atBottom})} to='/data'>Explore the data</Link>
+            <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
+          </div>
+
         <div className='restOfIntro' style={{ paddingBottom: contentHeight / 2, opacity: restOfIntroVisible ? 1 : 0}}>
           <section style={{ minHeight: contentHeight * 3, paddingBottom: contentHeight / 2}}>
           <div>

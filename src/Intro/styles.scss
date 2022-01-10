@@ -3,7 +3,13 @@
   position: relative;
   text-align: center;
   flex-grow: 1;
-
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+  }
   .introMap {
     width: 100vw;
 
@@ -40,10 +46,14 @@
   }
 
   .buttons {
-    position: fixed;
-    bottom: 0em;
-    left: 50%;
-    transform: translate(-50%, 0);
+
+    &.fixed {
+      position: fixed;
+      bottom: 0em;
+      left: 50%;
+      transform: translate(-50%, 0);
+
+    }
     opacity: 0;
     transition: opacity 1s ease-in-out;
     z-index: 100;
@@ -92,6 +102,16 @@
         opacity: 1;
       }
 
+    }
+
+    .finalExplore {
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease-in-out opacity;
+      &.visible {
+        opacity: 1;
+        pointer-events: all;
+      }
     }
   }
 
@@ -151,6 +171,9 @@
   @media (max-width: 1350px) {
     .restOfIntro {
       width: 32em;
+    }
+    .loading {
+      font-size: 1.0em;
     }
   }
   @media (max-width: 1200px) {
