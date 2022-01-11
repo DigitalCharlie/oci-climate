@@ -163,9 +163,15 @@
       font-weight: bold;
     }
 
-    g, tspan {
+    g {
       transition: 1s ease-in-out opacity;
+
     }
+
+    text {
+      transition: 1s ease-in-out opacity, 1s ease-in-out transform;
+    }
+
   }
 
   @media (max-width: 1350px) {

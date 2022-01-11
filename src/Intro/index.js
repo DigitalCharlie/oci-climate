@@ -185,8 +185,9 @@ export default function Intro(props) {
 
   let mobileSVGOffset = mobileLayout ? 80 : 0
   let barPadding = mobileLayout ? 6 : 0
-  const labelHeight = 30
+  const labelHeight = 50
 
+  const barPositioning = mobileLayout ? 0.15 : 0.1
   return (
     <div className="intro" ref={introContainer} style={{ top: headerHeight}}>
       {!width || !render ? <div className='loading'>Loading Finance Data...</div> : null}
@@ -243,26 +244,28 @@ export default function Intro(props) {
         <svg style={{ top: headerHeight }} className={classNames('fuelTypes', { mobileLayout})} width={width} height={contentHeight}>
 
           {mobileLayout && showingBars ? <rect fill='#fff' opacity='0.9' width={width} height={expandedHeight + labelHeight + barPadding} y={contentHeight - expandedHeight - mobileSVGOffset - labelHeight - barPadding } /> : null}
-          <animated.g style={{ opacity: fossilFuelOpacity}} transform={boxHeights.fossilFuelBoxHeight.interpolate(y => `translate(${width * 0.1}, ${contentHeight - y - mobileSVGOffset - barPadding})`)}>
+          <animated.g style={{ opacity: fossilFuelOpacity}} transform={boxHeights.fossilFuelBoxHeight.interpolate(y => `translate(${width * barPositioning}, ${contentHeight - y - mobileSVGOffset - barPadding})`)}>
             <animated.rect
               height={boxHeights.fossilFuelBoxHeight}
               width={barWidth}
               fill={colors['Fossil Fuel']}
             />
-            <text dy='-1em' fill={colors['Fossil Fuel']}>Fossil Fuel
-              <tspan style={{ opacity: showBarLabels ? 1 : 0}}> $63 billion</tspan>
+            <text style={{ transform: showBarLabels ? 'translateY(-1.2em)' : 'translateY(0)'}} dy={ '-1em'}  fill={colors['Fossil Fuel']}>Fossil Fuel
+
             </text>
+            <text dy='-1em' style={{ opacity: showBarLabels ? 1 : 0}} fill={colors['Fossil Fuel']}>$63 billion</text>
           </animated.g>
-          <animated.g style={{ opacity: cleanOpacity }} transform={boxHeights.cleanBoxHeight.interpolate(y => `translate(${width * 0.8 - barWidth}, ${contentHeight - y - mobileSVGOffset - barPadding})`)}>
+          <animated.g style={{ opacity: cleanOpacity }} transform={boxHeights.cleanBoxHeight.interpolate(y => `translate(${width * (1 - barPositioning) - barWidth}, ${contentHeight - y - mobileSVGOffset - barPadding})`)}>
             <animated.rect
               height={boxHeights.cleanBoxHeight}
               width={barWidth}
               fill={colors.Clean}
             />
-            <text dy={'-1em'} fill={colors.Clean}>Renewable Energy
+            <text style={{ transform: showBarLabels ? 'translateY(-1.2em)' : 'translateY(0)'}} dy={ '-1em'} fill={colors.Clean}>Renewable Energy
 
-              <tspan style={{ opacity: showBarLabels ? 1 : 0}}> $26 billion</tspan>
+
             </text>
+            <text dy={ '-1em'} fill={colors.Clean} style={{ opacity: showBarLabels ? 1 : 0}}> $26 billion</text>
           </animated.g>
 
 
