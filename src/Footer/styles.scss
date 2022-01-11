@@ -4,10 +4,40 @@
   background-color: #F0F0F0;
   padding: 0.2em;
   transition: opacity 0.3s ease-in-out;
+  > div {
+    padding: 0.2em 0;
+  }
+  .logo {
+    width: 10em;
+  }
   &.introFooter {
     position: fixed;
     bottom: 0;
     z-index: 1000;
     width: 100%;
+  }
+
+  .social {
+    white-space: nowrap;
+    padding-right: 1em;
+    a {
+      display: inline-block;
+      + a {
+        margin-left: 1em;
+      }
+    }
+    img {
+      width: 1em;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .logo {
+      width: 8em;
+    }
+    font-size: 0.8em;
+    > div {
+      padding: 0.1em 0;
+    }
   }
 }

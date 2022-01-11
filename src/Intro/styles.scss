@@ -52,12 +52,23 @@
       bottom: 0em;
       left: 50%;
       transform: translate(-50%, 0);
-
+      &.mobileLayout {
+        z-index: 1000;
+      }
     }
     opacity: 0;
     transition: opacity 1s ease-in-out;
     z-index: 100;
-    padding: 2em 1em 3em;
+    padding: 2em 1em 1em;
+
+    &.finalBoxInView {
+      padding: 2em 1em 8.5em;
+
+      &.mobileLayout {
+        padding: 1em 1em 9em;
+        font-size: 0.8em;
+      }
+    }
     width: 100%;
 
     &.introDismissed {
@@ -69,6 +80,7 @@
     &.mobileLayout.introDismissed {
       background-image:none;
       background-color: rgba(255,255, 255, 0.9);
+
     }
     &.visible {
       opacity: 1;
@@ -92,7 +104,7 @@
       font-size: 0.7em;
       color: #222222;
       position: absolute;
-      top: 0;
+      bottom: 1em;
       left: 50%;
       transform: translateX(-50%);
       font-weight: bold;

@@ -130,7 +130,7 @@ export default function Intro(props) {
   const width = introMapSize ? introMapSize[0] : 0
   const mobileLayout = width && width < 600
 
-  let expandedHeight =  mobileLayout ? contentHeight * 0.2 : contentHeight * 0.8
+  let expandedHeight =  mobileLayout ? contentHeight * 0.3 : contentHeight * 0.8
   let showingBars = false
   // console.log(fossilFuelBoxInView, fossilFuelBoxEntry && fossilFuelBoxEntry.boundingClientRect.top, fossilFuelBoxEntry)
   // console.log(fossilFuelBoxHeight, cleanBoxEntry && cleanBoxEntry.boundingClientRect.top)
@@ -183,7 +183,7 @@ export default function Intro(props) {
   const boxHeights = useSpring({ fossilFuelBoxHeight, cleanBoxHeight, config: { duration: 1000, easing: easeCubic }})
   const barWidth = introMapSize ?  (mobileLayout ? introMapSize[0] * 0.3 : introMapSize[0] * 0.1) : 0
 
-  let mobileSVGOffset = mobileLayout ? 80 : 0
+  let mobileSVGOffset = mobileLayout ? 60 : 0
   let barPadding = mobileLayout ? 6 : 0
   const labelHeight = 50
 
@@ -212,7 +212,7 @@ export default function Intro(props) {
             <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
           </div>}
         </div>
-        <div className={classNames('buttons fixed', {visible: buttonsVisible && introDismissed, introDismissed, mobileLayout})}>
+        <div className={classNames('buttons fixed', {visible: buttonsVisible && introDismissed, introDismissed, mobileLayout, finalBoxInView})}>
             <Link className={classNames('finalExplore', {visible: finalBoxInView})} to='/data'>Explore the data</Link>
             <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
           </div>
