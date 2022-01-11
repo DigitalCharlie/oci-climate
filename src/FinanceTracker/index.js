@@ -8,7 +8,6 @@ import { color as d3Color} from 'd3-color'
 import classNames from 'classnames'
 import useWindowSize from 'hooks/useWindowSize'
 import Select from 'Select'
-import Sources from './Sources.csv'
 import { csvParse } from 'd3-dsv'
 import Linkify from 'react-linkify'
 const financeTypes = [
@@ -70,7 +69,7 @@ export default function FinanceTracker(props) {
   const singleColumnView = width < 768
   const [sources, setSources] = useState(null)
   useEffect(() => {
-    window.fetch(Sources)
+    window.fetch( `${process.env.PUBLIC_URL}/Sources.csv`,)
       .then(response => response.text())
       .then(text => {
         setSources(csvParse(text))
