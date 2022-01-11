@@ -135,6 +135,18 @@ export default function DataView(props) {
 
   return (
     <div style={{ marginTop: headerHeight }}>
+      <div className='dataViewIntro'>
+        <h2>Data Dashboard</h2>
+        <div className='description'>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel elit sit amet justo malesuada porta. Nunc risus erat, scelerisque sit amet luctus id, bibendum eget sapien. Nunc condimentum turpis ac leo aliquet, eget consectetur magna suscipit. Morbi rhoncus metus eget lacus dignissim, at tempus massa finibus. Aenean ac enim ultricies, condimentum diam et, suscipit tortor. Curabitur interdum porta odio, eu blandit eros egestas vel. Suspendisse feugiat odio elit, sed dictum arcu cursus vel. Etiam pharetra neque sit amet lectus eleifend posuere.
+
+          </p>
+          <p>
+            Ut mollis accumsan dolor, eget auctor dui elementum quis. Duis velit diam, maximus in fringilla blandit, luctus a nibh. In nec fringilla urna. Aliquam quam lorem, condimentum at consequat sit amet, tincidunt accumsan neque. Duis sed consequat odio. Morbi at sodales sem. Praesent eget varius sem. Donec ipsum lorem, pharetra sit amet lorem ornare, tempus laoreet leo. Fusce elit augue, ornare ut efficitur a, fringilla ac turpis. Sed ut tellus ut eros ullamcorper rutrum. Nunc vel sollicitudin lorem.
+          </p>
+        </div>
+      </div>
       <div className='controls'>
 
 
