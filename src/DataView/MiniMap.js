@@ -149,7 +149,8 @@ export default function MiniMap(props) {
 
     const padding = 0
     projection.fitExtent([[padding, padding], [width-padding, height- padding]], collection)
-
+    projection.scale( projection.scale() * 1.2 )
+    projection.translate([width * 0.46, projection.translate()[1] * 0.9])
     const pathStrings = {}
     const centers = {}
     if (collection) {
