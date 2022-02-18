@@ -26,17 +26,6 @@ export default function About(props) {
   return (
     <div  style={{ marginTop: props.headerHeight }}  className='About'>
       <h1>About</h1>
-      <p>
-        {questions.map((q, i) => (
-          <div key={i}>
-            <HashLink smooth to={`#${slugs[i]}`}>{q}</HashLink>
-          </div>
-        ))}
-        <div>
-          <HashLink smooth to={`#downloadData`}>Download Data</HashLink>
-        </div>
-      </p>
-      <h2>FAQ about the Data</h2>
       <p>We use the following definitions for these categories:</p>
       <p>
         <strong>Fossil Fuel</strong>: This includes the oil, gas, and coal sectors. This includes access, exploration and appraisal, development, extraction, preparation, transport, plant construction and operation, distribution, and decommissioning. It also includes energy efficiency projects where the energy source(s) involved are primarily fossil fuels.
@@ -50,6 +39,18 @@ export default function About(props) {
       <p>
         If a project includes multiple energy sources, we split it into multiple transactions whenever possible. Otherwise, it is classified as ‘Other.’
       </p>
+      <br />
+      <h2>FAQ about the Data</h2>
+      <p>
+        {questions.map((q, i) => (
+          <div key={i}>
+            <HashLink smooth to={`#${slugs[i]}`}>{q}</HashLink>
+          </div>
+        ))}
+        <div>
+          <HashLink smooth to={`#downloadData`}>Download Data</HashLink>
+        </div>
+      </p>      
       <p id={slugs[0]}><strong>Where does the data come from?</strong></p>
       <p>
         Oil Change International builds this dataset by tracking energy finance from public finance institutions at the project and transaction level. As of 2021, it covers over 14,000 transactions including grants, loans, equity purchases, guarantees, and insurance back to 2013. About 70% of the total finance in the dataset is from loans. This data is sourced primarily from government and institution reporting (including annual reports with project information, press releases, freedom-of information requests, and project databases) as well as the Infrastructure Journal (IJ) Global database, Boston University’s Global Economic Governance Initiative’s China Global Energy Database, and investigations by our partners at Solutions for our Climate (Korea), Jubilee Australia, and Urgewald (Germany). We are also grateful to partners at Friends of the Earth US, Just Finance International, 350Africa.org, Les Amis de la Terre, Re:Common, Friends of the Earth Japan, Japan Center for a Sustainable Environment and Society (JACSES), Both ENDS, Fundación Ambiente y Recursos Naturales, Above Ground, Legambiente, Transnational Institute, Market Forces, Iniciativa Climática de Mexico, ActionAid, Jubilee Australia, Bank Information Centre, and Recourse.org for their periodic review of this dataset.
