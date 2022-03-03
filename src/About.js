@@ -51,23 +51,23 @@ export default function About(props) {
           <HashLink smooth to={`#downloadData`}>Download Data</HashLink>
         </div>
       </p>      
-      <p id={slugs[0]}><strong>Where does the data come from?</strong></p>
+      <h3 id={slugs[0]}><strong>Where does the data come from?</strong></h3>
       <p>
         Oil Change International builds this dataset by tracking energy finance from public finance institutions at the project and transaction level. As of 2021, it covers over 14,000 transactions including grants, loans, equity purchases, guarantees, and insurance back to 2013. About 70% of the total finance in the dataset is from loans. This data is sourced primarily from government and institution reporting (including annual reports with project information, press releases, freedom-of information requests, and project databases) as well as the Infrastructure Journal (IJ) Global database, Boston University’s Global Economic Governance Initiative’s China Global Energy Database, and investigations by our partners at Solutions for our Climate (Korea), Jubilee Australia, and Urgewald (Germany). We are also grateful to partners at Friends of the Earth US, Just Finance International, 350Africa.org, Les Amis de la Terre, Re:Common, Friends of the Earth Japan, Japan Center for a Sustainable Environment and Society (JACSES), Both ENDS, Fundación Ambiente y Recursos Naturales, Above Ground, Legambiente, Transnational Institute, Market Forces, Iniciativa Climática de Mexico, ActionAid, Jubilee Australia, Bank Information Centre, and Recourse.org for their periodic review of this dataset.
 
       </p>
-      <p id={slugs[1]}>
+      <h3 id={slugs[1]}>
         <strong>How is the amount of finance amount determined?</strong>
-      </p>
+      </h3>
       <p>
         For each project or transaction, the dollar amount shown is the amount committed from the financial institution on the date that the loan, grant, or guarantee was approved by the institution. The amount is entered in U.S. dollars and the original currency. If currency conversion is required, the U.S. dollar amount is calculated based on the exchange rate on December 31 of the approval year, using the rates published on <ExLink href="https://www.x-rates.com/">X-Rates</ExLink>’ exchange rates calculator.
       </p>
       <p>
         If it can be determined from project information that only a portion of the project or loan went to energy, then only that percentage will be included as the finance amount – otherwise a conservative estimate is made based on the number of sectors listed.
       </p>
-      <p id={slugs[2]}>
+      <h3 id={slugs[2]}>
         <strong>What public finance data is included here?</strong>
-      </p>
+      </h3>
       <p>
         This dataset covers only public finance from G20 country bilateral finance institutions and the major MDBs. We consider these export credit agencies, development finance institutions, and multilateral development banks to be in scope as ‘public finance institutions’ when national government(s) holds more than 50% of the shares and where there is a clear policy mandate that drives decisions beyond solely commercial performance (see the figures in the Data section for a full list and classifications). This means we do not cover finance or subsidies from G20 governments directly, sovereign wealth funds, or institutions owned by subnational governments. Generally, the MDBs, DFIs, and ECAs we cover provide energy finance internationally, but they sometimes also provide domestic support. These domestic projects are also included where information is available so we can get a full institution-level picture. Government agencies or national development banks that occasionally provide international finance are also not reflected here.
 
@@ -102,9 +102,9 @@ export default function About(props) {
         This scope means that to get a more holistic picture of support for fossil fuels from any one G20 government, these international public finance figures should be combined with data on direct domestic fossil fuel subsidies, domestic public finance, support to energy-related state-owned enterprises, and countries – see for example <ExLink href="https://www.iisd.org/publications/g20-scorecard">this report</ExLink> OCI wrote with International Institute for Sustainable Development and Overseas Development Institute in 2020, or a <ExLink href="https://about.bnef.com/blog/g-20-fossil-fuel-support-hits-nearly-600-billion-in-2020/">2021 update</ExLink> using this methodology and our data from BloombergNEF in 2021.
 
       </p>
-      <p id={slugs[3]}>
+      <h3 id={slugs[3]}>
         <strong>Do the amounts reported here include all G20 international public finance for energy?</strong>
-      </p>
+      </h3>
       <p>
         Poor reporting from governments means there are four significant limitations in this dataset. This means the figures presented in these reports are incomplete and therefore underestimated:
 
@@ -124,35 +124,35 @@ export default function About(props) {
           </li>
         </ul>
       </p>
-      <p  id={slugs[4]}>
+      <h3  id={slugs[4]}>
         <strong>How can I look at public finance for specific projects or see more detail?</strong>
 
-      </p>
+      </h3>
       <p>
         You can download the data as a spreadsheet <HashLink smooth to='/about#downloadData'>here</HashLink>. Definitions for each field are provided in the first tab, and a source for each transaction is in the last column. You can also read more background and analysis on public finance <Link to='/resources'>here</Link>.
 
       </p>
-      <p id={slugs[5]}><strong>How to cite this website</strong></p>
+      <h3 id={slugs[5]}><strong>How to cite this website</strong></h3>
       <p>The data in the Public Finance for Energy Database is available for use under a <ExLink href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</ExLink>. If using this finance data, please cite it as Oil Change International, “Public Finance for Energy Database,” [Date Accessed], URL.</p>
 
       <h2>FAQ about international public finance</h2>
-      <p id={slugs[6]}><strong>Is international public finance a “subsidy”?</strong></p>
+      <h3 id={slugs[6]}><strong>Is international public finance a “subsidy”?</strong></h3>
       <p>The World Trade Organization’s <ExLink href="https://www.wto.org/english/docs_e/legal_e/24-scm_01_e.htm">definition</ExLink> calls public finance a subsidy to energy production to the extent that it constitutes a “direct transfer of funds” (as with grants, loans, and equity infusion) or “potential direct transfers of funds or liabilities” (as with guarantees and insurance) to an energy project or sector. However, due to the lack of transparency and robust reporting from public finance institutions, it is not possible to separate out what portion of public finance is a subsidy component.</p>
       <p>
       Furthermore, beyond the portions that can be formally conceived of as a subsidy, public finance for energy plays an outsized role in shaping energy systems. These loans, grants, equity, and guarantees lower risk for other investors because they are government-backed and are often provided at preferential below-market rates. Public finance institutions often further influence the energy landscape by signaling government priorities and adding research and advisory capacity. These all help leverage additional investment for proposed projects. These are benefits that — if wielded alongside a commitment to human rights due diligence, community-led development, and strengthening public goods — are desperately needed for a just energy transition rather than for propping up the fossil fuel industry.
       </p>
-      <p id={slugs[7]}><strong>What do public finance institutions need to do to support a just energy transition aligned with 1.5C?</strong></p>
+      <h3 id={slugs[7]}><strong>What do public finance institutions need to do to support a just energy transition aligned with 1.5C?</strong></h3>
       <p>The International Energy Agency (IEA) <ExLink href="https://www.iea.org/reports/net-zero-by-2050">says</ExLink> that to limit global warming to 1.5°C, 2021 needs to mark the end of new investments in not just coal, but also new oil and gas supply. It is also clear that governments must pursue a much more rapid and just energy transition to avoid the worst climate impacts. This means we need to end all finance for new fossil fuel projects, but especially influential, government-backed public finance.</p>
       <p>
       Fossil free public finance also isn’t enough -- to support a globally just energy transition in line with 1.5°C, we also need public finance institutions to greatly increase their support for renewable energy, implement comprehensive human rights due diligence across their projects, and provide their fair share of debt cancellation and climate finance. Read our full recommendations for international public finance <ExLink href="https://priceofoil.org/2021/10/28/past-last-call-g20-public-finance-institutions-are-still-bankrolling-fossil-fuels/"> in this report.</ExLink>
       </p>
-      <p id={slugs[8]}>
+      <h3 id={slugs[8]}>
         <strong>What about domestic support for fossil fuels?</strong>
-      </p>
+      </h3>
       <p>International public finance for fossil fuels is only part of the problem. G20 countries must also clean up their act at home, which should include ending all kinds of domestic support for fossil fuels, implementing financial regulations to end private fossil fuel finance, and legislating a just and managed transition away from domestic fossil fuel production.</p>
-      <p id={slugs[9]}>
+      <h3 id={slugs[9]}>
         <strong>Aren’t fossil fuels needed for development?</strong>
-      </p>
+      </h3>
       <p>Fossil fuels have <ExLink href="https://priceofoil.org/2021/10/14/the-skys-limit-africa/">rarely served</ExLink> as a vehicle for just development, energy access, or resource sovereignty in the Global South because of poor contract terms, industry-friendly subsidy and royalty frameworks, debt traps, corruption, and the outsized ownership of fossil resources by multinational corporations based in wealthy countries. And as the industry faces increasing systemic financial risks, the possibility that fossil fuels can promote just development is increasingly slim.
       </p>
       <p>
