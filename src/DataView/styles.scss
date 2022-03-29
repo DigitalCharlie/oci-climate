@@ -1,5 +1,5 @@
 .dataViewIntro {
-  margin: 1em auto;
+  margin: 0 auto;
   max-width:50em;
   padding:10px;
 }
@@ -56,7 +56,7 @@
 }
 .controls {
   display: flex;
-  margin:0 auto 10px;
+  margin:0 auto 1em;
   max-width:50em;
   flex-wrap:wrap;
   padding-left:10px;
@@ -66,8 +66,11 @@
     }
 
   }
-  @media (max-width: 600px) {
+  @media (max-width: 650px) {
     font-size: 0.85em;
+    flex-direction:column;
+    margin-left:0;
+    width:300px;
 
     .year-picker  {
       margin-top: 0.5em;
@@ -80,9 +83,13 @@
     }
 
     .energyTypes {
+      margin-top:10px;
       svg[data-tip] {
         display: none;
       }
+    }
+    .energyTypeToggle:first-of-type {
+      margin-left: 0;
     }
   }
 }
