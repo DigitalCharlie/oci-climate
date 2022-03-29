@@ -274,7 +274,7 @@ export default function FinanceTracker(props) {
               label2={financeTypes[1].label}
               toggle={() => setSelectedFinanceType(selectedFinanceType === financeTypes[0] ? financeTypes[1] : financeTypes[0])}
             />
-            <div>
+            <div className="sortBy">
               Sort by:{' '}
               <Select
                 value={sortIndex}

@@ -4,6 +4,7 @@
   .description {
     max-width:50em;
     margin:0 auto;
+    padding:10px;
   }
 
   table {
@@ -116,6 +117,9 @@
         display: flex;
         .dot {
           margin-right: 0.5em;
+          @media (min-width:768px) {
+            margin-top:10px;
+          }
         }
         + div {
           margin-left: 2.5em;
@@ -186,5 +190,11 @@
         }
       }
     }
+  }
+}
+.sortBy {
+  display:inline;
+  @media (max-width: 768px) {
+    display:block;
   }
 }
