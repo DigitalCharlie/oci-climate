@@ -149,19 +149,18 @@ export default function DataView(props) {
       </div>
       <div className='controls'>
 
-
+        <YearPicker
+          value={yearType}
+          onChange={e => setYearType(e.target.value)}
+          customYears={customYears}
+          setCustomYears={setCustomYears}
+        />
         <Switch
           label=''
           label1='Total Sum'
           label2='Average Annual'
           value={aggregationType === 'sum'}
           toggle={() => setAggregationType(aggregationType === 'sum' ? 'average' : 'sum')}
-        />
-        <YearPicker
-          value={yearType}
-          onChange={e => setYearType(e.target.value)}
-          customYears={customYears}
-          setCustomYears={setCustomYears}
         />
         <div className='energyTypes'>
           {energyTypes.map(type => {
