@@ -97,10 +97,10 @@ export default function DataView(props) {
   if (!width) {
     return null
   }
-  const singleColumnView = width < 768
+  const singleColumnView = width < 1000
   console.log(singleColumnView)
 
-  const sectionWidth = singleColumnView ? width - 20 - 16 * 2 : (width - 16 * 4 - 20) / 2
+  const sectionWidth = singleColumnView ? width - 20 - 16 * 2 : (width - 50 * 4 - 20) / 2
   const renderSection = (section) => {
     const description = section.description
     let defaultContent = <svg width={sectionWidth} height={200 + section.index * 50} />
@@ -136,7 +136,7 @@ export default function DataView(props) {
   return (
     <div style={{ marginTop: headerHeight }}>
       <div className='dataViewIntro'>
-        <h2>Data Dashboard</h2>
+        <h1>Data Dashboard</h1>
         <div className='description'>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel elit sit amet justo malesuada porta. Nunc risus erat, scelerisque sit amet luctus id, bibendum eget sapien. Nunc condimentum turpis ac leo aliquet, eget consectetur magna suscipit. Morbi rhoncus metus eget lacus dignissim, at tempus massa finibus. Aenean ac enim ultricies, condimentum diam et, suscipit tortor. Curabitur interdum porta odio, eu blandit eros egestas vel. Suspendisse feugiat odio elit, sed dictum arcu cursus vel. Etiam pharetra neque sit amet lectus eleifend posuere.

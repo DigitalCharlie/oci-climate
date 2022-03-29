@@ -2,6 +2,9 @@
   margin: 1em;
 }
 .DataView {
+
+  padding:.5em;
+
   &.twoColumnView {
     // columns: 2;
     display: grid;
@@ -9,8 +12,9 @@
   }
 
   section {
-
-    margin: 1em;
+    margin: .5em;
+    border: 1px solid #dcdcdc;
+    padding:20px;
     .description {
       margin-bottom: 12px;
     }
@@ -28,6 +32,7 @@
 .disclaimer {
   font-size: 80%;
   padding: 1em;
+  text-align:center;
 }
 
 .energyTypeToggle {
