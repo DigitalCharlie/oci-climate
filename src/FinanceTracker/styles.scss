@@ -1,6 +1,10 @@
 .FinanceTracker {
   padding: 1em;
 
+  .description {
+    max-width:50em;
+    margin:0 auto;
+  }
 
   table {
     width: 100%;

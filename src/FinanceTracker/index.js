@@ -249,11 +249,8 @@ export default function FinanceTracker(props) {
   return (
     <div style={{ marginTop: props.headerHeight }} className={classNames('FinanceTracker', { singleColumnView })}>
       <div>
-        <h2>Fossil Free Policy Tracker
-          {/* <img alt='lorem ipsum dollar...' src={infoIcon} data-tip='Lorem ipsum dollar...' /> */}
-        </h2>
-
         <div className='description'>
+          <h1>Fossil Free Policy Tracker</h1>
           <p>
             Last update: DD/MM/YYYY, from Still Digging (2020) by Friends of the Earth US and OCI
           </p>
