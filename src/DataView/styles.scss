@@ -1,10 +1,14 @@
 .dataViewIntro {
   margin: 1em auto;
   max-width:50em;
+  padding:10px;
 }
 .DataView {
 
   padding:.5em;
+  @media (max-width: 1000px) {
+    padding:0;
+  }
 
   &.twoColumnView {
     // columns: 2;
@@ -52,27 +56,15 @@
 }
 .controls {
   display: flex;
-  justify-content: center;
-  margin-left: 1rem;
+  margin:0 auto 10px;
+  max-width:50em;
+  flex-wrap:wrap;
+  padding-left:10px;
   @media (max-width: 1200px) {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 0;
     .energyTypeToggle:first-of-type {
       margin-left: 1rem;
     }
 
-    .energyTypes {
-      margin-bottom: 1rem;
-    }
-
-    .switch {
-      margin-left: 1rem;
-      margin-top: 1rem;
-      + .switch {
-        margin-left: 1rem;
-      }
-    }
   }
   @media (max-width: 600px) {
     font-size: 0.85em;

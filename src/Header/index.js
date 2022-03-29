@@ -18,8 +18,7 @@ function Header(props, ref) {
   return (
     <header className="Header" ref={ref}>
       <div>
-        <img src={logo} alt='Oil Change International' />
-        {/* <h1>Energy Finance Database</h1> */}
+        <a href="/"><img src={logo} alt='Oil Change International' /></a>
         <select value={location.pathname} className='menu' onChange={updatePath}>
           {routes.map((route, index) => (
 
