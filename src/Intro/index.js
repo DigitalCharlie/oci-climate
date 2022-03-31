@@ -192,7 +192,7 @@ export default function Intro(props) {
     <div className="intro" ref={introContainer} style={{ top: headerHeight}}>
       {!width || !render ? <div className='loading'>Loading Finance Data...</div> : null}
       {width ? <IntroMap
-        showBars={showMapBars}
+        // showBars={showMapBars} // dont show bars on map
         collection={collection}
         data={data}
         width={width}

@@ -4,7 +4,7 @@ import { sum, groups } from 'd3-array'
 import { scaleOrdinal } from 'd3-scale'
 
 import {  useRef, useMemo } from 'react'
-import { geoMercator, geoPath } from 'd3-geo'
+import { geoEqualEarth, geoPath } from 'd3-geo'
 
 import { animated, useSpring } from '@react-spring/web'
 import { easeCubic } from 'd3-ease'
@@ -14,25 +14,25 @@ const colors = {
 }
 const categories = ['Fossil Fuel', 'Clean', 'Other']
 
-function Bars(props) {
-  const { maxBarHeight, showBars, barWidth, delay, duration } = props
-  const bar1Height = showBars ? maxBarHeight : 0
-  const bar2Height = showBars ? maxBarHeight * 0.333 : 0
-  const barHeights = useSpring({
-    bar1Height, bar2Height,
-    delay,
-    config: {
-      easing: easeCubic,
-      duration,
-    }
-  })
-  return (
-    <g>
-      <animated.rect width={barWidth} height={barHeights.bar1Height} fill={colors['Fossil Fuel']} x={-barWidth} y={barHeights.bar1Height.to(d => maxBarHeight - d)} />
-      <animated.rect width={barWidth} height={barHeights.bar2Height} fill={colors['Clean']} x={0} y={barHeights.bar2Height.to(d => maxBarHeight - d)} />
-    </g>
-  )
-}
+// function Bars(props) {
+//   const { maxBarHeight, showBars, barWidth, delay, duration } = props
+//   const bar1Height = showBars ? maxBarHeight : 0
+//   const bar2Height = showBars ? maxBarHeight * 0.333 : 0
+//   const barHeights = useSpring({
+//     bar1Height, bar2Height,
+//     delay,
+//     config: {
+//       easing: easeCubic,
+//       duration,
+//     }
+//   })
+//   return (
+//     <g>
+//       <animated.rect width={barWidth} height={barHeights.bar1Height} fill={colors['Fossil Fuel']} x={-barWidth} y={barHeights.bar1Height.to(d => maxBarHeight - d)} />
+//       <animated.rect width={barWidth} height={barHeights.bar2Height} fill={colors['Clean']} x={0} y={barHeights.bar2Height.to(d => maxBarHeight - d)} />
+//     </g>
+//   )
+// }
 export default function IntroMap(props) {
   const { width, height, data, collection, showBars, filled, opacity } = props
 
@@ -62,7 +62,7 @@ export default function IntroMap(props) {
   // console.log(countryRows)
 
   const { path, pathStrings, centers} = useMemo(() => {
-    const projection = geoMercator()
+    const projection = geoEqualEarth()
     const path = geoPath(projection)
 
     const paddingTop = -height * 0.1
@@ -116,33 +116,33 @@ export default function IntroMap(props) {
       <path key={feature.id} style={{ stroke, fill }} d={pathData} />
     )
   })
-  const bars = !collection ? null : collection.features.map(feature => {
-    if (!feature.id) {
-      return null
-    }
-    const center = centers[feature.id]
-    let matching = countryData.find(d => d.country === feature.properties.name)
-    if (!matching || !matching[dataKey] || !isFinite(matching[dataKey])) {
-      return null
-    }
-    // let hidden = matching.sortedIndex > 10 && feature.properties.name !== hoveredFeature
-    // if (hidden) {
-    //   return null
-    // }
+  // const bars = !collection ? null : collection.features.map(feature => {
+  //   if (!feature.id) {
+  //     return null
+  //   }
+  //   const center = centers[feature.id]
+  //   let matching = countryData.find(d => d.country === feature.properties.name)
+  //   if (!matching || !matching[dataKey] || !isFinite(matching[dataKey])) {
+  //     return null
+  //   }
+  //   // let hidden = matching.sortedIndex > 10 && feature.properties.name !== hoveredFeature
+  //   // if (hidden) {
+  //   //   return null
+  //   // }
 
-    return (
-      <g transform={`translate(${center.join(',')})`} key={feature.id}>
-        <Bars delay={delayScale(feature.id)} duration={durationScale(feature.id)} barWidth={height * 0.1 * 0.2} maxBarHeight={height * 0.1} showBars={showBars} />
-      </g>
-    )
-  })
+  //   return (
+  //     <g transform={`translate(${center.join(',')})`} key={feature.id}>
+  //       <Bars delay={delayScale(feature.id)} duration={durationScale(feature.id)} barWidth={height * 0.1 * 0.2} maxBarHeight={height * 0.1} showBars={showBars} />
+  //     </g>
+  //   )
+  // })
   const svgRef = useRef()
   return (
     <div className="IntroMap" style={{ opacity }}>
 
       <svg className='map' ref={svgRef} width={width} height={height}>
         <g>{features}</g>
-        <g>{bars}</g>
+        {/* <g>{bars}</g> */}
       </svg>
     </div>
   )
