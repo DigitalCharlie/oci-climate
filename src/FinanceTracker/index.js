@@ -24,10 +24,16 @@ const financeTypes = [
 ]
 
 const dotColors = {
-  'Red': '#D71921',
-  'Orange': '#f5922f',
-  'Yellow': '#F7C952',
-  'Green': '#075A60',
+  // OLD COLORS
+  // 'Red': '#D71921',
+  // 'Orange': '#f5922f',
+  // 'Yellow': '#F7C952',
+  // 'Green': '#075A60',
+  // NEW COLORS
+  'Red': '#FF4242',
+  'Orange': '#AB7800',
+  'Yellow': '#FFB300',
+  'Green': '#A4BA45',
 }
 const legendDescriptions = {
   'Red': 'No Exclusions',

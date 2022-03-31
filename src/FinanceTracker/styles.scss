@@ -96,7 +96,7 @@
     width: 1.5em;
     height: 1.5em;
     border-radius: 50%;
-    opacity: 0.5;
+    opacity: 1; // was .5 previously
     margin: 0 auto;
   }
   .controls {

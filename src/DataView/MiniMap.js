@@ -13,9 +13,15 @@ const categories = ['Fossil Fuel', 'Clean', 'Other']
 const mapDataKeys = ['Total', ...categories]
 
 const mapColors = {
-  'Fossil Fuel': ['#fcf9f9', '#efc1a8', '#de622b'],
-  'Clean': ['#f7fcfc', '#99dee3', '#44a39b'],
-  Other: ['#f7fbfd', '#6abef0', '#5d97c7'],
+  // OLD COLORS
+  // 'Fossil Fuel': ['#fcf9f9', '#efc1a8', '#de622b'],
+  // 'Clean': ['#f7fcfc', '#99dee3', '#44a39b'],
+  // Other: ['#f7fbfd', '#6abef0', '#5d97c7'],
+
+  // NEW COLORS
+  'Fossil Fuel': ['#F7FCFC', '#7E7E83', '#04000A'],
+  'Clean': ['#F7FCFC', '#A4BA45', '#778632'],
+  Other: ['#F7FCFC', '#8492DC', '#4057C9'],
   // 'Total': ['#f7fafa', '#000000']
 }
 
