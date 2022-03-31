@@ -18,11 +18,8 @@ const colors = {
 export default function Intro(props) {
   const { contentHeight, headerHeight } = props;
   const [introDismissed, setIntroDismissed] = useState(false);
-  const [h1Visible, setH1Visible] = useState(false);
-  const [p1Visible, setP1Visible] = useState(false);
-  const [p2Visible, setP2Visible] = useState(false);
+  const [topVisible, setTopVisible] = useState(false);
   const [buttonsVisible, setButtonsVisible] = useState(false);
-  const [showMapBars, setShowMapBars] = useState(false);
   const [mapFilled, setMapFilled] = useState(false);
   const [mapVisible, setMapVisible] = useState(false);
   const [restOfIntroVisible, setRestOfIntroVisible] = useState(false);
@@ -38,26 +35,15 @@ export default function Intro(props) {
         setRender(true)
       }, 50)
       setTimeout(() => {
-        setH1Visible(true);
-      }, 100)
-      setTimeout(() => {
         setMapVisible(true)
       }, 1300 / 2)
-
       setTimeout(() => {
-        setP1Visible(true);
+        setTopVisible(true);
+        setMapFilled(true);
       }, 2300 / 2)
       setTimeout(() => {
-        setMapFilled(true);
-
-      }, 2600 / 2)
-      setTimeout(() => {
-        setP2Visible(true);
-        setShowMapBars(true);
-      }, 6000 / 2)
-      setTimeout(() => {
         setButtonsVisible(true);
-      }, 8000 / 2)
+      }, 2300 / 2)
     }
   }, [data, introMapSize, collection])
 
@@ -203,18 +189,17 @@ export default function Intro(props) {
        : null}
        {render ? <Fragment>
         <div className="introText" style={{ top: mobileLayout ? contentHeight / 2.5 : contentHeight / 2}}>
-          <h1 className={classNames({visible: h1Visible})}>A Public Database of International Public Finance for Energy</h1>
-          <p  className={classNames({visible: p1Visible})}>G20 countries have provided at least $188 billion in influential, government-backed public finance for oil, gas, and coal since 2018.</p>
-          <p  className={classNames({visible: p2Visible})}>We are tracking this money from G20 export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they <span className='highlight'>#StopFundingFossils</span> and shift it to support just climate solutions instead. </p>
-          {introDismissed ? null : <div className={classNames('buttons', {visible: buttonsVisible && !introDismissed, introDismissed, mobileLayout})}>
-            {introDismissed ? null : <button onClick={() => setIntroDismissed(true)}>Read More</button>}
+          <h1 className={classNames({visible: topVisible})}>A Public Database of International Public Finance for Energy</h1>
+          <p  className={classNames({visible: topVisible})}>G20 countries have provided at least $188 billion in influential, government-backed public finance for oil, gas, and coal since 2018.</p>
+          <p  className={classNames({visible: topVisible})}>We are tracking this money from G20 export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they <span className='highlight'>#StopFundingFossils</span> and shift it to support just climate solutions instead. </p>
+          <div className={classNames('buttons', {visible: buttonsVisible})}>
+            <button>Read More</button>
             <Link to='/data'>Explore the data</Link>
-            <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
-          </div>}
+          </div>
         </div>
-        <div className={classNames('buttons fixed', {visible: buttonsVisible && introDismissed, introDismissed, mobileLayout, finalBoxInView})}>
+        <div className={classNames('buttons fixed', {visible: buttonsVisible, mobileLayout, finalBoxInView})}>
             <Link className={classNames('finalExplore', {visible: finalBoxInView})} to='/data'>Explore the data</Link>
-            <div className={classNames('scrollToContinue', {visible: introDismissed && !finalBoxInView})}>Scroll to continue reading</div>
+            <div className={classNames('scrollToContinue', {visible: !finalBoxInView})}>Scroll to continue reading</div>
           </div>
 
         <div className='restOfIntro' style={{ paddingBottom: contentHeight / 2, opacity: restOfIntroVisible ? 1 : 0}}>
