@@ -112,7 +112,7 @@ export default function YearlyAverageUsageGraph(props) {
     // const path = stackSprings[stackIndex].path
     const fill = singleEnergyType && (stack.key !== 'Clean' && stack.key !== 'Other') ? subcategoryColorScale(stack.key) : colors[stack.key]
     // let opacity = stackIndex === 0 ? null : '0.3'
-    let opacity = 0.8
+    let opacity = 1
     if (singleEnergyType) {
       // opacity = null
     }

@@ -13,9 +13,14 @@ import YearPicker from './YearPicker'
 import { Link } from 'react-router-dom'
 const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 export const colors = {
-  'Fossil Fuel': '#EFC1A8',
-  'Clean': '#99DEE3',
-  'Other': '#6ABEF0',
+  // OLD COLORS
+  // 'Fossil Fuel': '#EFC1A8',
+  // 'Clean': '#99DEE3',
+  // 'Other': '#6ABEF0',
+  // NEW COLORS
+  'Fossil Fuel': '#04000A',
+  'Clean': '#A4BA45',
+  'Other': '#8492DC',
 }
 export default function DataView(props) {
   const { data, headerHeight } = props
