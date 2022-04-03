@@ -143,13 +143,9 @@ export default function DataView(props) {
       <div className='dataViewIntro'>
         <h1>Data Dashboard</h1>
         <div className='description'>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel elit sit amet justo malesuada porta. Nunc risus erat, scelerisque sit amet luctus id, bibendum eget sapien. Nunc condimentum turpis ac leo aliquet, eget consectetur magna suscipit. Morbi rhoncus metus eget lacus dignissim, at tempus massa finibus. Aenean ac enim ultricies, condimentum diam et, suscipit tortor. Curabitur interdum porta odio, eu blandit eros egestas vel. Suspendisse feugiat odio elit, sed dictum arcu cursus vel. Etiam pharetra neque sit amet lectus eleifend posuere.
+<p>Public finance institutions play an outsized role in shaping our future energy system by providing government-backed, low-risk finance that is often a determining factor in which projects get built. This dashboard shows the total flows of public finance going to fossil fuel, clean, and other energy projects from G20 countries’ trade and development finance institutions as well as the major multilateral development banks. </p>
 
-          </p>
-          <p>
-            Ut mollis accumsan dolor, eget auctor dui elementum quis. Duis velit diam, maximus in fringilla blandit, luctus a nibh. In nec fringilla urna. Aliquam quam lorem, condimentum at consequat sit amet, tincidunt accumsan neque. Duis sed consequat odio. Morbi at sodales sem. Praesent eget varius sem. Donec ipsum lorem, pharetra sit amet lorem ornare, tempus laoreet leo. Fusce elit augue, ornare ut efficitur a, fringilla ac turpis. Sed ut tellus ut eros ullamcorper rutrum. Nunc vel sollicitudin lorem.
-          </p>
+<p><strong>How to use this dashboard:</strong> Use the controls below to add data on clean and other energy, change the years displayed, or show totals rather than annual averages. You can hover over a country or institution on a graph to see more details, and toggle some graph-specific settings. Countries or institutions with a * indicate there is particularly low transparency on their public finance flows. For more details on our methodology, see the About page. Our full dataset includes information on each transaction behind this data as well as details about the kind of finance, energy sub-type, and supply chain stage, and this can be downloaded <a  href={`${process.env.PUBLIC_URL}/OCI Public Finance for Energy Database - 2021.xlsx`}>here</a>.</p>
         </div>
       </div>
       <div className='controls'>
