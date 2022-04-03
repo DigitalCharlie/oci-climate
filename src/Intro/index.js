@@ -11,9 +11,16 @@ import { easeCubic } from 'd3-ease'
 import { transition } from 'd3-transition';
 import { interpolateNumber } from 'd3-interpolate';
 import Footer from '../Footer/'
+import publicFinance from '../images/public-finance-by-year.png'
+import mdb from '../images/mdb-comparison.png'
+import g20 from '../images/top-15-g20.png'
+
 const colors = {
   'Fossil Fuel': '#F4A77E',
   'Clean':'#63CAD1'
+}
+const ExLink = ({href, children}) => {
+  return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
 }
 export default function Intro(props) {
   const { contentHeight, headerHeight } = props;
@@ -193,7 +200,7 @@ export default function Intro(props) {
           <p  className={classNames({visible: topVisible})}>G20 countries have provided at least $188 billion in influential, government-backed public finance for oil, gas, and coal since 2018.</p>
           <p  className={classNames({visible: topVisible})}>We are tracking this money from G20 export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they <span className='highlight'>#StopFundingFossils</span> and shift it to support just climate solutions instead. </p>
           <div className={classNames('buttons', {visible: buttonsVisible})}>
-            <button>Read More</button>
+            <button onClick={() => setIntroDismissed(true)}>Read More</button>
             <Link to='/data'>Explore the data</Link>
           </div>
         </div>

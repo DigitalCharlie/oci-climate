@@ -1,15 +1,32 @@
 
 .Footer {
   margin-top:25px;
-  text-align: center;
+  color:rgb(60, 60, 60);
+  // text-align: center;
   background-color: #F0F0F0;
-  padding: 0.2em;
+  padding: 25px;
   transition: opacity 0.3s ease-in-out;
+  display:flex;
+  justify-content:space-around;
+  section {
+    width:550px;
+    display:flex;
+  }
+  .left-footer div {
+    border-left: 1px solid gray;
+    margin-left: 20px;
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+  .right-footer {
+    justify-content:end;
+  }
   > div {
     padding: 0.2em 0;
   }
   .logo {
-    width: 10em;
+    width: 12em;
+    align-self:center;
   }
   &.introFooter {
     position: fixed;
@@ -21,6 +38,7 @@
   .social {
     white-space: nowrap;
     padding-right: 1em;
+    margin-top:25px;
     a {
       display: inline-block;
       + a {
@@ -28,7 +46,7 @@
       }
     }
     img {
-      width: 1em;
+      width: 1.75em;
     }
   }
 
@@ -39,6 +57,11 @@
     font-size: 0.8em;
     > div {
       padding: 0.1em 0;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    .social {
+      margin-top:50px;
     }
   }
 }

@@ -1,6 +1,6 @@
 # Resources
 
-The Energy Finance Tracker database is a project of Oil Change International to reveal the true cost of fossil fuels and facilitate the ongoing transition to clean energy. You can read the latest fossil free public finance campaign updates and press releases [on our website](https://priceofoil.org/). Below you can find direct links to some of our research related to international public finance.
+The Public Finance for Energy Database is a project of Oil Change International to reveal the true cost of fossil fuels and facilitate the ongoing transition to clean energy. You can read the latest fossil free public finance campaign updates and press releases [on our website](https://priceofoil.org/). Below you can find direct links to some of our research related to international public finance.
 
 ### Research Spotlight
 

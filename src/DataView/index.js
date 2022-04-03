@@ -48,7 +48,7 @@ export default function DataView(props) {
       )
     },
     {
-      title: 'MDB Comparison',
+      title: 'Multilateral Development Banks Comparison',
 
       orderMultiColumnView: 3,
       description: 'Public energy finance from the major multilateral development banks. G20 countries have the majority voting power at each of these institutions, but other countries have voting power and shares as well. Hover over each bank label to see the institutions included.',
@@ -58,7 +58,7 @@ export default function DataView(props) {
     },
 
     {
-      title: 'ECAs Comparison',
+      title: 'Export Credit Agencies Comparison',
 
       orderMultiColumnView: 5,
       description: 'Public energy finance from G20 export credit agencies, by country. Export credit agencies are focused on trade finance and typically have a mandate to promote the export of goods and services from their country. Hover over each country label to see the institutions included.',

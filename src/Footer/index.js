@@ -10,6 +10,10 @@ import facebook from 'images/facebook.svg'
 import twitter from 'images/twitter.svg'
 import './styles.scss'
 
+const ExLink = ({href, children}) => {
+  return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
+}
+
 export default function Footer(props) {
   const { introFooter } = props
   const location = useLocation()
@@ -23,24 +27,24 @@ export default function Footer(props) {
   const pointerEvents = opacity ? 'auto' : 'none'
   return (
     <div className={classNames( "Footer", { introFooter })} style={{ opacity, pointerEvents }}>
-      <div>
-       <img className='logo' src={logo} alt='Oil Change International' />
-
-      </div>
-      <div>
-              © 2021 · Oil Change International · All Rights Reserved{' '}
-
-        <HashLink smooth to='/about#downloadData'>Download Data</HashLink>
-      </div>
-
-      <div className="social">
-        <a href="https://www.facebook.com/priceofoil/" target="_blank" rel="noopener noreferrer">
-          <img src={facebook} alt="Facebook" />
-        </a>
-        <a href="https://twitter.com/PriceofOil" target="_blank" rel="noopener noreferrer">
-          <img src={twitter} alt="Twitter" />
-        </a>
-      </div>
+      <section className="left-footer">
+          <img className='logo' src={logo} alt='Oil Change International' />
+          <div>
+            Public Finance for Energy Database is a project of Oil Change International.<br />
+            Press inquiries: <ExLink href="mailto:media@priceofoil.org">media@priceofoil.org</ExLink>
+          </div>
+      </section>
+      <section className="right-footer">
+        <div className="social">
+          <a href="https://www.facebook.com/priceofoil/" target="_blank" rel="noopener noreferrer">
+            <img src={facebook} alt="Facebook" />
+          </a>
+          <a href="https://twitter.com/PriceofOil" target="_blank" rel="noopener noreferrer">
+            <img src={twitter} alt="Twitter" />
+          </a>
+        </div>
+        {/* <p> © 2021 · Oil Change International · All Rights Reserved</p> */}
+      </section>
     </div>
   )
 }
