@@ -1,11 +1,10 @@
 .dataViewIntro {
   margin: 0 auto;
-  max-width:50em;
+  max-width:70em;
   padding: 0 10px;
 }
 .DataView {
 
-  padding:.5em;
   @media (max-width: 1000px) {
     padding:0;
   }
@@ -14,6 +13,8 @@
     // columns: 2;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    max-width:90em;
+    margin: 0 auto;
   }
 
   section {
@@ -64,9 +65,10 @@
 
 .controls {
   display: flex;
-  margin:0 auto 1em;
+  margin:0 auto 2em;
   max-width:50em;
   flex-wrap:wrap;
+  justify-content:center;
   padding-left:10px;
   @media (max-width: 1200px) {
     .energyTypeToggle:first-of-type {

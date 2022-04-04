@@ -198,7 +198,7 @@ export default function FinanceTracker(props) {
           {policyTypeColumns.map(policyType => <td key={policyType.label} style={policyType.theadStyle}>{policyType.label}</td>)}
         </tr>
         <tr>
-          <td colSpan={policyTypeColumns.length} style={{ width: '15em', textAlign: 'center'}}>(hover  over dot to see details)</td>
+          <td colSpan={policyTypeColumns.length} style={{ width: '15em', textAlign: 'center', color:'#9c9c9c'}}>(hover  over dot to see details)</td>
         </tr>
       </thead>
       <tbody>

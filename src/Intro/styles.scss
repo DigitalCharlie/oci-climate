@@ -59,7 +59,7 @@
     opacity: 0;
     transition: opacity 1s ease-in-out;
     z-index: 100;
-    padding: 2em 1em 1em;
+    padding: 4em 1em 2em;
 
     &.finalBoxInView {
       padding: 2em 1em 8.5em;
@@ -72,7 +72,7 @@
     width: 100%;
 
     &.introDismissed {
-      background:rgba(255,255, 255, 0.6);
+      background:rgba(255,255, 255, 0);
       background-image: -webkit-gradient(linear, left center, left top, from(rgba(255, 255, 255, 1)), to(rgba(255, 255, 255, 0)));
 
     }
@@ -104,7 +104,7 @@
       font-size: 0.7em;
       color: #222222;
       position: absolute;
-      bottom: 1em;
+      bottom: 1.5em;
       left: 50%;
       transform: translateX(-50%);
       font-weight: bold;
@@ -128,7 +128,7 @@
   }
 
   .restOfIntro {
-    max-width: 36em;
+    max-width: 50em;
     margin: 0 auto;
     padding: 0 1em;
     margin-top: 3em;
@@ -147,6 +147,8 @@
     }
     p {
       padding: 1em 0;
+      text-align:justify;
+      margin:0;
     }
   }
 
@@ -188,7 +190,7 @@
 
   @media (max-width: 1350px) {
     .restOfIntro {
-      width: 32em;
+      width: 45em;
     }
     .loading {
       font-size: 1.0em;
@@ -196,17 +198,18 @@
   }
   @media (max-width: 1200px) {
     .restOfIntro {
-      width: 28em;
+      width: 40em;
     }
   }
   @media (max-width: 1050px) {
     .restOfIntro {
-      width: 24em;
+      width: 36em;
     }
   }
   @media (max-width: 800px) {
     .restOfIntro {
-      width: 18em;
+      width: 30em;
+      max-width:95%;
     }
   }
   @media (max-width: 1000px) {

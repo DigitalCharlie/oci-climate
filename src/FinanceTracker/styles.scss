@@ -2,7 +2,7 @@
   padding: 0 1em 1em;
 
   .description {
-    max-width:50em;
+    max-width:70em;
     margin:0 auto;
     padding:0 10px;
   }
@@ -104,8 +104,8 @@
     justify-content: space-between;
   }
   .legend {
-    background-color: #F0F0F0;
-    padding: 0.5em;
+    // background-color: #F0F0F0;
+    // padding: 0.5em;
     .legend-title {
       font-weight: bold;
       font-size: 1.125em;
@@ -130,6 +130,8 @@
 
   .tableContainer {
     position: relative;
+    max-width:70em;
+    margin: 0 auto;
 
     .dotTooltip {
       position: absolute;
