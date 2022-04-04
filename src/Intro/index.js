@@ -192,7 +192,7 @@ export default function Intro(props) {
        : null}
        {render ? <Fragment>
         <div className="introText" style={{ top: mobileLayout ? contentHeight / 2.5 : contentHeight / 2}}>
-          <h1 className={classNames({visible: topVisible})}>A Public Database of International Public Finance for Energy</h1>
+          <h1 className={classNames({visible: topVisible})}>A Database of International Public Finance for Energy</h1>
           <p  className={classNames({visible: topVisible})}>G20 countries have provided at least $188 billion in influential, government-backed public finance for oil, gas, and coal since 2018.</p>
           <p  className={classNames({visible: topVisible})}>We are tracking this money from G20 export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they <span className='highlight'>#StopFundingFossils</span> and shift it to support just climate solutions instead. </p>
           <div className={classNames('buttons', {visible: buttonsVisible})}>

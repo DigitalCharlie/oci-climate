@@ -11,8 +11,9 @@ header.Header {
     display: flex;
   }
   img {
-    width: 12em;
+    width: 18em;
     align-self: center;
+    margin:10px;
   }
   h1 {
     margin: 0;
@@ -82,7 +83,8 @@ header.Header {
       display: block;
     }
     img {
-      width: 8em;
+      width: 12em;
+      margin:0;
     }
     h1 {
       margin-left: 0;

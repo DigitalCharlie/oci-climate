@@ -1,6 +1,6 @@
 import './styles.scss'
 
-import logo from 'images/logo.png'
+import logo from 'images/text-logo.png'
 import routes from 'routes'
 import { NavLink } from 'react-router-dom'
 import { useHistory, useLocation } from 'react-router'

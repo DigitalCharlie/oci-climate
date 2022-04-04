@@ -24,6 +24,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 36em;
+    p {
+      text-align:justify;
+    }
     > * {
       padding: 1em;
 
@@ -59,7 +62,7 @@
     opacity: 0;
     transition: opacity 1s ease-in-out;
     z-index: 100;
-    padding: 4em 1em 2em;
+    padding: 1em 1em 2em;
 
     &.finalBoxInView {
       padding: 2em 1em 8.5em;
