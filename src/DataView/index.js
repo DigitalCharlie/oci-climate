@@ -68,7 +68,7 @@ export default function DataView(props) {
     },
 
     {
-      title: 'DFIs Comparison',
+      title: 'Development Finance Institutions Comparison',
       orderMultiColumnView: 2,
       description: 'Public energy finance from G20 development finance institutions, by country. Hover over each country label to see the institutions included.',
       column: 'right',
@@ -77,10 +77,10 @@ export default function DataView(props) {
       )
     },
     {
-      title: 'Public Finance by Recipient Countries',
+      title: 'Public Finance by Country',
       column: 'left',
       orderMultiColumnView: 4,
-      description: 'Where G20 and MDB public finance for energy is flowing, by country.',
+      description: 'Where G20 and MDB public finance for energy is flowing, by country. Grouped either by recipient or financing country (use toggle below). Click on clean or other to see non-fossil fuel financing.',
       content: (
         data.length ? <MiniMap data={data} /> : null
       )

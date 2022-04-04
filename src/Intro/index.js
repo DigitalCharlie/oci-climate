@@ -204,7 +204,7 @@ export default function Intro(props) {
             <div className={classNames('scrollToContinue', {visible: !finalBoxInView})}>Scroll to continue reading</div>
           </div>
 
-        <div className='restOfIntro' style={{ paddingBottom: contentHeight / 10, opacity: restOfIntroVisible ? 1 : 0}}>
+        <div className='restOfIntro' style={{ paddingBottom: contentHeight / 5, opacity: restOfIntroVisible ? 1 : 0}}>
           <section>
           <h3>Public Finance Should Be Fossil Free</h3>
           <p>

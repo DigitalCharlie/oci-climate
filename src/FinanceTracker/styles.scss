@@ -102,13 +102,15 @@
   .controls {
     display: flex;
     justify-content: space-between;
+    border:1px solid black;
+    padding:10px;
   }
   .legend {
+    font-size:.875em;
     // background-color: #F0F0F0;
     // padding: 0.5em;
     .legend-title {
       font-weight: bold;
-      font-size: 1.125em;
       margin-bottom: 0.5em;
     }
     .legend-items {
@@ -116,9 +118,9 @@
       > div {
         display: flex;
         .dot {
+          font-size:1em;
           margin-right: 0.5em;
           @media (min-width:768px) {
-            margin-top:10px;
           }
         }
         + div {

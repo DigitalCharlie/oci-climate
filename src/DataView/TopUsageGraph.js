@@ -76,7 +76,7 @@ function AnimatedRow(props) {
   const textAnchor = 'end'
   if (isBank) {
     const nameOverrides = {
-      'Islamic Development Bank*': 'IsDB',
+      'Islamic Development Bank*': 'IsDB*',
       'Inter-American Development Bank': 'IaDB',
     }
     if (nameOverrides[name]) {

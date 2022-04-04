@@ -240,7 +240,7 @@ export default function FinanceTracker(props) {
   const legend = (
     <div className='legend'>
       <div className='legend-title'>
-        Exclusion Policies Situation color indicator:
+        Exclusion Policies color key:
       </div>
       <div className='legend-items'>
         {Object.keys(dotColors).map(color => (
