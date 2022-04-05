@@ -106,7 +106,7 @@ export default function DataView(props) {
   console.log(singleColumnView)
 
   // This section width determines size of the svg on the data dashboard
-  const sectionWidth = singleColumnView ? width - 20 - 16 * 2 : (width - 85 * 4 - 80) / 2
+  const sectionWidth = singleColumnView ? width - 20 - 16 * 2 : (width - 90 * 4 - 100) / 2
   const renderSection = (section) => {
     const description = section.description
     let defaultContent = <svg width={sectionWidth} height={200 + section.index * 50} />
