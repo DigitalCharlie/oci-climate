@@ -1,10 +1,11 @@
 
 import classNames from 'classnames';
 import { useEffect } from 'react'
-import logo from 'images/logo.png'
+import logo from 'images/oci-logo.png'
 
 import { useLocation } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link';
+import { Link } from 'react-router-dom'
 
 import facebook from 'images/facebook.svg'
 import twitter from 'images/twitter.svg'
@@ -30,8 +31,9 @@ export default function Footer(props) {
       <section className="left-footer">
           <img className='logo' src={logo} alt='Oil Change International' />
           <div>
-            Public Finance for Energy Database is a project of Oil Change International.<br />
-            Press inquiries: <ExLink href="mailto:media@priceofoil.org">media@priceofoil.org</ExLink>
+            This database is a project of OCI<br />
+            Press inquiries: <ExLink href="mailto:media@priceofoil.org">media@priceofoil.org</ExLink><br /><br />
+            <Link to="/about">About</Link>
           </div>
       </section>
       <section className="right-footer">
@@ -43,7 +45,7 @@ export default function Footer(props) {
             <img src={twitter} alt="Twitter" />
           </a>
         </div>
-        {/* <p> © 2021 · Oil Change International · All Rights Reserved</p> */}
+        <p> © Oil Change International (CC BY-NC-SA 4.0)</p>
       </section>
     </div>
   )

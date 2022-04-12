@@ -19,7 +19,12 @@
     margin-top: 10px;
   }
   .right-footer {
-    justify-content:end;
+    flex-direction: column;
+    align-items: flex-end;
+    p {
+      color:#a3a3a3;
+      margin-bottom:5px;
+    }
   }
   > div {
     padding: 0.2em 0;
