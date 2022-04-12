@@ -42,7 +42,7 @@ export default function DataView(props) {
     {
       title: 'Top 15 G20 Country Comparison',
       orderMultiColumnView: 1,
-      description: 'The top 15 G20 countries for international public finance for energy based on dashboard selections. This includes each country’s bilateral export credit agencies and development finance institutions, but not G20 country contributions to multilateral development banks which are not possible to disaggregate. Hover over each country label to see the institutions included.',
+      description: 'The 15 countries with the largest flows of international public finance for energy based on your dashboard selections. This includes finance from bilateral export credit agencies and development finance institutions, but not G20 country contributions to multilateral development banks as these are not possible to disaggregate. Hover over each country label to see the institutions included.',
       content: (
         <TopUsageGraph data={data.filter(d => d.institutionKind !== 'Multilateral')} />
       )
@@ -51,7 +51,7 @@ export default function DataView(props) {
       title: 'Multilateral Development Banks Comparison',
 
       orderMultiColumnView: 3,
-      description: 'Public energy finance from the major multilateral development banks. G20 countries have the majority voting power at each of these institutions, but other countries have voting power and shares as well. Hover over each bank label to see the institutions included.',
+      description: 'Public energy finance from the major multilateral development banks. Note that G20 countries are collectively major shareholders of each of these institutions, but that many other countries hold shares as well. Hover over each bank label to see the institutions included.',
       content: (
         <TopUsageGraph isBank data={data.filter(d => d.institutionKind === 'Multilateral')} />
       )
@@ -80,7 +80,7 @@ export default function DataView(props) {
       title: 'Public Finance by Country',
       column: 'left',
       orderMultiColumnView: 4,
-      description: 'Where G20 and MDB public finance for energy is flowing, by country. Grouped either by recipient or financing country (use toggle below). Click on clean or other to see non-fossil fuel financing.',
+      description: `Where G20 and MDB public finance for energy is flowing, by country. Grouped either by recipient or financing country (use toggle below). Click on 'Clean' or 'Other' to see non-fossil fuel finance flows. Hover over each country to see flow amounts.`,
       content: (
         data.length ? <MiniMap data={data} /> : null
       )
@@ -146,7 +146,7 @@ export default function DataView(props) {
         <div className='description'>
 <p>Public finance institutions play an outsized role in shaping our future energy system by providing government-backed, low-risk finance that is often a determining factor in which projects get built. This dashboard shows the total flows of public finance going to fossil fuel, clean, and other energy projects from G20 countries’ trade and development finance institutions as well as the major multilateral development banks. </p>
 
-<p><strong>How to use this dashboard:</strong> Use the controls below to add data on clean and other energy, change the years displayed, or show totals rather than annual averages. You can hover over a country or institution on a graph to see more details, and toggle some graph-specific settings. Countries or institutions with a * indicate there is particularly low transparency on their public finance flows. For more details on our methodology, see the About page. Our full dataset includes information on each transaction behind this data as well as details about the kind of finance, energy sub-type, and supply chain stage, and this can be downloaded <a  href={`${process.env.PUBLIC_URL}/OCI Public Finance for Energy Database - 2021.xlsx`}>here</a>.</p>
+<p><strong>How to use this dashboard:</strong> Use the controls below to add data on clean and other energy, change the years displayed, or show totals rather than annual averages. You can hover over a country or institution on a graph to see more details, and toggle some graph-specific settings. Poor reporting from governments means the figures reported here are often incomplete and therefore underestimated, and countries or institutions with a * indicate there is particularly low transparency on their public finance flows. For more details on our methodology, see the <Link to="/about">About</Link> page. Our full dataset includes information on each transaction behind this data as well as details about the kind of finance, energy sub-type, and supply chain stage. You can click <a  href={`${process.env.PUBLIC_URL}/OCI Public Finance for Energy Database - 2021.xlsx`}>here</a> to download it as a spreadsheet(.xlsx file).</p>
         </div>
       </div>
       <div className='controls'>
