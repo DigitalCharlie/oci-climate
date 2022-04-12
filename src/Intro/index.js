@@ -192,9 +192,11 @@ export default function Intro(props) {
        : null}
        {render ? <Fragment>
         <div className="introText" style={{ top: mobileLayout ? contentHeight / 2.5 : contentHeight / 2}}>
-          <h1 className={classNames({visible: topVisible})}>A Database of International Public Finance for Energy</h1>
-          <p  className={classNames({visible: topVisible})}>G20 countries have provided at least $188 billion in influential, government-backed public finance for oil, gas, and coal since 2018.</p>
-          <p  className={classNames({visible: topVisible})}>We are tracking this money from G20 export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they <span className='highlight'>#StopFundingFossils</span> and shift it to support just climate solutions instead. </p>
+          <h1 className={classNames({visible: topVisible})}>Tracking international public finance for energy</h1>
+          <p  className={classNames({visible: topVisible})}>G20 governments provide more than USD $100 billion each year in international finance for energy projects through their trade and development institutions. This money has an outsized influence on what kinds of energy projects get built. Unfortunately, for every dollar going to the clean energy we need to build a just and liveable future, 2.5x more is still flowing to fossil fuels. 
+          </p>
+          <p  className={classNames({visible: topVisible})}>Public Finance for Energy Database aims to track these flows and make it easier to hold G20 governments accountable for these influential investments. It is the only publicly available database tracking international public finance for energy across multiple countries.
+          </p>
           <div className={classNames('buttons', {visible: buttonsVisible})}>
             <button onClick={() => setIntroDismissed(true)}>Read More</button>
             <Link to='/data'>Explore the data</Link>
@@ -206,37 +208,47 @@ export default function Intro(props) {
 
         <div className='restOfIntro' style={{ paddingBottom: contentHeight / 5, opacity: restOfIntroVisible ? 1 : 0}}>
           <section>
-          <h3>Public Finance Should Be Fossil Free</h3>
+          <h3>Why track international public finance? </h3>
           <p>
-            Public Finance for Energy Database is the only publicly available database tracking international finance for energy from government-owned institutions across multiple countries. It tracks G20 energy finance at export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they stop funding fossil fuels and shift their support to clean energy and just climate solutions instead. 
+            Public Finance for Energy Database compiles transaction-level data on finance from G20 export credit agencies and development finance institutions as well as the large multilateral development banks they hold major governing stakes in. Our data shows these government institutions are providing at least <strong>$63 billion a year</strong> on average in influential international public finance for oil, gas, and coal. For 2018-2020 this was <strong>2.5x</strong> their support for clean energy. This public money is prolonging the fossil fuel era and making it harder for clean energy projects to get built. 
           </p>
           <p>
-            The database includes over 14,000 transactions from 2013 to 2020 and has been used by researchers for publications at <ExLink href="https://priceofoil.org/">BloombergNEF</ExLink>, <ExLink href="https://priceofoil.org/">Reuters</ExLink>, <ExLink href="https://priceofoil.org/">Energy Monitor</ExLink>, <ExLink href="https://priceofoil.org/">Nature</ExLink>, and <ExLink href="https://priceofoil.org/">Cambridge University</ExLink> among others. As a whole, we find that G20 government institutions are providing at least $63 billion a year on average in influential international public finance for oil, gas, and coal. For 2018-2020 this was 2.5x their support for clean energy. This public money is prolonging the fossil fuel era and making it harder for clean energy projects to get built. 
-          </p>
-          <p>
-            The International Energy Agency is clear that we need to end all finance for new fossil fuel supply and rapidly transition to clean energy to stay within 1.5°C of warming and avoid the worst climate impacts. Despite governments’ commitments to end fossil fuel subsidies and align financial flows with the Paris climate goals, public finance flows to fossil fuel projects have only slightly decreased and support for clean energy remains small.
+            This fossil fuel finance runs directly counter to our global climate goals. The International Energy Agency is clear that we need to end all finance for new fossil fuel supply and rapidly transition to clean energy to stay within 1.5°C of warming and avoid the worst climate impacts. Despite governments’ commitments to end fossil fuel subsidies and align financial flows with the Paris climate goals, since 2013 public finance flows to fossil fuel projects have only slightly decreased and support for clean energy remains small.
           </p>
 
+          <h3 className="chart-title">
+            G20 and MDB public finance for fossil fuels, clean, and other energy, 2013-2020, in USD Billions
+          </h3>
           <img src={publicFinance} alt="Chart of public finance between 2013 and 2020" />
 
           <p>
-            Public finance has an outsized impact on energy systems and often acts as a subsidy. This is because these loans, guarantees, equity, and grants have come with below-market rates, technical capacity, and decreased financial risks that make projects much more likely to go forward. We need this $63 billion a year currently in public finance for fossil fuels — and more — to support a just transition to clean energy instead. To get on the pathway to a globally just energy transition in line with 1.5°C, we also need wealthy G20 governments to ensure their public finance institutions uphold comprehensive human rights due diligence across their projects and provide their fair share of debt cancellation and climate finance. 
+            Public finance also has an outsized impact on energy systems and often acts as a subsidy. This is because these loans, guarantees, equity, and grants have come with below-market rates, technical capacity, and decreased financial risks that make projects much more likely to go forward. We need the $63 billion a year in public finance going to fossil fuels — and more — to support a just transition to clean energy instead. To get on the pathway to a globally just energy transition in line with 1.5°C, we need wealthy G20 governments to do much more as well, including rapidly phasing out their fossil fuel production at home, ensuring their public finance institutions uphold comprehensive human rights due diligence across for clean energy projects, and providing their fair share of debt cancellation and climate finance. 
+          </p>
+
+          <p>
+            Public Finance for Energy Database includes over 10,000 transactions from 2013 to 2020 and has been used by researchers for publications at <ExLink href="https://about.bnef.com/blog/new-report-finds-g-20-member-countries-support-fossil-fuels-at-levels-untenable-to-achieve-paris-agreement-goals/">BloombergNEF</ExLink>, <ExLink href="https://www.reuters.com/business/cop/19-countries-plan-cop26-deal-end-financing-fossil-fuels-abroad-sources-2021-11-03/">Reuters</ExLink>, <ExLink href="https://www.energymonitor.ai/finance/sustainable-finance/how-wealthy-governments-continue-to-subsidise-fossil-fuels-in-developing-nations">Energy Monitor</ExLink>, <ExLink href="https://www.nature.com/articles/d41586-021-02847-2">Nature</ExLink>, <ExLink href="https://www.cambridge.org/core/books/governing-the-climate-energy-nexus/87F5A10BD95C94B1245DF2F9CA5D00B5">Cambridge University</ExLink>, <ExLink href="https://foe.org/news/report-g20-governments-bankroll-188billion-in-fossil-fuels/">Friends of the Earth US</ExLink>, <ExLink href="https://www.iisd.org/publications/g20-scorecard">International Institute for Sustainable Development</ExLink>, and many others.
           </p>
           <p>
-            The Public Finance for Energy Database shows Canada, Japan, Korea, and China are the largest current providers of international public finance for fossil fuels out of the G20 countries. 
+            This data shows that Canada, Japan, Korea, and China are the largest current providers of international public finance for fossil fuels out of the G20 countries, bankrolling more than $10 billion a year on average 2018-2020. 
           </p>
+
+          <h3 className="chart-title">Top 15 G20 countries for international public finance for fossil fuels, annual average 2018-2020, USD billions</h3>
 
           <img src={g20} alt="Chart of top 15 G20 public finance for fossil fuels" />
 
           <p>
-            At the multilateral development bank level, the World Bank Group is providing the most financing for fossil fuel projects. 
+            At the multilateral development bank level, we find the World Bank Group is providing the most financing for fossil fuel projects each year. 
           </p>
 
+          <h3 className="chart-title">
+            Multilateral Development Bank finance for fossil fuels, annual average 2018-2020, USD billions
+          </h3>
           <img src={mdb} alt="Chart of comparison of fossil fuel funding by multilateral development banks" />
 
           <p>
-            But a breakthrough is close. Momentum is building to finally make public finance fossil free. As of 2021, almost all G20 countries have policies to end their coal finance. And six G20 countries, along with 33 other countries and institutions, signed a joint commitment at COP26 to end their international support for oil and gas by the end of 2022 as well. 
+            In the face of these troubling trends, public pressure for climate action means a breakthrough could be on the horizon. As of 2021, most G20 countries have policies to end their coal finance. And six G20 countries, along with 33 other countries and institutions, signed a joint commitment at COP26 to end their international support for oil and gas by the end of 2022 as well. Momentum is building, but these commitments must be implemented without loopholes and expanded to more countries rapidly for public finance to align with a livable future. 
           </p>
+
           <h3>
             <strong>Explore the Site</strong>
           </h3>
@@ -245,6 +257,9 @@ export default function Intro(props) {
           </p>
           <p ref={finalBoxRef}>
             Our <Link to="/tracker">Policy Tracker</Link> shows progress on the G20 country and MDBs implementation of these promises. 
+          </p>
+          <p>
+            The <Link to="/about">About</Link> page has details on our how we collect our data, key definitions, and the poor government transparency that limits what we can report on. 
           </p>
           <p>
             Our <Link to="resources">Resources</Link> page provides the latest research and news on international public finance from Oil Change International and our partners. 

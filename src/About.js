@@ -33,10 +33,10 @@ export default function About(props) {
     <div  style={{ marginTop: props.headerHeight }}  className='About'>
       <h1>About</h1>
       <p>
-        Public Finance for Energy Database is a project of Oil Change International. It is the only publicly available database tracking international finance for energy from government-owned institutions across multiple countries. We track G20 energy finance at export credit agencies, development finance institutions, and multilateral development banks at the project level to help make sure they stop funding fossil fuels and shift their support to clean energy and just climate solutions instead. 
+        Public Finance for Energy Database is a project of Oil Change International, formerly called the Shift the Subsidies Database. It is the only publicly available database tracking international finance for energy from government-owned institutions across multiple countries. We track G20 governments’ energy finance at export credit agencies, development finance institutions, and multilateral development banks at the project level.
       </p>
       <p>
-        Below are some of frequently asked questions. If you'd like to explore the data yourself, you can <a href={`${process.env.PUBLIC_URL}/OCI Public Finance for Energy Database - 2021.xlsx`}>download it as a spreadsheet here</a>.
+        Below are some of the most frequently asked questions. If you would like to explore the data yourself at the transaction level, you can click <a href={`${process.env.PUBLIC_URL}/OCI Public Finance for Energy Database - 2021.xlsx`}>here</a> to download it as a spreadsheet(.xlsx file).
       </p>
       <br />
       <h2>Frequently Asked Questions</h2>
