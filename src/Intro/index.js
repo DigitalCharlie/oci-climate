@@ -195,7 +195,7 @@ export default function Intro(props) {
           <h1 className={classNames({visible: topVisible})}>Tracking international public finance for energy</h1>
           <p  className={classNames({visible: topVisible})}>G20 governments provide more than USD $100 billion each year in international finance for energy projects through their trade and development institutions. This money has an outsized influence on what kinds of energy projects get built. Unfortunately, for every dollar going to the clean energy we need to build a just and liveable future, 2.5x more is still flowing to fossil fuels. 
           </p>
-          <p  className={classNames({visible: topVisible})}>Public Finance for Energy Database aims to track these flows and make it easier to hold G20 governments accountable for these influential investments. It is the only publicly available database tracking international public finance for energy across multiple countries.
+          <p  className={classNames({visible: topVisible})}>The Public Finance for Energy Database tracks these flows to make it easier to hold G20 governments accountable for these influential investments. It is the only publicly available database tracking international public finance for energy across multiple countries. 
           </p>
           <div className={classNames('buttons', {visible: buttonsVisible})}>
             <button onClick={() => setIntroDismissed(true)}>Read More</button>
@@ -210,7 +210,7 @@ export default function Intro(props) {
           <section>
           <h3>Why track international public finance? </h3>
           <p>
-            Public Finance for Energy Database compiles transaction-level data on finance from G20 export credit agencies and development finance institutions as well as the large multilateral development banks they hold major governing stakes in. Our data shows these government institutions are providing at least <strong>$63 billion a year</strong> on average in influential international public finance for oil, gas, and coal. For 2018-2020 this was <strong>2.5x</strong> their support for clean energy. This public money is prolonging the fossil fuel era and making it harder for clean energy projects to get built. 
+            The Public Finance for Energy Database is a project of <a href="https://priceofoil.org/" target="_blank">Oil Change International</a>. We compile transaction-level data on finance from G20 export credit agencies and development finance institutions as well as the large multilateral development banks they hold major governing stakes in. Our data shows these government institutions are providing at least <strong>$63 billion a year</strong> on average in influential international public finance for oil, gas, and coal. For 2018-2020 this was <strong>2.5x</strong> their support for clean energy. This public money is prolonging the fossil fuel era and making it harder for clean energy projects to get built. 
           </p>
           <p>
             This fossil fuel finance runs directly counter to our global climate goals. The International Energy Agency is clear that we need to end all finance for new fossil fuel supply and rapidly transition to clean energy to stay within 1.5°C of warming and avoid the worst climate impacts. Despite governments’ commitments to end fossil fuel subsidies and align financial flows with the Paris climate goals, since 2013 public finance flows to fossil fuel projects have only slightly decreased and support for clean energy remains small.
@@ -229,7 +229,7 @@ export default function Intro(props) {
             Public Finance for Energy Database includes over 10,000 transactions from 2013 to 2020 and has been used by researchers for publications at <ExLink href="https://about.bnef.com/blog/new-report-finds-g-20-member-countries-support-fossil-fuels-at-levels-untenable-to-achieve-paris-agreement-goals/">BloombergNEF</ExLink>, <ExLink href="https://www.reuters.com/business/cop/19-countries-plan-cop26-deal-end-financing-fossil-fuels-abroad-sources-2021-11-03/">Reuters</ExLink>, <ExLink href="https://www.energymonitor.ai/finance/sustainable-finance/how-wealthy-governments-continue-to-subsidise-fossil-fuels-in-developing-nations">Energy Monitor</ExLink>, <ExLink href="https://www.nature.com/articles/d41586-021-02847-2">Nature</ExLink>, <ExLink href="https://www.cambridge.org/core/books/governing-the-climate-energy-nexus/87F5A10BD95C94B1245DF2F9CA5D00B5">Cambridge University</ExLink>, <ExLink href="https://foe.org/news/report-g20-governments-bankroll-188billion-in-fossil-fuels/">Friends of the Earth US</ExLink>, <ExLink href="https://www.iisd.org/publications/g20-scorecard">International Institute for Sustainable Development</ExLink>, and many others.
           </p>
           <p>
-            This data shows that Canada, Japan, Korea, and China are the largest current providers of international public finance for fossil fuels out of the G20 countries, bankrolling more than $10 billion a year on average 2018-2020. 
+            This data shows that Canada, Japan, and Korea are the largest current providers of international public finance for fossil fuels out of the G20 countries, bankrolling more than $10 billion a year on average 2018-2020. 
           </p>
 
           <h3 className="chart-title">Top 15 G20 countries for international public finance for fossil fuels, annual average 2018-2020, USD billions</h3>
@@ -253,16 +253,16 @@ export default function Intro(props) {
             <strong>Explore the Site</strong>
           </h3>
           <p>
-            Our <Link to="/data">Data Dashboard</Link> shows the total flows of public finance going to fossil fuel, clean, and other energy projects from the major multilateral development banks as well as G20 countries’ trade and development finance institutions. You can toggle to adjust what countries, types of energy, and years are shown. 
+            Our <strong><Link to="/data">Data Dashboard</Link></strong> shows the total flows of public finance going to fossil fuel, clean, and other energy projects from the major multilateral development banks as well as G20 countries’ trade and development finance institutions. You can toggle to adjust what countries, types of energy, and years are shown. 
           </p>
           <p ref={finalBoxRef}>
-            Our <Link to="/tracker">Policy Tracker</Link> shows progress on the G20 country and MDBs implementation of these promises. 
+            Our <strong><Link to="/tracker">Policy Tracker</Link></strong> shows progress on the G20 country and MDBs implementation of these promises. 
           </p>
           <p>
-            The <Link to="/about">About</Link> page has details on our how we collect our data, key definitions, and the poor government transparency that limits what we can report on. 
+            The <strong><Link to="/about">About</Link></strong> page has details on our how we collect our data, key definitions, and the poor government transparency that limits what we can report on. 
           </p>
           <p>
-            Our <Link to="resources">Resources</Link> page provides the latest research and news on international public finance from Oil Change International and our partners. 
+            Our <strong><Link to="resources">Resources</Link></strong> page provides the latest research and news on international public finance from Oil Change International and our partners. 
           </p>
           {/* <div>
               <h2 style={{ top: headerHeight}}>Why does international public finance for energy matter？</h2>

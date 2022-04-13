@@ -6,7 +6,7 @@ The Energy Finance Tracker database is a project of Oil Change International’s
 
 [Past Last Call](https://priceofoil.org/2021/10/28/past-last-call-g20-public-finance-institutions-are-still-bankrolling-fossil-fuels/) (2021) is the most recent analysis of our G20 international public finance dataset from Oil Change International and Friends of the Earth US. This report provides an update to previous reports [Still Digging](http://priceofoil.org/2020/05/27/g20-still-digging/) (2020) and [Talk is Cheap](http://priceofoil.org/2017/07/05/g20-financing-climate-disaster/) (2017) detailing earlier trends. 
 
-![Past Last Call](Past-Last-Call.jpeg "Past Last Call")  
+[![Past Last Call](Past-Last-Call.jpeg "Past Last Call")](https://priceofoil.org/2021/10/28/past-last-call-g20-public-finance-institutions-are-still-bankrolling-fossil-fuels/)  
 
 &nbsp;
 
@@ -24,7 +24,7 @@ ECAs are consistently the worst public finance actors for the climate, providing
 
 - [Export finance for the past or the future? Why E3F member countries must end oil and gas financing and finance a climate-compatible future](http://priceofoil.org/2021/11/22/new-research-e3f-countries-need-to-shift-their-eur-19-billion-in-export-finance-for-fossil-fuels-to-renewables/) (2021)
 - [Briefing for Policy Makers: An agenda for greening Export Credit Agencies in 2021](http://priceofoil.org/content/uploads/2021/04/Briefing-for-Policy-Makers_-Greening-Export-Credit-Agencies.pdf) (2021)
--[Legal opinion: Export credit agencies and states potentially at risk of climate litigation over finance for fossil fuels](http://priceofoil.org/2021/05/04/press-release-eca-legal-opinion/)
+- [Legal opinion: Export credit agencies and states potentially at risk of climate litigation over finance for fossil fuels](http://priceofoil.org/2021/05/04/press-release-eca-legal-opinion/) (2021)
 
 ### Development Finance
 
