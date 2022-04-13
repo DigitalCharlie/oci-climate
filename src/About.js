@@ -36,7 +36,7 @@ export default function About(props) {
         Public Finance for Energy Database is a project of Oil Change International, formerly called the Shift the Subsidies Database. It is the only publicly available database tracking international finance for energy from government-owned institutions across multiple countries. We track G20 governments’ energy finance at export credit agencies, development finance institutions, and multilateral development banks at the project level.
       </p>
       <p>
-        Below are some of the most frequently asked questions. If you would like to explore the data yourself at the transaction level, you can click <a href={`${process.env.PUBLIC_URL}/OCI Public Finance for Energy Database - 2021.xlsx`}>here</a> to download it as a spreadsheet(.xlsx file).
+        Below are some of the most frequently asked questions. If you would like to explore the data yourself at the transaction level, you can click <a href={`${process.env.PUBLIC_URL}/OCI Public Finance for Energy Database - 2021.xlsx`}>here</a> to download it as a spreadsheet (.xlsx file).
       </p>
       <br />
       <h2>Frequently Asked Questions</h2>
