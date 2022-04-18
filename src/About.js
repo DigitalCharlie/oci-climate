@@ -8,6 +8,8 @@ const ExLink = ({href, children}) => {
 
 export default function About(props) {
 
+  const downloadPath = `OCI Public Finance for Energy Database - Download Copy.xlsx`
+
   const dataQuestions = [
     'How are projects classified as fossil fuel, clean, or other?',
     'Where does the data come from?',
@@ -36,7 +38,7 @@ export default function About(props) {
         Public Finance for Energy Database is a project of Oil Change International, formerly called the Shift the Subsidies Database. It is the only publicly available database tracking international finance for energy from government-owned institutions across multiple countries. We track G20 governments’ energy finance at export credit agencies, development finance institutions, and multilateral development banks at the project level.
       </p>
       <p>
-        Below are some of the most frequently asked questions. If you would like to explore the data yourself at the transaction level, you can click <a href={`${process.env.PUBLIC_URL}/OCI Public Finance for Energy Database - 2021.xlsx`}>here</a> to download it as a spreadsheet (.xlsx file).
+        Below are some of the most frequently asked questions. If you would like to explore the data yourself at the transaction level, you can click <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>here</a> to download it as a spreadsheet (.xlsx file).
       </p>
       <br />
       <h2>Frequently Asked Questions</h2>
@@ -122,7 +124,7 @@ In cases where multiple sectors are included in one transaction, only the portio
 
 <br /><h3 id={dataSlugs[5]}><strong>How can I look at public finance for specific projects or see more detail?</strong></h3>
 
-<p>You can download the data as a spreadsheet <a href={`${process.env.PUBLIC_URL}/OCI Public Finance for Energy Database - 2021.xlsx`}>here</a>. Definitions for each field are provided in the first tab, and a source for each transaction is in the last column. You can also read more background and analysis on public finance <Link to='/resources'>here</Link>.</p>
+<p>You can download the data as a spreadsheet <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>here</a>. Definitions for each field are provided in the first tab, and a source for each transaction is in the last column. You can also read more background and analysis on public finance <Link to='/resources'>here</Link>.</p>
 
 
 <br /><h3 id={dataSlugs[6]}><strong>How do I cite this website?</strong></h3>
