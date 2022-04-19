@@ -17,7 +17,8 @@ export default function About(props) {
     'What public finance data is included here?',
     'Do the amounts reported here include all G20 international public finance for energy?',
     'How can I look at public finance for specific projects or see more detail?',
-    'How do I cite this website?'
+    'How do I cite this website?',
+    `What is this site's Privacy Policy?`
   ]
   
   const dataSlugs = dataQuestions.map(q=>slug(q))
@@ -82,7 +83,7 @@ In cases where multiple sectors are included in one transaction, only the portio
 </p>
 
 <br /><h3 id={dataSlugs[3]}><strong>What public finance data is included here?</strong></h3>
-<p>This dataset covers only public finance from G20 country bilateral finance institutions and the major MDBs. We consider these export credit agencies, development finance institutions, and multilateral development banks to be in scope as ‘public finance institutions’ when national government(s) holds more than 50% of the shares and where there is a clear policy mandate that drives decisions beyond solely commercial performance (see the figures in the Data section for a full list of institutions and classifications). This means we do not cover finance or subsidies from G20 governments directly, sovereign wealth funds, or institutions owned by subnational governments. Generally, the MDBs, DFIs, and ECAs we cover provide energy finance internationally, but they sometimes also provide domestic support. These domestic projects are also included where information is available so we can get a full institution-level picture. Government agencies or national development banks that occasionally provide international finance are also not reflected here.</p>
+<p>This dataset covers only public finance from G20 country bilateral finance institutions and the major MDBs. We consider these export credit agencies, development finance institutions, and multilateral development banks to be in scope as ‘public finance institutions’ when national government(s) holds more than 50% of the shares and where there is a clear policy mandate that drives decisions beyond solely commercial performance (see the figures in the <Link to="/data">Data Dashboard</Link> for a full list of institutions and classifications). This means we do not cover finance or subsidies from G20 governments directly, sovereign wealth funds, or institutions owned by subnational governments. Generally, the MDBs, DFIs, and ECAs we cover provide energy finance internationally, but they sometimes also provide domestic support. These domestic projects are also included where information is available so we can get a full institution-level picture. Government agencies or national development banks that occasionally provide international finance are also not reflected here.</p>
 <table>
 <thead>
   <tr>
@@ -133,6 +134,10 @@ In cases where multiple sectors are included in one transaction, only the portio
       <p>
       If using this database, please cite it as Oil Change International, “Public Finance for Energy Database,” [Date Accessed], URL.</p>
 
+<br /><h3 id={dataSlugs[7]}><strong>What is this site's privacy policy?</strong></h3>
+<p>The Public Finance for Energy Database website (the “site”) does not collect, maintain, or process any personally identifiable information of visitors to the site. The site is hosted by <ExLink href="http://netlify.com/">netlify.com</ExLink>, you can read their privacy policy <ExLink href="https://www.netlify.com/privacy/">here</ExLink>. The site is managed and operated by <ExLink href="https://priceofoil.org/">Oil Change International</ExLink>. If you have any questions, please contact <ExLink href="mailto:info@priceofoil.org">info@priceofoil.org</ExLink>.</p>
+
+
 <br /><h2>Background on International Public Finance for Energy</h2>
 
 <h3 id={bgSlugs[0]}><strong>Is international public finance a “subsidy”?</strong></h3>
@@ -155,9 +160,9 @@ In cases where multiple sectors are included in one transaction, only the portio
 <br /><h3 id={bgSlugs[3]}><strong>Is public finance for fossil fuels needed for development?</strong></h3>
 <p>The majority of G20 international public finance for energy flows between wealthy countries. Of the top 20 recipients of public finance for fossil fuels in 2018-2020, only one was low-income by the World Bank classification (Mozambique), six were lower-middle income, and the remainder were upper or middle income. When G20 international public finance for fossil fuels does flow to lower income countries, it has <ExLink href="https://priceofoil.org/2021/10/14/the-skys-limit-africa/">rarely served</ExLink> as a vehicle for just development, energy access, or resource sovereignty because of poor contract terms, industry-friendly subsidy and royalty frameworks, debt traps, corruption, and the outsized ownership of fossil resources by multinational corporations based in wealthy countries. And as the industry faces increasing systemic financial risks, the possibility that fossil fuels can promote just development is increasingly slim.</p>
 
-<p>The outlook for fossil fuels and development has continued to diminish, and continued public finance for fossil fuels now nearly always contradicts recommendations for achieving <ExLink href="https://www.seforall.org/data-and-evidence/energizing-finance-series/energizing-finance-2020;">energy access</ExLink> and <ExLink href="https://www.iisd.org/">avoiding economic shocks</ExLink> like stranded assets and climate disasters. Ending public finance flows would not mean halting the use and production of fossil fuels overnight. Rather, it means saying no to new projects now and starting widespread planning now to ensure there is time and resources for clean-up and for a just transition for the workers and communities that depend upon production. The wealthy countries most responsible for historic and current emissions — including most of the G20 — must move first and fastest to phase out their fossil fuel production and pay their fair share for the global energy transition.</p>
+<p>The outlook for fossil fuels and development has continued to diminish, and continued public finance for fossil fuels now nearly always contradicts recommendations for achieving <ExLink href="https://www.seforall.org/data-and-evidence/energizing-finance-series/energizing-finance-2020;">energy access</ExLink> and <ExLink href="https://www.iisd.org/publications/natural-gas-finance-clean-alternatives-global-south/">avoiding economic shocks</ExLink> like stranded assets and climate disasters. Ending public finance flows would not mean halting the use and production of fossil fuels overnight. Rather, it means saying no to new projects now and starting widespread planning now to ensure there is time and resources for clean-up and for a just transition for the workers and communities that depend upon production. The wealthy countries most responsible for historic and current emissions — including most of the G20 — must move first and fastest to phase out their fossil fuel production and pay their fair share for the global energy transition.</p>
 
-<p>As seen the existing policies restricting public finance for fossil fossil fuels, there are usually limited short-term exceptions for emergency settings and energy access in cases where clean energy is not immediately available -- categories which account for a <ExLink href="http://priceofoil.org/2018/10/10/shortchanging-energy-access-report-mdb-finance/">minute portion</ExLink> of G20 public finance for fossil fuels. </p>
+<p>As seen in all <Link to="/tracker">existing policies</Link> restricting public finance for fossil fuels, there are limited and reasonable short-term exceptions for emergency settings and energy access in cases where clean energy is not immediately available -- categories which account for a <ExLink href="http://priceofoil.org/2018/10/10/shortchanging-energy-access-report-mdb-finance/">minute portion</ExLink> of G20 public finance for fossil fuels. </p>
 <br />
 
 

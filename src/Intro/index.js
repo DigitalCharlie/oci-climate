@@ -256,7 +256,7 @@ export default function Intro(props) {
             Our <strong><Link to="/data">Data Dashboard</Link></strong> shows the total flows of public finance going to fossil fuel, clean, and other energy projects from the major multilateral development banks as well as G20 countries’ trade and development finance institutions. You can toggle to adjust what countries, types of energy, and years are shown. 
           </p>
           <p ref={finalBoxRef}>
-            Our <strong><Link to="/tracker">Policy Tracker</Link></strong> shows progress on the G20 country and MDBs implementation of these promises. 
+            Our <strong><Link to="/tracker">Policy Tracker</Link></strong> shows progress on G20 country and MDB implementation of their promises to end public finance for fossil fuels.
           </p>
           <p>
             The <strong><Link to="/about">About</Link></strong> page has details on our how we collect our data, key definitions, and the poor government transparency that limits what we can report on. 
@@ -264,57 +264,8 @@ export default function Intro(props) {
           <p>
             Our <strong><Link to="resources">Resources</Link></strong> page provides the latest research and news on international public finance from Oil Change International and our partners. 
           </p>
-          {/* <div>
-              <h2 style={{ top: headerHeight}}>Why does international public finance for energy matter？</h2>
-
-            <p>
-                The International Energy Agency is clear we need to <strong>end all finance for new fossil fuel supply and rapidly transition to renewable energy</strong> and to stay within 1.5°C of warming and avoid the worst climate impacts.
-              </p>
-            </div>
-            <p ref={fossilFuelBoxRef}>Despite this, G20 countries are still financing at least USD <strong className='large'>$63 billion a year</strong> for <span className='fossilFuel'>fossil fuel</span> <strong>projects</strong> through their export credit agencies, development finance institutions, and multilateral development banks. </p>
-            <p ref={cleanBoxRef}>For 2018-2020 this was <strong className='large'>2.5x their support</strong> for <span className='clean'>renewable&nbsp;energy</span>.</p>
-            <p>This money – provided as loans, guarantees, equity, and grants — has an outsized impact on energy systems. Public finance often comes with below-market rates, technical capacity, and decreased financial risks that make projects much more likely to go forward — something that is increasingly influential as the fossil fuel industry faces unprecedented global headwinds. We need this $63 billion a year in public finance for fossil fuels  —  and more — to support a just transition to renewable energy&nbsp;instead. </p>
-          </section>
-          <section  style={{ minHeight: contentHeight * 1.5}}>
-            <div>
-              <h2 style={{ top: headerHeight}}>How do we get public finance out for fossils?</h2>
-              <p ref={cleanBoxRef2}>
-                Momentum is building to finally make <strong className='large'>public finance fossil&nbsp;free</strong>.
-              </p>
-            </div>
-            <p ref={cleanBoxRef3}>As of 2021, almost all G20 countries have policies to end their coal finance. And six G20 countries, along with 33 other countries and institutions, signed a joint commitment at COP26 to end their international support for oil and gas by 2022 as&nbsp;well.</p>
-            <p ref={finalBoxRef}>We’re tracking G20 countries’ and MDBs’ implementation of these promises into policy <Link to='/tracker'>here</Link>. Or, visit our resources page <Link to='/resources'>here</Link> to learn more and help make sure governments <strong className='large'>#StopFundingFossils</strong>.  </p> */}
           </section>
         </div>
-        {/* <svg style={{ top: headerHeight }} className={classNames('fuelTypes', { mobileLayout})} width={width} height={contentHeight}>
-
-          {mobileLayout && showingBars ? <rect fill='#fff' opacity='0.9' width={width} height={expandedHeight + labelHeight + barPadding} y={contentHeight - expandedHeight - mobileSVGOffset - labelHeight - barPadding } /> : null}
-          <animated.g style={{ opacity: fossilFuelOpacity}} transform={boxHeights.fossilFuelBoxHeight.interpolate(y => `translate(${width * barPositioning}, ${contentHeight - y - mobileSVGOffset - barPadding})`)}>
-            <animated.rect
-              height={boxHeights.fossilFuelBoxHeight}
-              width={barWidth}
-              fill={colors['Fossil Fuel']}
-            />
-            <text style={{ transform: showBarLabels ? 'translateY(-1.2em)' : 'translateY(0)'}} dy={ '-1em'}  fill={colors['Fossil Fuel']}>Fossil Fuel
-
-            </text>
-            <text dy='-1em' style={{ opacity: showBarLabels ? 1 : 0}} fill={colors['Fossil Fuel']}>$63 billion</text>
-          </animated.g>
-          <animated.g style={{ opacity: cleanOpacity }} transform={boxHeights.cleanBoxHeight.interpolate(y => `translate(${width * (1 - barPositioning) - barWidth}, ${contentHeight - y - mobileSVGOffset - barPadding})`)}>
-            <animated.rect
-              height={boxHeights.cleanBoxHeight}
-              width={barWidth}
-              fill={colors.Clean}
-            />
-            <text style={{ transform: showBarLabels ? 'translateY(-1.2em)' : 'translateY(0)'}} dy={ '-1em'} fill={colors.Clean}>Renewable Energy
-
-
-            </text>
-            <text dy={ '-1em'} fill={colors.Clean} style={{ opacity: showBarLabels ? 1 : 0}}> $26 billion</text>
-          </animated.g>
-
-
-        </svg> */}
         <Footer introFooter opacity={finalBoxInView ? 1 : 0 } />
       </Fragment> : null}
 

@@ -7,12 +7,15 @@
     color: #005080;
   }
 
+  .imageContainer {
+    text-align:center;
+  }
+
   p.hasImage {
     display: flex;
     justify-content: center;
     .imageContainer {
       position: relative;
-
       +.imageContainer {
         margin-left: 1em;
       }
