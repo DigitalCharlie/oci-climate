@@ -179,8 +179,8 @@ export default function YearlyAverageUsageGraph(props) {
 
   const svgHeight = height + margins.top + margins.bottom
 
-
-  const xTicks = xScale.ticks(5).map(tick => {
+  const tickCount = xScale.domain()[1] - xScale.domain()[0] + 1
+  const xTicks = xScale.ticks(tickCount).map(tick => {
     if (tick !== Math.round(tick)) {
       return null
     }
