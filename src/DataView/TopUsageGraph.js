@@ -128,8 +128,8 @@ export default function TopUsageGraph(props) {
   console.log(splitBarGraph, yearType)
   let yearRows = splitBarGraph ? [
     { startYear: 2013, endYear: 2015},
-    { startYear: 2016, endYear: 2020},
-  ] : [{ startYear: 2013, endYear: 2020}]
+    { startYear: 2016, endYear: 2021},
+  ] : [{ startYear: 2013, endYear: 2021}]
   if (yearType === 'custom') {
     yearRows = [{ startYear: customYears[0], endYear: customYears[1] }]
   }

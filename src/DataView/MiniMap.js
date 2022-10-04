@@ -124,7 +124,7 @@ export default function MiniMap(props) {
     'country': ['Brazil', 'Russia', 'India', 'United States']
   }
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
-  const forceYears = [2013, 2020]
+  const forceYears = [2013, 2021]
   if (yearType === 'custom') {
     forceYears[0] = customYears[0]
     forceYears[1] = customYears[1]

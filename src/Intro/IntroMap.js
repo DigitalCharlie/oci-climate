@@ -40,7 +40,7 @@ export default function IntroMap(props) {
   const countryAccessor = d => d[countryGrouping]
   const dataKey = 'Total'
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
-  const forceYears = [2013, 2020]
+  const forceYears = [2013, 2021]
 
   const countryRows = data.filter(d => !d.isBank)
     .filter(d => d.year >= forceYears[0] && d.year <= forceYears[1])

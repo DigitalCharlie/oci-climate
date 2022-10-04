@@ -57,11 +57,12 @@ export default function YearlyAverageUsageGraph(props) {
   filteredData = filteredData.filter(d => selectedEnergyTypes.includes(d.category))
   const singleEnergyType = selectedEnergyTypes.length === 1
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
-  let originalYears = [2013, 2020]
+  let originalYears = [2013, 2021]
   let forceYears = [...originalYears]
   if (yearType === 'custom') {
     forceYears = customYears
   }
+  // console.log(categoryAccessor)
   const filterOutYears = filteredData.filter(d => d.year >= forceYears[0] && d.year <= forceYears[1])
   const grouped = rollup(filterOutYears, rows => sum(rows, d => d.amount), d => d.year, categoryAccessor)
   // console.log(grouped)

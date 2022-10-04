@@ -29,7 +29,7 @@ export default function DataView(props) {
   const [selectedEnergyTypes , setSelectedEnergyTypes] = useState(['Fossil Fuel'])
   const [aggregationType, setAggregationType] = useState('average')
   const [yearType, setYearType] = useState('custom')
-  const [customYears, setCustomYears] = useState([2018, 2020])
+  const [customYears, setCustomYears] = useState([2017, 2021])
   const sections = [
     {
       title: 'Public Finance by Year',
