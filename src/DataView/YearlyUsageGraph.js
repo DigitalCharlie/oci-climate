@@ -205,7 +205,7 @@ export default function YearlyAverageUsageGraph(props) {
   let tooltip = null
 
   const svgRef = useRef()
-  const legendColors = (singleEnergyType ? stacks.map(stack => stack.key) : typesSorted)
+  const legendColors = (singleEnergyType ? stacks.map(stack => stack.key).sort() : typesSorted)
     .map(category => ({ category, color: singleEnergyType && (category !== 'Clean' && category !== 'Other') ? subcategoryColorScale(category) : colors[category] }))
     .filter(d => singleEnergyType ? true : selectedEnergyTypes.includes(d.category))
   return (
