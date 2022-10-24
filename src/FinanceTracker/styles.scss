@@ -105,11 +105,18 @@
 
     max-width: 70em;
     flex-wrap: nowrap;
+    @media (max-width: 650px) {
+      width: auto;
+    }
+    .Select {
+      margin: 0;
+    }
   }
   .legend {
     font-size:.875em;
     background-color: #F0F0F0;
     padding: 0.5em;
+    align-self: flex-end;
     .legend-title {
       font-weight: bold;
       margin-bottom: 0.5em;
@@ -194,6 +201,39 @@
           }
         }
       }
+    }
+  }
+
+  .filter-control {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    background-color: #F0F0F0;
+    font-weight: bold;
+    font-size: 0.8em;
+    margin: 0.5em 0;
+    cursor: pointer;
+    .filter-control-switch {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 0.5em;
+      background: url('../images/check-square-solid.png') 0 0 no-repeat;
+
+    }
+    &.checked {
+      background-color: #DAECF7;
+      .filter-control-switch {
+        background: url('../images/check-square-checked.png') 0 0 no-repeat;
+
+      }
+    }
+    img {
+      margin-left: 0.5em;
+    }
+    +.filter-control {
+      margin-left: 0.5em;
     }
   }
 }

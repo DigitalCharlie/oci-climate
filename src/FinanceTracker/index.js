@@ -12,6 +12,7 @@ import { csvParse } from 'd3-dsv'
 import Linkify from 'react-linkify'
 import tableCheckmarkChecked from '../images/checkbox_Check.png'
 import tableCheckmarkUnchecked from '../images/checkbox_Minus.png'
+import infoIcon from '../images/info-circle-solid.png'
 const financeTypes = [
   {
     label: 'Bilateral Institutions',
@@ -65,6 +66,21 @@ const formatValue = (value) => {
   }
   return `$${value.toLocaleString()}M`
 }
+
+function FilterControl(props) {
+  const { label, checked, setChecked, tooltip } = props
+  useEffect(() => {
+    ReactTooltip.rebuild()
+  })
+  return (
+    <div className={classNames('filter-control', {checked})} onClick={e => setChecked(!checked)}>
+      <div className='filter-control-switch' />
+      <div className='filter-control-label'>{label}</div>
+      <img src={infoIcon} data-tip={tooltip} />
+    </div>
+  )
+
+}
 export default function FinanceTracker(props) {
 
   const [selectedFinanceType, setSelectedFinanceType] = useState(financeTypes[0])
@@ -74,8 +90,11 @@ export default function FinanceTracker(props) {
   const tableContainer = useRef()
   const {width} = useWindowSize()
   const [sortIndex, setSortIndex] = useState(0)
-  const singleColumnView = width < 768
+  const singleColumnView = width < 1100
   const [sources, setSources] = useState(null)
+  const [showG20, setShowG20] = useState(true)
+  const [showGlasgow, setShowGlasgow] = useState(true)
+
   useEffect(() => {
     window.fetch( `${process.env.PUBLIC_URL}/Sources.csv`,)
       .then(response => response.text())
@@ -150,13 +169,14 @@ export default function FinanceTracker(props) {
 
     },
     {
-      label: 'Glasgow Signatory',
+      label: <>Glasgow<br />Signatory</>,
       theadStyle: { textAlign: 'center' },
       accessor: checkMarkAccessor('G20 member?'),
       tbodyStyle: { textAlign: 'center' },
     },
     {
       label: 'G20',
+      theadStyle: { textAlign: 'center' },
       accessor: checkMarkAccessor('Glasgow Statement Signatory?'),
       tbodyStyle: { textAlign: 'center' },
     }
@@ -209,7 +229,20 @@ export default function FinanceTracker(props) {
   }
   if (data) {
     const sortedData = [...data].sort(sortOptions[sortIndex].sort)
-    tracker = (<table>
+      .filter(d => {
+        if (showG20 && showGlasgow) {
+          return true
+        }
+        if (showG20 && !showGlasgow) {
+          return d['Glasgow Statement Signatory?'] === 'Yes'
+        }
+        if (!showG20 && showGlasgow ) {
+          return d['G20 member?'] === 'Yes'
+        }
+        return false
+      })
+
+    tracker = sortedData.length === 0 ? <div>No {selectedFinanceType.label} match your selection</div> :  (<table>
       <thead>
 
         <tr>
@@ -306,6 +339,10 @@ export default function FinanceTracker(props) {
               label2={financeTypes[1].label}
               toggle={() => setSelectedFinanceType(selectedFinanceType === financeTypes[0] ? financeTypes[1] : financeTypes[0])}
             />
+            <div>
+              <FilterControl tooltip='Click to filter Glasgow Signatories' label='Glasgow Signatory' checked={showGlasgow} setChecked={setShowGlasgow} />
+              <FilterControl tooltip='Click to filter G20 Members' label='G20 Member' checked={showG20} setChecked={setShowG20} />
+            </div>
             <div className="sortBy">
               Sort by:{' '}
               <Select
