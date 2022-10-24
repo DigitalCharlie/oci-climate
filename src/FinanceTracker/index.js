@@ -30,10 +30,10 @@ const dotColors = {
   // 'Yellow': '#F7C952',
   // 'Green': '#075A60',
   // NEW COLORS
-  'Red': '#FF4242',
-  'Orange': '#AB7800',
-  'Yellow': '#FFB300',
-  'Green': '#A4BA45',
+  'Red': '#D71921',
+  'Orange': '#AA7819',
+  'Yellow': '#F7C952',
+  'Green': '#A5B94E',
 }
 const legendDescriptions = {
   'Red': 'No Exclusions',
@@ -258,13 +258,13 @@ export default function FinanceTracker(props) {
         <div className='description'>
           <h1>Fossil Free Policy Tracker</h1>
           <p>
-            In order to ensure a safe climate for all, it is critical that public finance institutions end their support for fossil fuel projects and instead use their unique influence to catalyze a just energy transition. After years of commitments, more institutions are starting to implement fossil fuel exclusions into policy. The joint <a href="https://ukcop26.org/statement-on-international-public-support-for-the-clean-energy-transition/">Statement on International Public Support for the Clean Energy Transition</a> at COP26 in Glasgow was an important landmark with 39 countries and institutions committing to end their public finance for fossil fuels by the end of 2022. 
+            In order to ensure a safe climate for all, it is critical that public finance institutions end their support for fossil fuel projects and instead use their unique influence to catalyze a just energy transition. After years of commitments, more institutions are starting to implement fossil fuel exclusions into policy. The joint <a href="https://ukcop26.org/statement-on-international-public-support-for-the-clean-energy-transition/">Statement on International Public Support for the Clean Energy Transition</a> at COP26 in Glasgow was an important landmark with 39 countries and institutions committing to end their public finance for fossil fuels by the end of 2022.
           </p>
           <p>
             This interactive table tracks policies to exclude international public finance for fossil fuels from export credit agencies, bilateral development finance institutions, and multilateral development banks. We include policies dealing with coal, oil, and gas across the supply chain as well as “indirect” public finance for fossil fuels through related infrastructure, advisory services, technical assistance, policy support, and financial intermediaries.
           </p>
           <p>
-            <strong>How to use:</strong> Toggle to see the country-level or multilateral development bank report card, and hover or click the + sign to see more details.  
+            <strong>How to use:</strong> Toggle to see the country-level or multilateral development bank report card, and hover or click the + sign to see more details.
           </p>
           <p>
             Last update: April 11, 2022
