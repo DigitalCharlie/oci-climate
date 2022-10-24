@@ -10,6 +10,8 @@ import useWindowSize from 'hooks/useWindowSize'
 import Select from 'Select'
 import { csvParse } from 'd3-dsv'
 import Linkify from 'react-linkify'
+import tableCheckmarkChecked from '../images/checkbox_Check.png'
+import tableCheckmarkUnchecked from '../images/checkbox_Minus.png'
 const financeTypes = [
   {
     label: 'Bilateral Institutions',
@@ -121,7 +123,14 @@ export default function FinanceTracker(props) {
     theadStyle: { textAlign: 'center', width: '45px', paddingBottom: 0 },
     tbodyStyle: { width: '45px'}, // (10/policyTypes.length) + 'em' },
   }))
-
+  const checkMarkAccessor = (key) => row => {
+    const value = row[key]
+    if (value.trim().toLowerCase() === 'no') {
+      return <img src={tableCheckmarkUnchecked} alt='No' />
+    } else {
+      return <img src={tableCheckmarkChecked} alt='Yes' />
+    }
+  }
   const defaultColumns = [
     {
       label: selectedFinanceType.firstColumnLabel,
@@ -140,6 +149,17 @@ export default function FinanceTracker(props) {
       tbodyStyle: { fontSize: '0.8em'}
 
     },
+    {
+      label: 'Glasgow Signatory',
+      theadStyle: { textAlign: 'center' },
+      accessor: checkMarkAccessor('G20 member?'),
+      tbodyStyle: { textAlign: 'center' },
+    },
+    {
+      label: 'G20',
+      accessor: checkMarkAccessor('Glasgow Statement Signatory?'),
+      tbodyStyle: { textAlign: 'center' },
+    }
   ].filter(d => {
     if (selectedFinanceType === financeTypes[1] || singleColumnView) {
       if (d.label === 'Institution(s)') {
@@ -191,18 +211,21 @@ export default function FinanceTracker(props) {
     const sortedData = [...data].sort(sortOptions[sortIndex].sort)
     tracker = (<table>
       <thead>
+
+        <tr>
+          <td colSpan={defaultColumns.length} />
+          <td colSpan={policyTypeColumns.length} style={{ width: '15em', textAlign: 'center', color:'#9c9c9c'}}>(hover over dot to see details)</td>
+        </tr>
         <tr>
           {defaultColumns.map(column => (
             <td key={column.label} rowSpan={2} style={column.theadStyle}>{column.label}</td>
           ))}
           {policyTypeColumns.map(policyType => <td key={policyType.label} style={policyType.theadStyle}>{policyType.label}</td>)}
         </tr>
-        <tr>
-          <td colSpan={policyTypeColumns.length} style={{ width: '15em', textAlign: 'center', color:'#9c9c9c'}}>(hover  over dot to see details)</td>
-        </tr>
       </thead>
       <tbody>
         {sortedData.map(row => {
+          // console.log(row)
           const key = columns[0].accessor(row)
           const hasSource = sources ? sources.find(source => source.Institution === key) : false
           return <React.Fragment key={key}>
