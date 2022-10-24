@@ -229,6 +229,14 @@
 
       }
     }
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.2;
+      .filter-control-switch {
+        background: url('../images/check-square-solid.png') 0 0 no-repeat;
+
+      }
+    }
     img {
       margin-left: 0.5em;
     }

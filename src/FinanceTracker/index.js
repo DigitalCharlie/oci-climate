@@ -68,12 +68,12 @@ const formatValue = (value) => {
 }
 
 function FilterControl(props) {
-  const { label, checked, setChecked, tooltip } = props
+  const { label, checked, setChecked, tooltip, disabled } = props
   useEffect(() => {
     ReactTooltip.rebuild()
   })
   return (
-    <div className={classNames('filter-control', {checked})} onClick={e => setChecked(!checked)}>
+    <div className={classNames('filter-control', {checked, disabled})} onClick={e => setChecked(!checked)}>
       <div className='filter-control-switch' />
       <div className='filter-control-label'>{label}</div>
       <img src={infoIcon} data-tip={tooltip} />
@@ -144,6 +144,9 @@ export default function FinanceTracker(props) {
   }))
   const checkMarkAccessor = (key) => row => {
     const value = row[key]
+    if (!value) {
+      return null
+    }
     if (value.trim().toLowerCase() === 'no') {
       return <img src={tableCheckmarkUnchecked} alt='No' />
     } else {
@@ -171,13 +174,13 @@ export default function FinanceTracker(props) {
     {
       label: <>Glasgow<br />Signatory</>,
       theadStyle: { textAlign: 'center' },
-      accessor: checkMarkAccessor('G20 member?'),
+      accessor: checkMarkAccessor('Glasgow Statement Signatory?'),
       tbodyStyle: { textAlign: 'center' },
     },
     {
       label: 'G20',
       theadStyle: { textAlign: 'center' },
-      accessor: checkMarkAccessor('Glasgow Statement Signatory?'),
+      accessor: checkMarkAccessor('G20 member?'),
       tbodyStyle: { textAlign: 'center' },
     }
   ].filter(d => {
@@ -186,8 +189,14 @@ export default function FinanceTracker(props) {
         return false
       }
     }
+    if (selectedFinanceType === financeTypes[1]) {
+      if (d.label === 'G20') {
+        return false
+      }
+    }
     return true
   })
+  console.log(defaultColumns)
   const columns = [
     ...defaultColumns,
     ...policyTypeColumns,
@@ -234,10 +243,10 @@ export default function FinanceTracker(props) {
           return true
         }
         if (showG20 && !showGlasgow) {
-          return d['Glasgow Statement Signatory?'] === 'Yes'
+          return d['G20 member?'] === 'Yes'
         }
         if (!showG20 && showGlasgow ) {
-          return d['G20 member?'] === 'Yes'
+          return d['Glasgow Statement Signatory?'] === 'Yes'
         }
         return false
       })
@@ -341,7 +350,7 @@ export default function FinanceTracker(props) {
             />
             <div>
               <FilterControl tooltip='Click to filter Glasgow Signatories' label='Glasgow Signatory' checked={showGlasgow} setChecked={setShowGlasgow} />
-              <FilterControl tooltip='Click to filter G20 Members' label='G20 Member' checked={showG20} setChecked={setShowG20} />
+              <FilterControl tooltip='Click to filter G20 Members' label='G20 Member' checked={showG20} setChecked={setShowG20} disabled={selectedFinanceType === financeTypes[1]} />
             </div>
             <div className="sortBy">
               Sort by:{' '}
