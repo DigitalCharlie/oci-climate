@@ -136,11 +136,12 @@ export default function FinanceTracker(props) {
       setHoveredDot({ color, explanation, policyType, x ,y })
     }
   }
+  const dotColumnWidth = 45
   const policyTypeColumns = policyTypes.map(policyType => ({
     label: policyType === 'Indirect Finance' ? policyType : policyType.split(' ')[0],
     accessor: d => dot(d, policyType, hoverDot),
-    theadStyle: { textAlign: 'center', width: '45px', paddingBottom: 0 },
-    tbodyStyle: { width: '45px'}, // (10/policyTypes.length) + 'em' },
+    theadStyle: { textAlign: 'center', width: dotColumnWidth, paddingBottom: 0 },
+    tbodyStyle: { width: dotColumnWidth}, // (10/policyTypes.length) + 'em' },
   }))
   const checkMarkAccessor = (key) => row => {
     const value = row[key]
@@ -148,9 +149,9 @@ export default function FinanceTracker(props) {
       return null
     }
     if (value.trim().toLowerCase() === 'no') {
-      return <img src={tableCheckmarkUnchecked} alt='No' />
+      return <img className='dot' src={tableCheckmarkUnchecked} alt='No' />
     } else {
-      return <img src={tableCheckmarkChecked} alt='Yes' />
+      return <img className='dot' src={tableCheckmarkChecked} alt='Yes' />
     }
   }
   const defaultColumns = [
@@ -173,15 +174,15 @@ export default function FinanceTracker(props) {
     },
     {
       label: <>Glasgow<br />Signatory</>,
-      theadStyle: { textAlign: 'center' },
+      theadStyle: { textAlign: 'center', width: dotColumnWidth },
       accessor: checkMarkAccessor('Glasgow Statement Signatory?'),
-      tbodyStyle: { textAlign: 'center' },
+      tbodyStyle: { textAlign: 'center', width: dotColumnWidth },
     },
     {
       label: 'G20',
-      theadStyle: { textAlign: 'center' },
+      theadStyle: { textAlign: 'center', width: dotColumnWidth },
       accessor: checkMarkAccessor('G20 member?'),
-      tbodyStyle: { textAlign: 'center' },
+      tbodyStyle: { textAlign: 'center', width: dotColumnWidth },
     }
   ].filter(d => {
     if (selectedFinanceType === financeTypes[1] || singleColumnView) {
@@ -256,7 +257,7 @@ export default function FinanceTracker(props) {
 
         <tr>
           <td colSpan={defaultColumns.length} />
-          <td colSpan={policyTypeColumns.length} style={{ width: '15em', textAlign: 'center', color:'#9c9c9c'}}>(hover over dot to see details)</td>
+          <td colSpan={policyTypeColumns.length} style={{ width: '15em', textAlign: 'center', color:'#9c9c9c', transform: 'translateY(1.7em)'}}>(hover over dot to see details)</td>
         </tr>
         <tr>
           {defaultColumns.map(column => (

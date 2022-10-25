@@ -98,6 +98,7 @@
     border-radius: 50%;
     opacity: 1; // was .5 previously
     margin: 0 auto;
+    display: block;
   }
   .controls {
     display: flex;
@@ -109,7 +110,7 @@
       width: auto;
     }
     .Select {
-      margin: 0;
+      margin-bottom: 0;
     }
   }
   .legend {
