@@ -284,8 +284,8 @@ export default function FinanceTracker(props) {
                       const color = d3Color(dotColors[row[`${policyType} Colour`]])
                       return (
                         <div className='policy' key={policyType} style={{ backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, 0.1)` }}>
-                          <div>{key}</div>
-                          <div>
+                          <div style={{ fontSize: '0.9em'}}>{key}</div>
+                          <div style={{ fontSize: '0.8em'}}>
                             {row[key]}
                           </div>
                         </div>
