@@ -13,7 +13,7 @@ import Linkify from 'react-linkify'
 import tableCheckmarkChecked from '../images/checkbox_Check.png'
 import tableCheckmarkUnchecked from '../images/checkbox_Minus.png'
 import infoIcon from '../images/info-circle-solid.png'
-const financeTypes = [
+export const financeTypes = [
   {
     label: 'Bilateral Institutions',
     file: `${process.env.PUBLIC_URL}/FinanceTrackerCountriesTableOnly.csv`,
