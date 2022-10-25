@@ -136,7 +136,7 @@ export default function FinanceTracker(props) {
       setHoveredDot({ color, explanation, policyType, x ,y })
     }
   }
-  const dotColumnWidth = 45
+  const dotColumnWidth = 55
   const policyTypeColumns = policyTypes.map(policyType => ({
     label: policyType === 'Indirect Finance' ? policyType : policyType.split(' ')[0],
     accessor: d => dot(d, policyType, hoverDot),
