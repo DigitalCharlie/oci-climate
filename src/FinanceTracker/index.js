@@ -158,7 +158,9 @@ export default function FinanceTracker(props) {
     {
       label: selectedFinanceType.firstColumnLabel,
       accessor: d => d[selectedFinanceType.firstColumnLabel],
-      tbodyStyle: { fontWeight: 'bold' },
+      tbodyStyle: { fontWeight: 'bold', width: '10em' },
+      theadStyle: { width: '10em' }
+
     },
     {
       label: `${financeTrackerAmountKey} / Billions`,
