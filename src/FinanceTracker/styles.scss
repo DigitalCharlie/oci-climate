@@ -160,10 +160,13 @@
       background-color: #fff;
       .dotTooltip-content {
         padding: 0.5em;
-
       }
       .dot-tooltip-title {
         font-weight: bold;
+        font-size: 0.9em;
+      }
+      .dot-tooltip-description {
+        font-size: 0.8em;
       }
     }
 
