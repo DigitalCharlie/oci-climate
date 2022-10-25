@@ -154,12 +154,13 @@ export default function FinanceTracker(props) {
       return <img className='dot' src={tableCheckmarkChecked} alt='Yes' />
     }
   }
+  const firstColWidth = selectedFinanceType === financeTypes[0] ? '10em' : null
   const defaultColumns = [
     {
       label: selectedFinanceType.firstColumnLabel,
       accessor: d => d[selectedFinanceType.firstColumnLabel],
-      tbodyStyle: { fontWeight: 'bold', width: '10em' },
-      theadStyle: { width: '10em' }
+      tbodyStyle: { fontWeight: 'bold', width: firstColWidth },
+      theadStyle: { width: firstColWidth }
 
     },
     {
