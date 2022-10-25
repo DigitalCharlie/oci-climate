@@ -242,6 +242,14 @@ export default function FinanceTracker(props) {
   if (data) {
     const sortedData = [...data].sort(sortOptions[sortIndex].sort)
       .filter(d => {
+        if (selectedFinanceType === financeTypes[1]) {
+          if (showGlasgow) {
+            return true
+          } else {
+            return d['Glasgow Statement Signatory?'].trim().toLowerCase() === 'no'
+          }
+        }
+
         if (showG20 && showGlasgow) {
           return true
         }
