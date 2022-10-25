@@ -257,7 +257,7 @@ export default function FinanceTracker(props) {
 
         <tr>
           <td colSpan={defaultColumns.length} />
-          <td colSpan={policyTypeColumns.length} style={{ width: '15em', textAlign: 'center', color:'#9c9c9c', transform: 'translateY(1.7em)'}}>(hover over dot to see details)</td>
+          <td colSpan={policyTypeColumns.length} className='hoverInstructions'>(hover over dot to see details)</td>
         </tr>
         <tr>
           {defaultColumns.map(column => (
