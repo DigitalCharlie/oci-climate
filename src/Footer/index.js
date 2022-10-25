@@ -10,12 +10,14 @@ import { Link } from 'react-router-dom'
 import facebook from 'images/facebook.svg'
 import twitter from 'images/twitter.svg'
 import './styles.scss'
+import { forwardRef } from 'react'
 
 const ExLink = ({href, children}) => {
   return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
 }
 
-export default function Footer(props) {
+export default forwardRef(Footer)
+function Footer(props, ref) {
   const { introFooter } = props
   const location = useLocation()
   const opacity = introFooter ? props.opacity : (location.pathname === '/' ? 0 : 1)
@@ -27,7 +29,7 @@ export default function Footer(props) {
   }, [location.pathname, introFooter])
   const pointerEvents = opacity ? 'auto' : 'none'
   return (
-    <div className={classNames( "Footer", { introFooter })} style={{ opacity, pointerEvents }}>
+    <div className={classNames( "Footer", { introFooter })} style={{ opacity, pointerEvents }} ref={ref}>
       <section className="left-footer">
           <img className='logo' src={logo} alt='Oil Change International' />
           <div>

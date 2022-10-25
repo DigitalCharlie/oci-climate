@@ -12,14 +12,18 @@ function App() {
 
   const data = useDataHook()
   const headerRef = useRef()
+  const footerRef = useRef()
   const [contentHeight, setContentHeight] = useState(0)
   const [headerHeight, setHeaderHeight] = useState(0)
+  const [footerHeight, setFooterHeight] = useState(0)
   useEffect(() => {
     const resize = () => {
       const headerHeight = headerRef.current.getBoundingClientRect().height
       console.log(headerHeight)
       setHeaderHeight(headerHeight)
       setContentHeight(window.innerHeight - headerHeight - 5)
+      const footerHeight = footerRef.current.getBoundingClientRect().height
+      setFooterHeight(footerHeight)
     }
     resize()
     window.addEventListener('resize', resize)
@@ -33,14 +37,16 @@ function App() {
     <div className="App">
       <Router>
         <Header ref={headerRef} />
-        <Switch>
-          {routes.map(({ label, path, Component }) => (
-            <Route key={path} path={path} exact>
-              {Component ? <Component data={data} contentHeight={contentHeight} headerHeight={headerHeight} /> : null}
-            </Route>
-          ))}
-        </Switch>
-        <Footer />
+        <div style={{ paddingBottom: footerHeight + 30 }}>
+          <Switch>
+            {routes.map(({ label, path, Component }) => (
+              <Route key={path} path={path} exact>
+                {Component ? <Component data={data} contentHeight={contentHeight} headerHeight={headerHeight} /> : null}
+              </Route>
+            ))}
+          </Switch>
+        </div>
+        <Footer ref={footerRef} />
       </Router>
       <ReactTooltip disable={disableTooltips} arrowColor='transparent' effect='solid' place='bottom' className='helperTooltip' />
 

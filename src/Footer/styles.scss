@@ -8,6 +8,11 @@
   transition: opacity 0.3s ease-in-out;
   display:flex;
   justify-content:space-around;
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
   section {
     width:550px;
     display:flex;
