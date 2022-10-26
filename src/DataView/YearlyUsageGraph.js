@@ -10,6 +10,7 @@ import Select from 'Select/'
 import subcategoryColorScale from './subcategoryColorScale'
 import ColorLegend from './ColorLegend'
 import { colors } from './'
+import { finalYear } from 'App'
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
 
 const parisYear = 2016
@@ -57,7 +58,7 @@ export default function YearlyAverageUsageGraph(props) {
   filteredData = filteredData.filter(d => selectedEnergyTypes.includes(d.category))
   const singleEnergyType = selectedEnergyTypes.length === 1
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
-  let originalYears = [2013, 2021]
+  let originalYears = [2013, finalYear]
   let forceYears = [...originalYears]
   if (yearType === 'custom') {
     forceYears = customYears

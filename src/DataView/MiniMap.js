@@ -9,6 +9,7 @@ import { geoMercator, geoPath } from 'd3-geo'
 import useMapHook from '../hooks/useMapHook'
 import Select from 'Select'
 import Legend from 'Legend'
+import { finalYear } from 'App'
 const categories = ['Fossil Fuel', 'Clean', 'Other']
 const mapDataKeys = ['Total', ...categories]
 
@@ -124,7 +125,7 @@ export default function MiniMap(props) {
     'country': ['Brazil', 'Russia', 'India', 'United States']
   }
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
-  const forceYears = [2013, 2021]
+  const forceYears = [2013, finalYear]
   if (yearType === 'custom') {
     forceYears[0] = customYears[0]
     forceYears[1] = customYears[1]

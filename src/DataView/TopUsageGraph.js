@@ -7,7 +7,7 @@ import React, { useState, useRef } from 'react'
 import { animated, useSpring, useSprings} from 'react-spring'
 import subcategoryColorScale from './subcategoryColorScale'
 import ColorLegend from './ColorLegend'
-
+import { finalYear } from 'App'
 import { colors } from './'
 
 const typesSorted = ['Fossil Fuel', 'Clean', 'Other']
@@ -128,8 +128,8 @@ export default function TopUsageGraph(props) {
   console.log(splitBarGraph, yearType)
   let yearRows = splitBarGraph ? [
     { startYear: 2013, endYear: 2015},
-    { startYear: 2016, endYear: 2021},
-  ] : [{ startYear: 2013, endYear: 2021}]
+    { startYear: 2016, endYear: finalYear},
+  ] : [{ startYear: 2013, endYear: finalYear}]
   if (yearType === 'custom') {
     yearRows = [{ startYear: customYears[0], endYear: customYears[1] }]
   }

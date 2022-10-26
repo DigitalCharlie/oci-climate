@@ -11,6 +11,7 @@ import Checkbox from './Checkbox'
 import InfoIcon from './InfoIcon'
 import YearPicker from './YearPicker'
 import { Link } from 'react-router-dom'
+import { finalYear } from 'App'
 const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 export const colors = {
   // OLD COLORS
@@ -29,7 +30,7 @@ export default function DataView(props) {
   const [selectedEnergyTypes , setSelectedEnergyTypes] = useState(['Fossil Fuel'])
   const [aggregationType, setAggregationType] = useState('average')
   const [yearType, setYearType] = useState('custom')
-  const [customYears, setCustomYears] = useState([2017, 2021])
+  const [customYears, setCustomYears] = useState([2017, finalYear])
   const sections = [
     {
       title: 'Public Finance by Year',

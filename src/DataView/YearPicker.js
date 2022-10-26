@@ -1,6 +1,8 @@
 
 import classNames from 'classnames'
 import './YearPicker.scss'
+import { range } from 'd3-array'
+import { finalYear } from 'App'
 const yearPickerTypes = [
   {value: 'all', label: 'All Years'},
   {value: 'paris', label: 'Before/After Paris Agreement Adopted'},
@@ -9,7 +11,7 @@ const yearPickerTypes = [
 
 export default function YearPicker(props) {
   const { customYears, setCustomYears, onChange, value} = props
-  const options = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021].map(year => <option key={year} value={year}>{year}</option>)
+  const options = range(2013, finalYear + 1).map(year => <option key={year} value={year}>{year}</option>)
   return (
     <div className="year-picker">
       {yearPickerTypes.map(type => {

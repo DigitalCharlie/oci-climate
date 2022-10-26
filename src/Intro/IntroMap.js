@@ -8,6 +8,7 @@ import { geoEqualEarth, geoPath } from 'd3-geo'
 
 import { animated, useSpring } from '@react-spring/web'
 import { easeCubic } from 'd3-ease'
+import { finalYear } from 'App'
 const colors = {
   'Fossil Fuel': '#F4A77E',
   'Clean':'#63CAD1'
@@ -40,7 +41,7 @@ export default function IntroMap(props) {
   const countryAccessor = d => d[countryGrouping]
   const dataKey = 'Total'
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
-  const forceYears = [2013, 2021]
+  const forceYears = [2013, finalYear]
 
   const countryRows = data.filter(d => !d.isBank)
     .filter(d => d.year >= forceYears[0] && d.year <= forceYears[1])
