@@ -33,7 +33,7 @@ const dotColors = {
   // 'Yellow': '#F7C952',
   // 'Green': '#075A60',
   // NEW COLORS
-  'Red': '#D71921',
+  'Red': '#ff4242',
   'Orange': '#AA7819',
   'Yellow': '#F7C952',
   'Green': '#A5B94E',
