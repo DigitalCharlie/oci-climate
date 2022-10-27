@@ -92,8 +92,8 @@ export default function FinanceTracker(props) {
   const [sortIndex, setSortIndex] = useState(0)
   const singleColumnView = width < 1100
   const [sources, setSources] = useState(null)
-  const [showG20, setShowG20] = useState(true)
-  const [showGlasgow, setShowGlasgow] = useState(true)
+  const [showG20, setShowG20] = useState(false)
+  const [showGlasgow, setShowGlasgow] = useState(false)
 
   useEffect(() => {
     window.fetch( `${process.env.PUBLIC_URL}/Sources.csv`,)
@@ -243,24 +243,29 @@ export default function FinanceTracker(props) {
   if (data) {
     const sortedData = [...data].sort(sortOptions[sortIndex].sort)
       .filter(d => {
-        if (selectedFinanceType === financeTypes[1]) {
-          if (showGlasgow) {
+        if (selectedFinanceType === financeTypes[0]) {
+
+          if (!showG20 && !showGlasgow) {
             return true
-          } else {
-            return d['Glasgow Statement Signatory?'].trim().toLowerCase() === 'no'
+          }
+          if (showG20 && showGlasgow && d['G20 member?'] === 'Yes' && d['Glasgow Statement Signatory?'] === 'Yes') {
+            return true
+          }
+          if (showG20 && d['G20 member?'] === 'Yes' && !showGlasgow) {
+            return true
+          }
+          if (showGlasgow && d['Glasgow Statement Signatory?'] === 'Yes' && !showG20) {
+            return true
+          }
+          return false
+        } else {
+          if (!showGlasgow) {
+            return true
+          }
+          if (showGlasgow && d['Glasgow Statement Signatory?'] === 'Yes') {
+            return true
           }
         }
-
-        if (showG20 && showGlasgow) {
-          return true
-        }
-        if (showG20 && !showGlasgow) {
-          return d['G20 member?'] === 'Yes'
-        }
-        if (!showG20 && showGlasgow ) {
-          return d['Glasgow Statement Signatory?'] === 'Yes'
-        }
-        return false
       })
 
     tracker = sortedData.length === 0 ? <div>No {selectedFinanceType.label} match your selection</div> :  (<table>
