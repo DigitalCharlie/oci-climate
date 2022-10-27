@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react"
 import { csvParse } from "d3-dsv"
 import { financeTypes } from "FinanceTracker"
-export const financeTrackerAmountKey = 'Average Annual Fossil Fuel Finance 2018-2020, USD Millions'
+export const financeTrackerAmountKey = 'Average Annual Fossil Fuel Finance, USD Millions'
 const loadedData = {}
 export default function useFinanceTrackerData(file) {
   const [data, setData] = useState(null)
