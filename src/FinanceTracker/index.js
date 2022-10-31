@@ -13,6 +13,10 @@ import Linkify from 'react-linkify'
 import tableCheckmarkChecked from '../images/checkbox_Check.png'
 import tableCheckmarkUnchecked from '../images/checkbox_Minus.png'
 import infoIcon from '../images/info-circle-solid.png'
+import { Link } from 'react-router-dom'
+const ExLink = ({href, children}) => {
+  return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
+}
 export const financeTypes = [
   {
     label: 'Bilateral Institutions',
