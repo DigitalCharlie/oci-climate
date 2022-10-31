@@ -38,6 +38,9 @@
         opacity: 1;
       }
     }
+    .blue {
+      color:#4057C9;
+    }
   }
 
   h1 {
@@ -156,6 +159,14 @@
     .chart-title {
       text-align: left;
       margin-bottom:5px;
+    }
+    .intro-graph {
+      max-width:100%;
+    }
+    .intro-caption {
+      font-size:.8em;
+      font-style:italic;
+      padding:0 6% 0 4%;
     }
   }
 
