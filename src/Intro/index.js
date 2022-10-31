@@ -215,12 +215,13 @@ export default function Intro(props) {
           <p>
           This fossil fuel finance runs directly counter to our global climate goals. <strong>The International Energy Agency is clear that, in order to maintain a 50% chance to limit global warming to 1.5°C, we need to stop investing in new fossil fuel supply now, and rapidly increase public finance for affordable clean energy.</strong> 
           </p>
-
+          <div>
           <h3 className="chart-title">
             G20 and MDB public finance for fossil fuels, clean, and other energy, 2013-2021, in USD Billions
           </h3>
           <img src={publicFinance} alt="Chart of public finance between 2013 and 2021" />
-
+          <p className='intro-caption'>Despite governments’ long lasting commitments to end fossil fuel subsidies and align financial flows with the Paris climate goals, since 2013 public finance flows to fossil fuel projects have only slightly decreased and support for clean energy has not increased to the extent needed.</p>
+          </div>
           <p>
             Public finance has an outsized impact on energy systems and often acts as a subsidy. This is because these loans, guarantees, equity, and grants have come with below-market rates, technical capacity, and decreased financial risks that make projects much more likely to go forward. We need the $55 billion a year in public finance for fossil fuels — and more — to be shifted to support a just transition to clean energy instead.
           </p>
@@ -236,6 +237,7 @@ export default function Intro(props) {
             Multilateral Development Bank finance for fossil fuels, annual average 2018-2021, USD billions
           </h3>
           <img src={mdb} alt="Chart of comparison of fossil fuel funding by multilateral development banks" />
+          <p className="image-caption">Despite governments’ long lasting commitments to end fossil fuel subsidies and align financial flows with the Paris climate goals, since 2013 public finance flows to fossil fuel projects have only slightly decreased and support for clean energy has not increased to the extent needed.</p>
 
           <p>
             Despite these trends,  public pressure for climate action means a breakthrough is on the horizon. As of 2021, most G20 countries have policies to end their coal finance and at the 2021 global climate conference in Glasgow, 34 countries and 5 institutions signed a joint commitment to end their international support for oil and gas by the end of 2022 and instead fully prioritize their public finance for clean energy. We are tracking their progress on these promises <Link to="/tracker">here</Link>. We need to ensure countries get on track to keep their promise without loopholes, and ensure other countries follow-suit.
@@ -245,7 +247,7 @@ export default function Intro(props) {
             A trusted tool for media, academics, governments and campaigners
           </h3>
           <p>
-            Cited by <ExLink href="https://about.bnef.com/blog/new-report-finds-g-20-member-countries-support-fossil-fuels-at-levels-untenable-to-achieve-paris-agreement-goals/">BloombergNEF</ExLink>, <ExLink href="https://www.reuters.com/business/cop/19-countries-plan-cop26-deal-end-financing-fossil-fuels-abroad-sources-2021-11-03/">Reuters</ExLink>, <ExLink href="https://www.energymonitor.ai/finance/sustainable-finance/how-wealthy-governments-continue-to-subsidise-fossil-fuels-in-developing-nations">Energy Monitor</ExLink>, <ExLink href="https://www.nature.com/articles/d41586-021-02847-2">Nature</ExLink>, <ExLink href="https://www.cambridge.org/core/books/governing-the-climate-energy-nexus/87F5A10BD95C94B1245DF2F9CA5D00B5">Cambridge University</ExLink>, <ExLink href="https://foe.org/news/report-g20-governments-bankroll-188billion-in-fossil-fuels/">Friends of the Earth US</ExLink>, <ExLink href="https://www.iisd.org/publications/g20-scorecard">International Institute for Sustainable Development</ExLink>, <ExLink to="https://www.oecd-ilibrary.org/energy/oecd-companion-to-the-inventory-of-support-measures-for-fossil-fuels-2018_9789264286061-en">OECD</ExLink>, <ExLink to="https://forourclimate.org/en/fueling-the-climate-crisis">Solutions for Our Climate</ExLink>, <ExLink to="https://www.banktrack.org/news/at_least_132_billion_in_finance_for_fossil_fuels_is_locking_africa_out_of_a_just_transition_shows_new_report">Banktrack</ExLink>, <ExLink to="https://bigshiftglobal.org/">Big Shift Global</ExLink> and many others.
+            Cited by <ExLink href="https://about.bnef.com/blog/new-report-finds-g-20-member-countries-support-fossil-fuels-at-levels-untenable-to-achieve-paris-agreement-goals/">BloombergNEF</ExLink>, <ExLink href="https://www.reuters.com/business/cop/19-countries-plan-cop26-deal-end-financing-fossil-fuels-abroad-sources-2021-11-03/">Reuters</ExLink>, <ExLink href="https://www.energymonitor.ai/finance/sustainable-finance/how-wealthy-governments-continue-to-subsidise-fossil-fuels-in-developing-nations">Energy Monitor</ExLink>, <ExLink href="https://www.nature.com/articles/d41586-021-02847-2">Nature</ExLink>, <ExLink href="https://www.cambridge.org/core/books/governing-the-climate-energy-nexus/87F5A10BD95C94B1245DF2F9CA5D00B5">Cambridge University</ExLink>, <ExLink href="https://foe.org/news/report-g20-governments-bankroll-188billion-in-fossil-fuels/">Friends of the Earth US</ExLink>, <ExLink href="https://www.iisd.org/publications/g20-scorecard">International Institute for Sustainable Development</ExLink>, <ExLink href="https://www.oecd-ilibrary.org/energy/oecd-companion-to-the-inventory-of-support-measures-for-fossil-fuels-2018_9789264286061-en">OECD</ExLink>, <ExLink href="https://forourclimate.org/en/fueling-the-climate-crisis">Solutions for Our Climate</ExLink>, <ExLink href="https://www.banktrack.org/news/at_least_132_billion_in_finance_for_fossil_fuels_is_locking_africa_out_of_a_just_transition_shows_new_report">Banktrack</ExLink>, <ExLink href="https://bigshiftglobal.org/">Big Shift Global</ExLink> and many others.
           </p>
 
           <h3>
