@@ -217,9 +217,9 @@ export default function Intro(props) {
           </p>
 
           <h3 className="chart-title">
-            G20 and MDB public finance for fossil fuels, clean, and other energy, 2013-2020, in USD Billions
+            G20 and MDB public finance for fossil fuels, clean, and other energy, 2013-2021, in USD Billions
           </h3>
-          <img src={publicFinance} alt="Chart of public finance between 2013 and 2020" />
+          <img src={publicFinance} alt="Chart of public finance between 2013 and 2021" />
 
           <p>
             Public finance has an outsized impact on energy systems and often acts as a subsidy. This is because these loans, guarantees, equity, and grants have come with below-market rates, technical capacity, and decreased financial risks that make projects much more likely to go forward. We need the $55 billion a year in public finance for fossil fuels — and more — to be shifted to support a just transition to clean energy instead.
@@ -228,12 +228,12 @@ export default function Intro(props) {
             To get on the pathway to a globally just energy transition in line with 1.5°C, we need wealthy G20 governments to do much more as well, including rapidly phasing out their fossil fuel production at home, ensuring their public finance institutions uphold comprehensive human rights due diligence across for clean energy projects, and providing their fair share of climate finance, loss and damage finance, and debt cancellation. 
           </p>
 
-          <h3 className="chart-title">Top 15 G20 countries for international public finance for fossil fuels, annual average 2018-2020, USD billions</h3>
+          <h3 className="chart-title">Top 15 G20 countries for international public finance for fossil fuels, annual average 2018-2021, USD billions</h3>
 
           <img src={g20} alt="Chart of top 15 G20 public finance for fossil fuels" />
 
           <h3 className="chart-title">
-            Multilateral Development Bank finance for fossil fuels, annual average 2018-2020, USD billions
+            Multilateral Development Bank finance for fossil fuels, annual average 2018-2021, USD billions
           </h3>
           <img src={mdb} alt="Chart of comparison of fossil fuel funding by multilateral development banks" />
 
