@@ -35,7 +35,7 @@ export default function DataView(props) {
     {
       title: 'Public Finance by Year',
       orderMultiColumnView: 0,
-      description: <React.Fragment>International public finance by year and energy type, from G20 trade and development finance institutions. Filter to select a specific country or multilateral development bank, and to change what energy types are shown. Annual financing totals and data availability are often variable at individual institutions, so please use filtered results with caution — and read our <Link to='/about'>About page</Link> for more information on the data.</React.Fragment>,
+      description: <React.Fragment>International public finance by year and energy type, from multilateral development banks (MDBs), G20 export credit agencies (ECAs), and G20 development finance institutions (DFIs). Filter to select a specific country or MDB. Annual financing totals and data availability are often variable at individual institutions, so please use filtered results with caution — and read our <Link to='/about'>About page</Link> for more information on our data and methodology.</React.Fragment>,
       content: (
         data.length ? <YearlyUsageGraph data={data} /> : null
       )
@@ -146,9 +146,13 @@ export default function DataView(props) {
       <div className='dataViewIntro'>
         <h1>Data Dashboard</h1>
         <div className='description'>
-<p>Public finance institutions play an outsized role in shaping our future energy system by providing government-backed, low-risk finance that is often a determining factor in which projects get built. This dashboard shows the total flows of public finance going to fossil fuel, clean, and other energy projects from G20 countries’ trade and development finance institutions as well as the major multilateral development banks. </p>
+<p>Public finance institutions play an outsized role in shaping our future energy system by providing government-backed, low-risk finance that is often a determining factor in which projects get built. This dashboard shows the total flows of public finance going to fossil fuel, clean, and other energy projects from G20 countries’ trade and development finance institutions as well as the major multilateral development banks.
+</p>
 
-<p><strong>How to use this dashboard:</strong> Use the controls below to add data on clean and other energy, change the years displayed, or show totals rather than annual averages. You can hover over a country or institution on a graph to see more details, and toggle some graph-specific settings. Poor reporting from governments means the figures reported here are often incomplete and therefore underestimated, and countries or institutions with a * indicate there is particularly low transparency on their public finance flows. For more details on our methodology, see the <Link to="/about">About</Link> page. Our full dataset includes information on each transaction behind this data as well as details about the kind of finance, energy sub-type, and supply chain stage. You can click <a  href={`${process.env.PUBLIC_URL}/${downloadPath}`}>here</a> to download it as a spreadsheet (.xlsx file).</p>
+<p><strong>How to use this dashboard:</strong> Use the controls below to add or remove data on fossil, clean, and other energy, change the years displayed, or show totals rather than annual averages. You can hover over a country or institution on a graph to see more details, and toggle some graph-specific settings. For details on our methodology, see the <Link to="/about">About</Link> page. Our full dataset includes information on each transaction behind this data as well as details about the kind of finance, energy sub-type, and supply chain stage. You can click <a  href={`${process.env.PUBLIC_URL}/${downloadPath}`}>here</a> to download it as a spreadsheet (.xlsx file).</p>
+
+<p>* By a country indicates very limited or no direct reporting is available from this country or institution. However, note that all institutions have gaps in reporting, especially for indirect support through financial intermediation, policy-based lending at the MDBs, technical assistance, and associated facilities.  
+</p>
         </div>
       </div>
       <div className='controls'>
