@@ -1,6 +1,6 @@
 Country,Institutions,Glasgow Statement Signatory?,G20 member?,"Average Annual Fossil Fuel Finance, USD Millions",Coal Exclusion Policies,Oil Exclusion Policies,Gas Exclusion Policies,Indirect Finance Policies,Coal Exclusion Colour,Oil Exclusion Colour,Gas Exclusion Colour,Indirect Finance Colour
 Argentina,"
-Banco de Inversión y Comercio Exterior",No,Yes,No data available,No exclusion policy in place but no coal support identified.,No relevant policies.,No relevant policies.,No relevant policies.,Orange,Red,Red,Red
+Banco de Inversión y Comercio Exterior",No,Yes,,No exclusion policy in place but no coal support identified.,No relevant policies.,No relevant policies.,No relevant policies.,Orange,Red,Red,Red
 Australia,"
 Export Finance Australia",No,Yes,77,"OECD restriction for ECAs, applies to new, and existing coal-fired power plants. No other policy.",No relevant policies.,No relevant policies.,No relevant policies.,Orange,Red,Red,Red
 Brazil,"
@@ -46,15 +46,15 @@ United Kingdom,"
 British International Investment (formerly CDC Group Plc), Department for International Development, UK Export Finance",Yes,Yes,670,Full exclusion on coal. ,Full exclusion on oil across all institutions.,"Restricts most gas finance except in “exceptional” circumstances for power plants and non-export midstream infrastructure, requiring cost and emissions tests for alternatives.","Policy applies to all intermediated finance, directly related infrastructure, and technical advice but lacks a clear methodology for intermediaries.",Green,Green,Yellow,Yellow
 United States,"
 Export-Import Bank of the United States, Development Finance Corporation (formerly Overseas Private Investment Corporation)",Yes,Yes,"3,693","OECD restriction for ECAs, applies to  new and existing coal-fired power plants. 2013 non-binding policy and leaked 2021 interim guidance exclude coal. ",Policy guidance not publicly released might end support for oil but with exemptions for national security and energy access.,Policy guidance not publicly released might limit support for some gas but exact restrictions and application of exemptions remain unclear.,No relevant policies.,Yellow,Red,Red,Red
-Belgium ,"Credendo, BIO",Yes,No,6*,Full exclusion on coal. ,"BIO has full exclusion for upstream oil, and partial exclusion for midstream and downstream oil. Credendo policy excludes financing for oil fired power, though allows financing for existing oil fields approved before 2022 and up until 2025.","BIO has full exclusion for upstream gas, and partial exclusion for midstream and downstream gas. Credendo policy allows investments in gas-fired power plants until 2025 and for existing gas fields approved before 2022 and up until 2025.","No relevant policy identified at Credendo, EDFI financial intermediary statement
+Belgium ,"Credendo, BIO",Yes,No,6,Full exclusion on coal. ,"BIO has full exclusion for upstream oil, and partial exclusion for midstream and downstream oil. Credendo policy excludes financing for oil fired power, though allows financing for existing oil fields approved before 2022 and up until 2025.","BIO has full exclusion for upstream gas, and partial exclusion for midstream and downstream gas. Credendo policy allows investments in gas-fired power plants until 2025 and for existing gas fields approved before 2022 and up until 2025.","No relevant policy identified at Credendo, EDFI financial intermediary statement
 applies at BIO.",Green,Yellow,Orange,Orange
 Denmark,"Danmarks Eksport Kredit (EKF), Investeringsfonden for
-Udviklingslande (IFU)",Yes,No,36*,Full exclusion on coal. ,Full exclusion  on oil.,"Restricts most gas finance, though allows investments in gas-fired power plants for a transition period until 2025 under specific conditions.","No relevant policy identified at EKF,  EDFI financial intermediary statement
+Udviklingslande (IFU)",Yes,No,36,Full exclusion on coal. ,Full exclusion  on oil.,"Restricts most gas finance, though allows investments in gas-fired power plants for a transition period until 2025 under specific conditions.","No relevant policy identified at EKF,  EDFI financial intermediary statement
 applies at IFU.",Green,Green,Yellow,Orange
-Finland,"Finnvera, Finnfund",Yes,No,142*,Full exclusion on coal.,"Finnfund has full exclusion for upstream oil, and a partial exclusion for
+Finland,"Finnvera, Finnfund",Yes,No,142,Full exclusion on coal.,"Finnfund has full exclusion for upstream oil, and a partial exclusion for
 midstream and downstream oil. Finnvera has an exclusion for upstream and midstream oil, and a partial exclusion for downstream.","Finnfund has exclusion for upstream gas and partial exclusion for
 midstream and downstream gas. Finnvera has exclusion for upstream and midstream gas, and partial exclusion for downstream.",Finnfund policy applies to direct and indirect support. No relevant policy identified at Finnvera,Green,Yellow,Yellow,Orange
-Netherlands,"Atradius, Dutch entrepeneurial development bank (FMO)",Yes,No,"1,215*",Full exclusion on coal. ,Atradius has partial oil exclusion. FMO has full exclusion for oil.,"Atradius has partial gas exclusion. FMO has full exclusion for gas, except in limited circumstances for midstream and downstream gas during a 5 year transition period.",FMO exclusion for indirect support for coal. No relevant policy identified at Atradius. ,Green,Yellow,Yellow,Orange
+Netherlands,"Atradius, Dutch entrepeneurial development bank (FMO)",Yes,No,"1,215",Full exclusion on coal. ,Atradius has partial oil exclusion. FMO has full exclusion for oil.,"Atradius has partial gas exclusion. FMO has full exclusion for gas, except in limited circumstances for midstream and downstream gas during a 5 year transition period.",FMO exclusion for indirect support for coal. No relevant policy identified at Atradius. ,Green,Yellow,Yellow,Orange
 Portugal,"Companhia de Seguro
 de Créditos (COSEC), Sociedade para o
 Financiamento do Desenvolvimento
@@ -63,8 +63,8 @@ Spain,"Compañía Española de
 Seguros de Crédito a la
 Exportación (CESCE), Compañía Española
 de Financiación del
-Desarrollo (COFIDES)",Yes,No,"2,394*",CESCE has commited to ending finance for coal power though without a concrete timeline. EDFI coal exclusion applies at COFIDES.,CESCE has agreed to phase out oil finance but without clarification of scope or timeline. EDFI exclusion applies applies at COFIDES.,CESCE has agreed to phase out gas finance but without clarification of scope or timeline. EDFI exclusion applies applies at COFIDES.,EDFI financial intermediary exclusion applies to COFIDES.,Yellow,Yellow,Orange,Orange
-Sweden,"Swedish National Export Credits Guarantee Board (EKN), Swedish Export Credit Corporation (SEK), Swedfund",Yes,No,120*,Full exclusion on coal. ,"Full exclusion
+Desarrollo (COFIDES)",Yes,No,"2,394",CESCE has commited to ending finance for coal power though without a concrete timeline. EDFI coal exclusion applies at COFIDES.,CESCE has agreed to phase out oil finance but without clarification of scope or timeline. EDFI exclusion applies applies at COFIDES.,CESCE has agreed to phase out gas finance but without clarification of scope or timeline. EDFI exclusion applies applies at COFIDES.,EDFI financial intermediary exclusion applies to COFIDES.,Yellow,Yellow,Orange,Orange
+Sweden,"Swedish National Export Credits Guarantee Board (EKN), Swedish Export Credit Corporation (SEK), Swedfund",Yes,No,120,Full exclusion on coal. ,"Full exclusion
 for upstream,
 midstream, and
 downstream oil.","Exclusion policy for gas in place, however includes loopholes that could allow for gas fired power plants and extraction under specific conditions.",EDFI financial intermediary exclusion applies at Swedfund. ,Green,Green,Yellow,Orange
@@ -72,7 +72,7 @@ Switzerland,"Schweizerische
 Exportrisikoversicherung
 (SERV), Swiss Investment Fund
 for Emerging Markets
-(SIFEM)",Yes,No,963*,"SIFEM has a full exclusion on coal. SERV has OECD restriction for ECAs, applies to new and existing coal-fired power plants.","No relevant policy identified at SERV, EDFI exclusion
+(SIFEM)",Yes,No,963,"SIFEM has a full exclusion on coal. SERV has OECD restriction for ECAs, applies to new and existing coal-fired power plants.","No relevant policy identified at SERV, EDFI exclusion
 applies at SIFEM.","No relevant policy identified at SERV, EDFI exclusion
 applies at SIFEM.","EDFI financial intermediary exclusion
 applies at SIFEM.",Yellow,Orange,Orange,Orange

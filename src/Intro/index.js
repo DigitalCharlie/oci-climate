@@ -232,7 +232,7 @@ export default function Intro(props) {
           <h3 className="chart-title">Top 15 G20 countries for international public finance for fossil fuels, annual average 2019-2021, USD billions</h3>
 
           <img className="intro-graph" src={g20} alt="Chart of top 15 G20 public finance for fossil fuels" />
-          <p className='intro-caption'>Canada, Japan, and Korea are the largest current providers of international public finance for fossil fuels out of the G20 countries, bankrolling more than $10 billion a year on average 2018-2020.</p>
+          <p className='intro-caption'>Japan, Canada and Korea are the largest current providers of international public finance for fossil fuels out of the G20 countries, bankrolling almost $9 billion a year on average 2019-2021.</p>
 
           <h3 className="chart-title">
             Multilateral Development Bank finance for fossil fuels, annual average 2019-2021, USD billions
