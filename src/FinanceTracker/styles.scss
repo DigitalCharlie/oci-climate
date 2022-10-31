@@ -93,6 +93,10 @@
     a {
       color: #005080;
     }
+    a::after {
+      content:"\A";
+      white-space:pre;
+    }
   }
   .dot {
     width: 1.5em;
