@@ -11,10 +11,10 @@ import Checkbox from './Checkbox'
 import InfoIcon from './InfoIcon'
 import YearPicker from './YearPicker'
 import { Link } from 'react-router-dom'
+import { finalYear } from 'App'
 const ExLink = ({href, children}) => {
   return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
 }
-import { finalYear } from 'App'
 const energyTypes = ['Fossil Fuel', 'Clean', 'Other']
 export const colors = {
   // OLD COLORS
