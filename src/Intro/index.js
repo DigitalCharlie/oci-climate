@@ -267,6 +267,9 @@ export default function Intro(props) {
           <p>
             <strong><Link to="resources">Resources</Link></strong>: Research and news on international public finance from Oil Change International and our partners.
           </p>
+          <p>
+            <strong><ExLink href="https://act.priceofoil.org/signup/public-finance-energy-database-updates/">Sign up for research updates</ExLink></strong>: Receive an email when we upload new data or publish major reports using Public Finance for Energy Database. 
+          </p>
           </section>
         </div>
         <Footer introFooter opacity={finalBoxInView ? 1 : 0 } />
