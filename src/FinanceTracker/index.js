@@ -312,6 +312,7 @@ export default function FinanceTracker(props) {
                       )
                     })}
                   </div>
+                  {console.log(sources)}
                   {hasSource ? <div className='sources'><strong>Sources</strong><p><Linkify>{hasSource.Source}</Linkify></p></div> : null}
                 </div>
               </td>
