@@ -357,7 +357,7 @@ export default function FinanceTracker(props) {
             <strong>How to use:</strong> Toggle to see the country-level or multilateral development bank report card, filter the view to see Glasgow Signatories or not, and hover or click the + sign to see more details.
           </p>
           <p>
-            Last update: November 1, 2022
+            Last update: February 20, 2024
           </p>
         </div>
         <div className='controls'>
