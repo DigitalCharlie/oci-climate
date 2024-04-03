@@ -7,7 +7,7 @@ import routes from './routes'
 import ReactTooltip from 'react-tooltip';
 import { useRef, useState, useEffect } from 'react';
 import Footer from './Footer'
-export const finalYear = 2021
+export const finalYear = 2022
 
 function App() {
 

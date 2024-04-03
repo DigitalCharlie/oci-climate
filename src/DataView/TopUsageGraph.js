@@ -78,6 +78,8 @@ function AnimatedRow(props) {
     const nameOverrides = {
       'Islamic Development Bank*': 'IsDB*',
       'Inter-American Development Bank': 'IaDB',
+      'Asian Development Bank': 'ADB',
+      'African Development Bank': 'AfDB',
     }
     if (nameOverrides[name]) {
       label = nameOverrides[name]
@@ -85,7 +87,7 @@ function AnimatedRow(props) {
       label = name.split(' ').map(word => word.charAt(0)).join('')
       const overrides = {
         EBfRaD: 'EBRD',
-        'ADB': 'AfDB',
+        // 'ADB': 'AfDB',
       }
       if (overrides[label]) {
         label = overrides[label]
