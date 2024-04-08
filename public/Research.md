@@ -4,7 +4,7 @@ The Energy Finance Tracker database is a project of Oil Change International’s
 
 ### Research Spotlight
 
- [Public Enemies](https://priceofoil.org/?p=43627)is the most recent analysis of our G20 international public finance dataset from Oil Change International and Friends of the Earth US. This report provides an update to previous reports: [At A Crossroads](http://priceofoil.org/g20-at-a-crossroads) (September 2022), [Past Last Call](https://priceofoil.org/2021/10/28/past-last-call-g20-public-finance-institutions-are-still-bankrolling-fossil-fuels/) (2021), [Still Digging](http://priceofoil.org/2020/05/27/g20-still-digging/) (2020) and [Talk is Cheap](http://priceofoil.org/2017/07/05/g20-financing-climate-disaster/) (2017) detailing earlier trends.
+ [Public Enemies](https://priceofoil.org/?p=43627) (2024) is the most recent analysis of our G20 international public finance dataset from Oil Change International and Friends of the Earth US. This report provides an update to previous reports: [At A Crossroads](http://priceofoil.org/g20-at-a-crossroads) (September 2022), [Past Last Call](https://priceofoil.org/2021/10/28/past-last-call-g20-public-finance-institutions-are-still-bankrolling-fossil-fuels/) (2021), [Still Digging](http://priceofoil.org/2020/05/27/g20-still-digging/) (2020) and [Talk is Cheap](http://priceofoil.org/2017/07/05/g20-financing-climate-disaster/) (2017) detailing earlier trends.
 
 ### Recommendations for international public finance institutions
 
