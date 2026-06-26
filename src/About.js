@@ -15,7 +15,7 @@ export default function About(props) {
     'Where does the data come from?',
     'How is the amount of finance determined?',
     'What public finance data is included here?',
-    'Do the amounts reported here include all G20 international public finance for energy?',
+    'Do the amounts reported here include all G20 public finance for energy?',
     'How can I look at public finance for specific projects or see more detail?',
     'How do I cite this website?',
     `What is this site's Privacy Policy?`
@@ -24,9 +24,8 @@ export default function About(props) {
   const dataSlugs = dataQuestions.map(q=>slug(q))
   
   const bgQuestions = [
-    'Is international public finance a “subsidy”?',
+    'Is public finance a “subsidy”?',
     'What would 1.5C aligned international public finance for energy look like?',
-    'What about domestic support for fossil fuels?',
     'Is public finance for fossil fuels needed for development?'
   ]
   
@@ -39,10 +38,11 @@ export default function About(props) {
         The Public Finance for Energy Database is a project of Oil Change International, and was formerly called the Shift the Subsidies Database. It is the only publicly available database tracking international finance for energy from more than one government-owned institution. We track energy finance from G20 governments’ export credit agencies (ECAs) and development finance institutions (DFIs), as well as the  major multilateral development banks (MDBs).
       </p>
       <p>
-        Below are some of the most frequently asked questions.
+        In July 2026, we updated the database to include, for the first time, G20 domestic public finance from domestic public banks, including national development banks (NDBs). This is the first comprehensive, cross-country dataset of energy financing flows from domestic public banks in G20 countries.
       </p>
+      <p>If you would like to explore the data yourself at the transaction level, you can <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>download the dataset as a spreadsheet here (.xlsx file)</a>.</p>
       <p>
-        <strong>If you would like to explore the data yourself at the transaction level, you can to  <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>download it here as a spreadsheet (.xlsx file)</a>.</strong>
+        Below are some of the most frequently asked questions. For any further questions please reach out to <ExLink href="mailto:claire@oilchange.org">claire@oilchange.org</ExLink>.
       </p>
       <br />
       <h2>Frequently Asked Questions</h2>
@@ -71,8 +71,9 @@ export default function About(props) {
 <p><strong>Other:</strong> Includes projects where (a) the energy source(s) are unclear or unidentified as well as (b) non-fossil energy sources that typically have significant impacts on the environment and human populations. This means we include large hydropower (over 30MW), biofuels, biomass, nuclear power, and incineration. If a project includes multiple energy sources, we split it into multiple transactions, but if this is not possible we also classify it as ‘Other.’ 52% of the finance in this category is for transmission and distribution projects.</p>
 
 <br /><h3 id={dataSlugs[1]}><strong>Where does the data come from?</strong></h3>
-<p>Oil Change International builds this dataset by tracking energy finance from public finance institutions at the transaction level. As of 2022, it covers over 12,000 transactions totalling over $1 trillion going back to 2008 for multilateral development banks and back to 2013 for the bilateral categories of public finance institutions. This data is sourced primarily from government and institution reporting (including annual reports with project information, press releases, freedom-of information requests, and project databases) as well as the Infrastructure Journal (IJ) Global database, Boston University’s Global Economic Governance Initiative’s <ExLink href="https://www.bu.edu/cgef/#/all/Country">China Global Energy Finance Database</ExLink>, and investigations by our partners at <ExLink href="https://forourclimate.org/en/">Solutions for our Climate</ExLink> (Korea), <ExLink href="https://www.jubileeaustralia.org/">Jubilee Australia</ExLink>, <ExLink href="https://www.urgewald.org/en/english">Urgewald</ExLink> (Germany), and <ExLink href="https://farn.org.ar/">Fundación Ambiente y Recursos Naturales</ExLink> (Argentina).</p>
-<p>We are also grateful to partners at Friends of the Earth US, Just Finance International, 350Africa.org, Les Amis de la Terre, Re:Common, Friends of the Earth Japan, Japan Center for a Sustainable Environment and Society (JACSES), Both ENDS, Fundación Ambiente y Recursos Naturales, Above Ground, Legambiente, Transnational Institute, Market Forces, Iniciativa Climática de Mexico, ActionAid, Jubilee Australia, Bank Information Centre, and Recourse.org among others for their periodic review of this dataset.</p>
+<p>Oil Change International builds this dataset by tracking energy finance from public finance institutions at the transaction level. As of 2024, it covers over 18,000 transactions totalling almost $1.7 trillion going back to 2013. The domestic public finance is available for 2016 to 2024. Going back to 2008 for multilateral development banks is available in the <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>downloadable full data set</a>.
+</p><p>This data is sourced primarily from government and institution reporting (including annual reports with project information, press releases, freedom-of information requests, and project databases) as well as the Infrastructure Journal (IJ) Global database, Boston University’s Global Economic Governance Initiative’s <ExLink href="https://www.bu.edu/cgef/#/all/Country">China Global Energy Finance Database</ExLink>, and investigations by our partners at <ExLink href="https://forourclimate.org/en/">Solutions for our Climate</ExLink> (Korea), <ExLink href="https://www.jubileeaustralia.org/">Jubilee Australia</ExLink>, <ExLink href="https://www.urgewald.org/en/english">Urgewald</ExLink> (Germany), and <ExLink href="https://farn.org.ar/">Fundación Ambiente y Recursos Naturales</ExLink> (Argentina).</p>
+<p>We are also grateful to partners at 350Africa.org, Above Ground, ActionAid, Bank Information Centre, Both ENDS, Environmental Defence Canada, Friends of the Earth Japan, Friends of the Earth US, Fundación Ambiente y Recursos Naturales, Grupo de Financiamiento Climático de Latinoamérica y el Caribe (GFLAC), I4CE, Iniciativa Climática de Mexico, International Institute for Sustainable Development, Japan Center for a Sustainable Environment and Society (JACSES), Jubilee Australia, Just Finance International, Legambiente, Les Amis de la Terre, Market Forces, Rabia Transitions, Re:Common, Recourse.org, Solutions for our Climate, Transnational Institute, Urgewald among others for their periodic review of this dataset.</p>
 
 <br /><h3 id={dataSlugs[2]}><strong>How is the amount of finance determined?</strong></h3>
 
@@ -85,7 +86,7 @@ In cases where multiple sectors are included in one transaction, only the portio
 </p>
 
 <br /><h3 id={dataSlugs[3]}><strong>What public finance data is included here?</strong></h3>
-<p>This dataset covers only public finance from G20 country bilateral finance institutions and the major MDBs. We consider an export credit agency, development finance institution, or multilateral development bank to be in scope as a ‘public finance institution’ when national government(s) hold more than 50% of the ownership stakes and where there is a clear policy mandate that drives decisions beyond solely commercial performance. See the figures in the <Link to="/data">Data Dashboard</Link>, or the <Link to="/tracker">Policy Tracker</Link> for a full list of institutions and classifications. This means we do not cover finance or subsidies from G20 governments directly, sovereign wealth funds, or institutions owned by subnational governments. Generally, the MDBs, DFIs, and ECAs we cover provide energy finance internationally, but they sometimes also provide domestic support. These domestic projects are also included where information is available so we can get a full institution-level picture. Likewise, government agencies or national development banks that only occasionally provide international finance are also not reflected here.
+<p><strong>International finance:</strong> This dataset covers public finance from G20 country bilateral finance institutions and the major MDBs. We consider an export credit agency, development finance institution, or multilateral development bank to be in scope as a ‘public finance institution’ when national government(s) hold more than 50% of the ownership stakes and where there is a clear policy mandate that drives decisions beyond solely commercial performance. See the figures in the <Link to="/data">Data Dashboard</Link>, or the <Link to="/tracker">Policy Tracker</Link> for a full list of institutions and classifications. This means we do not cover finance or subsidies from G20 governments directly, sovereign wealth funds, or institutions owned by subnational governments.
 </p>
 <table>
 <thead>
@@ -103,7 +104,7 @@ In cases where multiple sectors are included in one transaction, only the portio
   </tr>
   <tr>
     <td>Development Finance Institution</td>
-    <td>Promote sustainable development and reduce poverty. They may have further objectives based on national policy priorities. DFIs typically focus on bilateral finance but some national development banks that we cover support both domestic and international projects.</td>
+    <td>Promote sustainable development and reduce poverty. They may have further objectives based on national policy priorities. DFIs typically focus on bilateral finance but some that we cover support both domestic and international projects.</td>
     <td>China Development Bank (China), Agence Française de Développement (France), Nacional Financiera (Mexico)</td>
   </tr>
   <tr>
@@ -113,13 +114,15 @@ In cases where multiple sectors are included in one transaction, only the portio
   </tr>
 </tbody>
 </table>
+<p><strong>Domestic public finance:</strong> Our G20 domestic public finance database not only includes any domestic finance from G20 ECAs and DFIs, but also includes national development bank (NDB)energy finance between 2016 and 2024. NDBs have a wide variety of structures and mandates, so in order to meet the challenge of classifying them, the institutions covered here borrow from <ExLink href="https://financeincommon.org/sites/default/files/2021-10/Mapping%20DFIs%20Worldwide_0.pdf">Finance in Common’s Public Development Banks (PDBs) database</ExLink>, and are defined as: stand-alone entities, having a proactive public policy-oriented mandate, government steering of corporate strategy, and funding sources that go beyond periodic budgetary transfers. 
+</p>
 
-<br /><h3 id={dataSlugs[4]}><strong>Do the amounts reported here include all G20 international public finance for energy?</strong></h3>
+<br /><h3 id={dataSlugs[4]}><strong>Do the amounts reported here include all G20 public finance for energy?</strong></h3>
 
 <p>Poor reporting from governments means there are four significant limitations in this dataset. This means the figures presented in the database are incomplete and therefore underestimated:</p>
 
 <ul>
-	<li>Many institutions have limited or no reporting on their projects.  The Islamic Development Bank, Argentina, China, India, Indonesia, Mexico, Russia, Saudi Arabia, South Africa, and Türkiye have particularly little publicly available information — meaning they do not have annual reports with project information, semi-regular press releases, a freedom-of-information request detailing funding, or any form of project database. This is marked throughout the data dashboard. However, it’s important to note that the totals for other countries or institutions that do provide some of these sources are still uncertain. In all cases, we use media reporting and paid databases like IJGlobal to supplement data provided by government sources.
+	<li>Many institutions have limited or no reporting on their projects. Argentina, China, India, Indonesia, Mexico, Russia, Saudi Arabia, South Africa, and Türkiye have particularly little publicly available information across both their domestic and international institutions— meaning they do not have annual reports with project information, semi-regular press releases, a freedom-of-information request detailing funding, or any form of project database. This is marked throughout the data dashboard. However, it’s important to note that the totals for other countries or institutions that do provide some of these sources are still uncertain. For FY 2024 this is particularly true for South Korea and Japan. In all cases, we use media reporting and paid databases like IJGlobal to supplement data provided by government sources.
   </li>
 	<li>There is little data available on much of the energy finance provided via financial intermediaries (FIs) — third-party financial institutions like local banks, pension funds, or private equity funds. Details on the volume of public finance for specific energy activities ultimately delivered through those intermediaries are rarely available. This is a significant gap given lending through financial intermediaries is often half to two-thirds of finance for institutions focused on private-sector lending, and up to a quarter for those more focused on sovereign lending. Financial intermediation is also growing across all finance, and available data suggests this is likely the case for energy finance of the trade and development finance institutions mapped here.</li>
 	<li>There is little data available on the energy-related portions of much of the “policy-based” lending from MDBs, providing government budget support that can be across multiple sectors and departments (The World Bank Group (WBG), Asian Development Bank (ADB), African Development Bank (AfDB), European Bank for Reconstruction and Development (EBRD), and the Inter-American Development Bank (IBRD) engage in this).</li>
@@ -129,7 +132,7 @@ In cases where multiple sectors are included in one transaction, only the portio
 
 <br /><h3 id={dataSlugs[5]}><strong>How can I look at public finance for specific projects or see more detail?</strong></h3>
 
-<p>You can download the data as a spreadsheet <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>here</a>. Definitions for each field are provided in the first tab, and a source for each transaction is in the last column. You can also read more background and analysis on public finance <Link to='/resources'>here</Link>.</p>
+<p>You can download the data as a spreadsheet <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>here</a>. Definitions for each field are provided in the first tab, a filter for whether the transaction is domestic or international is in the last column, and a source for each transaction is in the second to last column. You can also read more background and analysis on public finance <Link to='/resources'>here</Link>.</p>
 
 
 <br /><h3 id={dataSlugs[6]}><strong>How do I cite this website?</strong></h3>
@@ -144,7 +147,7 @@ In cases where multiple sectors are included in one transaction, only the portio
 
 <br /><h2>Background on International Public Finance for Energy</h2>
 
-<h3 id={bgSlugs[0]}><strong>Is international public finance a “subsidy”?</strong></h3>
+<h3 id={bgSlugs[0]}><strong>Is public finance a “subsidy”?</strong></h3>
   <p>The World Trade Organization’s <ExLink href="https://www.wto.org/english/docs_e/legal_e/24-scm_01_e.htm">definition</ExLink> calls public finance a subsidy to energy production to the extent that it constitutes a “direct transfer of funds” (as with grants, loans, and equity infusions) or “potential direct transfers of funds or liabilities” (as with guarantees and insurance) to an energy project or sector. However, due to the lack of transparency and robust reporting from public finance institutions, it is not possible to separate out what portion of public finance is a subsidy component.</p>
   <p>
   Furthermore, beyond the portions that can be formally conceived of as a subsidy, public finance for energy still plays an outsized role in shaping energy systems. These loans, grants, equity, and guarantees still lower risk for other investors when there is no below-market component because they are government-backed. Public finance institutions often further influence the energy landscape by signaling government priorities and adding research and advisory capacity. These all help leverage additional investment for proposed projects. These are benefits that — if wielded alongside a commitment to human rights due diligence, community-led development, and strengthening public goods — are desperately needed for a just energy transition rather than for propping up the fossil fuel industry.
@@ -158,12 +161,9 @@ In cases where multiple sectors are included in one transaction, only the portio
 
 <p>Fossil free public finance alone is not enough to support a globally just energy transition in line with 1.5°C. We also need public finance institutions to greatly increase their support for clean energy, implement comprehensive human rights due diligence across their projects, provide their fair share of debt cancellation and climate finance, and work together to update international monetary, trade, tax and debt policies to build a more just global financial system that can deliver a globally just energy transition.</p>
 
-<p> You can read more detailed recommendations for international public finance in the new report from Oil Change International and Friends of the Earth US, "<ExLink href="https://priceofoil.org/?p=43627">Public Enemies.</ExLink>"</p>
+<p> You can read more detailed recommendations for international public finance in this report from Oil Change International and Friends of the Earth US, "<ExLink href="https://priceofoil.org/?p=43627">Public Enemies.</ExLink>"</p>
 
-<br /><h3 id={bgSlugs[2]}><strong>What about domestic support for fossil fuels?</strong></h3>
-<p>International public finance for fossil fuels is only part of the problem. G20 countries must also clean up their act at home, which should include ending all kinds of domestic support for fossil fuels, implementing financial regulations to end private fossil fuel finance, and legislating a just and managed transition away from domestic fossil fuel production.</p>
-
-<br /><h3 id={bgSlugs[3]}><strong>Is public finance for fossil fuels needed for development?</strong></h3>
+<br /><h3 id={bgSlugs[2]}><strong>Is public finance for fossil fuels needed for development?</strong></h3>
 <p>The majority of G20 international public finance for energy flows between relatively wealthy countries. When it does flow to low-income countries it has <ExLink href="https://priceofoil.org/2021/10/14/the-skys-limit-africa/">rarely served</ExLink> as a vehicle for just development, energy access, or resource sovereignty because of poor contract terms, industry-friendly subsidy and royalty frameworks, debt traps, corruption, and the outsized ownership of fossil resources by multinational corporations based in wealthy countries. And as the industry faces increasing systemic financial risks, the possibility that fossil fuels can promote just development is increasingly slim.</p>
 
 <p>The outlook for fossil fuels and development has continued to diminish, and continued public finance for fossil fuels now nearly always contradicts recommendations for achieving <ExLink href="https://www.seforall.org/data-and-evidence/energizing-finance-series/energizing-finance-2020;">energy access</ExLink> and <ExLink href="https://www.iisd.org/publications/natural-gas-finance-clean-alternatives-global-south/">avoiding economic shocks</ExLink> like stranded assets and climate disasters. Ending public finance flows would not mean halting the use and production of fossil fuels overnight. Rather, it means saying no to new projects now and starting widespread planning now to ensure there is time and resources for clean-up and for a just transition for the workers and communities that depend upon production. The wealthy countries most responsible for historic and current emissions — including most of the G20 — must move first and fastest to phase out their fossil fuel production and pay their fair share for the global energy transition.</p>

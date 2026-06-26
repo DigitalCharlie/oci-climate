@@ -38,16 +38,15 @@ export default function DataView(props) {
     {
       title: 'Public Finance by Year',
       orderMultiColumnView: 0,
-      description: <React.Fragment>International public finance by year and energy type, from multilateral development banks (MDBs), G20 export credit agencies (ECAs), and G20 development finance institutions (DFIs). Filter to select a specific country or MDB. Annual financing totals and data availability are often variable at individual institutions, so please use filtered results with caution — and read our <Link to='/about'>About page</Link> for more information on our data and methodology.</React.Fragment>,
+      description: <React.Fragment>International and domestic public finance by year and energy type, from multilateral development banks (MDBs), G20 export credit agencies (ECAs),  G20 development finance institutions (DFIs) and G20 national development banks (NDBs). Filter to select a specific country or MDB. Annual financing totals and data availability are often variable at individual institutions, so please use filtered results with caution — and read our <Link to='/about'>About page</Link> for more information on our data and methodology.</React.Fragment>,
       content: (
         data.length ? <YearlyUsageGraph data={data} /> : null
       )
-
     },
     {
       title: 'Top 15 G20 Country Comparison',
       orderMultiColumnView: 1,
-      description: 'The 15 countries with the largest flows of international public finance for energy based on your dashboard selections. This includes finance from bilateral export credit agencies and development finance institutions, but not G20 country contributions to multilateral development banks as these are not possible to disaggregate. Hover over each country label to see the institutions included.',
+      description: 'The 15 countries with the largest flows of international and domestic public finance for energy based on your dashboard selections. This includes finance from bilateral export credit agencies and development finance institutions, but not G20 country contributions to multilateral development banks as these are not possible to disaggregate. Hover over each country label to see the institutions included.',
       content: (
         <TopUsageGraph data={data.filter(d => d.institutionKind !== 'Multilateral')} />
       )
@@ -149,12 +148,14 @@ export default function DataView(props) {
       <div className='dataViewIntro'>
         <h1>Data Dashboard</h1>
         <div className='description'>
-<p>Public finance institutions play an outsized role in shaping our future energy system by providing government-backed, low-risk finance that is often a determining factor in which projects get built. This dashboard shows the total flows of public finance going to fossil fuel, clean, and other energy projects from G20 countries’ trade and development finance institutions as well as the major multilateral development banks.
+<p>Public finance institutions play an outsized role in shaping our future energy system by providing government-backed, low-risk finance that is often a determining factor in which projects get built. This dashboard shows the total flows of both international and domestic public finance going to fossil fuel, clean, and other energy projects from G20 countries’ trade, development finance institutions, and national development banks as well as the major multilateral development banks.
 </p>
 
-<p><strong>How to use this dashboard:</strong> Use the controls below to add or remove data on fossil, clean, and other energy, change the years displayed, or show totals rather than annual averages. You can hover over a country or institution on a graph to see more details, and toggle some graph-specific settings. For details on our methodology, see the <Link to="/about">About</Link> page. Our full dataset includes information on each transaction behind this data as well as details about the kind of finance, energy sub-type, and supply chain stage. Click <ExLink href="https://act.priceofoil.org/signup/public-finance-energy-database-updates/">here</ExLink> to sign up to get email updates when a new dataset is available.</p>
+<p><strong>How to use this dashboard:</strong> Use the controls below to add or remove data on fossil, clean, and other energy, change the years displayed, or show totals rather than annual averages. You can hover over a country or institution on a graph to see more details, and toggle some graph-specific settings. Our dataset includes G20 domestic (comprehensive between 2016 and 2024) and international energy finance. The visualizations below include both domestic and international public finance. Our <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>downloadable dataset</a> allows you to see a breakdown of the finance by either domestic, international or both. 
+</p>
+<p>For details on our methodology, see the <Link to="/about">About</Link> page. Our full dataset includes information on each transaction behind this data as well as details about the kind of finance, energy sub-type, and supply chain stage. Click <ExLink href="https://act.oilchange.org/forms/oci-email-signup?source=energy-finance-database">here</ExLink> to sign up to get email updates when a new dataset is available.</p>
 
-<strong>If you would like to explore the data yourself at the transaction level, you can to  <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>download it here as a spreadsheet (.xlsx file)</a>.</strong>
+<p><strong>If you would like to explore the data yourself at the transaction level, you can <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>download the dataset as a spreadsheet here (.xlsx file)</a>.</strong></p>
 
 <p>* By a country indicates very limited or no direct reporting is available from this country or institution. However, note that all institutions have gaps in reporting, especially for indirect support through financial intermediation, policy-based lending at the MDBs, technical assistance, and associated facilities.  
 </p>

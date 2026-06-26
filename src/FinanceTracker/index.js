@@ -343,21 +343,21 @@ export default function FinanceTracker(props) {
     <div style={{ marginTop: props.headerHeight }} className={classNames('FinanceTracker', { singleColumnView })}>
       <div>
         <div className='description'>
-          <h1>Fossil Free Policy Tracker</h1>
+          <h1>Fossil Free International Policy Tracker</h1>
           <p>
             In order to ensure a safe climate for all, it is critical that public finance institutions end their support for fossil fuel projects and instead use their unique influence to catalyze a just energy transition. After years of commitments, more institutions are starting to implement fossil fuel exclusions into policy. The joint <a href="https://ukcop26.org/statement-on-international-public-support-for-the-clean-energy-transition/">Statement on International Public Support for the Clean Energy Transition</a> at COP26 in Glasgow was an important landmark with 39 countries and institutions committing to end their public finance for fossil fuels by the end of 2022.
           </p>
           <p>
-            This table tracks all policies to exclude international public finance from high-income signatories to the Glasgow Statement with international public finance institutions, G20 governments, and the major multilateral development banks. We include policies dealing with coal, oil, and gas across the supply chain as well as “indirect” public finance for fossil fuels through related infrastructure, technical assistance, policy support, and financial intermediaries. 
+            <strong>This table tracks all policies to exclude international public finance from high-income signatories to the Clean Energy Transition Partnership with international public finance institutions, G20 governments, and the major multilateral development banks.</strong> We include policies dealing with coal, oil, and gas across the supply chain as well as “indirect” public finance for fossil fuels through related infrastructure, technical assistance, policy support, and financial intermediaries.
           </p>
           <p>
-            “Single” exclusions are those covering only one part of the supply chain (or one type of indirect finance) at one or more of a country’s or MDB’s relevant institutions, while green “full” exclusions cover all supply chain stages across all institutions though with substantial loopholes in some cases. “Average Annual Fossil Fuel Finance” figures are 2019-2021 averages for all G20 countries and MDBs. Non-G20 countries totals are 2018-2020 averages, from <ExLink href="https://www.iisd.org/publications/report/turning-glasgow-statement-into-action">research</ExLink> with International Institute for Sustainable Development.
+            “Single” exclusions are those covering only one part of the supply chain (or one type of indirect finance) at one or more of a country’s or MDB’s relevant institutions, while green “full” exclusions cover all supply chain stages across all institutions though with substantial loopholes in some cases. “Average Annual Fossil Fuel Finance” figures are 2022-2024 averages. Figures for Non-G20 Countries are from research with the international Institute for Sustainable Development.
           </p>
           <p>
             <strong>How to use:</strong> Toggle to see the country-level or multilateral development bank report card, filter the view to see Glasgow Signatories or not, and hover or click the + sign to see more details.
           </p>
           <p>
-            Last update: February 20, 2024
+            Last update: September 2025
           </p>
         </div>
         <div className='controls'>
