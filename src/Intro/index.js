@@ -195,7 +195,7 @@ export default function Intro(props) {
           <h1 className={classNames({visible: topVisible})}>A <span className="blue">public</span> database for <span className="blue">public</span> finance </h1>
           <p  className={classNames({visible: topVisible})}>G20 governments and the major multilateral development banks (MDBs) provide over USD $200 billion each year in both domestic and international finance for energy projects. This public money has an outsized influence on what kinds of energy projects get built. Unfortunately, for every dollar going to the clean energy we need to build a just and liveable future, nearly one dollar is still flowing to climate-wrecking fossil fuels.
           </p>
-          <p  className={classNames({visible: topVisible})}>The Public Finance for Energy Database is the only resource tracking these flows across more than one institution. At over 18,000 transactions and counting, totalling almost  $ $1.7 trillion, our data is free and publicly available to make sure G20 governments and MDBs can be held accountable to their promises to build a liveable and just future.
+          <p  className={classNames({visible: topVisible})}>The Public Finance for Energy Database is the only resource tracking these flows across more than one institution. At over 18,000 transactions and counting, totalling almost $1.7 trillion, our data is free and publicly available to make sure G20 governments and MDBs can be held accountable to their promises to build a liveable and just future.
           </p>
           <div className={classNames('buttons', {visible: buttonsVisible})}>
             <button onClick={() => setIntroDismissed(true)}>Read More</button>
@@ -210,7 +210,7 @@ export default function Intro(props) {
           <section>
           <h3>Why track public finance? </h3>
           <p>
-            The Public Finance for Energy Database is a project of <a href="https://priceofoil.org/" target="_blank">Oil Change International</a>. We compile transaction-level data on finance from G20 export credit agencies and development finance institutions, as well as the major multilateral development banks. We have recently expanded our dataset to include national development bank finance as well, to capture both the G20’s domestic and international public finance. 
+            The Public Finance for Energy Database is a project of <a href="https://priceofoil.org/" target="_blank">Oil Change International</a>. We compile transaction-level data on finance from G20 export credit agencies, national development banks, and development finance institutions, as well as the major multilateral development banks.
           </p>
           <p>
             <strong>Looking at international public finance,</strong> our data shows these government institutions are providing at least $19 billion a year on average in influential international public finance for oil, gas, and coal. The true amount is likely higher, due to gaps in reporting in South Korea and Japan, key providers of international public finance for fossil fuels, who have yet to commit to end this finance. <strong>This public money is prolonging the fossil fuel era and making it harder for clean energy projects to get built.</strong>
@@ -223,7 +223,7 @@ export default function Intro(props) {
           </p>
           <div>
           <h3 className="chart-title">
-            G20 and MDB public finance for fossil fuels, clean, and other energy, 2013-2024, in USD Billions
+            G20 and MDB domestic and international public finance for fossil fuels, clean, and other energy, 2013-2024, in USD Billions
           </h3>
           <img className="intro-graph" src={publicFinance} alt="Chart of public finance between 2013 and 2024" />
           <p className='intro-caption'>Despite governments’ long lasting commitments to end fossil fuel subsidies and align financial flows with the Paris climate goals, since 2013 public finance flows to fossil fuel projects have not decreased rapidly enough and support for clean energy has not increased to the extent needed.</p>

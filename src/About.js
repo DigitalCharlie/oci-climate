@@ -35,10 +35,10 @@ export default function About(props) {
     <div  style={{ marginTop: props.headerHeight }}  className='About'>
       <h1>About</h1>
       <p>
-        The Public Finance for Energy Database is a project of Oil Change International, and was formerly called the Shift the Subsidies Database. It is the only publicly available database tracking international finance for energy from more than one government-owned institution. We track energy finance from G20 governments’ export credit agencies (ECAs) and development finance institutions (DFIs), as well as the  major multilateral development banks (MDBs).
+        The Public Finance for Energy Database is a project of Oil Change International, and was formerly called the Shift the Subsidies Database. It is the only publicly available database tracking finance for energy from more than one government-owned institution. We track energy finance from G20 governments’ export credit agencies (ECAs) and development finance institutions (DFIs), as well as the major multilateral development banks (MDBs). 
       </p>
       <p>
-        In July 2026, we updated the database to include, for the first time, G20 domestic public finance from domestic public banks, including national development banks (NDBs). This is the first comprehensive, cross-country dataset of energy financing flows from domestic public banks in G20 countries.
+        In July 2026, we updated the database to include, for the first time, G20 national development banks (NDBs). This is the first comprehensive, cross-country dataset of domestic public finance for energy financing flows in G20 countries. 
       </p>
       <p>If you would like to explore the data yourself at the transaction level, you can <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>download the dataset as a spreadsheet here (.xlsx file)</a>.</p>
       <p>
@@ -114,7 +114,7 @@ In cases where multiple sectors are included in one transaction, only the portio
   </tr>
 </tbody>
 </table>
-<p><strong>Domestic public finance:</strong> Our G20 domestic public finance database not only includes any domestic finance from G20 ECAs and DFIs, but also includes national development bank (NDB)energy finance between 2016 and 2024. NDBs have a wide variety of structures and mandates, so in order to meet the challenge of classifying them, the institutions covered here borrow from <ExLink href="https://financeincommon.org/sites/default/files/2021-10/Mapping%20DFIs%20Worldwide_0.pdf">Finance in Common’s Public Development Banks (PDBs) database</ExLink>, and are defined as: stand-alone entities, having a proactive public policy-oriented mandate, government steering of corporate strategy, and funding sources that go beyond periodic budgetary transfers. 
+<p><strong>Domestic public finance:</strong> Our G20 domestic public finance database not only includes any domestic finance from G20 ECAs and DFIs, but also includes national development bank (NDB) energy finance between 2016 and 2024. NDBs have a wide variety of structures and mandates, so in order to meet the challenge of classifying them, the institutions covered here borrow from <ExLink href="https://financeincommon.org/sites/default/files/2021-10/Mapping%20DFIs%20Worldwide_0.pdf">Finance in Common’s Public Development Banks (PDBs) database</ExLink>, and are defined as: stand-alone entities, having a proactive public policy-oriented mandate, government steering of corporate strategy, and funding sources that go beyond periodic budgetary transfers. 
 </p>
 
 <br /><h3 id={dataSlugs[4]}><strong>Do the amounts reported here include all G20 public finance for energy?</strong></h3>
