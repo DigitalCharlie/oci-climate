@@ -12,12 +12,14 @@ const fossilFuels = {
   // 'Coal': '#4d2907',
   // 'Mixed Fossil': '#d8794f',
   // NEW COLORS
+  'Coal': '#3C2A00',
   'Gas': '#FFB300',
   'Oil and Gas': '#AB7800',
   'Oil and gas': '#AB7800',
   'Oil': '#6F5517',
-  'Coal': '#3C2A00',
   'Mixed Fossil': '#04000A',
+  'CCS': '#265474',
+  'Hydrogen': '#1681cd'
 }
 const colorScale = (subcategory) => {
   if (fossilFuels[subcategory]) {

@@ -41,26 +41,30 @@
   text-align:center;
 }
 
-.energyTypeToggle {
+.energyTypeToggle, .fossilFuelSubTypeToggle {
   margin-left: 1rem;
   display: inline-block;
   padding: 0.2em 0.5em;
-  font-weight: bold;
   white-space: nowrap;
   font-size: 0.875em;
   cursor: pointer;
   border-radius: 0.25em;
   transition: opacity 0.3s ease-in-out;
-  &:first-of-type {
+  .Checkbox {
+    margin-right: 0.5em;
+  }
+}
+
+.energyTypeToggle {
+  font-weight: bold;
+}
+
+.energyTypeToggle:first-of-type, .fossilFuelSubTypeToggle {
     color:white;
     .Checkbox {
       background-color:white;
       border:1px solid white;
     }
-  }
-  .Checkbox {
-    margin-right: 0.5em;
-  }
 }
 
 .controls {

@@ -41,7 +41,7 @@ const GraphLabel = (props) => {
   )
 }
 export default function YearlyAverageUsageGraph(props) {
-  const { width, data,  selectedEnergyTypes, yearType, customYears } = props
+  const { width, data,  selectedEnergyTypes, yearType, customYears, scopeType, selectedfossilFuelSubTypes } = props
 
 
   const height = width * 0.450
@@ -57,14 +57,26 @@ export default function YearlyAverageUsageGraph(props) {
   let filteredData = selectedGroup ? data.filter(d => d.institutionGroup === selectedGroup) : data
   filteredData = filteredData.filter(d => selectedEnergyTypes.includes(d.category))
   const singleEnergyType = selectedEnergyTypes.length === 1
+  let subCategoryFilteredData = filteredData.filter(d => {
+    if(d.category != 'Fossil Fuel') {
+      return true
+    } else {
+      return selectedfossilFuelSubTypes.includes(d['category detail'])
+    }
+  })
+  let scopeFilteredData = subCategoryFilteredData
+  if (scopeType != 'both') {
+    scopeFilteredData = subCategoryFilteredData.filter(d => d['International or Domestic'] === scopeType)
+  }
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
+  const categoryList = Array.from(new Set(scopeFilteredData.map(categoryAccessor))).sort()
   let originalYears = [2013, finalYear]
   let forceYears = [...originalYears]
   if (yearType === 'custom') {
     forceYears = customYears
   }
   // console.log(categoryAccessor)
-  const filterOutYears = filteredData.filter(d => d.year >= forceYears[0] && d.year <= forceYears[1])
+  const filterOutYears = scopeFilteredData.filter(d => d.year >= forceYears[0] && d.year <= forceYears[1])
   const grouped = rollup(filterOutYears, rows => sum(rows, d => d.amount), d => d.year, categoryAccessor)
   // console.log(grouped)
   for (let year = forceYears[0]; year <= forceYears[1]; year++) {
@@ -205,6 +217,15 @@ export default function YearlyAverageUsageGraph(props) {
   })
   let tooltip = null
 
+  let disclaimer = null
+  if (!singleEnergyType && categoryList.includes('Fossil Fuel') && selectedfossilFuelSubTypes.length < 6) {
+    let listOfFossilFuels = selectedfossilFuelSubTypes.sort().join(', ')
+    const allFossilFuelSubtypes = ['CCS', 'Coal', 'Gas', 'Hydrogen', 'Oil', 'Oil and Gas']
+    const filteredOutSubtypes = allFossilFuelSubtypes.filter(ff => selectedfossilFuelSubTypes.indexOf(ff) == -1)
+    let listOfExcluded = filteredOutSubtypes.sort().join(', ')
+    disclaimer = <p>† Fossil fuels included: {listOfFossilFuels}. Excluded: {listOfExcluded}.</p>
+  }
+
   const svgRef = useRef()
   const legendColors = (singleEnergyType ? stacks.map(stack => stack.key).sort() : typesSorted)
     .map(category => ({ category, color: singleEnergyType && (category !== 'Clean' && category !== 'Other') ? subcategoryColorScale(category) : colors[category] }))
@@ -212,7 +233,7 @@ export default function YearlyAverageUsageGraph(props) {
   return (
     <div className="YearlyUsageGraph">
       <Select placeholder='All Countries and Institutions'  value={selectedGroup} onChange={setSelectedGroup} options={groups} />
-      <ColorLegend colors={legendColors} />
+      <ColorLegend colors={legendColors} selectedfossilFuelSubTypes={selectedfossilFuelSubTypes} />
       <svg ref={svgRef} width={width} height={svgHeight} key={forceYears[1] - forceYears[0]}>
         <g transform={`translate(${margins.left}, ${margins.top})`}>
           {areaGroup}
@@ -223,6 +244,7 @@ export default function YearlyAverageUsageGraph(props) {
         </g>
       </svg>
       {tooltip}
+      {disclaimer}
     </div>
   )
 }

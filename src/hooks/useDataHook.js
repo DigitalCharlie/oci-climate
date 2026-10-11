@@ -10,6 +10,12 @@ const normalizedDetail = {
   'gas': 'Gas',
   'other': 'Other',
   'oil and gas': 'Oil and Gas',
+  'ccs': 'CCS',
+  'hydrogen': 'Hydrogen',
+}
+const normalizedScope = {
+  'domestic': 'Domestic',
+  'international': 'International',
 }
 export default function useDataHook() {
 
@@ -37,6 +43,8 @@ export default function useDataHook() {
           }
           const subcategory = row['category detail'].trim().toLowerCase()
           row['category detail'] = normalizedDetail[subcategory] || subcategory
+          const scope = row['International or Domestic'].trim().toLowerCase()
+          row['International or Domestic'] = normalizedScope[scope] || scope
         })
         rows = rows.filter(d => d.visible === 'TRUE' && d.year > 2000)
         // console.log(rows)

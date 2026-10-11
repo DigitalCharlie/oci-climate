@@ -9,7 +9,6 @@ export default forwardRef(Header)
 function Header(props, ref) {
   const history = useHistory()
   const location = useLocation()
-  console.log(location)
   const updatePath = (e) => {
     const path = e.target.value
     history.push(path)

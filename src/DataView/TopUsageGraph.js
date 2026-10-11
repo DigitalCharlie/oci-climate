@@ -125,9 +125,9 @@ function AnimatedRow(props) {
 }
 
 export default function TopUsageGraph(props) {
-  const { width, data, isBank, selectedEnergyTypes, aggregationType, yearType, customYears } = props
+  const { width, data, isBank, selectedEnergyTypes, aggregationType, yearType, customYears, scopeType, selectedfossilFuelSubTypes } = props
   const splitBarGraph = yearType === 'paris'
-  console.log(splitBarGraph, yearType)
+  // console.log(splitBarGraph, yearType)
   let yearRows = splitBarGraph ? [
     { startYear: 2013, endYear: 2015},
     { startYear: 2016, endYear: finalYear},
@@ -139,13 +139,25 @@ export default function TopUsageGraph(props) {
   const [hoveredGroup, setHoveredGroup] = useState(null)
   const singleEnergyType = selectedEnergyTypes.length === 1
   let categoryFilteredData = data.filter(d => selectedEnergyTypes.includes(d.category))
+  // console.log(selectedfossilFuelSubTypes)
+  let subCategoryFilteredData = categoryFilteredData.filter(d => {
+    if(d.category != 'Fossil Fuel') {
+      return true
+    } else {
+      return selectedfossilFuelSubTypes.includes(d['category detail'])
+    }
+  })
+  let scopeFilteredData = subCategoryFilteredData
+  if (scopeType != 'both') {
+    scopeFilteredData = subCategoryFilteredData.filter(d => d['International or Domestic'] === scopeType)
+  }
   let categoryAccessor = singleEnergyType ? d => d['category detail'] : d => d.category
-  const categoryList = Array.from(new Set(categoryFilteredData.map(categoryAccessor))).sort()
+  const categoryList = Array.from(new Set(scopeFilteredData.map(categoryAccessor))).sort()
 
   const institutionValues = []
   const groupRows = yearRows.map(({startYear, endYear}) => {
 
-    let filteredData = categoryFilteredData.filter(d => d.year >= startYear && d.year <= endYear)
+    let filteredData = scopeFilteredData.filter(d => d.year >= startYear && d.year <= endYear)
     const denominator = aggregationType === 'sum' ? 1 : (endYear - startYear + 1)
     const grouped = rollups(filteredData, rows => sum(rows, d => d.amount) / denominator, d => d.institutionGroup, categoryAccessor)
     grouped.forEach(group => {
@@ -370,7 +382,16 @@ export default function TopUsageGraph(props) {
     )
   }
 
-  const legend = <ColorLegend colors={legendColors} />
+  let disclaimer = null
+  if (!singleEnergyType && categoryList.includes('Fossil Fuel') && selectedfossilFuelSubTypes.length < 6) {
+    let listOfFossilFuels = selectedfossilFuelSubTypes.sort().join(', ')
+    const allFossilFuelSubtypes = ['CCS', 'Coal', 'Gas', 'Hydrogen', 'Oil', 'Oil and Gas']
+    const filteredOutSubtypes = allFossilFuelSubtypes.filter(ff => selectedfossilFuelSubTypes.indexOf(ff) == -1)
+    let listOfExcluded = filteredOutSubtypes.sort().join(', ')
+    disclaimer = <p>† Fossil fuels included: {listOfFossilFuels}. Excluded: {listOfExcluded}.</p>
+  }
+
+  const legend = <ColorLegend colors={legendColors} selectedfossilFuelSubTypes={selectedfossilFuelSubTypes} />
   return (
     <div className="TopUsageGraph">
       {legend}
@@ -384,6 +405,7 @@ export default function TopUsageGraph(props) {
         </svg>
         {tooltip}
       </div>
+      {disclaimer}
     </div>
   )
 }

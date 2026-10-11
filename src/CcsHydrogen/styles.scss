@@ -1,0 +1,52 @@
+body {
+  scroll-padding-top:100px;
+}
+
+.CcsHydrogen {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 0 1em;
+  h1 {
+    padding:3rem 0 2rem;
+  }
+  h1, p, .footnote {
+    max-width:42rem;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+
+  }
+  td {
+    padding: 0.25em;
+  }
+  p {
+    font-size:1.1rem;
+    line-height:1.5;
+	  scroll-margin-top: 90px;
+  }
+  sup {
+    line-height:0;
+    font-size:.8rem;
+  }
+
+  a {
+    color: #005080;
+  }
+  .flourish-embed {
+    padding:1rem;
+    border:1px solid #dcdcdc
+  }
+  .footnote {
+    display:flex;
+    flex-direction:row;
+    margin-top:2rem;
+    gap:.5rem;
+    border-top:1px solid #3c3c3c;
+    p {
+      font-size:.8rem;
+    }
+  }
+}

@@ -32,7 +32,7 @@ const countryGroupings = [
 ]
 
 function StackedBarSelector(props) {
-  const { width, height, data, onChange, selectedDataKey } = props
+  const { width, height, data, onChange, selectedDataKey, selectedfossilFuelSubTypes } = props
   const summedData = useMemo(() => {
     const summedData = data.reduce(
       (acc, d) => {
@@ -80,7 +80,10 @@ function StackedBarSelector(props) {
     const textX = isTotal ? 5 : barWidth - 5
     const splitTextToTwoLines = width < 500
     const formattedValue = valueFormatter(summedData[key])
-    let text = <text dy={rowHeight / 2 + 4} x={textX} textAnchor={textAnchor} fill='#fff'>{key} {formattedValue}</text>
+    if (selectedDataKey === 'Fossil Fuel' && selectedfossilFuelSubTypes && selectedfossilFuelSubTypes.length < 6) {
+      console.log('test')
+    }
+    let text = <text dy={rowHeight / 2 + 4} x={textX} textAnchor={textAnchor} fill='#fff'>{key === 'Fossil Fuel' && selectedfossilFuelSubTypes && selectedfossilFuelSubTypes.length < 6 ? <>Fossil Fuel<tspan dy="-.4em">†</tspan><tspan dy=".4em"> </tspan></> : key} {formattedValue}</text>
     if (splitTextToTwoLines) {
       text = <g>
         <text dy={rowHeight / 2 - 2} x={textX} textAnchor={textAnchor} fill='#fff'>{key}</text>
@@ -113,7 +116,7 @@ function StackedBarSelector(props) {
 }
 
 export default function MiniMap(props) {
-  const { width, data, aggregationType, yearType, customYears } = props
+  const { width, data, aggregationType, yearType, customYears, scopeType, selectedfossilFuelSubTypes } = props
 
   const collection = useMapHook()
   const height = width * 0.6
@@ -125,12 +128,26 @@ export default function MiniMap(props) {
     'country': ['Brazil', 'Russia', 'India', 'United States']
   }
   // const filteredData = selectedCategory ? data.filter(d => d.category === selectedCategory) : data
+  // data filtering added
+  let subCategoryFilteredData = data.filter(d => {
+    if(d.category != 'Fossil Fuel') {
+      return true
+    } else {
+      return selectedfossilFuelSubTypes.includes(d['category detail'])
+    }
+  })
+  let scopeFilteredData = subCategoryFilteredData
+  if (scopeType != 'both') {
+    scopeFilteredData = subCategoryFilteredData.filter(d => d['International or Domestic'] === scopeType)
+  }
+
   const forceYears = [2013, finalYear]
   if (yearType === 'custom') {
     forceYears[0] = customYears[0]
     forceYears[1] = customYears[1]
   }
-  const countryRows = data.filter(d => d.institutionKind !== 'Multilateral')
+  // to add data filtering, line below uses scopeFilteredData instead of data
+  const countryRows = scopeFilteredData.filter(d => d.institutionKind !== 'Multilateral')
     .filter(d => d.year >= forceYears[0] && d.year <= forceYears[1])
   const denominator = aggregationType === 'sum' ? 1 : (forceYears[1] - forceYears[0] + 1)
   const countryData = groups(countryRows, countryAccessor).map(v => ({country: v[0], values: v[1]})).map(cData => {
@@ -242,6 +259,16 @@ export default function MiniMap(props) {
     legendRef.current.append(legend);
     return () => legend.remove();
   })
+
+  let disclaimer = null
+  if (selectedfossilFuelSubTypes.length < 6 && dataKey === 'Fossil Fuel') {
+    let listOfFossilFuels = selectedfossilFuelSubTypes.sort().join(', ')
+    const allFossilFuelSubtypes = ['CCS', 'Coal', 'Gas', 'Hydrogen', 'Oil', 'Oil and Gas']
+    const filteredOutSubtypes = allFossilFuelSubtypes.filter(ff => selectedfossilFuelSubTypes.indexOf(ff) == -1)
+    let listOfExcluded = filteredOutSubtypes.sort().join(', ')
+    disclaimer = <p>† Fossil fuels included: {listOfFossilFuels}. Excluded: {listOfExcluded}.</p>
+  }
+
   return (
     <div className="MiniMap">
       Group By: <Select options={countryGroupings} value={countryGrouping} onChange={setCountryGrouping} />
@@ -252,6 +279,7 @@ export default function MiniMap(props) {
         data={countryData}
         onChange={setSelectedDataKey}
         selectedDataKey={dataKey}
+        selectedfossilFuelSubTypes={selectedfossilFuelSubTypes}
       />
 
       <div ref={legendRef} />
@@ -261,6 +289,7 @@ export default function MiniMap(props) {
         <g>{labels}</g>
       </svg>
       {tooltip}
+      {disclaimer}
     </div>
   )
 }

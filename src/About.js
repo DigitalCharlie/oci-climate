@@ -35,14 +35,14 @@ export default function About(props) {
     <div  style={{ marginTop: props.headerHeight }}  className='About'>
       <h1>About</h1>
       <p>
-        The Public Finance for Energy Database is a project of Oil Change International, and was formerly called the Shift the Subsidies Database. It is the only publicly available database tracking finance for energy from more than one government-owned institution. We track energy finance from G20 governments’ export credit agencies (ECAs) and development finance institutions (DFIs), as well as the major multilateral development banks (MDBs). 
+        The Public Finance for Energy Database is a project of Oil Change International that covers over 20,000 transactions totalling over USD 2 trillion and is the only publicly available database tracking public finance for energy from more than one government-owned institution. We track energy finance from the major multilateral development banks (MDBs), G20 governments’ export credit agencies (ECAs) and development finance institutions (DFIs), and, as of July 2026, the G20 national development banks (NDBs).
       </p>
       <p>
         In July 2026, we updated the database to include, for the first time, G20 national development banks (NDBs). This is the first comprehensive, cross-country dataset of domestic public finance for energy financing flows in G20 countries. 
       </p>
       <p>If you would like to explore the data yourself at the transaction level, you can <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>download the dataset as a spreadsheet here (.xlsx file)</a>.</p>
       <p>
-        Below are some of the most frequently asked questions. For any further questions please reach out to <ExLink href="mailto:claire@oilchange.org">claire@oilchange.org</ExLink>.
+        Below are some of the most frequently asked questions. For any further questions, please reach out to <ExLink href="mailto:info@oilchange.org">info@oilchange.org</ExLink>.
       </p>
       <br />
       <h2>Frequently Asked Questions</h2>

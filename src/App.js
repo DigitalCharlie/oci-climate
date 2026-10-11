@@ -20,7 +20,6 @@ function App() {
   useEffect(() => {
     const resize = () => {
       const headerHeight = headerRef.current.getBoundingClientRect().height
-      console.log(headerHeight)
       setHeaderHeight(headerHeight)
       setContentHeight(window.innerHeight - headerHeight - 5)
       const footerHeight = footerRef.current.getBoundingClientRect().height
