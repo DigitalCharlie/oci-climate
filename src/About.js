@@ -38,7 +38,7 @@ export default function About(props) {
         The Public Finance for Energy Database is a project of Oil Change International that covers over 20,000 transactions totalling over USD 2 trillion and is the only publicly available database tracking public finance for energy from more than one government-owned institution. We track energy finance from the major multilateral development banks (MDBs), G20 governments’ export credit agencies (ECAs) and development finance institutions (DFIs), and, as of July 2026, the G20 national development banks (NDBs).
       </p>
       <p>
-        In July 2026, we updated the database to include, for the first time, G20 national development banks (NDBs). This is the first comprehensive, cross-country dataset of domestic public finance for energy financing flows in G20 countries. 
+        In October 2026, we added the CCS and fossil Hydrogen dataset. This is the first publicly available dataset that tracks subsidies for carbon capture and storage (CCS) and fossil hydrogen projects pledged by governments.
       </p>
       <p>If you would like to explore the data yourself at the transaction level, you can <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>download the dataset as a spreadsheet here (.xlsx file)</a>.</p>
       <p>
@@ -54,7 +54,7 @@ export default function About(props) {
           </div>
         ))}
 
-      <h3>About international public finance for energy</h3>
+      <h3>About public finance for energy</h3>
         {bgQuestions.map((q, i) => (
           <div key={i}>
             <HashLink smooth to={`#${bgSlugs[i]}`}>{q}</HashLink>
@@ -70,7 +70,7 @@ export default function About(props) {
 <p><strong>Clean:</strong> Includes energy that is both low-carbon and has negligible impacts on the environment and human populations if implemented with appropriate safeguards. This includes solar, wind, tidal, geothermal, and small-scale hydro. This classification also includes energy efficiency projects where the energy source(s) involved are not primarily fossil fuels.</p>
 <p><strong>Other:</strong> Includes projects where (a) the energy source(s) are unclear or unidentified as well as (b) non-fossil energy sources that typically have significant impacts on the environment and human populations. This means we include large hydropower (over 30MW), biofuels, biomass, nuclear power, and incineration. If a project includes multiple energy sources, we split it into multiple transactions, but if this is not possible we also classify it as ‘Other.’ 52% of the finance in this category is for transmission and distribution projects.</p>
 
-<br /><h3 id={dataSlugs[1]}><strong>Where does the data come from?</strong></h3>
+<br /><h3 id={dataSlugs[1]}><strong>Where does the public finance data come from?</strong></h3>
 <p>Oil Change International builds this dataset by tracking energy finance from public finance institutions at the transaction level. As of 2024, it covers over 18,000 transactions totalling almost $1.7 trillion going back to 2013. The domestic public finance is available for 2016 to 2024. Going back to 2008 for multilateral development banks is available in the <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>downloadable full data set</a>.
 </p><p>This data is sourced primarily from government and institution reporting (including annual reports with project information, press releases, freedom-of information requests, and project databases) as well as the Infrastructure Journal (IJ) Global database, Boston University’s Global Economic Governance Initiative’s <ExLink href="https://www.bu.edu/cgef/#/all/Country">China Global Energy Finance Database</ExLink>, and investigations by our partners at <ExLink href="https://forourclimate.org/en/">Solutions for our Climate</ExLink> (Korea), <ExLink href="https://www.jubileeaustralia.org/">Jubilee Australia</ExLink>, <ExLink href="https://www.urgewald.org/en/english">Urgewald</ExLink> (Germany), and <ExLink href="https://farn.org.ar/">Fundación Ambiente y Recursos Naturales</ExLink> (Argentina).</p>
 <p>We are also grateful to partners at 350Africa.org, Above Ground, ActionAid, Bank Information Centre, Both ENDS, Environmental Defence Canada, Friends of the Earth Japan, Friends of the Earth US, Fundación Ambiente y Recursos Naturales, Grupo de Financiamiento Climático de Latinoamérica y el Caribe (GFLAC), I4CE, Iniciativa Climática de Mexico, International Institute for Sustainable Development, Japan Center for a Sustainable Environment and Society (JACSES), Jubilee Australia, Just Finance International, Legambiente, Les Amis de la Terre, Market Forces, Rabia Transitions, Re:Common, Recourse.org, Solutions for our Climate, Transnational Institute, Urgewald among others for their periodic review of this dataset.</p>
@@ -130,7 +130,7 @@ In cases where multiple sectors are included in one transaction, only the portio
 </ul>
 
 
-<br /><h3 id={dataSlugs[5]}><strong>How can I look at public finance for specific projects or see more detail?</strong></h3>
+<br /><h3 id={dataSlugs[5]}><strong>How can I look at finance for specific projects or see more detail?</strong></h3>
 
 <p>You can download the data as a spreadsheet <a href={`${process.env.PUBLIC_URL}/${downloadPath}`}>here</a>. Definitions for each field are provided in the first tab, a filter for whether the transaction is domestic or international is in the last column, and a source for each transaction is in the second to last column. You can also read more background and analysis on public finance <Link to='/resources'>here</Link>.</p>
 
